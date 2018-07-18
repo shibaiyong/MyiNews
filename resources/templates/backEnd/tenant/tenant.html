@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>租户管理页</title>
+    <!-- iCheck CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/js/static/user/iCheck/flat/blue.css" th:href="@{/backEnd/js/static/user/iCheck/flat/blue.css}" />
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/tenant/tenant.css" th:href="@{/backEnd/css/tenant/tenant.css}" />
+
+    <!-- bootstrap-multiselect JS -->
+    <script type="text/javascript" src="../../../static/backEnd/plugins/bootstrap-multiselect/js/multiselect.min.js" th:src="@{/backEnd/plugins/bootstrap-multiselect/js/multiselect.min.js}" ></script>
+    <!-- iCheck JS -->
+    <script type="text/javascript" src="../../../static/backEnd/js/static/user/iCheck/icheck.min.js" th:src="@{/backEnd/js/static/user/iCheck/icheck.min.js}" ></script>
+    <!-- Self JS -->
+    <script type="text/javascript" src="../../../static/backEnd/js/static/tenant/tenant.js" th:src="@{/backEnd/js/dynamic/tenant/tenant.js}" ></script>
+    <script type="text/javascript" src="../../../static/common/plugins/sha/sha256.js" th:src="@{/common/plugins/sha/sha256.js}" ></script>
+</head>
+<body>
+<section class="content-header">
+    <h5 class="m-all">
+        租户管理列表
+    </h5>
+</section>
+<section class="content">
+    <div class="box p-right p-left">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div class="box-title">
+                    <div class="has-feedback pull-left">
+                        <input id="queryStr" type="text" class="form-control input-sm" placeholder="租户查询" />
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                    &nbsp;
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#tenantModal">添加租户</button>
+                </div>
+                <div class="box-tools">
+                    <button type="button" class="btn btn-primary" th:onclick="'batchDelete()'">批量删除</button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover tenantTable">
+                        <thead>
+                        <tr>
+                            <th>
+                                <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
+                            </th>
+                            <th>租户名称</th>
+                            <th>租户系统标识</th>
+                            <th>密钥</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="body">
+                        <tr>
+                            <td><input type="checkbox" value="100"/></td>
+                            <td>荣之联</td>
+                            <td>UEC</td>
+                            <td>556677</td>
+                            <td>2016-12-24</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        操作 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:toUpdate()">修改</a></li>
+                                        <!--<li><a href="javascript:toUpdatePwd()">修改密钥</a></li>-->
+                                        <li><a href="javascript:deleteTenant()">删除</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="101"/></td>
+                            <td>法制日报</td>
+                            <td>FZRB</td>
+                            <td>556677</td>
+                            <td>2016-12-24</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        操作 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">修改</a></li>
+                                        <li><a href="#">修改密钥</a></li>
+                                        <li><a href="#">删除</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="102"/></td>
+                            <td>人民日报</td>
+                            <td>RMRB</td>
+                            <td>556677</td>
+                            <td>2016-12-24</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        操作 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">修改</a></li>
+                                        <li><a href="#">修改密钥</a></li>
+                                        <li><a href="#">删除</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="102"/></td>
+                            <td>苏州台</td>
+                            <td>SZT</td>
+                            <td>556677</td>
+                            <td>2016-12-24</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        操作 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">修改</a></li>
+                                        <li><a href="#">修改密钥</a></li>
+                                        <li><a href="#">删除</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 添加租户模态框 -->
+        <div class="modal fade" id="tenantModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" th:onclick="'modelClose()'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加租户</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="tenantModelForm">
+                            <input type="hidden" id="tenantId" value="" />
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label"><span style="color:red">*</span>租户名称</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="tenantName" placeholder="请输入租户名" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <p class="form-control-static">
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入租户名"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label"><span style="color:red">*</span>租户公司名称</label>
+                                    <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="companyName" placeholder="请输入租户公司名称" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <p class="form-control-static">
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入租户公司名称"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label"><span style="color:red">*</span>租户系统标识</label>
+                                <div class="col-sm-7">
+                                    <input type="tel" class="form-control" id="tenantMark" placeholder="请输入租户系统标识" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <p class="form-control-static">
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入租户系统标识"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group hide">
+                                <label for="inputEmail3" class="col-sm-3 control-label">密钥</label>
+                                <div class="col-sm-7">
+                                    <input type="tel" class="form-control" id="tenantSecret" placeholder="请输入密钥" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <p class="form-control-static">
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入密钥"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group"  style="display: block">
+                                <label for="inputEmail3" class="col-sm-3 control-label"><span style="color:red">*</span>所属地区</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="tenantArea" autocomplete="off"  placeholder="请输入租户所属地区" />
+                                    <input type="hidden"  id="zybrbh"  value="999999999" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <p class="form-control-static">
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="地区"></i>
+                                    </p>
+                                </div>
+                                <!-- 模糊查询匹配 -->
+                                <div id='brxmDiv' class="d-search-autodiv" style="display: none">
+                                    <select id='brxmSelect' size="4" th:onclick="'checked()'" style='margin-top:-3px; margin-left: 165px; height: 110px; display: none;' class="d-search-autoselect">
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" th:onclick="'modelClose()'">取消</button>
+                        <button type="button" class="btn btn-primary" th:onclick="'addTenant()'" >添加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!--修改租户密钥模态框 -->
+        <!--<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">-->
+            <!--<div class="modal-dialog">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                        <!--<h4 class="modal-title" id="passwordModalLabel">修改密钥</h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body">-->
+                        <!--<form class="form-horizontal" role="form" id="passwordModelForm">-->
+                            <!--<input type="hidden" id="pwd_innerid" />-->
+                            <!--<div class="form-group">-->
+                                <!--<label for="newPassword" class="col-sm-3 control-label">新密钥</label>-->
+                                <!--<div class="col-sm-7">-->
+                                    <!--<input type="password" class="form-control" id="newPassword" placeholder="请输入新密钥" />-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-2">-->
+                                    <!--<p class="form-control-static">-->
+                                        <!--<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入新密钥"></i>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+                        <!--<button type="button" class="btn btn-primary" th:onclick="'savePassword()'" >保存</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</section>
+
+</body>
+</html>

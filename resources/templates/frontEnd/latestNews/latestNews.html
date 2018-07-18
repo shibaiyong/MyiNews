@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="referrer" content="never"/>
+<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+<!-- 新闻线索-new -->
+<title>iNews-新闻库</title>
+<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	
+	<!-- Daterangepicker Css -->
+    <link rel="stylesheet" type="text/css" href="../../static/assets/js/daterangepicker/css/daterangepicker.min.css" th:href="@{/common/plugins/daterangepicker/css/daterangepicker.min.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/latestNews/latestNews.css"	th:href="@{/frontEnd/css/latestNews/latestNews.css}" />
+	
+	<!-- Daterangepicker Scripts -->
+    <script src="../../static/assets/js/daterangepicker/js/moment.min.js" th:src="@{/common/plugins/daterangepicker/js/moment.min.js}"></script>
+    <script src="../../static/assets/js/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/latestNews/latestNews_static.js"	th:src="@{/frontEnd/js/dynamic/latestNews/latestNews_static.js}"></script>
+
+</head>
+<body>
+<!-- 	处于哪种展示方式：0 列表  1 缩略图  2 九宫格 -->
+	<input type="hidden" class="tableListCon" value="0"/>
+<!-- 	3中展示方式中，展示条数的控制 -->
+	<input type="hidden" class="tableListLength" value="30"/>
+	
+<!-- 	选中的webpageCode -->
+	<input type="hidden" class="checkedWebPageCode" value=''/>
+	<input type="hidden" data-once="true" class="searchWord" th:value="${searchWord}" />
+	
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div class="container" style="background: #fff">
+			<div id="main-content">
+				<div class="row">
+					<div class="pull-left siderLeftBox col-md-2 col-sm-12 col-xs-12">
+						<div class="box p-right p-left">
+							<ul id="accordion" class="accordion">
+								<li class="open">
+									<div class="link">全部<i class="fold fa fa-chevron-down"></i></div>
+									<ul class="submenu" style="display:block" th:remove="body">
+										<li><a href="javascript:void(0)">官方媒体</a></li>
+										<li><a href="javascript:void(0)">商业媒体</a></li>
+										<li><a href="javascript:void(0)">政府网站</a></li>
+										<li><a href="javascript:void(0)">微博</a></li>
+										<li><a href="javascript:void(0)">微信</a></li>
+										<li><a href="javascript:void(0)">自媒体</a></li>
+										<li><a href="javascript:void(0)">国外媒体</a></li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="accordion webSources" th:remove="body" style="display: none;">
+								<li class="sourcesBox">
+									<div class="link ">中国经营报<span class="deleteSources">×</span> </div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">中国经营网 <span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">新浪网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">新华网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">腾讯网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">苏州网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">华龙网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">深圳新闻网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">江西新闻网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">中华美食网<span class="deleteSources">×</span></div>
+								</li>
+								<li class="sourcesBox">
+									<div class="link ">未来网<span class="deleteSources">×</span></div>
+								</li>
+							</ul>
+							<input autocomplete="off" data-provide="typeahead" type="text" class="input-sm form-control addSources" placeholder="请输入来源" style="display: none;"/>
+							<div class="noSources hide">
+								<span>尚未收录该网站</span>
+							</div>
+						</div>
+					</div>
+					<div class="pull-left col-md-10 col-sm-12 col-xs-12" >
+						
+						<div th:include="frontEnd/common/screenClassification :: screenClassification"></div>
+						
+						<div class="box p-right p-left p-top">
+							<div class="dataConTable">
+								<table class="table table-bordered screenTable">
+									<tbody>
+										<tr>
+											
+											<td class="dataConTabTit">展示方式</td>
+											<td class="dataConShowWays active" data-show="false"><a
+												href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="列表"><i class='fa fa-align-justify'
+													></i></a></td>
+											<td class="dataConShowWays" data-show="true"><a
+												href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="缩略图"><i class="fa fa-th-list"></i></a></td>
+											<td class="dataConShowWays" data-show="true"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+													title="九宫格"><i class='fa fa-th' ></i></a></td>
+											
+											<td class="dataConTabTit">展示条数</td>
+											<td class="showBranches "><a href="javascript:void(0)">15</a></td>
+											<td class="showBranches active"><a href="javascript:void(0)">30</a></td>
+											<td class="showBranches"><a href="javascript:void(0)">60</a></td>
+											<td class="changeState activeBg" ><a href="javascript:void(0)">相似合并</a></td>
+											<td class="changeStateBtn"><a href="javascript:void(0)">含图片</a></td>
+											<td class="changeStateBtn"><a href="javascript:void(0)">含视频</a></td>
+											<td class="refreshButton" style="width:50px"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="每60秒刷新"><i class="fa fa-refresh "></i></a></td>
+											<td class="sortCountButton hide"><a href="javascript:void(0)">共 <span class="red"></span></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="linkLastNewsDataTable" >
+								<div id="operateGroup"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+				
+								<div id="threadContent" th:include="frontEnd/common/threadContent :: threadContent"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Modal 删除左侧来源-->
+				<div class="modal fade" id="deletaSources" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <p style="text-align:center;margin-bottom:0px">是否将已经添加的来源删除？</p>
+				        <div style="margin-top:10px;text-align:right">
+				        	<button type="button" class="btn btn-red btn-sm certainBtn"  data-dismiss="modal">确定</button>
+				        	<button type="button" class="btn btn-default btn-sm cancelBtn" data-dismiss="modal">取消</button>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news"/>
+    <meta name="description"
+          content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。"/>
+    <link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen"
+          th:href="@{/frontEnd/image/logo/favicon.ico}"/>
+    <!-- 我的定制 -->
+    <title>iNews-我的定制</title>
+
+
+    <!-- 引入公用的插件 注：必须放在最开始的位置 -->
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	<!--<script type="text/javascript"	src="../../../static/frontEnd/js/dynamic/myCustom/myCustomThread.js"	th:src="@{/frontEnd/js/dynamic/myCustom/myCustomThread.js}"></script>-->
+
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/myCustomThread.css"
+          th:href="@{/frontEnd/css/myCustom/myCustomThread.css}"/>
+
+    <style>
+        .table .fa {
+            font-size: 18px;
+        }
+
+        .refresh-dialog {
+            line-height: 40px;
+            text-align: center;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            display:none;
+            height: 40px;
+            background: #d6d6d6
+        }
+    </style>
+
+</head>
+<body>
+<!-- 	处于哪种展示方式：0 列表  1 缩略图  2 九宫格 -->
+<input type="hidden" class="tableListCon" value="0"/>
+<!-- 	3中展示方式中，展示条数的控制 -->
+<input type="hidden" class="tableListLength" value="30"/>
+
+<!-- 线索 -->
+<div class="xsContent ">
+    <div class="recommend-title">
+        <!--<h4 th:remove="body">荣之联</h4>-->
+        <!--<div class="recommend-title-right">-->
+        <!--<a href="javascript:void(0)" class="editCustom">-->
+        <!--<button type="button" class="btn btn-red btn-xs"><i class="fa fa-cog"></i>&nbsp;修改定制条件</button>-->
+        <!--</a>-->
+        <!--<a href="javascript:void(0)">-->
+        <!--<button class="btn btn-red btn-xs deleteCustom" data-toggle="modal" data-target="#myModal2"><i-->
+        <!--class="fa fa-trash-o"></i>&nbsp;删除-->
+        <!--</button>-->
+        <!--</a>-->
+        <!--</div>-->
+    </div>
+
+    <div th:include="frontEnd/common/screenClassification :: screenClassification"></div>
+
+    <!-- 数据内容展示 - 本站 -->
+    <div id="dataConShow">
+        <div class="box p-right p-left p-top" style="position: relative">
+            <div class="refresh-dialog" id="refresh-dialog"></div>
+            <div class="dataConTable">
+                <table class="table screenTable">
+                    <tbody>
+                    <tr>
+                        <td class="dataConTabTit" style="background: none;border: none">展示方式</td>
+                        <td class="dataConShowWays active" data-show="false" style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="列表"><i
+                                class='fa fa-align-justify'
+                        ></i></a></td>
+                        <td style="border: 1px solid #ddd;" class="dataConShowWays" data-show="true"><a
+                                href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="缩略图"><i
+                                class="fa fa-th-list"></i></a></td>
+                        <td class="dataConShowWays" data-show="true" style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+                                title="九宫格"><i class='fa fa-th'></i></a></td>
+
+                        <td class="dataConTabTit" style="background: none;border: none">展示条数</td>
+                        <td class="showBranches " style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)">15</a></td>
+                        <td class="showBranches active" style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)">30</a></td>
+                        <td class="showBranches" style="border: 1px solid #ddd;"><a href="javascript:void(0)">60</a>
+                        </td>
+                        <td class="changeState activeBg" style="border: 1px solid #ddd;"><input type="hidden"
+                                                                                                id="showSimilar"
+                                                                                                value="false"/><a
+                                href="javascript:void(0)">相似合并</a></td>
+                        <td class="changeStateBtn" style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)">含图片</a></td>
+                        <td class="changeStateBtn" style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)">含视频</a></td>
+                        <td class="refreshButton" style="width:50px;border:none"><a href="javascript:void(0)"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top" title="每60秒刷新"><i
+                                class="fa fa-refresh "></i></a></td>
+                        <td class="collectButton" style="border: 1px solid #ddd;"><a
+                                href="javascript:void(0)">我的收藏</a></td>
+
+                        <td class="sortCountButton hide"><a href="javascript:void(0)">共 <span class="red"></span></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="linkLastNewsDataTable">
+
+                <div id="operateGroup" style="display:none;"
+                     th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+
+                <div id="threadContent" th:include="frontEnd/common/threadContent :: threadContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Self JS -->
+<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/myCustomThread.js"
+        th:src="@{/frontEnd/js/dynamic/myCustom/myCustomThread.js}"></script>
+</body>
+</html>

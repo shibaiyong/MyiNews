@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 全网搜索页 -->
+	<title>iNews-全网搜索</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/latestNews/fullWebSearch.css" th:href="@{/frontEnd/css/latestNews/fullWebSearch.css}"/>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/latestNews1/fullWebSearch.js" th:src="@{/frontEnd/js/dynamic/searchNews/searchNews.js}"></script>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div class="container" style="background:#fff">
+			<div id="main-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="reSearch center">
+							<div class="box p-right p-left">
+								<form class="form-inline" role="form" action="javascript:void(0);">
+								  <div class="form-group">
+								    <div class="input-group">
+								      <input class="form-control reSearchInput" type="text" placeholder="请输入关键词"/>
+								      <div class="input-group-addon btn-red wholeNetwork"><a href="javascript:void(0);" onclick="javascript:searchWholeNetNews()">全网搜索</a></div>
+								    </div>
+								    <button type="button" class="btn btn-style homeSearchInput">
+								    	<a href="javascript:void(0)">本站搜索</a>
+								    </button>
+								  </div>
+
+								</form>
+							</div>
+						</div>
+						<div class="fullWebCon">
+							<div class="box p-left p-right">
+								<div class="box p-right p-left">
+									<div class="row">
+									  	<div class="col-md-8 ">
+									  		<div class="fullWebConTable">
+												<!-- <table class="table table-bordered m-bottom fullWebListConTable">
+													<tbody>
+														<tr>
+															<td><a href="javascript:void(0)">共搜索到<span class='red'>118</span>篇</a></td>
+															<td><a href="javascript:void(0)">新闻门户(<span class='red'>140</span>)</a></td>
+															<td><a href="javascript:void(0)">社交网站(<span class='red'>41402</span>)</a></td>
+															<td><a href="javascript:void(0)">传统媒体(<span class='red'>4102</span>)</a></td>
+															<td><a href="javascript:void(0)">行业网站(<span class='red'>1402</span>)</a></td>
+															<td><a href="javascript:void(0)">国外媒体(<span class='red'>233</span>)</a></td>
+														</tr>
+													</tbody>
+												</table> -->
+												<table class="table table-bordered fullWebScreeTable m-bottom ">
+													<tbody>
+														<tr class="center">
+															<td class="fullWebConShow active"><a href="javascript:void(0)">列表</a></td>
+															<td class="fullWebConShow " ><a href="javascript:void(0)">缩略图 </a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+									  		<!-- 列表形式展现数据 -->
+											<div class="fullWebConList ">
+												<input type="hidden" class="searchType" th:attr="value=${searchType}"></input>
+												<input type="hidden" class="searchWord" th:attr="value=${searchWord}"></input>
+												<input type="hidden" id="queryStr" th:value="${queryStr}" />
+												<table class="table table-hover fullWebBoxTable m-bottom">
+													<thead>
+														<tr>
+															<th>标题</th>
+															<th style="width: 95px;" class="center">发布时间</th>
+															<th style="width:95px;">发稿来源</th>
+															<th class="center" style="width: 45px;">相似</th>
+														</tr>
+													</thead>
+													<tbody th:remove="all">
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+														<tr>
+															<td>
+																<a href="javascript:void(0)">
+																	东平县村民新农合被指“搭车收费” 不交卫生费不给办
+																</a>
+															</td>
+															<td>2016-12-04</td>
+															<td>中国新闻网</td>
+															<td>(1)</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+
+											<!-- 缩略图形式展现数据 -->
+											<div class="fullWebConThumbnail hide">
+												<table class="table fullWebConThumbnailTable">
+													<thead></thead>
+													<tbody th:remove="body">
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="media">
+																  <a class="media-left" href="#">
+																    <img src="../../../static/frontEnd/image/latestNews/1.jpg" alt="..." class="img-thumbnail"/>
+																  </a>
+																  <div class="media-body">
+																  	<div class="mediaCon pull-left">
+																  		<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+																    	<p class="mediaConSummary m-bottom">
+																    		新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+																    	</p>
+																  	</div>
+																    <div class="mediaRight pull-right">
+																    	<ul class="list-group ta-right">
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2016-11-29 13:00</a>
+																		  		[发布时间]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">新华网</a>
+																		  		[发稿来源]
+																		  	</li>
+																		  	<li class="list-group-item">
+																		  		<a href="javascript:void">2</a>
+																		  		[相关新闻]
+																		  	</li>
+																		</ul>
+																    </div>
+																  </div>
+																</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+
+											<div class="fullWebInterrelated box" th:if="${null != relativeWordList and relativeWordList.size()>0}">
+												<h6>相关检索词推荐</h6>
+												<div class="interrelatedCon">
+													<ul th:remove="all-but-first" >
+														<li th:each="relativeWord:${relativeWordList}" ><a th:href="${relativeWord.relativeInforUrl}" th:text="${relativeWord.relativeInfor}" target="_blank" >新闻头条</a></li>
+														<li><a href="javascript:void(0)">军事新闻最新消息</a></li>
+														<li><a href="javascript:void(0)">新闻联播直播今天视频</a></li>
+														<li><a href="javascript:void(0)">百度头条</a></li>
+														<li><a href="javascript:void(0)">新闻联播直播今天视</a></li>
+														<li><a href="javascript:void(0)">军事新闻最新消息</a></li>
+														<li><a href="javascript:void(0)">百度头条</a></li>
+														<li><a href="javascript:void(0)">新闻联播直播今天视频</a></li>
+													</ul>
+												</div>
+											</div>
+									  	</div>
+									  	<div class="col-md-4 ">
+									  		<div class="correlationList">
+									  			<!-- 相关人物 -->
+												<div class="relativePerson" th:if="${null != personList and personList.size()>0}">
+													<div class="box-header header-vimeo">
+														<h2>相关人物</h2>
+													</div>
+													<div class="listPer box p-right p-left">
+														<div class="listLabel" th:remove="all-but-first">
+															<a th:each="person:${personList}" th:href="${person.relativeInforUrl}" th:text="${person.relativeInfor}" target="_blank">马丁</a> 
+															<a href="javascript:void(0)">凯文-马丁</a>
+															<a href="javascript:void(0)">哈登</a> 
+															<a href="javascript:void(0)">周杰伦</a> 
+															<a href="javascript:void(0)">唐嫣</a> 
+															<a href="javascript:void(0)">罗晋</a>
+														</div>
+													</div>
+												</div>
+												<!-- 相关机构 -->
+												<div class="relativeOrganize" th:if="${null != organizeList and organizeList.size()>0}">
+												<div class="box-header header-vimeo">
+													<h2>相关机构</h2>
+												</div>
+												<div class="box p-left p-right listOrg">
+													<div class="listLabel" th:remove="all-but-first">
+														<a th:each="organize:${organizeList}" th:href="${organize.relativeInforUrl}" th:text="${organize.relativeInfor}" target="_blank" >中国</a>
+														<a href="javascript:void(0)">凯尔特</a>
+														<a href="javascript:void(0)">哈登</a>
+														<a href="javascript:void(0)">播放</a>
+														<a href="javascript:void(0)">中华人民共和国</a>
+														<a href="javascript:void(0)">加拿大</a>
+													</div>
+												</div>
+												</div>
+												<!-- 相关事件 -->
+												<div class = "relativeEvent" th:if="${null != eventList and eventList.size()>0}">
+												<div class="box-header header-vimeo">
+													<h2>相关事件</h2>
+												</div>
+												<div class="box p-right p-left listEvent">
+													<ul class="list-group" th:remove="all-but-first">
+													  	<li th:each="event:${eventList}">
+													  		<i class='red fa fa-angle-double-right'></i>
+													  		<a th:href="${event.relativeInforUrl}" th:text="${event.relativeInfor}" target="_blank">罗尔称要把房留给儿子 媒体:意思是女儿让网</a>
+													  	</li>
+													  	<li>
+													  		<i class='red fa fa-angle-double-right'></i>
+													  		<a href="javascript:void(0)">罗尔称要把房留给儿子 媒体:意思是女儿让网</a>
+													  	</li>
+													  	<li >
+													  		<i class='red fa fa-angle-double-right'></i>
+													  		<a href="javascript:void(0)">罗尔称要把房留给儿子 媒体:意思是女儿让网</a>
+													  	</li>
+													  	<li >
+													  		<i class='red fa fa-angle-double-right'></i>
+													  		<a href="javascript:void(0)">罗尔称要把房留给儿子 媒体:意思是女儿让网</a>
+													  	</li>
+													  	<li>
+													  		<i class='red fa fa-angle-double-right'></i>
+													  		<a href="javascript:void(0)">罗尔称要把房留给儿子 媒体:意思是女儿让网</a>
+													  	</li>
+													</ul>
+												</div>
+												</div>
+									  		</div>
+									  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

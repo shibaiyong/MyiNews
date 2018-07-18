@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Inews Backend</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/common/common.css" th:href="@{/backEnd/css/hotAndTopNews/topNews.css}" />
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Cander/calendar.min.css" th:href="@{/common/plugins/jedate/skin/jedate.6.0.css}"/>
+    <script type="text/javascript" src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/datatable/jquery3.3.1.min.js}" ></script>
+    <script type="text/javascript" src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jedate/jedate_6.0.js}" ></script>
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Cander/calendar.min.css"  th:href="@{/common/plugins/dataTables/jquery.dataTables.css}"/>
+    <script type="text/javascript" src="../../../static/common/plugins/dataTables/jquery.dataTables.js" th:src="@{/common/plugins/dataTables/jquery.dataTables.js}" ></script>
+</head>
+<body>
+<div class="drop_wrapper">
+    <div class='drop_container'>
+        <a href="javascript:;" status="hide" class="region" data-innerid="">地区</a>
+        <div class="scrollhidden">
+            <ul class='drop_item drop_item_regions'>
+
+            </ul>
+        </div>
+    </div>
+    <div class='drop_container'>
+        <a href="javascript:;" status="hide" class="classfiy" data-innerid="">分类</a>
+        <div class="scrollhidden">
+            <ul class='drop_item drop_item_class'>
+
+            </ul>
+        </div>
+    </div>
+    <div class='drop_container'>
+        <a href="javascript:;" status="hide" class="all" data-innerid="">载体</a>
+        <div class="scrollhidden">
+            <ul class='drop_item drop_item_all'>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="search-container">
+    <form class="form-inline">
+        <div class="form-group">
+            <input class="form-control" id="jeDate" type="text" placeholder="选择日期" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="iSearch" placeholder="请输入关键字" />
+        </div>
+        <button type="submit" class="btn btn-default searchbtn">iSearch</button>
+    </form>
+</div>
+<table id="topNewTable" class="display">
+    <thead>
+    <tr>
+        <th>排位</th>
+        <th>发布时间</th>
+        <th>文章标题</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</body>
+</html>
+
+<script>
+    $(document).ready( function () {
+        //修改默认配置。
+        $.extend($.fn.dataTable.defaults, {
+            searching: false,
+            ordering: false
+        });
+        var dataTable = $('#topNewTable').DataTable({
+            serverSide: true,//标示从服务器获取数据
+            sAjaxSource : ctx+'/cluster/back/newsDiscover',//服务器请求
+            fnServerData : retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
+            'iDisplayLength' : 20,
+            fnServerParams:function(aoData){
+                aoData = getSearchData(aoData);
+            },
+            rowCallback: function (row, data, index) {
+
+                var localDate = new Date(data.createDatetime).formatDate("yyyy-MM-dd hh:mm:ss");
+                $('td:eq(1)', row).html( '<input type="text" value="'+localDate+'" class="form-control jedate" data-clusterCode="'+data.clusterCode+'" data-title="'+data.title+'"/>');
+                $('td:eq(2)', row).html( '<input type="text" value="'+data.title+'" class="form-control title" data-clusterCode="'+data.clusterCode+'" data-date="'+localDate+'"/>' );
+            },
+            columns: [
+                {data: "weight", bSortable: false},
+                {data: "releaseDatetime"},
+                {data: "title"},
+                {data: null, bSortable: false}
+            ],
+            "aoColumnDefs": [
+                {//倒数第一列
+                    "targets": -1,
+                    "bSortable": false,
+                    render: function (data, type, row) {
+                        var html = '<button class="btn btn-xs jfhide btn-danger" clusterCode="' + row.clusterCode + '" data-ishow="1">隐藏</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+                            + '<button class="btn btn-xs btn-danger jfdelete" clusterCode="' + row.clusterCode + '" data-delete="1">删除</button>';
+                        return html;
+                    }
+                }
+            ],
+            oLanguage: {
+                sProcessing: "努力加载数据中.",
+                sLengthMenu: "每页显示 _MENU_ 条记录",
+                sZeroRecords: "抱歉,没有找到",
+                sInfo: "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                sInfoEmpty: "没有数据",
+                sInfoFiltered: "(从 _MAX_ 条数据中检索)",
+                sZeroRecords: "没有检索到数据",
+                sSearch: "模糊查询:  ",
+                oPaginate: {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+        var ctx = '/ns';
+        var status = '';
+        var is_delete = '';
+        var time;
+
+        //隐藏功能
+
+        // $('#topNewTable').on('click',"td .jfhide",function(){
+        //     if($(this).text()=='隐藏'){
+        //         $(this).text('取消隐藏');
+        //         //$(this).attr('data-ishow',1);
+        //         status = 1;
+        //     }else{
+        //         $(this).text('隐藏');
+        //         //$(this).attr('data-ishow',0);
+        //         status = 0;
+        //     }
+        //     var options = {
+        //         data:{
+        //             operationType:'opt_hide',
+        //             clusterCode:$(this).attr('clusterCode')
+        //         },
+        //         callback:processing
+        //     }
+        //     var url = ctx + '/cluster/back/newsDiscoverManage/'+$(this).attr('clusterCode');
+        //     ajaxMethod(url,'post',options);
+        // })
+
+        //删除功能
+
+        $('#topNewTable').on('click',"td .jfdelete",function(){
+            var options = {
+                data:{
+                    operType:'opt_delete',
+                    clusterCode:$(this).attr('clusterCode')
+                },
+                callback:processing
+            }
+            var url = ctx + '/cluster/back/newsDiscoverManage/'+$(this).attr('clusterCode');
+            ajaxMethod(url,'post',options);
+        })
+
+        //修改功能
+
+        $('#topNewTable').on('blur','input.title',function(){
+            var options = {
+                data:{
+                    releaseDateTime:$(this).parent().prev().children('input').val(),
+                    title:$(this).val()
+                },
+                callback:processing
+            }
+            var url = ctx + '/cluster/back/updateNewsDiscover/'+$(this).attr('data-clusterCode');
+            ajaxMethod(url,'post',options);
+        })
+
+        dataTable.on( 'draw.dt', function () {
+            $(".jedate").each(function(){
+                var $this = $(this);
+                $(this).jeDate({
+                    format: "YYYY-MM-DD hh:mm:ss",
+                    onClose:true,
+                    okfun:function(obj){
+                        console.log(obj.val)
+                        var options = {
+                            data:{
+                                releaseDateTime:obj.val,
+                                title:$this.parent().next().children('input').val()
+                            },
+                            callback:processing
+                        }
+                        var url = ctx + '/cluster/back/updateNewsDiscover/'+$this.attr('data-clusterCode');
+                        ajaxMethod(url,'get',options);
+                    }
+                });
+            });
+        } )
+
+        //顶部下拉选单的效果
+
+        $(document).on('click', function(e){
+            if($(e.target).attr('status') == 'hide'){
+                $(e.target).attr('status','show')
+                $(e.target).parent().siblings().children('a').attr('status','hide');
+                $(e.target).parent().siblings().find('.scrollhidden').hide();
+                $(e.target).next().show();
+            }else{
+                $('.drop_container>a').attr('status','hide');
+                $('.drop_container .scrollhidden').hide();
+            }
+        })
+
+        //点击下拉选单刷新列表
+
+        $('.drop_wrapper').on('click','li a',function(){
+            var innerid = $(this).attr('data-innerid');
+            var content = $(this).text();
+            $(this).parents('.scrollhidden').prev().attr('data-innerid',innerid).text(content);
+            dataTable.ajax.reload();
+        })
+        $('.searchbtn').click(function(e){
+            var ev = e||event;
+            ev.preventDefault();
+            dataTable.ajax.reload();
+        })
+
+        //标记下拉列表中被选择的项用select=selected来标记。
+        //$('.drop_item').on('click',)
+        //时间控件初始化
+
+        $("#jeDate").jeDate({
+            isinitVal:true,
+            format: "YYYY-MM-DD hh:mm:ss",
+            okfun:function(obj){
+                time=$.timeStampDate(obj.val)*1000;
+                dataTable.ajax.reload();
+            }
+        });
+
+        //获取 地区，分类，和全部的下拉列表
+
+        reqRegions('.drop_item_regions');
+        reqAllDropList( '.drop_item_all' );
+        reqClassificationsDropList( '.drop_item_class' );
+        function reqRegions( ele ){
+            var options= {
+                data:{
+                    level:1
+                },
+                ele:ele,
+                callback:dropListProcess
+            }
+            var url = ctx+'/config/front/listUserConfigRegion';//地区
+            ajaxMethod(url,'get',options);
+        }
+        function reqAllDropList( ele ){
+            var options= {
+                data:{
+                    level:1
+                },
+                ele:ele,
+                callback:dropListProcess
+            }
+            var url = ctx+'/config/front/listUserConfigCarrier';//全部
+            ajaxMethod(url,'get',options);
+        }
+        function reqClassificationsDropList( ele ){
+            var options= {
+                data:{
+                    level:1
+                },
+                ele:ele,
+                callback:dropListProcess
+            }
+            var url = ctx+'/config/front/listUserConfigClassification';//分类
+            ajaxMethod(url, 'get', options);
+        }
+
+        //封装的ajax请求
+
+        function ajaxMethod(url, type, options){
+            $.ajax({
+                url:url,
+                type:type,
+                data:options.data,
+                dataType:'json',
+                success:function( res ){
+                    if(options.callback){
+                        if(options.ele){
+                            options.callback(res,options.ele);
+                        }else{
+                            options.callback(res);
+                        }
+                    }else{
+                        return;
+                    }
+                }
+            })
+        }
+        function reloadTable(){
+            dataTable.settings[0].data={};
+            dataTable.ajax.reload( null, false );
+        }
+
+        //ajax 成功时，来处理返回数据的函数；重新加载表格数据
+
+        function processing( res ){
+            alert('process')
+            dataTable.ajax.reload( null, false ); // 刷新表格数据，分页信息不会重置
+        }
+        //callback2
+        function dropListProcess( res,ele ){
+            if(res.result){
+                var obj = res.resultObj;
+                var len=obj.length;
+                var str = '<li><a href="javascript:;" data-innerid="">全部</a></li>';
+                for(var i=0;len>i;i++){
+                    str+='<li><a href="javascript:;" data-innerid="'+obj[i].innerid+'">'+obj[i].name+'</a></li>'
+                }
+                $(ele).html(str);
+            }else{
+                return false;
+            }
+        }
+
+        //获取参数。
+
+        function getSearchData(aoData){
+            var regions = $('.region').attr('data-innerid');
+            var classfiy = $('.classfiy').attr('data-innerid');
+            var all = $('.all').attr('data-innerid');
+            var todayTime = new Date();
+            var queryStr = $('#iSearch').val();
+            if(time){
+                var timeObj=new Date(time)
+                if(timeObj.formatDate('yyyy-MM-dd')==todayTime.formatDate('yyyy-MM-dd')){
+                    updateDatetime = todayTime.formatDate('yyyy-MM-dd hh:mm:ss');
+                    createDatetime = new Date(new Date().getTime() - (1000 * 60 * 60 * 24)).formatDate('yyyy-MM-dd hh:mm:ss');
+                }else{
+                    createDatetime = timeObj.formatDate('yyyy-MM-dd')+' 00:00:00';
+                    updateDatetime = new Date(new Date(createDatetime.replace(/-/g,'/')).getTime() + (1000 * 60 * 60 * 24)).formatDate('yyyy-MM-dd')+' 00:00:00';
+                }
+            }else{
+                updateDatetime = todayTime.formatDate('yyyy-MM-dd hh:mm:ss');
+                createDatetime = new Date(new Date().getTime() - (1000 * 60 * 60 * 24)).formatDate('yyyy-MM-dd hh:mm:ss');
+            }
+            if(!regions){
+                regions = '';
+            }
+            if(!classfiy){
+                classfiy = '';
+            }
+            if(!all){
+                all = '';
+            }
+            if(!queryStr){
+                queryStr = '';
+            }
+            aoData.push(
+                {'name':'regions','value':regions},
+                {'name':'classifications','value':classfiy},
+                {'name':'queryStr','value':queryStr},
+                {'name':'carrier','value':all},
+                {'name':'createDatetime','value':createDatetime},
+                {'name':'updateDatetime','value':updateDatetime}
+            )
+            console.log(aoData)
+            return aoData;
+        }
+    })
+</script>

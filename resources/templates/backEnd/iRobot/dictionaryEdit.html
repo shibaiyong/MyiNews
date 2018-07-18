@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>来源字典表管理列表</title>
+	
+	<!-- jedate CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/addMyCustom.css"  th:href="@{/backEnd/js/dynamic/iRobot/plug/jedate/skin/jedate.css}" />
+	<!-- Self Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/detail.css" th:href="@{/backEnd/css/iRobot/dictionaryEdit.css}" />
+
+</head>
+<body>
+	<div class="wrapper">
+		
+		<div id="header" th:include="backEnd/iRobot/common/header :: header"></div>
+		
+		<input type="hidden" th:value="${websiteId}" id="websiteId"/>
+		
+        <div class="content-wrapper" style="margin-left:0px;">
+			<section class="content">
+				<div class="box p-right p-left">
+					<div class="box box-primary">
+						<div class="box-body">
+							<div class="detailTop">
+								<div class="irobotTitle">
+									<h6>新增/修改字典表</h6>
+<!-- 									<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="所有信息可修改，点击启用即可生效（除采集任务名称外）"></i> -->
+								</div>
+								<div class="mainContent">
+									<div class="screenCon">
+										<form class="form-horizontal">
+											<div class="form-group">
+											    <label class="col-sm-2 control-label"><i class="mustRed">*</i>&nbsp;名称</label>
+											    <div class="col-sm-7">
+											      	<input type="text" class="form-control name"  placeholder="请输入名称"/>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label"><i class="mustRed">*</i>&nbsp;网址/BIZ/IME</label>
+											    <div class="col-sm-7">
+											      	<input type="text" class="form-control webUrl"  placeholder="请输入网址"/>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label"><i class="mustRed">*</i>&nbsp;权重</label>
+											    <div class="col-sm-7">
+											      	<input type="text" class="form-control weight"  placeholder="请输入权重"/>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label">采集载体</label>
+											    <div class="col-sm-7">
+											      	<select class="form-control carrier" th:remove="body">
+													  <option>网站</option>
+													  <option>微博</option>
+													  <option>微信</option>
+													</select>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label">来源机构</label>
+											    <div class="col-sm-7">
+											      	<select class="form-control sources" th:remove="body">
+													  <option>商业媒体</option>
+													  <option>官方媒体</option>
+													  <option>自媒体</option>
+													</select>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label">&nbsp;地区</label>
+											    <div class="col-sm-7">
+											      	<input autocomplete="off" data-provide="typeahead" type="text" class="form-control region" placeholder="请输入地区名称"/>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label">&nbsp;网站层级关系</label>
+											    <div class="col-sm-7">
+													<input type="text" class="form-control level"  placeholder="请输入网站层级关系"/>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <label class="col-sm-2 control-label">创建日期</label>
+											    <div class="col-sm-7">
+											      	<input type="text" class="form-control data"  placeholder="请选择日期"/>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+											<div class="form-group">
+											    <div class="col-md-9 text-right">
+											      	<button type="button" class="btn btn-info sureBtn">确定</button>
+											      	<button type="button" class="btn btn-default cancelBtn">取消</button>
+											    </div>
+											    <div class="col-sm-3"></div>
+											</div>
+										</form>
+									</div>
+								</div>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!--jedate JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/addMyCustom.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/jedate/jquery.jedate.min.js}"></script>
+	<!-- Self Js -->
+     <script src="../../../static/backEnd/js/static/iRobot/webDetail.js" th:src="@{/backEnd/js/dynamic/iRobot/dictionaryEdit.js}"></script>
+</body>
+</html>

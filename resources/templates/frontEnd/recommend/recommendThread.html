@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="recommendThread">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻线索-new -->
+	<title>iNews-为你推荐</title>
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/recommended/recommendThread.css"	th:href="@{/frontEnd/css/recommended/recommendThread.css}" />
+	
+	<!-- jquery.dotdotdot JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/recommended/recommendThread.js"	th:src="@{/frontEnd/js/dynamic/recommended/recommendThread.js}"></script>
+</head>
+<body>
+<!-- 	处于哪种展示方式：0 列表  1 缩略图  2 九宫格 -->
+	<input type="hidden" class="tableListCon" value="0"/>
+<!-- 	3中展示方式中，展示条数的控制 -->
+	<input type="hidden" class="tableListLength" value="30"/>
+	
+	<div class="recommend-thread">
+		<div class="dataConTable">
+			<table class="table table-bordered screenTable">
+				<tbody>
+					<tr>
+						<td class="dataConTabTit">展示方式</td>
+						<td class="dataConShowWays active" data-show="false"><a
+							href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="列表"><i class='fa fa-align-justify'
+								></i></a></td>
+						<td class="dataConShowWays" data-show="true"><a
+							href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="缩略图"><i class="fa fa-th-list"></i></a></td>
+						<td class="dataConShowWays" data-show="true"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+								title="九宫格"><i class='fa fa-th' ></i></a></td>
+						
+						<td class="dataConTabTit">展示条数</td>
+						<td class="showBranches "><a href="javascript:void(0)">15</a></td>
+						<td class="showBranches active"><a href="javascript:void(0)">30</a></td>
+						<td class="showBranches"><a href="javascript:void(0)">60</a></td>
+						<td class="changeState activeBg" ><input type="hidden" id="showSimilar" value="false" /><a href="javascript:void(0)">相似合并</a></td>
+						<td class="changeStateBtn"><a href="javascript:void(0)">含图片</a></td>
+						<td class="changeStateBtn"><a href="javascript:void(0)">含视频</a></td>
+						<td class="sourcechooseButton changeState">
+							<div class="dropdown">
+							    <a type="button" class="dropdown-toggle" id="sourcesCon" data-toggle="dropdown">来源<span class="caret"></span></a>
+							    <ul class="dropdown-menu" role="menu" aria-labelledby="sourcesCon" th:remove="body" id="sourceSelect">
+							    	<li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">全部</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">官方媒体</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">商业媒体</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">政府网站</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">微博</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">微信</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">自媒体</a>
+							        </li>
+							        <li role="presentation" class="sourcesItem">
+							            <a role="menuitem" tabindex="-1" href="#">国外媒体</a>
+							        </li>
+							    </ul>
+							</div>
+						</td>
+						<td class="refreshButton"><a href="javascript:void(0)"><i class="fa fa-refresh "></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="dataConBox">
+		
+			<div id="operateGroup"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+			
+			<div id="threadContent" th:include="frontEnd/common/threadContent :: threadContent"></div>
+		</div>
+	</div>
+</body>
+</html>

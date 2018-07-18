@@ -1,0 +1,45 @@
+.addKeyword:hover{
+	background:#F44336;
+	color:#fff;
+}
+.keywordsBox .has-feedback{
+	margin:0px 0px 10px
+}
+.keywordsBox .has-feedback span{
+	right:0px !important;
+	cursor:pointer;
+	pointer-events:visible;
+}
+/* 二级显示样式 */
+.sortDownContent{
+/* 	background:#f1f1f1; */
+	padding:5px 10px;
+	box-shadow:0px 0px 4px #666;
+}
+.sortDownContent a{
+	padding:6px 8px;
+	display:inline-block;
+	width:85px;
+}
+.sortDownContent p{
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-bottom:0px;
+	border-bottom:1px solid #ccc;
+}
+
+.sortDownContent a:hover{
+	color:#F44336;
+}
+.sortDownContent a.active{
+	color:#F44336;
+}
+
+.sortDown i{
+	position:relative;
+	display:inline-block;
+	padding:3px 5px;
+	border-left:1px solid #ccc;
+	width:20px;
+	text-align:center;
+}

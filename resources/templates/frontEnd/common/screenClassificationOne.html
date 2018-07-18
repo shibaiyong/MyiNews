@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="screenClassificationOne">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 我的定制 -->
+	<title>iNews-来源、地区、分类</title>
+	
+
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/screenClassification.css"  th:href="@{/frontEnd/css/common/screenClassification.css}" />
+	
+</head>
+<body>
+	<div class="screenConditionBox">
+		<div class="pros subpage srceenSources hide" data-localname="srceenSources">
+			<h2 data-inter='false' data-innerId=''>来源<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenSourcesPro" th:remove='body'>
+				<li class="">
+					<a class="ti" href="#">全部</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">官方媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">商品媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">政府网站</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微博</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微信</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">自媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">国外媒体</a>
+				</li>
+			</ul>
+		</div>
+		<div class="pros subpage srceenMap hide" data-localname="srceenMap">
+			<h2 class="srceenMapShow" data-multi="false" data-innerId='' data-old='' data-toggle=""  data-inter='false'>地区
+				<i class="fa fa-caret-down"></i>
+			</h2>
+			<ul class="prosul clearfix" id="srceenMapPro" th:remove="body">
+				<li class="">
+					<a class="ti" href="#">北京<i class='fa fa-caret-right'></i></a>
+					<div class="prosmore hide">
+						<span><em><a href="#">全部(117)</a></em></span>
+						<span><em class="morehot"><a class="morehot" href="#">火锅(17)</a></em></span>
+						<span><em class="morehot"><a class="morehot" href="#">烧烤(16)</a></em></span>
+						<span><em><a href="#">西餐(9)</a></em></span>
+						<span><em><a href="#">海鲜(37)</a></em></span>
+						<span><em><a href="#">地方菜(5)</a></em></span>
+						<span><em><a href="#">日韩料理(2)</a></em></span>
+						<span><em><a href="#">快餐(2)</a></em></span>
+						<span><em class="morehot"><a class="morehot" href="#">蛋糕(9)</a></em></span>
+						<span><em><a href="#">其他(7)</a></em></span>
+						<span><em><a href="#">下午茶(5)</a></em></span>
+						<span><em><a href="#">咖啡(8)</a></em></span>
+					</div>
+				</li>
+				<li class="">
+					<a class="ti" href="#">天津</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">上海</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">重庆</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">吉林</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">辽宁</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">河北</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">山东</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">江苏</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">山西</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">陕西</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">甘肃</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">四川</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">青海</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">湖南</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">湖北</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="pros subpage srceenClassification hide" data-localname="srceenClassification">
+			<h2 class="srceenMapShow" data-innerId='' data-inter='false'>分类
+				<i class="fa fa-caret-down"></i>
+			</h2>
+			<ul class="prosul clearfix" id="srceenClassificationPro" th:remove="body">
+				<li class="">
+					<a class="ti" href="#">经济<i class='fa fa-caret-right'></i></a>
+					<div class="prosmore hide">
+						<span><em><a href="#">宏观经济</a></em></span>
+						<span><em ><a  href="#">产业经济</a></em></span>
+						<span><em ><a  href="#">国际财经</a></em></span>
+						<span><em><a href="#">公司新闻</a></em></span>
+						<span><em><a href="#">金融新闻</a></em></span>
+					</div>
+				</li>
+				<li class="">
+					<a class="ti" href="#">政治</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">社会</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">文化</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">生活</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">体育</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">娱乐</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">军事</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">法制</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">教育</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">科技</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">其他</a>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div class="pros subpage srceenTag hide" data-localname="srceenTag">
+			<h2 data-inter='false' data-innerId=''>标签<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenTagPro" th:remove='body'>
+				<li class="">
+					<a class="ti" href="#">官方媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">商品媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">政府网站</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微博</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微信</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">自媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">国外媒体</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="pros subpage srceenMedia hide" data-localname="srceenMedia">
+			<h2 data-inter='false' data-innerId=''>媒体<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenMediaPro">
+				<li class="">
+					<a class="ti" href="#">官方媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">商品媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">政府网站</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微博</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微信</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">自媒体</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">国外媒体</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="pros subpage srceenMediaAlone hide" data-localname="srceenMediaAlone">
+			<h2 data-inter='false' data-innerId=''>全部<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenMediaAlonePro" th:remove="body">
+				<li class="">
+					<a class="ti" href="#">微博</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">微信</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class='pros subpage srceenTime hide' data-localname="srceenTime">
+			<input type="text" class="form-control form_datetime " id="screen_begin_time" placeholder="请选择时间" />
+		</div>
+		<form class="subpage form-inline screenSearch hide" role="form" action='javascript:void(0)'>
+			<div class="form-group">
+				<div class="input-group">
+				
+					<input autocomplete="off" data-provide="typeahead" type="text" class="input-sm form-control customAddInput" placeholder="请输入关键词" />
+					
+					<div class="input-group-addon btn-red customAddBtn">iSearch</div>
+				</div> 
+			</div>
+		</form>
+<!-- 		榜单 -->
+		<div class="pros subpage srceenList hide" >
+			<h2 data-inter='false' data-innerId='75'>点击榜<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenListPro" th:remove='body'>
+				<li class="">
+					<a class="ti" href="#">点击榜</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">排行榜</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="pros subpage srceenListPeriod hide" data-localname="srceenListPeriod">
+			<h2 data-inter='false' data-innerId='72'>24小时<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenListPeriodPro" th:remove='body'>
+				<li class="">
+					<a class="ti" href="#">全部</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">官方媒体</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="pros subpage srceenBranches hide" data-localname="srceenBranches">
+			<h2 data-inter='false' data-innerId=''>前5条<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenBranchesPro">
+				<li class="">
+					<a class="ti" href="#">前5条</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">前10条</a>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div class="pros subpage srceenClusterFre hide" data-localname="srceenClusterFre">
+			<h2 data-inter='false' data-innerId='7'>4小时<i class="fa fa-caret-down"></i></h2>
+			<ul class="prosul clearfix" id="srceenClusterFrePro" th:remove="body">
+				<li class="">
+					<a class="ti" href="#">前5条</a>
+				</li>
+				<li class="">
+					<a class="ti" href="#">前10条</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/common/plugins/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/screenClassificationOne.js" th:src="@{/frontEnd/js/dynamic/common/screenClassificationOne.js}"></script>
+</body>
+</html>

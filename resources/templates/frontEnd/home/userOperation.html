@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>配置修改</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+    <meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+    <link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" />
+    <!-- 全网头条 -->
+    <!-- 引用公共css -->
+    <object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+
+    <!-- 引用公共js -->
+    <object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+
+    <!-- 引用dataTables -->
+    <object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+    <!-- 引入公用的插件 注：必须放在最开始的位置 -->
+    <script type="text/javascript" src="../../../static/common/plugins/jedate/jquery.jedate.js"  th:src="@{/common/plugins/jedate/jquery.jedate.js}"></script>
+    <script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js"  th:src="@{/common/plugins/typeahead/bootstrap3-typeahead.min.js}"></script>
+    <script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js"  th:src="@{/common/plugins/bootstrap-3.3.0/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js"></script>
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+    <link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/more/more.css"	th:href="@{/frontEnd/css/config/jquery.dad.css}" />
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/addMyCustom.css"  th:href="@{/common/plugins/jedate/skin/jedate.css}" />
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/addMyCustom.css"  th:href="@{/frontEnd/css/myCustom/addMyCustom.css}" />
+    <link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/more/more.css"	th:href="@{/frontEnd/css/config/config.css}" />
+    <link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/more/more.css"	th:href="@{/frontEnd/css/config/myCostom.css}" />
+
+    <script type="text/javascript"	src="../../../static/frontEnd/js/static/more/more.js"	th:src="@{/frontEnd/js/dynamic/config/dad.js}"></script>
+    <!-- Self JS -->
+
+    <style>
+        /*Mycustom was modified by shibaiyong 2018/3/27*/
+        .addAndModifyGrounp{
+            display:block;
+        }
+        .addAndModifyGrounp .addModifyNavsIner{
+            border-bottom:3px solid #dd2f39;
+        }
+        .addAndModifyGrounp .addModifyNavs ul li{
+            display:inline-block;
+        }
+        .addAndModifyGrounp .addModifyNavs ul li a{
+            display:inline-block;
+            width:200px;
+            height: 40px;
+            line-height: 40px;
+            font-size:18px;
+            color:#333;
+            text-align: center;
+        }
+
+        .button-container{
+            text-align:center;
+            padding-top:20px;
+        }
+        .button-container .finished{
+            width:60px;
+            background:#f44336;
+            color:white;
+        }
+        .confirmToDisplay{
+            display:none;
+            margin-top: 30px;
+        }
+        .addAndModifyGrounp .addModifyNavs ul li a.clickedStyle {
+            background: #dd2f39;
+            color: white;
+        }
+        .contraryFlag{
+            color:#333;
+        }
+        .modal-dialog{
+            margin-top:16%;
+        }
+        .hiddenn{
+            display: none;
+        }
+        h2>span{
+            background: white;
+            padding:0 6px;
+            display: inline-block;
+            margin-left:14px;
+            font-size:18px;
+            height: 36px;
+            line-height: 36px;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- 主体内容 -->
+<input type="hidden" id="context" th:value="${#httpServletRequest.contextPath}"/>
+<div id="page-content" class="container">
+    <div  class="container" style="background:#fff">
+        <div class="row">
+            <div id="main-content">
+                <div class="col-md-12">
+                    <!-- 						标签 -->
+                    <div class="box p-right p-left p-bottom">
+                        <div class="box-header header-vimeo">
+                            <h2>标签</h2>
+                        </div>
+                    </div>
+                    <div class="labelContent box">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form class="form-horizontal" action="javascript:void(0)">
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">来源</label>
+                                        <div class="col-sm-10">
+                                            <div class="listLabel" id="source" data-position='6'>
+                                                <input type="hidden" value='0'/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">载体</label>
+                                        <div class="col-sm-10">
+                                            <div class="listLabel" id="carrier" data-position='10'>
+                                                <input type="hidden" value='0'/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group contentSort">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">分类</label>
+                                        <div class="col-sm-10" >
+                                            <div class="listLabel sortTitle" id="classification" data-position='7'>
+                                                <input type="hidden" value='0'/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">地区</label>
+                                        <div class="col-sm-10">
+                                            <div class="listLabel" id="map" data-position='8'>
+                                                <input type="hidden" value='0'/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="already-add">
+                                    <h4>已定制条件</h4>
+                                </div>
+                                <div class="alreadyCon" >
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="form-group">
+                                    <button class="btn btn-red conserve"  data-once="0">保存</button>
+                                    <button class="btn btn-default reset" >恢复默认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 						导航 -->
+                    <div class="col-md-10 col-sm-12 col-xs-12 confirmToDisplay">
+                        <div class="addAndModifyGrounp">
+                            <div class="addModifyNavs">
+                                <ul class="addModifyNavsIner" style="margin-left: 40px;">
+                                    <li><a href="javascript:;">网站/APP</a></li>
+                                    <li><a href="javascript:;">微信</a></li>
+                                    <li><a href="javascript:;">微博</a></li>
+                                </ul>
+                                <div class="showAddModifyContainer">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="finished btn">完成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="probationCommon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p style="text-align:center;margin-bottom:0px">
+                    你未选择关注的内容范围，将视你为心系天下的新闻百晓生</p>
+                <p style="text-align:center;margin-bottom:0px">是否确定跳过？</p>
+                <div style="margin-top:10px;text-align:right">
+                    <button type="button" class="btn btn-red btn-sm" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/userOperation.js" th:src="@{/frontEnd/js/dynamic/myCustom/userOperation.js}"></script>
+
+<script>
+    //初始化我的定制页；
+    var ctx = $('#context').val();//获取根目录；
+    console.log(ctx)
+
+    $("#myaccordion>li>.link").click(function(){
+        $(this).css('background', 'red');
+        $(this).parent().siblings().find('.link').css('background', 'white')
+        $('.addAndModifyGrounp').hide();
+        $('#myCustomContent').show();
+        if($(this).attr('isopen')=='opened') {
+            $(this).attr('isopen','closed');
+            $(this).siblings().hide();
+            //$(this).parent().siblings().find('.submenu').hide();
+        }else{
+            $(this).attr('isopen','opened');
+            $(this).siblings().show();
+            $(this).parent().siblings().find('.submenu').hide();
+            $(this).parent().siblings().find('.link').attr('isopen','closed');
+        }
+    })
+
+
+    $('#myaccordion>li>.submenu>li').click(function(){
+
+        $(this).parent('.submenu').hide();
+        $(this).parent('.submenu').siblings('.link').attr('isopen','closed');
+    })
+
+
+    $('#totalAddModify').click(function(){
+        $('.addAndModifyGrounp').show();
+        $('#myCustomContent').hide();
+        //进入添加修改页时，默认展示  新闻线索页面。
+        $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoAddMyCustom');
+    })
+
+    //获取定制信息
+
+
+
+    //给左侧各个子项添加点击事件
+    // $('.submenu').on('click','li',function(){
+    //     console.log($(this).attr('data-customgroup'));
+    // })
+    // $('.analysis').click(function(){
+    //     $('#myCustomContent').loadPage('/ns'+'/custom/front/gotoReviewAnalysis');
+    // })
+
+    // $('#myCustomContent').loadPage('/ns'+'/custom/front/gotoMyCustomThread');
+    $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoAddWebandApp');
+    $('.addAndModifyGrounp .addModifyNavsIner li a').click(function(){
+        var name = $(this).text();
+        console.log(name)
+        if(name == '微信') {
+            //判断是否添加了微信的定制
+            judgeCustomed(ctx, 'get', {type: 1})
+        }else if(name == '微博') {
+            //判断是否添加了微博的定制
+            judgeCustomed(ctx, 'get', {type: 2})
+        }else if(name == '网站/APP'){
+            $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoAddWebandApp');
+        }
+    })
+
+    $('.finished').click(function(){
+        if($(".alreadyCon").children().length>0){
+            window.location.href='/ns';
+        }else{
+            $('#probationCommon').modal('show');
+        }
+    })
+
+    $('#probationCommon').on('shown.bs.modal', function (event) {
+        $('.btn-red').click(function(){
+            window.location.href='/ns';
+        })
+    })
+
+    $('.addModifyNavsIner li a').click(function () {
+        $(this).addClass('clickedStyle');
+        $(this).parent().siblings().find('a').removeClass('clickedStyle');
+    })
+    //默认第一个新闻线索选中；
+    $('.addModifyNavsIner li:first a').click();
+</script>

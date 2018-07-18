@@ -1,0 +1,40 @@
+.searchesTable td:nth-child(1){
+	font-size:12px;
+}
+.searchesTable{
+	border-top:2px solid #EAEAEA;
+}
+.searchesTable td:nth-child(2),
+.searchesTable td:nth-child(6),
+.searchesTable td:nth-child(7),
+.searchesTable td:nth-child(8),
+.searchesTable td:nth-child(9){
+	text-align:center;
+}
+
+#operateGroup{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+/* 列表中的操作 */
+.searchesTable tbody td:nth-child(10) i{
+	margin-left:5px;
+	cursor:pointer;
+}
+.searchesTable tbody td:nth-child(10) i:first-child{
+	margin-left:0px;
+}
+.searchesTable tbody td:nth-child(10) i:hover{
+	color:#F44336
+}
+.searchesTable .inewsOperation i.active{
+	color:#F44336
+}
+
+.green{
+	color:red;
+}
+.gray{
+	color:green;
+}

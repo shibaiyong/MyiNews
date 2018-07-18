@@ -1,0 +1,193 @@
+@media (min-width: 992px){
+	.col-md-10{
+		width: 87%;
+	}
+	.col-md-2{
+		width: 12%
+	}
+	
+	footer .col-md-2{
+		width:16.66666667%;
+	}
+	
+}
+@media (max-width: 992px){
+	.dataConSudoku .caption .dl-horizontal dt{
+		width: 100% !important;
+	}
+}
+
+.fa-chevron-up{
+	-webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/* 侧边栏-来源增加 */
+.accordion .addSources .link{
+	padding:0px;
+}
+.accordion .addSources .link input{
+	display:inline-block;
+	width:100%;
+	border:0px;
+	padding:6px;
+}
+
+/* input框获得焦点的时，改变边框的颜色 */
+.accordion .addSources .link input:focus {
+    outline: none;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    border-color: #ccc;
+}
+
+a:focus{outline:none !important;}
+
+
+/* 相似合并等操作-列表样式 */
+#dataConShow{
+	margin-top:0px
+}
+.dataConTable{
+	text-align: center;
+}
+.dataConTable .table>thead>tr>th, 
+.dataConTable .table>tbody>tr>th, 
+.dataConTable .table>tfoot>tr>th, 
+.dataConTable .table>thead>tr>td, 
+.dataConTable .table>tbody>tr>td, 
+.dataConTable .table>tfoot>tr>td{
+	padding: 4px 2px;
+}
+.dataConTable table{
+	margin-bottom:6px;
+}
+.dataConTable table td.active a{
+/* 	color: #F44336; */
+	color:#fff;
+	font-weight: bold;
+}
+.dataConTable td.dataConTabTit{
+	background:#f7f5f5;
+}
+.dataConTable .table>tbody>tr>td.active{
+/* 	background-color: #fff; */
+	background:#F44336
+}
+
+/* 其余样式 */
+#threadContent{
+	margin-top:8px;
+}
+
+/* 侧边栏-添加来源删除 */
+.accordion{
+	overflow:hidden;
+}
+.deleteSources{
+	float:right;
+	position:absolute;
+	display:inline-block;
+	width:25px;
+	height:32px;
+	line-height:32px;
+	text-align:center;
+	color:#fff;
+	margin-top:-6px;
+	background:rgba(106,106,106,0.6);
+	right:-25px;
+}
+.sourcesBox.active{
+	background:#F44336;
+}
+.sourcesBox.active .link{
+	color:#fff;
+}
+
+.addSourcesBox{
+	width:100%;
+}
+
+
+/* 列表展示 */
+.heatSortTable tbody td:nth-child(5),
+.heatSortTable tbody td:nth-child(6),
+.heatSortTable tbody td:nth-child(7){
+	text-align:center
+}
+
+
+.heatSortTable .inewsOperation i.active{
+	color:#F44336
+}
+
+
+/* 热度值Top500按钮 */
+.heatBox{
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+.heatBtn {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 6px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.heatBtn a {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color:#fff; 	
+}
+
+.heatBtn a:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.heatBtn:hover a {
+  padding-right: 15px;
+}
+
+.heatBtn:hover a:after {
+  opacity: 1;
+  right: 0;
+}
+.srceenTimeQuantum{
+	width:215px;
+}
+
+/* 添加来源-搜索不到的提示 */
+.noSources{
+	border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    width: 115px;
+    text-align: center;
+    padding: 5px 0px;
+    border-top: 0px;
+}
+.noSources span{
+	color:#999;
+}
+
+.green{
+	color:red;
+}
+.gray{
+	color:green;
+}

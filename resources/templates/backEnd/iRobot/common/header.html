@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="header">
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>iNews后台管理</title>
+	<!-- Bootstrap Core CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/bootstrap-3.3.0/css/bootstrap.min.css" th:href="@{/common/plugins/bootstrap-3.3.0/css/bootstrap.min.css}" />
+	<!-- Fonts -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/common/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" />
+	<!-- AdminLTE CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/plugins/AdminLTE/css/AdminLTE.min.css" th:href="@{/backEnd/plugins/AdminLTE/css/AdminLTE.min.css}" />
+	<!-- skins CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/plugins/AdminLTE/css/skins/_all-skins.min.css" th:href="@{/backEnd/plugins/AdminLTE/css/skins/_all-skins.min.css}" />
+    <!-- dataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/dataTables/jquery.dataTables.min.css" th:href="@{/common/plugins/dataTables/jquery.dataTables.min.css}" />
+    <!-- toastmessage CSS-->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/toastmessage/css/jquery.toastmessage.css" th:href="@{/common/plugins/toastmessage/css/jquery.toastmessage.css}" />	
+    <!-- Commom CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/common/common.css" th:href="@{/backEnd/css/iRobot/common/common.css}" />
+
+	<!-- jQuery 2.1.4-->
+	<script src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+	<!-- Bootstrap Core Js -->
+	<script src="../../../static/common/plugins/bootstrap-3.3.0/js/bootstrap.min.js" th:src="@{/common/plugins/bootstrap-3.3.0/js/bootstrap.min.js}"></script>
+	<!-- APP Js -->
+	<script src="../../../static/backEnd/plugins/AdminLTE/js/app.min.js" th:src="@{/backEnd/plugins/AdminLTE/js/app.min.js}"></script>
+	<!-- dataTables Js -->
+	<script src="../../../static/common/plugins/dataTables/jquery.dataTables.min.js" th:src="@{/common/plugins/dataTables/jquery.dataTables.min.js}"></script>
+	<script src="../../../static/common/plugins/dataTables/dataTables.bootstrap.min.js" th:src="@{/common/plugins/dataTables/dataTables.bootstrap.min.js}"></script>
+	<script src="../../../static/common/plugins/dataTables/dataTables-style.js" th:src="@{/common/plugins/dataTables/dataTables-style.js}"></script>
+	<!-- toastmessage Js-->
+	<script src="../../../static/common/plugins/toastmessage/js/jquery.toastmessage.js" th:src="@{/common/plugins/toastmessage/js/jquery.toastmessage.js}" ></script>
+	<!-- Common Js -->
+    <script src="../../../static/backEnd/js/dynamic/iRobot/common/common.js" th:src="@{/backEnd/js/dynamic/iRobot/common/common.js}"></script>
+    <!-- Self Js -->
+    <script src="../../../static/backEnd/js/static/common/header.js" th:src="@{/backEnd/js/dynamic/iRobot/common/header.js}"></script>
+</head>
+<body class="skin-blue sidebar-mini" style="font-family:Microsoft Yahei">
+
+	<input type="hidden" id="ctx" th:value="${#httpServletRequest.contextPath}"/>
+	
+    <header class="main-header">
+     <a href="#" class="logo" th:href="@{/crawl/back/manage}">
+       <span class="logo-mini"><b>iRobot</b></span>
+       <span class="logo-lg"><b>iRobot</b></span>
+     </a>
+
+     <nav class="navbar navbar-static-top" role="navigation">
+       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+         <span class="sr-only">Toggle navigation</span>
+       </a>
+       <div class="navbar-custom-menu">
+         <ul class="nav navbar-nav">
+           <li class="dropdown messages-menu">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <i class="fa fa-envelope-o"></i>
+               <span class="label label-success">4</span>
+             </a>
+           </li>
+           <li class="dropdown notifications-menu">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <i class="fa fa-bell-o"></i>
+               <span class="label label-warning">10</span>
+             </a>
+           </li>
+           <li class="dropdown tasks-menu">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <i class="fa fa-flag-o"></i>
+               <span class="label label-danger">9</span>
+             </a>
+           </li>
+           <li class="dropdown user user-menu">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <span class="hidden-xs">admin</span>
+             </a>
+           </li>
+           <li class="dropdown user user-menu">
+             <a href="javascript:void(0)" th:href="@{/dictionary/back/dictionary}" target="_blank" class="dropdown-toggle" >
+               <span class="hidden-xs">字典表</span>
+             </a>
+           </li>
+           <li>
+             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+           </li>
+         </ul>
+       </div>
+
+     </nav>
+ 	</header>
+</body>
+</html>

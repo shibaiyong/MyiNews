@@ -1,0 +1,16 @@
+
+.screenTable tbody a{
+	display:inline-block;
+	width:100%;
+	height:100%;
+	cursor:pointer;
+}
+.sourcechooseButton .dropdown-menu{
+	left:-3px;
+	min-width:100px;
+	margin-top:4px;
+}
+
+
+
+

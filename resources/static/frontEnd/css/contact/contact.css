@@ -1,0 +1,30 @@
+/* .container{
+	width:814px;
+} */
+.headerLogo{
+	margin:20px 0px 20px 20px;
+}
+.headerLogo img{
+	width:100px;
+}
+.contactHeader{
+	margin-bottom:20px;
+}
+.contactForm{
+	margin-bottom:20px;
+}
+
+.contactSuccess{
+	margin-top:12%;
+	text-align:center;
+	font-size:20px;
+}
+.contactFailure{
+	margin-top:12%;
+	text-align:center;
+	font-size:20px;
+}
+.contactFailure a{
+	color:#F44336;
+	margin-left:3px;
+}

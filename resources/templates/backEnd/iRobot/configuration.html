@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>iRobot - 网站配置字段详情页</title>
+	<!-- Self Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/configuration.css" th:href="@{/backEnd/css/iRobot/configuration.css}" />
+
+</head>
+<body>
+	<div class="wrapper">
+		<input type='hidden' id="taskId" th:value="${taskId}" />
+		<div id="header" th:include="backEnd/iRobot/common/header :: header"></div>
+		
+        <div class="content-wrapper" style="margin-left:0px;">
+			<section class="content">
+				<div class="box p-right p-left">
+					<div class="box box-primary">
+						<div class="box-body">
+							<div class="listTop listConfig">
+								<div class='listTitle'>
+									<h4>新闻列表配置</h4> 
+								</div>
+								<div class="row">
+								  <div class="col-md-4">
+								  		<div class="irobotTitle">
+											<h6>网站源代码（带格式人工复制或URL自动获取）</h6>
+										</div>
+										<div class='listItemCon'>
+											<form class="form-horizontal" action="javascript:void(0)">
+											  <div class="form-group">
+											    <div class="col-sm-9">
+											     	<input type="text" class="form-control extractionInp"  placeholder="请输入网址链接"/>
+											    </div>
+											    <button class="btn btn-default extraction col-sm-3">代码提取</button>
+											  </div>
+											</form>
+											<div class="extractionHtml"></div>
+										</div>
+								  </div>
+								  <div class="col-md-4">
+								  		<div class="irobotTitle">
+											<h6>采集模板配置</h6>
+										</div>
+										<div class="listItemCon formworkConfiguration">
+											<div class='listItemTitle'>
+												<button type="button" class="btn btn-default">采集模板一</button>
+												<form class="form-horizontal">
+												  <div class="form-group">
+												    <label class="col-sm-3 control-label">选择列表采集模板</label>
+												    <div class="col-sm-8">
+												      	<input autocomplete="off" data-provide="typeahead" type="text" class="form-control collectList" placeholder="请输入采集来源名称"/>
+												    </div>
+												    <div class="col-sm-1">
+												    	<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="默认自动选择最新新增模板"></i>
+												    </div>
+												  </div>
+												</form>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">采集代码范围</h6>
+												<form class="form-inline bianma">
+												  <div class="form-group">
+												    <label>页面编码</label>
+												    <select class="form-control encoding">
+													  <option value="utf-8">UTF-8</option>
+													  <option value="gb8103">GB8103</option>
+													</select>
+												  </div>
+												</form>
+												<form class="form-horizontal codeRange">
+													  <div class="form-group">
+													   		<label class="col-sm-2 control-label">步骤1</label>
+													    	<label  class="col-sm-2 control-label p-left p-right" >采集位置</label>
+													    	<div class="col-sm-8">
+													      		<input type="text" class="form-control collectionPositon"  placeholder="" />
+													    	</div>
+													  </div>
+													  <div class="form-group">
+													  		<label class="col-sm-2 control-label">步骤2</label>
+													    	<label  class="col-sm-2 control-label p-left p-right">列表标签</label>
+													    	<div class="col-sm-8">
+													      		<input type="text" class="form-control tags"  placeholder="" />
+													    	</div>
+													  </div>
+												</form>
+												<button type="button" data-count='3' class="btn btn-default" id="addListLabel">新增列表标签</button>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">采集字段</h6>
+												<form class="form-horizontal collectField">
+													  <div class="collectFieldItem">
+														  <div class="form-group">
+														   		<label class="col-sm-2 control-label">字段1</label>
+														    	<label  class="col-sm-2 control-label p-left p-right">所属字段</label>
+														    	<div class="col-sm-8">
+	<!-- 													      		<select class="form-control"> -->
+	<!-- 																  <option>分类-classification</option> -->
+	<!-- 																</select> -->
+																	<input autocomplete="off" data-provide="typeahead" type="text" class="form-control collectionField" placeholder="请输入所属字段的名称"/>
+														    	</div>
+														  </div>
+														  <div class="form-group">
+														  		<label class="col-sm-2 control-label"></label>
+														    	<label  class="col-sm-2 control-label p-left p-right">获取位置</label>
+														    	<div class="col-sm-8">
+														      		<input type="text" class="form-control crawlPosition"  placeholder="每个选择器中间以&amp;&amp;隔开" />
+														    	</div>
+														  </div>
+													  </div>
+													  <div class="collectFieldItem">
+														  <div class="form-group">
+														   		<label class="col-sm-2 control-label">字段2</label>
+														    	<label  class="col-sm-2 control-label p-left p-right">所属字段</label>
+														    	<div class="col-sm-8">
+														      		<input autocomplete="off" data-provide="typeahead" type="text" class="form-control collectionField" placeholder="请输入所属字段的名称"/>
+														    	</div>
+														  </div>
+														  <div class="form-group">
+														  		<label class="col-sm-2 control-label"></label>
+														    	<label  class="col-sm-2 control-label p-left p-right">获取位置</label>
+														    	<div class="col-sm-8">
+														      		<input type="text"  class="form-control crawlPosition"  placeholder="每个选择器中间以&amp;&amp;隔开" />
+														    	</div>
+														  </div>
+													  </div>
+												</form>
+												<button type="button" data-count='3' class="btn btn-default" id="addField">新增字段</button>
+											</div>
+										</div>
+								  </div>
+								  <div class="col-md-4">
+								  		<div class="irobotTitle">
+											<h6>采集模板代码展示/采集效果展示</h6>
+										</div>
+										<div class='listItemCon'>
+											<div class="listItemTitle rightEidtList">
+												<button type="button" class="btn btn-default editFormwork">编辑查看采集模板代码</button>
+												<button type="button" class="btn btn-default collectResultShow">采集效果测试</button>
+												<form class="form-inline parse parseListCon">
+												  <div class="form-group m-bottom">
+												  	<select class="form-control parseDataType parserListId" th:remove="body">
+												  		<option>浏览器方式</option>
+												  		<option>普通方式</option>
+												  		<option>正则方式</option>
+												  	</select>
+												  </div>
+												</form>
+											</div>
+											<div class='listItemMid editFormworkCon'>
+												<textarea class="form-control formworkCodeShow" rows="30" disabled="true"></textarea>
+<!-- 												<div class="formworkCodeShow"></div> -->
+											</div>
+											<div class="listItemMid collectResultShowCon hide" th:remove="body">
+												<table class="table table-striped collectResultShowTable">
+													<thead>
+														<tr>
+															<th style="width:27%"></th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>crawl_datetime</td>
+															<td>2017-09-13 18:51:22</td>
+														</tr>
+														<tr>
+															<td>dev1</td>
+															<td>李克强深入太行山区考察脱贫攻坚_新浪新闻</td>
+														</tr>
+														<tr>
+															<td>run_num</td>
+															<td>1</td>
+														</tr>
+													</tbody>													
+												</table>
+											</div>
+										</div>
+								  </div>
+								  <div class="col-md-12">
+								  		<div class="listItemBtn text-center">
+											<button type="button" class="btn btn-info saveAsFormwork" data-toggle="modal" data-target="#saveAsFormworkModal" data-whatever="" data-type="0">另存为模板</button>
+											<button type="button" class="btn btn-info generatedCode">生成代码</button>
+											<button type="button" class="btn btn-info saveFormwork">保存</button>
+<!-- 											<button type="button" class="btn btn-info">取消</button> -->
+										</div>
+								  </div>
+								</div>
+							</div>
+							
+							<div class="listBottom detailConfig">
+								<div class='listTitle'>
+									<h4>新闻详情页配置</h4>
+								</div>
+								<div class="row">
+								  	<div class="col-md-4">
+								  		<div class="irobotTitle">
+											<h6>网站源代码（带格式人工复制或URL自动获取）</h6>
+										</div>
+										<div class='listItemCon'>
+											<form class="form-horizontal" action="javascript:void(0)">
+												<div class="form-group">
+												    <div class="col-sm-9">
+												     	<input type="text" class="form-control extractionDetailInp"  placeholder="请输入网址链接"/>
+												    </div>
+													<button class="btn btn-default extractionDetail col-sm-3">代码提取</button>
+												</div>
+											</form>
+										    <div class="extractionDetailHtml"></div>
+										</div>
+								  	</div>
+								  	<div class="col-md-4">
+								  		<div class="irobotTitle">
+											<h6>采集模板配置</h6>
+										</div>
+										
+										<div class="listItemCon detailConfiguration">
+											<div class='listItemTitle'>
+												<button type="button" class="btn btn-default">采集模板一</button>
+												<form class="form-horizontal">
+												  <div class="form-group">
+												    <label class="col-sm-3 control-label">选择列表采集模板</label>
+												    <div class="col-sm-8">
+												      <input autocomplete="off" data-provide="typeahead" type="text" class="form-control collectListDetail" placeholder="请输入所属字段的名称"/>
+												    </div>
+												    <div class="col-sm-1">
+												    	<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="默认自动选择最新新增模板"></i>
+												    </div>
+												  </div>
+												</form>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">采集代码范围</h6>
+												<form class="form-inline bianma">
+												  <div class="form-group">
+												    <label>页面编码</label>
+												    <select class="form-control encodingDetail">
+													  <option value="utf-8">UTF-8</option>
+													  <option value="gb8103">GB8103</option>
+													</select>
+												  </div>
+												</form>
+												<form class="form-horizontal" style="margin-top:15px">
+													  <div class="form-group m-bottom">
+													    <label  class="col-sm-3 control-label">采集位置</label>
+													    <div class="col-sm-9">
+													      <input type="text" class="form-control collectionPositonDetail" placeholder="每个选择器中间以&amp;&amp;隔开"/>
+													    </div>
+													  </div>
+												</form>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">标题</h6>
+												<div class="listItemMidCon title">
+													<form>
+													  <div class="form-group">
+													    <input type="text" class="form-control crawlPositionDetail" placeholder="每个选择器中间以&amp;&amp;隔开"/>
+													  </div>
+													</form>
+													<form class="form-horizontal">
+														  <div class="form-group m-bottom">
+														    <label class="col-sm-3 control-label" style="margin-top:10px">设置默认值 &nbsp;&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="采集不到标题"></i></label>
+														    <div class="col-sm-9">
+														      <input type="text" class="form-control defaultMsgDetail"  placeholder="新浪财经新闻+采集时间" style="margin-top:12px;"/>
+														    </div>
+														    <div class="col-sm-offset-3 col-sm-9">
+														    	<div class="radio">
+																  <label class="p-left">
+																     <input type="checkbox" checked="checked" class="titleSelectFlag"/>
+																    自动取正文前15字作为标题
+																  </label>
+																</div>
+														    </div>
+														  </div>
+													</form>
+												</div>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">正文</h6>
+												<div class="listItemMidCon">
+													<form>
+													  <div class="form-group">
+													    <input type="text" class="form-control mainConDetail" placeholder="每个选择器中间用&amp;&amp;隔开"/>
+													  </div>
+													</form>
+													<button type="button" class="btn btn-default" id="addClear">新增清除内容字段</button>
+													
+													<form class="addClearContent"></form>
+												</div>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">发布时间</h6>
+												<div class="listItemMidCon">
+													<form>
+													  <div class="form-group">
+													    <input type="text" class="form-control issueTimeDetail" placeholder="每个选择器中间用&amp;&amp;隔开"/>
+													  </div>
+													</form>
+													<form class="form-horizontal">
+														  <div class="form-group m-bottom">
+														    <label class="col-sm-3 control-label p-left">原始时间样式</label>
+														    <div class="col-sm-9">
+														      <input type="text" class="form-control originalTimeDetail" placeholder="2017-03-15 09:14"/>
+														    </div>
+														    
+														    <div class="col-sm-offset-3 col-sm-9">
+														    	<div class="radio">
+																  <label class="p-left">
+																    <input type="checkbox" checked="checked" class="timeSelectFlag"/>
+																    未采集到发布时间则补填采集时间
+																  </label>
+																</div>
+														    </div>
+														  </div>
+													</form>
+												</div>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">发稿来源</h6>
+												<div class="listItemMidCon">
+													<form>
+													  <div class="form-group">
+													    <input type="text" class="form-control pressSourcesDetail" placeholder="每个选择器中间用逗号隔开"/>
+													  </div>
+													</form>
+													<button type="button" class="btn btn-default" id="addAlternative">新增备选方案</button>
+													<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="因为有的发稿来源在正文，优先主方案，主方案有值，则不用备"></i>
+													
+													<form class="addAlternativeCon"></form>
+													
+													<form class="form-horizontal" style="margin-top:10px">
+														  <div class="form-group m-bottom">
+														    <label class="col-sm-3 control-label">设置默认值</label>
+														    <div class="col-sm-9 p-left">
+														      <input type="text" class="form-control pressSourcesDefault" placeholder=""/>
+														    </div>
+														  </div>
+													</form>
+												</div>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">关键词</h6>
+												<div class="listItemMidCon">
+													<form>
+													  <div class="form-group">
+													    <input type="text" class="form-control keyWordsDetail" placeholder="每个选择器中间用&amp;&amp;隔开"/>
+													  </div>
+													</form>
+												</div>
+											</div>
+											<div class='listItemMid'>
+												<h6 class="listItemMidTitle">作者</h6>
+												<div class="listItemMidCon">
+													<form >
+													  <div class="form-group">
+													    <input type="text" class="form-control authorDetail"  placeholder="每个选择器中间用&amp;&amp;隔开"/>
+													  </div>
+													</form>
+												</div>
+											</div>
+											
+										</div>
+								  	</div>
+								  	<div class="col-md-4">
+								  		<div class="irobotTitle">
+											<h6>采集模板代码展示/采集效果展示</h6>
+										</div>
+										<div class='listItemCon'>
+											<div class="listItemTitle rightEidtDetail">
+												<button type="button" class="btn btn-default editFormworkDetail">编辑查看采集模板代码</button>
+												<button type="button" class="btn btn-default collectResultDetail">采集效果测试</button>
+												<form class="form-inline parse parseDetailCon">
+												  <div class="form-group m-bottom">
+												  	<select class="form-control parseDataType parserDetailId" th:remove="body">
+												  		<option>浏览器方式</option>
+												  		<option>普通方式</option>
+												  		<option>正则方式</option>
+												  	</select>
+												  </div>
+												</form>
+											</div>
+											<div class='listItemMid editFormworkConDetail'>
+												<textarea class="form-control formworkCodeDetailShow" rows="54" disabled="true"></textarea>
+											</div>
+											<div class="listItemMid collectResultConDetail hide" th:remove="body">
+												<table class="table table-striped collectResultDetailShowTable">
+													<thead>
+														<tr>
+															<th style="width:27%"></th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>crawl_datetime</td>
+															<td>2017-09-13 18:51:22</td>
+														</tr>
+														<tr>
+															<td>dev1</td>
+															<td>李克强深入太行山区考察脱贫攻坚_新浪新闻</td>
+														</tr>
+														<tr>
+															<td>run_num</td>
+															<td>1</td>
+														</tr>
+													</tbody>													
+												</table>
+											</div>
+										</div>
+								  	</div>
+								  	<div class="col-md-12">
+								  		<div class="listItemBtn text-center">
+											<button type="button" class="btn btn-info saveAsFormworkDetail"  data-toggle="modal" data-target="#saveAsFormworkModal" data-whatever="" data-type="1">另存为模板</button>
+											<button type="button" class="btn btn-info generatedCodeDetail">生成代码</button>
+											<button type="button" class="btn btn-info saveFormworkDetail">保存</button>
+<!-- 											<button type="button" class="btn btn-info">取消</button> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						
+<!-- 							另存为模板提示 -->
+							<div class="modal fade" id="saveAsFormworkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<!-- 							        <h4 class="modal-title" id="exampleModalLabel">New message</h4> -->
+							      </div>
+							      <div class="modal-body">
+							        <form>
+							          <div class="form-group">
+							            <label for="recipient-name" class="control-label">另存为模板名称：</label>
+							            <input type="text" class="form-control" id="recipient-name"/>
+							          </div>
+							        </form>
+							      </div>
+							      <div class="modal-footer">
+							      	<button type="button" class="btn btn-primary saveAsButton">保存</button>
+							        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!-- Self Js -->
+     <script src="../../../static/backEnd/js/static/iRobot/configuration.js" th:src="@{/backEnd/js/dynamic/iRobot/configuration.js}"></script>
+</body>
+</html>

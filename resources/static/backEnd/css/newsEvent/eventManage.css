@@ -1,0 +1,18 @@
+/* 顶部标题 */
+.content-header h5{
+	padding-left:8px;
+	border-left: 5px solid #00c0ef;
+}
+
+.select2-container--default .select2-selection--multiple{
+	border-radius: 0px;
+	border:1px solid #d2d6de;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+	background: #3c8dbc;
+	border:1px solid #3c8dbc;
+	border-radius: 0px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+	color:rgba(255,255,255,0.7);
+}

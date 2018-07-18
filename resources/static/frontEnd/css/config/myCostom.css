@@ -1,0 +1,199 @@
+@media (min-width: 992px){
+	.col-md-10{
+		width: 87%;
+	}
+	.col-md-2{
+		width: 12%
+	}
+	
+	footer .col-md-2{
+		width:16.66666667%;
+	}
+	
+}
+
+
+
+
+/* The content */
+
+.tabs-vertical .tabs-content-placeholder{
+	height:300px;
+    overflow: hidden;
+    border-left: 1px solid #dddddd;
+    font-weight: normal;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.tabs-vertical .tabs-content-placeholder div{
+    display: none;
+}
+
+.tabs-vertical .tabs-content-placeholder div.tab-content-active{
+    display: block;
+    padding:10px 20px;
+}
+
+.tabs-vertical .tabs-content-placeholder div p{
+    color: #565a5c;
+    line-height: 1.5;
+    text-align: left;
+
+    margin: 5px 0 20px;
+}
+
+.tabs-vertical .tabs-content-placeholder div img{
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+
+    .tabs-vertical ul{
+        float: none;
+    }
+
+    .tabs-vertical ul li{
+        display: inline-block;
+        margin-bottom: -1px;
+    }
+
+    .tabs-vertical ul li a{
+        border: 1px solid transparent;
+        border-bottom: 0;
+        border-top: 0;
+        padding: 12px 15px;
+    }
+
+    .tabs-vertical ul li a.tab-active {
+        border-color: #dddddd;
+        background-color: #ffffff;
+        box-shadow: 2px 0px 0px #EFEFEF;
+    }
+
+    .tabs-vertical ul li:first-child a{
+        border-left: 0;
+    }
+
+    .tabs-vertical .tabs-content-placeholder{
+        padding: 15px 30px 30px;
+        border-left: 0;
+        border-top: 1px solid #dddddd;
+        box-shadow: 0px -3px 0px #F3F3F3;
+    }
+
+}
+
+
+
+
+/* 相似合并等操作-列表样式 */
+#dataConShow{
+	margin-top:0px
+}
+.dataConTable{
+	text-align: center;
+}
+.dataConTable .table>thead>tr>th, 
+.dataConTable .table>tbody>tr>th, 
+.dataConTable .table>tfoot>tr>th, 
+.dataConTable .table>thead>tr>td, 
+.dataConTable .table>tbody>tr>td, 
+.dataConTable .table>tfoot>tr>td{
+	padding: 4px 2px;
+}
+.dataConTable table{
+	margin-bottom:6px;
+}
+.dataConTable table td.active a{
+/* 	color: #F44336; */
+	color:#fff;
+	font-weight: bold;
+}
+.dataConTable td.dataConTabTit{
+	background:#f7f5f5;
+}
+.dataConTable .table>tbody>tr>td.active{
+/* 	background-color: #fff; */
+	background:#F44336
+}
+
+/* table列表中的颜色样式 */
+.green{
+	color:green;
+}
+.gray{
+	color:gray
+}
+
+/* 定制的线索头部 */
+.recommend-title{
+	margin-top:10px;
+	border-bottom:1px solid #eee;
+}
+.recommend-title h4{
+	display:inline-block;
+	margin:0px;
+	padding:5px 8px;
+	border-bottom:2px solid #fd8c25;
+}
+.recommend-title-right{
+	float:right;
+}
+.listLabel .dl-horizontal dd{
+	margin-left:0px;
+}
+.listLabel .dl-horizontal dd a{
+	font-size:12px;
+}
+.listLabel a.active{
+	background:#F44336;
+	color:#fff;
+}
+.threadContentRightOther{
+	display:inline-block;
+	margin-bottom:5px;
+}
+
+/* 模态框样式 */
+#deleteAll .modal-body p{
+	text-align:center;
+	margin-bottom:0px;
+	font-size:16px;
+}
+#deleteAll .modal-body div{
+	margin-top:10px;
+	text-align:right;
+}
+.btn-red:hover{
+	color:#fff;
+	
+}
+
+/* 左侧侧边栏样式 */
+.accordion li{
+	position:relative;
+}
+.accordion li i{
+	display:inline-block;
+	width:25px;
+	height:32px;
+	line-height:32px;
+	text-align:center;
+	top:0px;
+	right:0px;
+}
+.accordion li.open i{
+	color:#fff;
+}
+.accordion li div.link{
+	text-align:left;
+	padding-bottom:0px;
+}
+.accordion li div.link span{
+	display:inline-block;
+	width:80%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}

@@ -1,0 +1,36 @@
+.searchesTable{
+	border-top:2px solid #EAEAEA;
+}
+.searchesTable td{
+	vertical-align:middle !important
+}
+.searchesTable a.beyondEllipsis{
+	width:100%;
+}
+.searchesTable tbody td{
+	text-align:center;
+}
+.searchesTable tbody td:nth-child(3){
+	text-align:left;
+}
+
+.colorUp{
+	color:#F44336;
+}
+.colorDown{
+	color:#3fad7e;
+}
+
+.redBack{
+	background:#F44336 !important;
+}
+.titleRightClick a{
+	margin-top:5px;
+}
+/*//QG指数颜色修改*/
+.green {
+	color: red;
+}
+.gray {
+	color: green;
+}

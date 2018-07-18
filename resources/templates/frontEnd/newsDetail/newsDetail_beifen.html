@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords"  th:content="${webpage.keywords}?${webpage.keywords}:'iNews-智慧新闻'"/>
+	<meta name="description" th:content="${summary}?${summary.analysisValue}:'iNews-智慧新闻'"/>
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻详情页 -->
+	<title th:text="${webpage.title+' _iNews-智慧新闻'}">iNews-智慧新闻</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	
+	
+	
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="col-md-8 col-sm-12">
+						
+						<div class="newsDetailCon box p-left">
+							<input type="hidden" id="webpageCode" th:value="${webpage.webpageCode}" />
+							<input type="hidden" id="queryStr" th:value="${queryStr}" />
+							<div class="newsDetailTop">
+								<div class='newsDetailConTit clearfix'>
+									<h5 class="pull-left">
+										<span  th:text="${webpage.title}">中共中央政治局常务委员会召开会议 习近平发表重要讲话</span>
+									</h5>
+									<div class="newsDetailConTitRight">
+										<a class="btn-sm  p-all"><i class="fa fa-share-alt"></i>&nbsp;分享</a>
+										<a class="btn-sm  p-all"><i class="fa fa-heart-o"></i>&nbsp;收藏</a>
+										<a class="btn-sm  p-all"><i class="fa fa-file-text-o"></i>&nbsp;建稿</a>
+									</div>
+								</div>
+								
+								<div class="MainNews" >
+									<span class="gray">发布时间:</span>
+									<strong th:text="${#dates.format(webpage.releaseDatetime,'yyyy-MM-dd HH:mm:ss')}">2017-01-10 18:47</strong>
+									<span class="gray">来源:</span>
+									<em th:text="${webpage.sourceCrawlLevelTwo eq 'iNews'?webpage.sourceCrawlLevelTwo:webpage.sourceReport}">新华网</em>
+									<span class="gray" th:if="${webpage.sourceCrawlLevelTwo != 'iNews'}">爬取来源:</span>
+									<em th:if="${webpage.sourceCrawlLevelTwo != 'iNews'}" th:text="${webpage.sourceCrawlLevelTwo}">中国新闻网</em>
+									
+									<span class="gray">浏览量:</span>
+									<em>12345</em>
+									<a href="javascript:viod(0)" class="linkOriginal"><i class="fa fa-chain-broken"></i> 原文链接</a>
+									<div class="changeFontStyle">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <label>字体：</label>
+										    <select class="form-control">
+										      <option select='selected'>中号</option>
+											  <option >小号</option>
+											  <option>大号</option>
+											</select>
+										  </div>
+										</form>
+									</div>
+								</div>
+								<div class="clearfix textLinkTop">
+									<div class="newsDetailBottom clearfix">
+										<div class="bottomBox clearfix">
+											<div class="clearfix newsDetailKeys">
+												<div class='pull-left'>
+													<dl class="dl-horizontal m-bottom">
+													   	<dt>
+													   		<span>关键词：</span>
+													   	</dt>
+													  	<dd>
+													  		<div class='originalKeyWords' th:if="${null!=webpage.keywords}">
+																<span class="label label-red-bg"  th:each="keyword:${#strings.listSplit(webpage.keywords,',|，|; ')}" th:text="${keyword}">习近平</span>
+															</div>
+															<div class='customKeyWords' th:remove="all-but-first" th:if="${null != keywordsList and keywordsList.size()>0}" >
+																<span class="label label-orange-bg"  th:each="keywords:${keywordsList}" th:text="${keywords.keyword}">军委改革</span>
+															</div>
+													  	</dd>
+													</dl>
+												</div>
+												
+											</div>
+											<p class="newsID m-bottom">
+												<span>新闻ID：</span><span th:text="${webpage.webpageCode}">170120_00017_20752</span>
+											</p>
+<!-- 											<div class="clearfix"> -->
+<!-- 												<p class="pull-left textLink" th:if="${webpage.sourceCrawlLevelTwo != 'iNews'}"> -->
+<!-- 													<span>原文链接：</span> -->
+<!-- 													<a href="javascript:void(0)" target="_blank" th:href="${webpage.webpageUrl}" th:text="${webpage.webpageUrl}">http://www.chinanews.com/gn/2017/01-10/8119765.shtml</a> -->
+<!-- 												</p> -->
+<!-- 											</div> -->
+										</div>
+									</div>
+									<!-- <p class="pull-left textLink" th:if="${webpage.sourceCrawlLevelTwo != 'iNews'}">
+										<span>原文链接：</span>
+										<a href="javascript:void(0)" target="_blank" th:href="${webpage.webpageUrl}" th:text="${webpage.webpageUrl}">http://www.chinanews.com/gn/2017/01-10/8119765.shtml</a>
+									</p> -->
+								</div>
+							</div>
+
+							<div class="newsDetailSummary">
+								<div class="summaryCon " th:if="${summary}!=null" >
+									<p  th:if="${#strings.contains(summary.analysisValue,sp)}" th:utext="'&lt;p&gt;'+${#strings.replace(summary.analysisValue,sp,'&lt;p/&gt;&lt;p&gt;')}+'&lt;p/&gt;'">新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。</p>
+									<p th:unless="${#strings.contains(summary.analysisValue,sp)}" th:text="${summary.analysisValue}"></p>
+								</div>
+							</div>
+							
+							<div class="newsDetailText">
+								<div id="newsContent" th:utext="${webpage.content}">
+									<div class="left_zw" style="position:relative">
+									<p style="text-align: center;"><strong></strong><strong>中共中央政治局常务委员会召开会议</strong></p>
+									<p style="text-align: center;"><strong>听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报</strong></p>
+									<p style="text-align: center;"><strong>听取中央书记处工作报告</strong></p>
+									<p style="text-align: center;"><strong>中共中央总书记习近平主持会议</strong></p>
+									<p>新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。</p>
+									<p>会议强调，办好中国的事情，关键在党。中国特色社会主义最本质的特征是中国共产党领导，中国特色社会主义制度的最大优势是中国共产党领导。坚持党的领导首先是坚持党中央集中统一领导。坚持党中央集中统一领导，是全面从严治党、严肃党内政治生活、加强党内监督的重要目的，也是一条根本的政治规矩。要深入学习贯彻党的十八届六中全会精神，严格执行《关于新形势下党内政治生活的若干准则》、《中国共产党党内监督条例》，牢固树立政治意识、大局意识、核心意识、看齐意识，坚持以党的旗帜为旗帜、以党的方向为方向、以党的意志为意志，切实把党中央重大决策部署落实到各项工作中去。</p>
+									<!-- <div class="uec_inews_picture_group_images">
+										<a class="control3 control prev"></a><a class="control3 control next abs"></a>
+										<div class="slider">
+											<ul>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/1.jpg" alt="1月18日清晨，数百辆外来务工者集体骑摩托车从中国石油福建晋江荆山加油站一起出发返乡过年。截至今天7时30分，804辆铁骑、1082人在中国石油福建泉州等地加油站免费加油、吃完早餐后出发，踏上返乡旅程。从2012年起，中国石油联合相关单位，利用中国石油国道、省道的加油站，为铁骑提供免费加油、免费热饭热菜、免费姜汤热茶等帮助。经统计，过去5年，中国石油已累计帮助铁骑近10万人次，今年是铁骑返乡的第六年。图为数百辆摩托车集中出发。 王东明 摄" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/2.jpg" alt="态生两靥之愁，娇袭一身之病。" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/3.jpg" alt="泪光点点，娇喘微微。" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/4.jpg" alt="闲静似娇花照水，行动如弱柳扶风。" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/5.jpg" alt="心较比干多一窍，病如西子胜三分。" /></a></li>
+											</ul>
+										</div>
+									</div> -->
+									<div id = "uec_inews_picture_group_news">
+														                    <script>
+														                        var uec_inews_picture_group_json = {'desc':'<div class="overview"><p>1月18日，1000多辆摩托车近2000多名在福建的外来务工人员从中国石油福建各地加油站出发，骑行返乡过年。</p></div>','pic':[{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMI4A6VVV0001.jpg','title':'','desc':'1月18日，1000多辆摩托车近2000多名在福建的外来务工人员从中国石油福建各地加油站出发，骑行返乡过年。图为骑手们出发返乡。 吕明 摄'},
+														                        {'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMIDT6VVV0001.jpg','title':'','desc':'2017年“铁骑返乡”从1月18日至1月27日将陆续进行，在福建、江西、湖南、湖北四省共有65座的中国石油加油站，将为骑摩托车返乡的农民工朋友提供包括免费加油、免费快餐、免费姜汤热茶、帮助联系摩托车修理、更换摩托车机油等在内的帮助。“铁骑返乡”已成为成为中国春运的一个独特现象。图为骑手在加油站免费加油。 吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMIK56VVV0001.jpg','title':'','desc':'白康生与妻子白清兰准备出发。 吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMIOQ6VVV0001.jpg','title':'','desc':'骑手们来加油站登记信息。 吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMIVV6VVV0001.jpg','title':'','desc':'骑手们在加油站吃早餐。 吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMJ4I6VVV0001.jpg','title':'','desc':'加油站工作人员为骑手戴上护膝片。 吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMJB36VVV0001.jpg','title':'','desc':'准备回江西老家的白康生为妻子穿上反光背心。 吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMMEO6VVV0001.jpg','title':'','desc':'骑手们在出发前合影留念。吕明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMMMT6VVV0001.jpg','title':'','desc':'1月18日清晨，数百辆外来务工者集体骑摩托车从中国石油福建晋江荆山加油站一起出发返乡过年。截至今天7时30分，804辆铁骑、1082人在中国石油福建泉州等地加油站免费加油、吃完早餐后出发，踏上返乡旅程。从2012年起，中国石油联合相关单位，利用中国石油国道、省道的加油站，为铁骑提供免费加油、免费热饭热菜、免费姜汤热茶等帮助。经统计，过去5年，中国石油已累计帮助铁骑近10万人次，今年是铁骑返乡的第六年。图为数百辆摩托车集中出发。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMMT56VVV0001.jpg','title':'','desc':'准备回家了，“小候鸟”露出开心的笑容。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMN496VVV0001.jpg','title':'','desc':'天刚亮，“铁骑”们就纷纷来到中石油加油站免费加油。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMO3F6VVV0001.jpg','title':'','desc':'返乡”铁骑”们中途休息，吃上免费的方便面。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMO856VVV0001.jpg','title':'','desc':'五岁的江西赣州小朋友许世馨跟随父母一起回家，在休息站吃东西。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMOGB6VVV0001.jpg','title':'','desc':'宠物犬也跟随主人铁骑返乡。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMOLJ6VVV0001.jpg','title':'','desc':'中石油在沿途各个加油站点设置休息室，还为“铁骑”们提供免费食物和姜汤。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMOQ46VVV0001.jpg','title':'','desc':'交警和工作人员为“铁骑”讲解地图。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMPMB6VVV0001.jpg','title':'','desc':'天还没亮，返乡心切的“铁骑”们已经纷纷来到加油站集中。 王东明 摄'},{'url':'D:/GitLab/ns/src/main/resources/static/frontEnd/image/18/2017/01/18/14847327256/900x600_CB2OMPR66VVV0001.jpg','title':'','desc':'骑行在路上的“铁骑”。 王东明 摄'}]}
+														                    </script>
+														                </div> 
+									<!-- <div id="uec_inews_picture_group_weibo">
+										<script type="text/javascript">
+											var uec_inews_picture_group_json = {
+												'desc':'妹妹人儿昨天在家犯错误，我在南京通过视频实现了远程教育 ​​​​',
+												'pic':[{'url':'../../../static/frontEnd/image/newsDetail/6d26261fly1fbsg2buw6wj20y11csgsc.jpg','text':'好可爱'},
+												{'url':'../../../static/frontEnd/image/newsDetail/6d26261fly1fbsg2ew7xfj20yi1pc4qs.jpg','text':'好可爱'},
+												{'url':'../../../static/frontEnd/image/newsDetail/6d26261fly1fbsg2ke9bxj20yi1pchdw.jpg','text':'好可爱'},
+												{'url':'../../../static/frontEnd/image/newsDetail/6d26261fly1fbsg2buw6wj20y11csgsc.jpg','text':'好可爱'},
+												{'url':'../../../static/frontEnd/image/newsDetail/005TY5Mrly1fbsa3asajgj30hm2foqdu.jpg','text':'好可爱'},
+												{'url':'../../../static/frontEnd/image/newsDetail/6d26261fly1fbsg2s0vvej20yi1pchdw.jpg','text':'好可爱'}]
+											}
+										</script>
+									</div> -->
+									
+									<p>会议认为，过去的一年，全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组坚持党中央集中统一领导，维护党中央权威，落实全面从严治党责任，规范党内政治生活制度，强化政治领导责任，扎实开展“两学一做”学习教育。坚持围绕中心、服务大局，在贯彻落实党中央重大决策部署上凝神聚焦发力，为推进党和国家各项事业发展、实现“十三五”良好开局作出了积极贡献。</p>
+									<p>会议认为，过去的一年，中央书记处认真贯彻党中央决策部署，协助党中央抓全面从严治党，指导群团工作尤其是群团改革，推动一批党内法规文件制定和实施，配合办好一系列重要会议和重大纪念活动，各项工作取得了新成绩。</p>
+									
+									<div id = "uec_inews_picture_group_news">
+					                    <script>
+					                        var uec_inews_picture_group_json = {'pic':[{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306103337731.jpg','desc':'天安门广场上，红旗招展'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102632807.jpg','desc':'代表入场'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102633913.jpg','desc':'代表入场'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102633133.jpg','desc':'代表在大会堂前合影'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102634799.jpg','desc':'起立，唱国歌'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102635904.jpg','desc':'唱国歌'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102636773.jpg','desc':'外国使节'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102636146.jpg','desc':'少数民族语言女翻译'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102637842.jpg','desc':'旁听的政协委员'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102638902.jpg','desc':'军乐团在演奏'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102639823.jpg','desc':'大会堂内'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102639567.jpg','desc':'鱼眼镜头下的会场'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102640608.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102641887.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102641301.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102642820.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102643640.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102643530.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102643286.jpg','desc':'少数民族代表'},{'url':'${inewsImageServer}/image/2498/2017/03/06/148879975247/20170306102644358.jpg','desc':'少数民族代表'}]}
+					                    </script>
+					                </div>
+									<p>会议强调，今年我们将召开党的十九大，也是实施“十三五”规划的重要一年、推进供给侧结构性改革的深化之年。全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组要坚决维护党中央权威，在思想上政治上行动上始终同以习近平同志为核心的党中央保持高度一致，抓好党中央重大决策部署落地生根，确保党中央令行禁止。要扎实做好党中央部署的各项工作，紧紧围绕大局履职尽责，坚持稳中求进工作总基调，着力防范和化解各种风险，促进经济平稳健康发展和社会和谐稳定。要落实全面从严治党责任，严肃党内政治生活，自觉接受党内监督和各方面监督，加强党组自身建设，不断提高党的建设水平。</p>
+									<p>会议强调，中央书记处要带头讲政治，坚持正确政治方向，服务大局出谋划策，突出重点抓好落实，不断提高运用科学理论解决实际问题的能力，完成好党中央交办的各项任务。<div id="function_code_page"></div>
+									</p></div>
+								</div>
+							</div>
+							<div class="newsDetailBottom clearfix">
+								<div class="bottomBox clearfix">
+<!-- 									<div class="clearfix newsDetailKeys"> -->
+<!-- 										<div class='pull-left'> -->
+<!-- 											<dl class="dl-horizontal m-bottom"> -->
+<!-- 											   	<dt> -->
+<!-- 											   		<span>关键词：</span> -->
+<!-- 											   	</dt> -->
+<!-- 											  	<dd> -->
+<!-- 											  		<div class='originalKeyWords' th:if="${null!=webpage.keywords}"> -->
+<!-- 														<span class="label label-red-bg"  th:each="keyword:${#strings.listSplit(webpage.keywords,',|，|; ')}" th:text="${keyword}">习近平</span> -->
+<!-- 													</div> -->
+<!-- 													<div class='customKeyWords' th:remove="all-but-first" th:if="${null != keywordsList and keywordsList.size()>0}" > -->
+<!-- 														<span class="label label-orange-bg"  th:each="keywords:${keywordsList}" th:text="${keywords.keyword}">军委改革</span> -->
+<!-- 													</div> -->
+<!-- 											  	</dd> -->
+<!-- 											</dl> -->
+<!-- 										</div> -->
+										
+<!-- 									</div> -->
+									<p class="newsID">
+										<span>新闻ID：</span><span th:text="${webpage.webpageCode}">170120_00017_20752</span>
+									</p>
+									<div class="clearfix">
+										<p class="pull-left textLink" th:if="${webpage.sourceCrawlLevelTwo != 'iNews'}">
+											<span>原文链接：</span>
+											<a href="javascript:void(0)" target="_blank" th:href="${webpage.webpageUrl}" th:text="${webpage.webpageUrl}">http://www.chinanews.com/gn/2017/01-10/8119765.shtml</a>
+										</p>
+										<p class="pull-right newsDetailConTitRight">
+											<a class="btn-sm  p-all"><i class="fa fa-share-alt"></i>&nbsp;分享</a>
+											<a class="btn-sm  p-all"><i class="fa fa-heart-o"></i>&nbsp;收藏</a>
+											<a class="btn-sm  p-all"><i class="fa fa-file-text-o"></i>&nbsp;建稿</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="box p-right p-left">
+							<div class="entityWord" >
+								<div class="box-header header-vimeo" >
+									<h2>内容标签</h2>
+								</div>
+								<div class="listPer box p-right p-left" th:if="${null != entityContent}" id="entityWordsDiv" >
+									<div class="listLabel" th:if="${null != entityContent.personNameList and entityContent.personNameList.size() > 0}" th:object="${entityContent}">
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="javascript:void(0)" class='set'>人物标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href="javascript:void(0)" th:each="personName:*{personNameList}" th:text="${personName.word}" class="dictionaryWord">习近平</a>
+										  	</dd>
+										</dl>
+									</div>
+									<div class="listLabel" th:if="${null != entityContent.orgNameList and entityContent.orgNameList.size() > 0}" th:object="${entityContent}">
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="javascript:void(0)" class='set'>机构标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href="javascript:void(0)" th:each="orgName:*{orgNameList}" th:text="${orgName.word}" class="dictionaryWord">全国政协</a>
+										  	</dd>
+										</dl>
+									</div>
+									<div class="listLabel" th:if="${null != entityContent.companyNameList and entityContent.companyNameList.size() > 0}" th:object="${entityContent}">
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="javascript:void(0)" class='set'>单位标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href="javascript:void(0)" th:each="companyName:*{companyNameList}" th:text="${companyName.word}" class="dictionaryWord">军委</a>
+										  	</dd>
+										</dl>
+									</div>
+									<div class="listLabel" th:if="${null != entityContent.locationList and entityContent.locationList.size() > 0}"  th:object="${entityContent}" >
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="javascript:void(0)" class='set'>地点标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href="javascript:void(0)"  th:each="location:*{locationList}"  th:text="${location.word}" class="dictionaryWord">北京</a>
+										  	</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+						<div class="newsDetailLabel">
+							<div class="box-header header-vimeo">
+								<h2>属性标签</h2>
+							</div>
+							<div class="listPer box p-right p-left">
+								<div class="listLabel" th:remove="all-but-first" th:if="${null!=lableList and lableList.size() > 0}">
+									<a href="javascript:void(0)" th:each="lable:${lableList}" th:text="${lable}">房价</a>
+									<a href="javascript:void(0)">原创</a>
+									<a href="javascript:void(0)">改革</a>
+								</div>
+								<div class="listLabel" th:remove="all-but-first" th:if="${null!=classificationList and classificationList.size() > 0}">
+									<a href="javascript:void(0)" th:each="classification:${classificationList}" th:text="${classification}">房价</a>
+									<a href="javascript:void(0)">原创</a>
+									<a href="javascript:void(0)">改革</a>
+								</div>
+							</div>
+						</div>
+							<div class="bothSides" th:if="${null != sentimentContent and null != sentimentContent.positive}">
+								<div class="box-header header-vimeo">
+									<h2>正负面对比</h2>
+								</div>
+								<div class="bothSidesData box p-right p-left">
+									<div class="row">
+									   	<div class="col-md-3 col-sm-3 col-xs-3 center">
+									   		<div class="bothSidesTit ">
+												<span>负</span>
+											</div>
+									   	</div>
+									  	<div class="col-md-6 col-sm-6 col-xs-6 p-right p-left">
+									  		<div class="progress_bar">
+												<div class="pro-bar" >
+													<small class="progress_bar_title" >
+														<span class="progress_number" th:text="${sentimentContent.positive}+'%'">97%</span>
+													</small>
+													<span class="progress-bar-inner"  style="background-color: #F44336;" data-value="36" data-percentage-value="36"></span>
+												</div>
+											</div>
+									  	</div>
+									 	<div class="col-md-3 col-sm-3 col-xs-3 center">
+									 		<div class="bothSidesTit bothSidesF">
+												<span>正</span>
+											</div>
+									 	</div>
+									</div>
+								</div>
+							</div>
+							<div class="newsDetailRelative">
+								<input type="hidden" class="relativeNum" th:attr="value=${relativeNum}"></input>
+								<div class="box-header header-vimeo" >
+									<h2>相关内容</h2>
+								</div>
+								<input type="hidden" class="changeNum" value="1"></input>
+								<div class="changeRelativeCon" onclick="changeRelative()"><i class="fa fa-refresh"></i>&nbsp;换一换</div>
+								<div class="box p-left p-right p-top">
+									<div class="relativeEvent" th:remove="all">
+										<ul class="relativeList">
+											<li >
+												<dl class="dl-horizontal">
+												  	<dt><span>[事件]</span></dt>
+												  	<dd>
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		<a href="javascript:void(0)">全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="relativeTopic" th:if="${null != eventBasicList and eventBasicList.size()>0}">
+										<ul class="relativeList">
+											<li th:each="eventBasic:${eventBasicList}" th:if="${null != eventBasic}">
+												<dl class="dl-horizontal">
+												  	<dt><span>[专题]</span></dt>
+												  	<dd th:remove="all-but-first">
+												  		<a target='_blank' th:href="@{/event/front/gotoEventDetail/}+${eventBasic.innerid}" th:text="${eventBasic.eventName}">全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="relativeNews" th:if="${null != simArticleList and simArticleList.size()>0}">
+										<ul class="relativeList">
+											<li th:each="simArticle:${simArticleList}">
+												<dl class="dl-horizontal"  >
+												  	<dt><span>[新闻]</span></dt>
+												  	<dd th:remove="all-but-first" >
+												  		<a target='_blank' th:href="@{/latest/front/gotoLatestNewsDetail/}+${simArticle.innerid}" th:text="${simArticle.title}">全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		<a target='_blank' href="#">老爸要就任美国总统 ”第一女儿”精心打扮赴华盛顿</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 词条百科-模态框 -->
+				<div class="modal bs-example-modal-lg" id="dictionaryModal" >
+				  	<div class="modal-dialog modal-lg">
+				    	<div class="modal-content">
+				      		<div class="modal-header">
+				        		<button type="button" class="close closeThreadModal" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        		<h6 class="modal-title" id="dictionary_title" th:remove="body">习近平</h6>
+				      		</div>
+				      		<div class="modal-body" style="height:450px;overflow-y:scroll" id="dictionary_content" th:remove="body">
+				      			<b>人物详情</b><div style="margin-top:10px;margin-bottom:20px;clear:both;overflow: hidden"><div class="col-sm-3" style="height:190px;text-align: center"><img src="../../../static/frontEnd/image/newsDetail/5_xijinping.jpg" /></div><div class="col-sm-9" style="height:190px;padding-left: 0px"><p>现任中国共产党中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席。</p><div class="col-sm-3">出生年月：</div><div class="col-sm-3">1953-6</div><div class="col-sm-3">性别：</div><div class="col-sm-3">男</div><div class="col-sm-3">籍贯：</div><div class="col-sm-3">陕西富平</div><div class="col-sm-3">民族：</div><div class="col-sm-3">汉族</div><div class="col-sm-3">毕业院校：</div><div class="col-sm-3">																									清华大学,</div><div class="col-sm-3">学位/学历：</div><div class="col-sm-3">博士,在职研究生,</div></div></div><b>主要经历</b><div style="clear:both;margin-top:10px"><div class="zyjl_content">
+                习近平，男，汉族，1953年6月生，陕西富平人，1969年1月参加工作，1974年1月加入中国共产党，清华大学人文社会学院马克思主义理论与思想政治教育专业毕业，在职研究生学历，法学博士学位。<br/>
+<br/>
+现任中国共产党中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席。<br/>
+<br/>
+1969－1975年　陕西省延川县文安驿公社梁家河大队知青、党支部书记<br/>
+<br/>
+1975－1979年　清华大学化工系基本有机合成专业学习<br/>
+<br/>
+1979－1982年　国务院办公厅、中央军委办公厅秘书(现役)<br/>
+<br/>
+1982－1983年　河北省正定县委副书记<br/>
+<br/>
+1983－1985年　河北省正定县委书记，正定县武装部第一政委、党委第一书记<br/>
+<br/>
+1985－1988年　福建省厦门市委常委、副市长<br/>
+<br/>
+1988－1990年　福建省宁德地委书记，宁德军分区党委第一书记<br/>
+<br/>
+1990－1993年　福建省福州市委书记、市人大常委会主任，福州军分区党委第一书记<br/>
+<br/>
+1993－1995年　福建省委常委，福州市委书记、市人大常委会主任，福州军分区党委第一书记<br/>
+<br/>
+1995－1996年　福建省委副书记，福州市委书记、市人大常委会主任，福州军分区党委第一书记<br/>
+<br/>
+1996－1999年　福建省委副书记，福建省高炮预备役师第一政委<br/>
+<br/>
+1999－2000年　福建省委副书记、代省长，南京军区国防动员委员会副主任，福建省国防动员委员会主任，福建省高炮预备役师第一政委<br/>
+<br/>
+2000－2002年　福建省委副书记、省长，南京军区国防动员委员会副主任，福建省国防动员委员会主任，福建省高炮预备役师第一政委<br/>
+<br/>
+(1998－2002年清华大学人文社会学院马克思主义理论与思想政治教育专业在职研究生班学习，获法学博士学位)<br/>
+<br/>
+2002－2002年　浙江省委副书记、代省长，南京军区国防动员委员会副主任，浙江省国防动员委员会主任<br/>
+<br/>
+2002－2003年　浙江省委书记、代省长，浙江省军区党委第一书记，南京军区国防动员委员会副主任，浙江省国防动员委员会主任<br/>
+<br/>
+2003－2007年　浙江省委书记、省人大常委会主任，浙江省军区党委第一书记<br/>
+<br/>
+2007－2007年　上海市委书记，上海警备区党委第一书记<br/>
+<br/>
+2007－2008年　中央政治局常委、中央书记处书记，中央党校校长<br/>
+<br/>
+2008－2010年　中央政治局常委、中央书记处书记，中华人民共和国副主席，中央党校校长<br/>
+<br/>
+2010－2012年　中央政治局常委、中央书记处书记，中华人民共和国副主席，中共中央军事委员会副主席，中华人民共和国中央军事委员会副主席，中央党校校长<br/>
+<br/>
+2012－2013年　中央委员会总书记，中共中央军事委员会主席，中华人民共和国副主席，中华人民共和国中央军事委员会副主席<br/>
+<br/>
+2013－　　　　中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席<br/>
+<br/>
+中共第十五届中央候补委员，十六届、十七届、十八届中央委员，十七届中央政治局委员、常委、中央书记处书记，十八届中央政治局委员、常委、中央委员会总书记。第十一届全国人大第一次会议当选为中华人民共和国副主席。十七届五中全会增补为中共中央军事委员会副主席。第十一届全国人大常委会第十七次会议任命为中华人民共和国中央军事委员会副主席。十八届一中全会任中共中央军事委员会主席。第十二届全国人大第一次会议当选为中华人民共和国主席、中华人民共和国中央军事委员会主席。<br/>
+<br/>
+习近平的父亲习仲勋曾是中国党和国家领导人之一，不满21岁就担任陕甘边区政府主席，被毛泽东称为“从群众中走出来的领袖”。“文革”结束后百业待兴的初期，他受命到改革开放的前沿广东担任省委第一书记，以开明开放、求真务实的作风，为广东“杀出一条血路”、“先走一步”建立经济特区以及后来的大发展作出了奠基性重要贡献。<br/>
+<br/>
+习近平的母亲齐心也是一位老干部、老党员，已近90岁高龄。<br/>
+<br/>
+习近平的妻子彭丽媛是中国家喻户晓的著名歌唱家和歌剧表演艺术家。1986年两人一见钟情，结下良缘。在彭丽媛眼中，丈夫既是一个与众不同的人，也是一个普通的人。他喜欢吃陕西、山东家常菜，朋友聚会时还会喝酒助兴。他喜欢游泳、登山，爱看篮球、足球、拳击等比赛，有时也会在深夜看电视转播的体育节目。两人育有一女，取名“明泽”。
+			</div></div>
+				        		
+				     	 	</div>
+				      		<div class="modal-footer">
+				        		<button type="button" class="btn btn-default closeThreadModal" data-dismiss="modal">关闭</button>
+<!-- 				        		<button type="button" class="btn btn-primary">确定</button> -->
+				      		</div>
+				    	</div>
+				  	</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer><!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	<!-- YuxiSlider CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/newsdetailcarousel/css/YuxiSlider.css"   th:href="@{/common/plugins/newsdetailcarousel/css/YuxiSlider.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/newsDetail/newsDetail.css" th:href="@{/frontEnd/css/newsDetail/newsDetail.css}" />
+
+	<!-- jquery.dotdotdot JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js}"></script>
+	<!-- YuxiSlider JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js}" ></script>
+<!-- 	<script type="text/javascript"  th:src="@{/common/plugins/showdown.min.js}"></script> -->
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/newsDetail/newsDetail.js" th:src="@{/frontEnd/js/dynamic/latestNews/latestNewsDetail.js}"></script>
+	
+	
+</body>
+</html>

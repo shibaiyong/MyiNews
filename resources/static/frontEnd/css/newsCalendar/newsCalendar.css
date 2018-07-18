@@ -1,0 +1,75 @@
+.fc-day-grid-event .fc-time{
+	font-weight: normal;
+}
+.popover-content{
+	color: #333;
+	white-space:nowrap;
+}
+.fc-event-container a{
+	color: #333;
+}
+.popover{
+	max-width: 600px;
+}
+.fc-day-grid-event{
+	line-height: 1.2;
+	padding-top: 2px;
+}
+.fc-day-grid-event a{
+	display: inline-block;
+	white-space:nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+table th, table td{
+	text-indent: 0px;}
+.fc-more-popover  .fc-day-grid-event a{
+	display: inline;
+	white-space: normal;
+}
+
+.fc-popover{
+	box-shadow:0 6px 8px rgba(0,0,0,.35)
+}
+.fc-more-popover{
+	width: 100%;
+}
+.fc-more-popover .fc-event-container{
+	overflow: hidden;
+}
+.fc-more-popover .fc-event-container a.fc-day-grid-event{
+	float: left;
+	width: 30%;
+}
+.fc-more-popover .fc-event-container .fc-day-grid-event{
+	margin:2px 10px 1px;
+}
+
+
+.fc-sat{
+	background: #fbfaf8;
+}
+.fc-sun{
+	background: #fbfaf8;
+}
+/* .fc-today{
+	background:#ede9dd !important;
+} */
+a.fc-more{
+	color:#F44336;
+}
+.fc-event{
+	border:0px;
+}
+#main-content div.box{
+	padding-top:15px;
+}
+button:focus,
+button:active:focus,
+button.active:focus,
+.button.focus,
+button:active.focus,
+button.active.focus {
+    outline: none;          
+}

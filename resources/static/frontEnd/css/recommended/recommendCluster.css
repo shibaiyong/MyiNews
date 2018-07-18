@@ -1,0 +1,35 @@
+.searchesTable{
+	border-top:2px solid #EAEAEA;
+}
+
+.searchesTable td:nth-child(1),
+.searchesTable td:nth-child(3),
+.searchesTable td:nth-child(4),
+.searchesTable td:nth-child(5),
+.searchesTable td:nth-child(6),
+.searchesTable td:nth-child(7){
+	text-align:center
+}
+
+.selectedTime{
+	margin-bottom:10px;
+	margin-top:10px
+}
+.selectedTime select{
+	display:inline-block;
+	width:60px;
+	height:25px;
+	padding:0px 5px;
+	margin-right:5px;
+}
+.selectedTime em{
+	font-style:normal;
+}
+.selectedTime input.form_datetime{
+	width:180px;
+	display:inline-block;
+}
+
+.selectedTime span{
+	margin-right:5px;
+}

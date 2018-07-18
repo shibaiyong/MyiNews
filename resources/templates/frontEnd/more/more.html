@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>置顶新闻列表</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+<!-- 全网头条 -->
+<!-- 引用公共css -->
+<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+	
+<!-- 引用公共js -->
+<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+
+<!-- 引用dataTables -->
+<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+<!-- Self CSS -->
+<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/more/more.css"	th:href="@{/frontEnd/css/more/more.css}" />
+
+<!-- Self JS -->
+<script type="text/javascript"	src="../../../static/frontEnd/js/static/more/more.js"	th:src="@{/frontEnd/js/dynamic/more/more.js}"></script>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+
+					<div class="col-md-12">
+						<div class="box p-right p-left p-bottom">
+							<div class="box-header header-vimeo">
+								<h2>推送新闻列表</h2>
+							</div>
+						</div>
+						<div class="searchesLine ">
+							<div class="searchesCon">
+								<div id="operateGroup"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+								
+								<div id="threadContent" th:include="frontEnd/common/threadContent :: threadContent"></div>
+								
+<!-- 								<table class="table table-hover searchesTable"> -->
+<!-- 									<thead> -->
+<!-- 										<tr> -->
+<!-- 											<th style="width:18px"></th> -->
+<!-- 											<th style="width: 83px" class="center">发布时间</th> -->
+<!-- 											<th>标题</th> -->
+<!-- 											<th style="width: 100px">采集来源</th> -->
+<!-- 											<th style="width: 100px">发稿来源</th> -->
+<!-- 											<th style="width:40px" class="center">相似</th> -->
+<!-- 											<th style="width:40px" class="center">相关</th> -->
+<!-- 											<th style="width: 60px" class="center">负面指数</th> -->
+<!-- 											<th style="width:55px" class="center">浏览量</th> -->
+<!-- 											<th style="width: 40px;" class='center'>操&nbsp;作</th> -->
+<!-- 										</tr> -->
+<!-- 									</thead> -->
+<!-- 									<tbody> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-10 18:34</td> -->
+<!-- 											<td > -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">80%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-10 16:38 </td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平将对瑞士进行国事访问、出席世界经济论坛年会并访问瑞士国际组织	</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">80%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-11 03:57</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">80%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-11 05:57</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平将对瑞士进行国事访问、出席世界经济论坛2017年年会并访问瑞士国际组织</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">80%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 07:00</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">全面从严治党如何向纵深发展，习近平这样布局 </a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="green">10%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 12:52</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">世界期待分享中国经验——国际人士瞩目习近平主席2017年首次出访</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="green">8%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child checked"><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 13:25</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="gray">60%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child "><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 13:25</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+											
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">70%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child "><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 13:25</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="green">20%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child "><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 13:25</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">68%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child "><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 13:25</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">70%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<span class="check-box check-child "><i class="fa fa-check"></i></span> -->
+<!-- 											</td> -->
+<!-- 											<td>01-01 13:25</td> -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a> -->
+<!-- 											</td> -->
+<!-- 											<td>新浪微博</td> -->
+<!-- 											<td>中国证券网</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td>(2)</td> -->
+<!-- 											<td class="red">80%</td> -->
+<!-- 											<td>12345</td> -->
+<!-- 											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td> -->
+<!-- 										</tr> -->
+<!-- 									</tbody> -->
+<!-- 								</table> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+.custom-special {
+    margin: 10px;
+}
+
+.custom-special .custom-button-box {
+    cursor: pointer;
+    float: right;
+    background: #dd2f39;
+    height: 34px;
+    width: 100px;
+    color: white;
+    text-align: center;
+}
+
+.custom-special .custom-button-box .button {
+    height: 34px;
+    line-height: 34px;
+}
+
+.custom-special .title {
+    font-weight: bold;
+    padding-top: 15px;
+    padding-bottom: 8px;
+    border-bottom: #F1F1F1 solid 2px;
+}
+
+.custom-special .no-data {
+    height: 38px;
+    line-height: 38px;
+    width: 100%;
+    text-align: center;
+    color: #aaaaaa;
+}
+
+.custom-special .list-title {
+    margin-top: 10px;
+    height: 30px;
+    width: 100%;
+    font-weight: bold;
+    border-bottom: #444444 solid 1px;
+    text-align: center;
+}
+
+.custom-special .list-title span {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.custom-special .list-item div {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.custom-special .list-item {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    height: 39px;
+    line-height: 35px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    border-bottom: #999999 solid 1px;
+}
+
+.custom-special .handle-special {
+    padding: 5px;
+    border-radius: 5px;
+    border: #dddddd 1px solid;
+    cursor: pointer;
+}
+
+.custom-special .update-special {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    border: #dddddd 1px solid;
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html >
+<html lang="en" th:fragment="header">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>智慧新闻</title>
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	
+	<!-- smarticker Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/smarticker/css/jquery.smarticker.css" th:href="@{/common/plugins/smarticker/css/jquery.smarticker.css}" />
+	<!-- Header Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/header.css" th:href="@{/frontEnd/css/common/header.css}" />
+	
+	<!-- smarticker Js -->
+	<script type="text/javascript" src="../../../static/common/plugins/smarticker/js/smarticker.js" th:src="@{/common/plugins/smarticker/js/smarticker.js}"></script>
+	<!-- Self Js -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/header.js" th:src="@{/frontEnd/js/dynamic/common/header.js}"></script>
+	<!-- websocket -->
+	<script type="text/javascript" src="../../../static/common/plugins/sockjs-0.3.min.js" th:src="@{/common/plugins/sockjs-0.3.min.js}"></script>
+	<style>
+		#ico-refresh,#ico-heart{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			visibility: hidden;
+			background: none;
+			background: white;
+		}
+		@-webkit-keyframes mymove {
+			from {transform:rotate(0deg)}
+			to {transform:rotate(360deg)}
+		}
+		.rotateLong{
+			animation:mymove 3s linear infinite;
+		}
+	</style>
+</head>
+
+<body>
+ 	<input type="hidden" id="context" th:value="${#httpServletRequest.contextPath}"/>
+	<!--<input type="hidden" id="isNew" th:value="${isNew}"/>-->
+	<!--<input type="hidden" id="isNew" th:value="${session.isNew}"/>-->
+	<!--<input type="hidden" id="isNew" value="hshshshhs"/>-->
+	<header> 
+		<div class="header-top-box ">
+			<div class="header-top container">
+	   	    	<div class="header-logo">
+	   	    		<!-- <img src="../../../static/frontEnd/image/logo/uec.png" th:src="@{/frontEnd/image/logo/uec2.png}" /> -->
+					<a th:href="@{/}">
+						<img src="../../../static/frontEnd/image/logo/logo-header.png" th:src="${null==session.pageConfig?session:session.pageConfig.get('header.image')}" />
+					</a>
+<!-- 	   	    		<a th:href="@{/}"><img src="../../../static/frontEnd/image/logo/logo-header.png" th:src="@{/frontEnd/image/logo/hnheng.png}" /></a> -->
+	   	    	</div>
+	   	    	<ul class=" navbar-nav navbar-right " shiro:user="true">
+					<!-- <li class="editConfig">
+						<a href="#" th:href="@{/config/front/gotoConfig}"><i class="fa fa-wrench"></i>配置修改</a>
+					</li> -->
+					
+					<!-- <li ><a href="javascript:void(0)"  ><i class="fa fa-user"></i>欢迎，<span th:text="${session.user.name}"></span></a></li> -->
+					<li class="userCenter btn-group">
+						<a class="navUserName" href="../user/user.html" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/gotouser'}">
+							<span th:text="${session.user.name}"></span>														
+						</a>
+					</li>
+					<li class="editConfig dropDownMenu">
+						<a class="userIcon" href="../user/user.html" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/gotouser'}">
+							<i class="fa fa-user fa-lg" data-toggle="popover" data-placement="bottom" data-content="个人资料"></i>
+						</a>
+						<a class="dropdown-toggle userDropDown" data-toggle="dropdown" href="#">
+							<span class="fa fa-caret-down" title=""></span>							
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" th:href='@{/user/front/gotochangepsw}'><i class="fa fa-lock fa-lg"></i> 修改密码</a>
+							</li>
+							<li>
+								<a href="#" th:href="@{/logout}"><i class="fa fa-sign-out fa-lg"></i> 退出</a>
+							</li>
+						</ul>						
+					</li>
+					<li  class="editConfig myConfig">
+                        <a href="#" th:href="@{/config/front/gotoConfig}">
+                            <i class="fa fa-cog fa-lg" data-toggle="popover" data-placement="bottom" data-content="配置修改"></i>
+						</a>
+					</li>
+					<li class="editConfig collection">
+						<a href="#" th:href="@{/gotocollection}">
+							<i class="fa fa-heart fa-lg" data-toggle="popover" data-placement="bottom" data-content="我的收藏"></i>
+						</a>
+					</li>
+					<li class="editConfig myHistory">
+						<a href="#" th:href="@{/gotohistory}">
+							<i class="fa fa-clock-o fa-lg" data-toggle="popover" data-placement="bottom" data-content="我的历史"></i>
+						</a>
+					</li>
+					<li class="editConfig" shiro:hasRole="admin">
+                        <a href="#" th:href="@{/back}">
+                            <i class="fa fa-gavel fa-lg" data-toggle="popover" data-placement="bottom" data-content="后台管理"></i>
+						</a>
+					</li>
+					<!-- <li ><a href="#" ><i class="fa fa-filter"></i>设置</a></li> -->
+					<!-- <li >
+						<a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" ></i>退出</a>
+					</li> -->
+				</ul>
+				<ul class=" navbar-nav navbar-right-login pull-right"  shiro:guest="true">
+					<li >
+						<a href="#" th:href="@{/login}"><i class="fa fa-user fa-fw"></i>登录</a>
+					</li>
+				</ul>
+				
+				<div class='smartickerBox' th:remove="body">
+					<div class="smarticker2">
+						<ul>
+							<li><a href="#"><span class="time">[06-27 10:47]</span>新闻标题 1 <em>-- 新华网</em></a></li>
+							<li><a href="#"><span class="time">[06-27 10:47]</span>新闻标题 2 <em>-- 新华网</em></a></li>
+							<li><a href="#"><span class="time">[06-27 10:47]</span>新闻标题 3 <em>-- 新华网</em></a></li>
+							<li><a href="#"><span class="time">[06-27 10:47]</span>新闻标题 4 <em>-- 新华网</em></a></li>
+							<li><a href="#"><span class="time">[06-27 10:47]</span>新闻标题 5 <em>-- 新华网</em></a></li>
+							<li><a href="#"><span class="time">[06-27 10:47]</span>新闻标题 6 <em>-- 新华网</em></a></li>
+						</ul>
+					</div>
+					<div class="more">更多>></div>
+				</div>
+				
+	   	    </div>
+	   	</div>
+    	<nav id="inews_nav"  class="navbar navbar-default" role="navigation">
+		    <div class="container-fluid container">
+		    <div class="navbar-header">
+		        <button type="button" class="navbar-toggle" data-toggle="collapse"
+		                data-target="#example-navbar-collapse">
+		            <span class="sr-only">切换导航</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+		        <ul class="navbar-brand" href="#" shiro:user="true">
+		        	<li shiro:hasRole="admin"><a href="#" th:href="@{/back}"><i class="fa fa-cog"></i></a></li>
+					<li ><a href="#" th:href="@{/gotouser}"><i class="fa fa-user" ></i></a></li>
+					<li ><a href="#" ><i class="fa fa-filter"></i></a></li>
+					<li ><a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" ></i></a></li>
+		        </ul>
+		        <ul class="navbar-brand navbar-right-login" href="#" shiro:guest="true">
+		        	<li ><a href="#" th:href="@{/login}"><i class="fa fa-user fa-fw"></i></a></li>
+		        </ul>
+		    </div>
+		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+		        <ul class="nav navbar-nav inewsHeaderNav">
+<!-- 					<li class="top" th:each="nav,dataStat:${session.navConfigList}" th:if="${nav.status==0}" th:attr="data-mark=${nav.paramName}"> -->
+<!-- 						<a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+nav.value}" th:text="${nav.displayName}"></a> -->
+<!-- 					</li> -->
+<!-- 		            <li class="top" data-mark="nav.home"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/'}">首页</a></li> -->
+<!-- 		            <li class="" data-mark="nav.recommend"><a shiro:hasAnyRoles="admin,user" href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/recommend/front/list'}">为你推荐</a></li> -->
+<!-- 					<li class="" data-mark="nav.custom"><a shiro:hasAnyRoles="admin,user" href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/custom/front/list'}">我的定制</a></li> -->
+<!-- 					<li data-mark="nav.clue"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/latest/front/thread/list'}">新闻线索</a></li> -->
+<!-- 					<li data-mark="nav.top"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/latest/front/topnews/list'}" >媒体头条</a></li> -->
+<!-- 					<li data-mark="nav.hot"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/hot/front/list'}">热点排行</a></li> -->
+<!-- 					<li data-mark="nav.cluster"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/cluster/front/list'}">热点发现</a></li> -->
+<!-- 					<li data-mark="nav.event"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/event/front/list'}">热门专题</a></li> -->
+<!-- 					<li class="" data-mark="nav.image"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/latest/front/image/list'}">图片库</a></li> -->
+<!-- 					<li class="" data-mark="nav.video"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/latest/front/video/list'}">视频库</a></li> -->
+<!-- 					<li data-mark="nav.news"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/latest/front/news/list'}">新闻库</a></li> -->
+<!-- 					<li data-mark="nav.calendar"><a href="javascript:void(0)" th:href="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark+'/calendar/front/list'}">新闻日历</a></li> -->
+		        </ul>
+		        <form class="navbar-right navbar-form headerSearch" role="form" action='javascript:void(0)'>
+					<div class="search-wrapper">
+ 				        <div class="input-holder">
+ 				            <input type="text" class="search-input" placeholder="请输入搜索词" />
+ 				                <a class="search-icon">
+				                   	<span class="active">全网</span><em>|</em><span>本站</span>
+				                </a>
+ 				        </div>
+ 				    </div> 
+ 				            <!-- <div class="form-group">
+       							    <div class="input-group">
+       							      <input class="form-control" type="text" placeholder="请输入搜索词">
+       							      <div class="input-group-addon">全网搜索</div>
+       							    </div>
+       							</div> -->
+				</form>
+		    </div>
+		    </div>
+		</nav> 
+		
+	</header>
+	
+	<!-- 返回顶部 -->
+	<div class="go-top dn hide" id="go-top">
+		<a href="javascript:void(0)" id="ico-refresh"><i class="fa fa-refresh" aria-hidden="true"></i> </a>
+		<a href="javascript:void(0)" id="ico-heart"><i class="fa fa-heart" aria-hidden="true"></i> </a>
+	    <a href="javascript:;" class="uc-2vm"></a>
+		<div class="uc-2vm-pop dn hide">
+			<h2 class="title-2wm">用微信扫一扫</h2>
+			<div class="logo-2wm-box">
+				<img src="../../../static/frontEnd/image/backTop/weixin.jpg" th:src="@{/frontEnd/image/backTop/weixin.jpg}"  width="344" height="344" />
+			</div>
+		</div>
+	    <a href="javascript:void(0)" target="_blank" class="feedback"></a>
+	    <a href="javascript:void(0)" class="go"></a>
+	</div>
+</body>
+</html>

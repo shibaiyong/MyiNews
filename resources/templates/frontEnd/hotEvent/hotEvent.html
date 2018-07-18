@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<title>iNews-热点专题</title>
+	<!-- 热点专题 -->
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- Screen CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/hotEvent/screen/css/screen.css" th:href="@{/frontEnd/css/hotEvent/screen/css/screen.css}" />
+	<!-- daterangepicker CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/daterangepicker/css/daterangepicker.min.css" th:href="@{/common/plugins/daterangepicker/css/daterangepicker.min.css}" />
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/hotEvent/hotEvent.css" th:href="@{/frontEnd/css/hotEvent/hotEvent.css}" />
+	
+	<!-- jquery.dotdotdot JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js}"></script>
+	<!-- Screen JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/hotEvent/screen/js/screen.js" th:src="@{/frontEnd/js/dynamic/hotEvent/screen/js/screen.js}" ></script>
+	<!-- daterangepicker JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/daterangepicker/js/moment.min.js" th:src="@{/common/plugins/daterangepicker/js/moment.min.js}" ></script>
+	<script type="text/javascript" src="../../../static/common/plugins/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.min.js}" ></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/hotEvent/hotEvent.js" th:src="@{/frontEnd/js/dynamic/hotEvent/hotEvent.js}"  ></script>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class='col-md-12'>
+						<div class="searchesLine ">
+							<div class="searchesTitle">
+								<div id="screen">
+								    <div class="box p-all">
+								    	<div class="box screenCon p-bottom p-left p-right">
+							    	 		<div class="customAdd">
+											    <form class="form-inline" role="form" action='javascript:void(0)'>
+												  	<div class="form-group">
+												    	<div class="input-group">
+												      		<input class="form-control customAddInput" type="text" placeholder="请输入关键词" />
+												      		<div class="input-group-addon btn-red customAddBtn">iSearch</div>
+												    	</div>
+<!-- 												    	<button type="button" class="btn btn-default btn-sm advancedFilter">高级筛选&nbsp;<i class="fa fa-angle-double-down"></i></button> -->
+												  	</div>
+												</form>
+								          	</div>
+<!-- 								          	<div> -->
+<!-- 								          		<ul class="select row"> -->
+<!-- 								          			<li class="select-result"> -->
+<!-- 														<dl class="dl-horizontal"> -->
+<!-- 															<dt>已选：</dt> -->
+<!-- 															<dd class="select-no">暂时没有选择过滤条件</dd> -->
+<!-- 															<span type="button" class="btn btn-link pull-right clearAllBtn">清空全部</span> -->
+<!-- 														</dl> -->
+<!-- 													</li> -->
+<!-- 								          		</ul> -->
+<!-- 								          	</div> -->
+								          	<ul class="select row advancedFilterCon">
+												<li class="select-list">
+													<div class="row">
+														<div class='col-md-12'>
+													  		<dl id="hotRankClassification" class="dl-horizontal">
+																<dt>分类：</dt>
+																<dd class="select-all selected"><a  href="javascript:void(0);">全部</a></dd>
+																<dd th:each="classification,detailStat:${classList}">
+																	<a href="javascript:void(0);" th:text="${classification.name}">要闻</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">政治</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">经济</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">社会</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">文化</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">生活</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">体育</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">娱乐</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">军事</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">法制</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">教育</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">科技</a>
+																</dd>
+																<dd th:remove="all">
+																	<a href="javascript:void(0);">其他</a>
+																</dd>
+															</dl>
+													  		<div class="line" style="border-right: 2px solid #ddd"></div>
+													  	</div>
+													</div>
+													
+												</li>
+												<li class="select-list">
+													<dl id="customTime" class="dl-horizontal">
+														<dt>时间：</dt>
+														<dd class="select-all selected"><a href="javascript:void(0);">全部</a></dd>
+														<dd><a href="javascript:void(0);">最近一天</a></dd>
+														<dd><a href="javascript:void(0);">最近三天</a></dd>
+														<dd><a href="javascript:void(0);">最近一周</a></dd>
+														<dd><a href="javascript:void(0);">最近一月</a></dd>
+														<dd><a href="javascript:void(0);" class="timeCustom">自定义</a></dd>
+														<span class='timeCustomCon'></span>
+													</dl>
+													<dl class="classificationAmb" style="display: none">
+													</dl>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="searchesCon" style="display:none">
+								<table class="table table-hover searchesTable">
+										<thead>
+											<tr>
+												<th >标题</th>
+												<th style="width:150px">类型</th>
+												<th style="width:150px" class="center">发生时间</th>
+												<th style="width:100px" class="center">新闻总量</th>
+												<th style="width:100px" class="center">时间跨度</th>
+											</tr>
+										</thead>
+										<tbody th:remove="body">
+											<tr>
+												<td>
+													<a href="javascript:void(0)" class="beyondEllipsis">八达岭动物园东北虎园重新开放 入口处新增警示牌</a>
+												</td>
+												<td>社会</td>
+												<td>2016-11-25 22:25</td>
+												<td>123</td>
+												<td>1个月</td>
+											</tr>
+											<tr>
+												<td>
+													<a href="javascript:void(0)" class="beyondEllipsis">八达岭动物园东北虎园重新开放 入口处新增警示牌八达岭动物园东北虎园重新开放 入口处新增警示牌八达岭动物园东北虎园重新开放 入口处新增警示牌</a>
+												</td>
+												<td>社会</td>
+												<td>2016-11-25 22:25</td>
+												<td>123</td>
+												<td>1个月</td>
+											</tr>
+											<tr>
+												<td>
+													<a href="javascript:void(0)" class="beyondEllipsis">八达岭动物园东北虎园重新开放 入口处新增警示牌</a>
+												</td>
+												<td>社会</td>
+												<td>2016-11-25 22:25</td>
+												<td>123</td>
+												<td>1个月</td>
+											</tr>
+											<tr>
+												<td>
+													<a href="javascript:void(0)" class="beyondEllipsis">八达岭动物园东北虎园重新开放 入口处新增警示牌</a>
+												</td>
+												<td>社会</td>
+												<td>2016-11-25 22:25</td>
+												<td>123</td>
+												<td>1个月</td>
+											</tr>
+											<tr>
+												<td>
+													<a href="javascript:void(0)" class="beyondEllipsis">八达岭动物园东北虎园重新开放 入口处新增警示牌</a>
+												</td>
+												<td>社会</td>
+												<td>2016-11-25 22:25</td>
+												<td>123</td>
+												<td>1个月</td>
+											</tr>
+						
+										</tbody>
+									</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 ">
+						<div class='hotRankList'>
+							<!-- 最新专题 -->
+							<div class="hotEvent breviaryImg box p-right p-left">
+								<div class="box-header header-vimeo">
+									<h2>最新专题</h2>
+								</div>
+								<div class="hotEventCon">
+									<div class='box p-left p-right'>
+										<table class='table no-border hotEventTable'>
+											<thead></thead>
+											<tbody class="row" th:remove="body">
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	俄罗斯军用飞机坠毁事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/1.jpg"  />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-25 11:00</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年12月25日，一架载有91人的俄罗斯军用飞机从索契起飞20分钟后从雷达上消失，飞机原定飞往叙利亚，目前很可能已经坠落在山谷中，飞机可能是由于技术故障或驾驶错误而坠毁。 　　据报道，这架军机型号为图-154，隶属俄罗斯国防部。俄安全部门相关人士称，机上有91人，除了军人之外，还有前往“赫梅伊米姆”空军基地与军人们共庆新年的国防部亚历山大洛娃歌舞团的工作者们和9名记者。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">俄罗斯驻土耳其大使遇刺事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/1.png" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-19 20:00</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年12月19日，土耳其安卡拉，俄罗斯驻土耳其大使卡尔洛夫（karlov）在土耳其首都安卡拉遭枪击。枪击案发生时，卡尔洛夫正在参加一个艺术展活动。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	柏林卡车冲撞事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/11.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-19 20:20</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年12月19日晚20时左右，德国首都柏林市中心布赖特沙伊德广场圣诞市场遭一辆货车闯入。截至当晚23时，事件已至少造成12人死亡、50余人受伤。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">2016年最大雾霾
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/2.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-16 18:40</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年12月16日起，入秋以来最大规模的一次重污染过程始终盘踞在华北地区。环保部12月19日的数据是，已经有8个城市爆表。而今天，在雾与霾的重创下，北京等多个城市的污染指数急剧攀升。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	罗一笑事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/5.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-11-25 14:50</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年11月底，网友被一位不幸罹患白血病的小女孩笑笑的故事刷爆了，数以万计的人通过各种方式进行捐赠，希望为这个悲伤的家庭送去温暖。2016年11月30日，剧情翻转，与作者罗尔同在深圳女报的知情人Po了真相，爆料罗尔家底深厚，此事背后营销。 2016年12月1日，罗尔就“罗一笑事件”发声明：260余万捐款将全部捐出。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	聂树斌案
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/3.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-02 18:30</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																1995年4月25日，河北省鹿泉县人聂树斌因故意杀人、强奸妇女被判处死刑，剥夺政治权利终身。2016年12月2日，最高人民法院第二巡回法庭对原审被告人聂树斌故意杀人、强奸妇女再审案公开宣判，宣告撤销原审判决，改判聂树斌无罪。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	中关村二小学生欺凌事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/4.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-08 19:00</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																　　12月8日晚，一篇题为《每对母子都是生死之交，我要陪他向校园霸凌说NO！》的文章，开始在微信朋友圈等平台刷屏。文章作者自称是北京中关村二小四年级一名10岁男孩的妈妈。她在文中表示，孩子在学校被同学用厕所垃圾筐扣头后，出现失眠、厌食、恐惧上学等症状，后被医院诊断为急性应激反应。
+															</p>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- 历史跟踪 -->
+							<div class="historyFollow box p-right p-left">
+								<div class="box-header header-vimeo">
+									<h2>历史跟踪</h2>
+								</div>
+								<div class="historyFollowCon">
+									<div class='box p-left p-right'>
+										<table class='table no-border historyFollowTable'>
+											<thead></thead>
+											<tbody class="row" th:remove="body">
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	聂树斌案
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/3.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-02 18:30</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																1995年4月25日，河北省鹿泉县人聂树斌因故意杀人、强奸妇女被判处死刑，剥夺政治权利终身。2016年12月2日，最高人民法院第二巡回法庭对原审被告人聂树斌故意杀人、强奸妇女再审案公开宣判，宣告撤销原审判决，改判聂树斌无罪。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	支付宝密码验证漏洞
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/6.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2017-01-10 10:45</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																近日，有网友曝出支付宝存在新漏洞——陌生人有五分之一的机会登录你的支付宝，而熟人则有百分之百的机会登录你的支付宝。2017年1月10日，针对网友曝出的修改密码漏洞，支付宝方面回应称这一方式仅在特定情况下才会实现。且一旦用户支付宝在其他设备被登录，本人设备会收到通知提醒。 　　
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	朴槿惠“亲信干政”事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/8.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-10-29 18:50</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年10月24日晚，韩国JTBC电视台报道,并无任何官职的朴槿惠亲信崔顺实曾收到过包括44份总统演讲稿在内的200多份文件，其中部分演讲稿的打开时间在总统演讲前，而且崔顺实在总统演讲前曾修改过演讲稿。舆论指出，总统府内仅有极少数幕僚有权审阅这些文件，如果上述报道属实，这将是一起破坏国家纲纪的严重事件。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	白银谋杀案
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/7.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-08-28 00:00</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																1988年至2002年的14年间，在中国甘肃省白银市有9名女性惨遭入室杀害的案件，部分受害人曾遭受性侵害。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	俄罗斯军用飞机坠毁事件
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/9.png" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-25 14:00</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年12月25日，一架载有91人的俄罗斯军用飞机从索契起飞20分钟后从雷达上消失，飞机原定飞往叙利亚，目前很可能已经坠落在山谷中，飞机可能是由于技术故障或驾驶错误而坠毁。 　　据报道，这架军机型号为图-154，隶属俄罗斯国防部。俄安全部门相关人士称，机上有91人，除了军人之外，还有前往“赫梅伊米姆”空军基地与军人们共庆新年的国防部亚历山大洛娃歌舞团的工作者们和9名记者。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	2016年美国大选
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/10.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-09-29 12:00</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年大选首场总统候选人电视辩论于美东时间9月26日9时在纽约长岛的霍夫斯特拉大学举行。总统选举将于2016年11月8日星期二举行，此次是美国第58届总统选举。
+															</p>
+														</div>
+													</td>
+												</tr>
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	2016年最大雾霾
+
+
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/2.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2016-12-16 18:40</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																2016年12月16日起，入秋以来最大规模的一次重污染过程始终盘踞在华北地区。环保部12月19日的数据是，已经有8个城市爆表。而今天，在雾与霾的重创下，北京等多个城市的污染指数急剧攀升。
+															</p>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- 历史同期专题 -->
+							<div class="historyPeriod box p-right p-left">
+								<div class="box-header header-vimeo">
+									<h2>历史同期专题</h2>
+								</div>
+								<div class="historyPeriodCon">
+									<div class='box p-left p-right'>
+										<table class='table no-border historyPeriodTable'>
+											<thead></thead>
+											<tbody class="row" th:remove="body">
+												<tr class="col-md-3 col-ms-12 ">
+													<td>
+														<div class="hotEventConListBox">
+															<h6 class="hotEventConListTit">
+																<a href="javascript:void" class="beyondEllipsis">
+																	支付宝密码验证漏洞
+																</a>
+															</h6>
+															<div  class="thumbnail">
+														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/6.jpg" />
+														    </div>
+														    <p class="hotEventConListTime">2017-01-10 10:45</p>
+														    <p class="sudokuSummary clearfix">
+																<span>[摘要]</span>
+																近日，有网友曝出支付宝存在新漏洞——陌生人有五分之一的机会登录你的支付宝，而熟人则有百分之百的机会登录你的支付宝。2017年1月10日，针对网友曝出的修改密码漏洞，支付宝方面回应称这一方式仅在特定情况下才会实现。且一旦用户支付宝在其他设备被登录，本人设备会收到通知提醒。 　　
+															</p>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

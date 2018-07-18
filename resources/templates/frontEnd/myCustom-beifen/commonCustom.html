@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="commonCustom">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 我的定制 -->
+	<title>iNews-我的定制</title>
+
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/commonCustom.css"  th:href="@{/frontEnd/css/myCustom/commonCustom.css}" />
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/commonCustom.js" th:src="@{/frontEnd/js/dynamic/myCustom/commonCustom.js}"></script>
+</head>
+<body>
+	<form class="form-horizontal" action="javascript:void(0)">
+		<div class="form-group">
+	    	<label for="inputEmail3" class="col-sm-2 control-label">定制名称</label>
+	    	<div class="col-sm-10">
+	      		<input type="text" class="form-control" id="addCustomName" placeholder="请输入定制名称"/>
+	    	</div>
+	  	</div>
+	    <div class="form-group">
+	    	<label for="inputPassword3" class="col-sm-2 control-label"><span class="red">* </span>关键词组</label>
+	    	<div class="col-sm-8 keywordsBox">
+	      		<input type="text" class="form-control" id="addKeyWordInput" data-position='1' placeholder="请输入关键词组，并以逗号隔开"/>
+	    		<p class="text-muted">注：可定制多个关键词组，匹配任意一组关键词的新闻都属于线索</p>
+	    	</div>
+	    	<div class="col-sm-2 p-left">
+	    		<input type="hidden" value='0'/>
+	    		<button class="btn btn-default addKeyword" data-show='false'><i class="fa fa-plus"></i> 关键词组</button>
+	    	</div>
+	    </div>
+	  	<div class="form-group">
+	    	<label  class="col-sm-2 control-label" >来源</label>
+	    	<div class="col-sm-10">
+	      		<div class="listLabel" id="source" data-position='2'>
+	      			<input type="hidden" value='0'/>
+<!-- 	      			<a href="javascript:void(0)" class="listLabelAll active" value=""><span>全部</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='1'><span>官方媒体</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='2'><span>商业媒体</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='3'><span>政府网站</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='4'><span>微博</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='5'><span>微信</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='6'><span>自媒体</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='7'><span>国外媒体</span></a> -->
+				</div>
+	    	</div>
+	  	</div>
+	  	<div class="form-group contentSort">
+	    	<label for="inputEmail3" class="col-sm-2 control-label">分类</label>
+	    	<div class="col-sm-10" >
+	      		<div class="listLabel sortTitle" id="classification" data-position='3'>
+	      			<input type="hidden" value='0'/>
+<!-- 	      			<a href="javascript:void(0)" class="active listLabelAll" value=""><span>全部</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='1'><span>政治</span></a> -->
+<!-- 					<a href="javascript:void(0)" class="sortDown" data-value='2'><span>经济</span><i class="fa fa-angle-left"></i></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='3'><span>社会</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='4'><span>文化</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='5' ><span>生活</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='6' class="sortDown"><span>体育</span><i class="fa fa-angle-left"></i></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='7'><span>娱乐</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='8'><span>军事</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='9'><span>法制</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='10'><span>教育</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='11'><span>科技</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='12'><span>其他</span></a> -->
+				</div>
+				
+				<div class="classificationSortDown sortDownContent hide" data-sort-item="2" th:remove="all">
+					<p>请选择经济的分类：</p>
+					<a href="javascript:void(0)" data-value-item='21'><span>宏观经济</span></a>
+					<a href="javascript:void(0)" data-value-item='22'><span>产业经济</span></a>
+					<a href="javascript:void(0)" data-value-item='23'><span>国际经济</span></a>
+					<a href="javascript:void(0)" data-value-item='24'><span>公司经济</span></a>
+					<a href="javascript:void(0)" data-value-item='25'><span>金融经济</span></a>
+				</div>
+				<div class="classificationSortDown sortDownContent hide" data-sort-item="6" th:remove="all">
+					<p>请选择体育的分类：</p>
+					<a href="javascript:void(0)" data-value-item='61'><span>篮球</span></a>
+					<a href="javascript:void(0)" data-value-item='62'><span>足球</span></a>
+					<a href="javascript:void(0)" data-value-item='63'><span>羽毛球</span></a>
+					<a href="javascript:void(0)" data-value-item='64'><span>奥运会</span></a>
+					<a href="javascript:void(0)" data-value-item='65'><span>冬奥会</span></a>
+				</div>
+	    	</div>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="inputEmail3" class="col-sm-2 control-label">地区</label>
+	    	<div class="col-sm-10">
+	      		<div class="listLabel" id="map" data-position='4'>
+	      			<input type="hidden" value='0'/>
+<!-- 	      			<a href="javascript:void(0)" class="listLabelAll active" value=""><span>全部</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='1' class="sortDown"><span>北京</span><i class="fa fa-angle-left"></i></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='2'><span>天津</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='3'><span>上海</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='4'><span>河北</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='5'><span>新疆</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='6'><span>安徽</span></a> -->
+<!-- 					<a href="javascript:void(0)" data-value='7'><span>苏州</span></a> -->
+				</div>
+				
+				<div class="mapSortDown sortDownContent hide" data-sort-item="1" th:remove="all">
+					<p>请选择体育的分类：</p>
+					<a href="javascript:void(0)" data-value-item='11'><span>朝阳区</span></a>
+					<a href="javascript:void(0)" data-value-item='12'><span>海淀区</span></a>
+					<a href="javascript:void(0)" data-value-item='13'><span>西城区</span></a>
+					<a href="javascript:void(0)" data-value-item='14'><span>东城区</span></a>
+					<a href="javascript:void(0)" data-value-item='15'><span>丰台</span></a>
+				</div>
+	    	</div>
+	  	</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news"/>
+    <meta name="description"
+          content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。"/>
+    <link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen"
+          th:href="@{/frontEnd/image/logo/favicon.ico}"/>
+    <!-- 我的定制 -->
+    <title>iNews-我的定制</title>
+
+    <!-- 引用公共css -->
+    <object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+
+    <!-- 引用公共js -->
+    <object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+
+    <!-- 引用dataTables -->
+    <object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+
+    <!-- 引入公用的插件 注：必须放在最开始的位置 -->
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/myCostom.css"
+          th:href="@{/frontEnd/css/myCustom/myCostom.css}"/>
+
+
+    <script src="http://cdn.bootcss.com/echarts/3.4.0/echarts.min.js"></script>
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/recommended/recommended.js"
+            th:src="@{/frontEnd/js/dynamic/common/pic.js}"></script>
+    <!-- Self JS -->
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/myCustom.js"
+            th:src="@{/frontEnd/js/dynamic/myCustom/myCustom.js}"></script>
+    <style>
+        .col-md-4.hidden {
+            display: none;
+        }
+
+        #myaccordion .submenu li {
+            cursor: pointer;
+        }
+
+        .addAndModifyGrounp .addModifyNavs ul li a.clickedStyle {
+            background: #dd2f39;
+            color: white;
+        }
+
+        #myaccordion .submenu {
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .modal-dialog {
+            margin-top: 18%;
+        }
+
+        @-webkit-keyframes mymove {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .ico_loading {
+            animation: mymove 3s linear infinite;
+            margin-top: 15%;
+        }
+
+        .loading-zhe {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            top: 0;
+            display: none;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" value="" class="timeCode"/>
+<!-- 头部内容 -->
+<div id="header" th:include="frontEnd/common/header :: header"></div>
+<!-- 主体内容 -->
+<div id="page-content" class="container">
+    <div class="container" style="background:#fff">
+        <div id="main-content">
+            <input id="type" type="hidden" th:value="${type}"/>
+            <div class="row">
+                <div class="pull-left siderLeftBox col-md-2 col-sm-12 col-xs-12" style="width:180px">
+                    <div class="box p-right p-left">
+                        <ul id="myaccordion" class="accordion">
+                            <li>
+                                <div class="link"><span data-spanIndex="0">新闻线索</span><i class="fa fa-angle-down"
+                                                                      style="visibility: hidden"></i></div>
+                                <ul class="submenu" data-num="0">
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link"><span data-spanIndex="1">网站</span><i class="fa fa-angle-down"
+                                                                    style="visibility: hidden"></i></div>
+                                <ul class="submenu" data-num="1">
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link"><span data-spanIndex="2">APP</span><i class="fa fa-angle-down"
+                                                                     style="visibility: hidden"></i></div>
+                                <ul class="submenu" data-num="2">
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link"><span data-spanIndex="3">微信</span><i class="fa fa-angle-down"
+                                                                    style="visibility: hidden"></i></div>
+                                <ul class="submenu" data-num="0">
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link"><span data-spanIndex="4">微博</span><i class="fa fa-angle-down"
+                                                                    style="visibility: hidden"></i></div>
+                                <ul class="submenu" data-num="3">
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                    <!--<li>kdfjlksdjf</li>-->
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="link analysis"><span data-spanIndex="0">评论/分析</span><i class="fa fa-angle-down"
+                                                                                style="visibility: hidden;"></i></div>
+                            </li>
+                            <li>
+                                <div class="link special"><span data-spanIndex="0">专题定制</span><i class="fa fa-angle-down"
+                                                                                                   style="visibility: hidden;"></i></div>
+                            </li>
+                        </ul>
+                        <ul id="totalAddModify">
+                            <li style="cursor:pointer;background:#dd2f39;">添加修改</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pull-left col-md-10 col-sm-12 col-xs-12" style="width:1030px">
+                    <!-- 						<div id="myCustomContent" th:include="frontEnd/myCustom/myCustomThread :: myCustomThread"></div> -->
+                    <div id="myCustomContent"></div>
+                    <div class="addAndModifyGrounp">
+                        <div class="addModifyNavs">
+                            <ul class="addModifyNavsIner">
+                                <li><a href="javascript:;" class="clickedStyle">新闻线索</a></li>
+                                <li><a href="javascript:;">网站/APP</a></li>
+                                <li><a href="javascript:;">微信</a></li>
+                                <li><a href="javascript:;">微博</a></li>
+                            </ul>
+                            <div class="showAddModifyContainer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loading-zhe"><i class="fa fa-spinner ico_loading" aria-hidden="true"
+                                            style="color:white;font-size: 50px;"></i></div>
+                <!-- Modal -->
+                <div class="modal fade" id="cannotSkipDialog" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p style="text-align:center;margin-bottom:0px">是否要删除这条新闻线索？</p>
+
+                                <div style="margin-top:10px;text-align:right">
+                                    <button type="button" class="btn btn-red btn-sm confirm-myCustom"
+                                            data-dismiss="modal">确定
+                                    </button>
+                                    <button type="button" class="btn btn-default cancel-myCustom" data-dismiss="modal">
+                                        取消
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal End-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 尾部内容 -->
+<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

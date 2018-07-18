@@ -1,0 +1,73 @@
+
+.webBox,
+.weiboBox,
+.weixinBox,
+.appBox{
+	padding:15px;
+}
+.form-inline .form-group{
+	margin-right:10px;
+}
+.btn-info{
+	background:#00acd6 !important;
+}
+.appBox p{
+	text-align:center;
+	font-size:18px;
+	margin-top:20px;
+}
+
+.labelDescribe{
+	padding-left:0px !important;
+	padding-right:0px !important;
+	margin-top:5px;
+}
+
+.weiboConfiguration,
+.weixinConfiguration{
+	padding:0px 15px 15px;
+	border-top:1px solid #ddd;
+}
+
+.weiboConfigurationTable,
+.weixinConfigurationTable{
+	border-top:2px solid #EAEAEA;
+	text-align:center
+}
+.weiboConfigurationTable thead th,
+.weixinConfigurationTable thead th{
+	text-align:center;
+}
+table.dataTable thead th, table.dataTable thead td{
+	border-bottom:0px !important;
+}
+.weiboConfigurationCon,
+.weixinConfigurationCon{
+	position:relative;
+}
+.weiboConfigurationCon .batchOperationRight,
+.weixinConfigurationCon .batchOperationRight{
+	position:absolute;
+	right:0px;
+	top:0px;
+}
+
+/* 下拉框多选 */
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
+	width:100%;
+}
+.bootstrap-select .btn-default{
+	background-color:initial
+}
+
+/* 错误提示 */
+.errorInput{
+	border:1px solid #F44336 !important;
+}
+
+.startTask{
+	position:relative;
+}
+.customFormwork{
+	position:relative;
+}

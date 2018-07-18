@@ -1,0 +1,121 @@
+@charset"utf-8";
+/*---------------------------样式归零 By 天涯浅唱 QQ：122452357----------------------*/
+
+
+
+
+:focus,a {
+	outline: 0
+}
+
+a {
+	margin: 0;
+	font-size: 100 %;
+	vertical-align: baseline;
+	background: 0 0;
+	blr: expression(this.onFocus=this.blur())
+}
+
+a,ins {
+	text-decoration: none
+}
+
+a,hr {
+	padding: 0
+}
+
+ins,mark {
+	background-color: #ff9;
+	color: #000
+}
+
+mark {
+	font-style: italic;
+	font-weight: 700
+}
+
+blockquote,q {
+	quotes: none
+}
+
+blockquote:after,blockquote:before,q:after,q:before {
+	content: '';
+	content: none
+}
+
+/*-------------------------归零样式END，请于样式表最前面调用-------------------------*/
+
+/*-----------------自定义按钮样式，移动端不需要，PC端根据实际情况选择----------------*/
+.mosaicMain {
+	
+	font-size: 14px;
+	position: relative;
+	border:1px solid #eee;
+	width:90%;
+	margin:0px auto;
+}
+.mosaicMain em{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background: 0 0;
+	font-weight: 400;
+	vertical-align: top
+}
+.mosaicMain a.control {
+	position: absolute;
+	display: block;
+	top: 50%;
+	margin-top: -78px;
+	width: 76px;
+	height: 112px;
+	cursor: pointer;
+	z-index: 2;
+	background: url(../images/buttons.png) no-repeat
+}
+
+.mosaicMain a.prev {
+	left: 0;
+	background-position: 0 0
+}
+
+.mosaicMain a.next {
+	right: 0;
+	background-position: -76px 0
+}
+
+.mosaicMain a.prev:hover {
+	background-position: 0 -112px
+}
+
+.mosaicMain a.next:hover {
+	background-position: -76px -112px
+}
+.mosaicMain p{
+	text-indent:0px !important;
+	line-height:initial !important;
+	margin-top:0px !important;
+}
+.mosaicMain .line{
+	line-height:3em;
+	text-align:center;
+}
+.mosaicMain li{
+	text-align:center;
+}
+.mosaicMain li img{
+	max-height:460px;
+	max-width:1180px;
+}
+@media  (min-width: 1400px){
+	.mosaicMain li img{
+/* 		max-height:600px; */
+/* 		max-width:1180px; */
+	}
+}
+/*----------------------------为保证最佳效果，建议设置如下样式------------------------*/
+.slider {
+	display: none
+}

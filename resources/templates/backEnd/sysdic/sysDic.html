@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>系统字典管理</title>
+	<!-- Daterangepicker Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/newsEvent/eventManage.css" th:href="@{/common/plugins/daterangepicker/css/daterangepicker.min.css}" />
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/newsEvent/eventManage.css" th:href="@{/backEnd/css/latestNews/latestNewsDetail.css}" />
+
+</head>
+<body>
+	<section class="content-header">
+		<h5 class="m-all">
+          字典管理
+        </h5>
+	</section>
+	<section class="content">
+		<div class="box p-right p-left">
+			<div class="box box-primary">
+				<div class="box-body">
+					<form class="form-inline search-box">
+						<div class="form-group">
+						    <label for="">ID</label>
+						    <input type="text" class="form-control"  placeholder="请输入ID" id = "innerid"/>
+						</div>
+						<div class="form-group">
+						    <label for="">标题</label>
+						    <input type="text" class="form-control" placeholder="请输入数据名称" id="dataName"/>
+						</div>
+						<div class="form-group">
+						    <label for="">来源</label>
+						    <input type="text" class="form-control"  placeholder="请输入数据值" id="dataValue"/>
+						</div>
+						<!-- <div class="form-group">
+						    <label for="">时间</label>
+						    <input type="text" class="form-control time-slice"  placeholder="请选择时间" id ="time"/>
+						</div>
+					   -->
+					  	<button type="button" class="btn btn-primary" onclick="searchSysDic()">查询</button>
+					</form>
+					<table class="sysDicConTable table table-hover">
+						<thead>
+					        <tr>
+					         	<th>数据名称</th>
+					            <th>数据的值</th>
+					            <th>描述</th>
+					            <th>权重</th>
+					            <th>创建时间</th>
+					            <th>更新时间</th>
+					      	</tr>
+					    </thead>
+					    <tbody>
+					    	<tr>
+					    		<td>新浪</td>
+					    		<td>www.news.sina.com</td>
+					    		<td>新闻网站</td>
+					    		<td>-</td>
+					    		<td>2016-12-19 10:22:00</td>
+					    		<td>2017-01-11 11:46:00</td>
+					  	    </tr>
+					    </tbody>
+					</table>
+		</div>
+		</div>
+		</div>
+	</section>
+	<!-- Daterangepicker Scripts -->
+    <script src="../../static/assets/js/daterangepicker/js/moment.min.js" th:src="@{/common/plugins/daterangepicker/js/moment.min.js}"></script>
+    <script src="../../static/assets/js/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.min.js}"></script>
+	<!-- Self Js -->
+     <script src="../../../static/backEnd/js/static/latestNews/latestNews.js" th:src="@{/backEnd/js/dynamic/sysDic/sysDic.js}"></script>
+</body>
+</html>

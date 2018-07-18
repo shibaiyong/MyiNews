@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>专题管理-添加</title>
+	<!-- bootstrap-datetimepicker CSS-->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/newsTopic/addTopic.css">
+	<!-- bootstrap-datetimepicker JS-->
+	<script type="text/javascript" src="../../../static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/backEnd/js/static/newsTopic/addTopic.js"></script>
+</head>
+<body>
+	<section class="content-header">
+		<h5 class="m-all">
+          新闻专题管理-新建专题
+        </h5>
+	</section>
+	<section class="content">
+		<div class="box p-right p-left">
+			<div class="box box-primary">
+                <div class="box-body">
+                	<form class="form-horizontal" role="form">
+                		<div class="row">
+                			<div class="col-md-4">
+                				<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-3 control-label p-right">专题名称：</label>
+									<div class="col-sm-9 p-left">
+									    <input type="text" class="form-control" id="inputEmail3" placeholder="请输入专题名称">
+									</div>
+								</div>
+                			</div>
+                			<div class="col-md-4">
+                				<div class="form-group timeInterval">
+								    <label for="inputEmail3" class="col-sm-3 control-label p-right">时间区间：</label>
+									<div class="col-sm-9 p-left">
+									    <input type="text" class="form-control form_datetime" id="begin_time" placeholder="开始时间">
+								        <span>-</span>									        
+								        <input type="text" class="form-control form_datetime" id="end_time" placeholder="结束时间">
+									</div>
+								</div>
+                			</div>
+                			<div class="col-md-4">
+                				<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-3 control-label p-right">专题类型：</label>
+									<div class="col-sm-9 p-left">
+									    <select class="form-control">
+										  	<option>体育</option>
+										  	<option>娱乐</option>
+										  	<option>教育</option>
+										  	<option>军事</option>
+										  	<option>财经</option>
+										</select>
+									</div>
+								</div>
+                			</div>
+                			
+                		</div>
+					</form>
+					<!-- 版块一添加 -->
+					<div class="columnOne">
+						<h6>版块一</h6>
+						<button type="button" class="btn btn-primary pull-right">添加</button>
+					</div>
+					
+					<form class="form-horizontal" role="form">
+                		<div class="row">
+                			<div class="col-md-4 col-sm-6">
+                				<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-3 control-label p-right">聚类名称：</label>
+									<div class="col-sm-9 p-left">
+									    <input type="text" class="form-control" id="inputEmail3" placeholder="请输入聚类名称">
+									</div>
+								</div>
+                			</div>
+                			<div class="col-md-4 col-sm-6">
+                				<div class="form-group timeInterval">
+								    <label for="inputEmail4" class="col-sm-3 control-label p-right">计算周期：</label>
+									<div class="col-sm-9 p-left">
+									    <input type="text" class="form-control" id="inputEmail4" placeholder="">
+									</div>
+								</div>
+                			</div>
+                			<div class="col-md-4 col-sm-6">
+                				<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-3 control-label p-right">分类选择：</label>
+									<div class="col-sm-9 p-left">
+									    <select class="form-control">
+										  	<option>体育</option>
+										  	<option>娱乐</option>
+										  	<option>教育</option>
+										  	<option>军事</option>
+										  	<option>财经</option>
+										</select>
+									</div>
+								</div>
+                			</div>
+                			<div class="col-md-4 col-sm-6">
+                				<div class="form-group">
+								    <label for="inputEmail5" class="col-sm-4 control-label p-right">初次更新时间：</label>
+									<div class="col-sm-8 p-left">
+										<input type="text" class="form-control" id="inputEmail4" placeholder="">
+									</div>
+								</div>
+                			</div>
+                		</div>
+					</form>
+					<!-- 其他版块添加 -->
+					<div class="columnOther">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加其他版块</button>
+					</div>
+					<div class="addTopicTable">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>所属版块</th>
+									<th>板块名称</th>
+									<th>关键词</th>
+									<th>显示条数</th>
+									<th>分类选择</th>
+									<th>来源</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>版块三</td>
+									<td>羽毛球</td>
+									<td>林丹，高洪波，谢杏芳</td>
+									<td>10</td>
+									<td>体育，娱乐</td>
+									<td>新闻网站，微信</td>
+									<td>
+										<div class="btn-group">
+										  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										    操作 <span class="caret"></span>
+										  	</button>
+										  	<ul class="dropdown-menu" role="menu">
+										    	<li data-toggle="modal" data-target="#myModal"><a href="#">修改</a></li>
+										    	<li><a href="#">删除</a></li>
+										  	</ul>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>版块三</td>
+									<td>羽毛球</td>
+									<td>林丹，高洪波，谢杏芳</td>
+									<td>10</td>
+									<td>体育，娱乐</td>
+									<td>新闻网站，微信</td>
+									<td>
+										<div class="btn-group">
+										  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										    操作 <span class="caret"></span>
+										  	</button>
+										  	<ul class="dropdown-menu" role="menu">
+										    	<li><a href="#">修改</a></li>
+										    	<li><a href="#">删除</a></li>
+										  	</ul>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>版块三</td>
+									<td>羽毛球</td>
+									<td>林丹，高洪波，谢杏芳</td>
+									<td>10</td>
+									<td>体育，娱乐</td>
+									<td>新闻网站，微信</td>
+									<td>
+										<div class="btn-group">
+										  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										    操作 <span class="caret"></span>
+										  	</button>
+										  	<ul class="dropdown-menu" role="menu">
+										    	<li><a href="#">修改</a></li>
+										    	<li><a href="#">删除</a></li>
+										  	</ul>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+					</div>
+					<!-- 模块修改-模态框 -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					        <h4 class="modal-title" id="myModalLabel">模块修改</h4>
+					      </div>
+					      <div class="modal-body">
+					        	<form class="form-horizontal" role="form">
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">版块名称</label>
+								    	<div class="col-sm-9">
+								      		<input type="text" class="form-control" id="inputEmail3" placeholder="羽毛球">
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">关键词</label>
+								    	<div class="col-sm-9">
+								      		<textarea class="form-control" rows="3"></textarea>
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">来源</label>
+								    	<div class="col-sm-9">
+								      		<select class="form-control">
+											  	<option>新华网</option>
+											  	<option>腾讯网</option>
+											  	<option>百度</option>
+											  	<option>新浪</option>
+											  	<option>凤凰</option>
+											</select>
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">分类</label>
+								    	<div class="col-sm-9">
+								      		<select class="form-control">
+											  	<option>娱乐</option>
+											  	<option>体育</option>
+											  	<option>财经</option>
+											  	<option>教育</option>
+											  	<option>经济</option>
+											</select>
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					        <button type="button" class="btn btn-primary">确定</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+					<!-- 添加其他模块-模态框 -->
+					<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					        <h4 class="modal-title" id="myModalLabel">添加版块</h4>
+					      </div>
+					      <div class="modal-body">
+					        	<form class="form-horizontal" role="form">
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">版块名称</label>
+								    	<div class="col-sm-9">
+								      		<input type="text" class="form-control" id="inputEmail3" placeholder="请输入版块名称">
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">关键词</label>
+								    	<div class="col-sm-9">
+								      		<textarea class="form-control" rows="3"></textarea>
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">来源</label>
+								    	<div class="col-sm-9">
+								      		<select class="form-control">
+								      			<option selected="selected">请选择来源</option>
+											  	<option>新华网</option>
+											  	<option>腾讯网</option>
+											  	<option>百度</option>
+											  	<option>新浪</option>
+											  	<option>凤凰</option>
+											</select>
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								  	<div class="form-group">
+								    	<label for="inputEmail3" class="col-sm-2 control-label">分类</label>
+								    	<div class="col-sm-9">
+								      		<select class="form-control">
+								      			<option selected="selected">请选择分类</option>
+											  	<option>娱乐</option>
+											  	<option>体育</option>
+											  	<option>财经</option>
+											  	<option>教育</option>
+											  	<option>经济</option>
+											</select>
+								    	</div>
+								    	<div class="col-sm-1"></div>
+								  	</div>
+								</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					        <button type="button" class="btn btn-primary">确定</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+                </div>
+            </div>
+        </div>
+	</section>
+</body>
+</html>

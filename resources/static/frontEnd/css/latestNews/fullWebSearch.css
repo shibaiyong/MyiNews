@@ -1,0 +1,195 @@
+table th, table td{
+	text-indent:0px !important;
+}
+.fullWebScreeTable>thead>tr>th, 
+.fullWebScreeTable>tbody>tr>th, 
+.fullWebScreeTable>tfoot>tr>th, 
+.fullWebScreeTable>thead>tr>td, 
+.fullWebScreeTable>tbody>tr>td, 
+.fullWebScreeTable>tfoot>tr>td{
+	padding:3px 6px;
+}
+/* 顶部搜索栏 */
+.reSearch{
+	padding-top:8px;
+}
+.reSearch .wholeNetwork a,
+.reSearch .btn-style a{
+	color:#fff;
+}
+.reSearch .input-group .form-control{
+	width: 410px;
+	border-color:#F44336;
+	border-radius: 0px
+}
+
+/* 搜索列表*/
+.fullWebScreeTable{
+	width:20%;
+}
+.fullWebScreeTable .fullWebTitle{
+	background: #eee;
+}
+.fullWebScreeTable td.active{
+	background: #fff;
+	color:#F44336;
+}
+.fullWebScreeTable td.active a{
+	color: #F44336;
+}
+.table>tbody>tr>td.active{
+	background: #fff;
+}
+ .fullWebListConTable>thead>tr>th, 
+ .fullWebListConTable>tbody>tr>th, 
+ .fullWebListConTable>tfoot>tr>th, 
+ .fullWebListConTable>thead>tr>td, 
+ .fullWebListConTable>tbody>tr>td, 
+ .fullWebListConTable>tfoot>tr>td{
+ 	padding:8px 2px;
+ }
+
+/* 列表形式展示数据 */
+.fullWebCon .fullWebConList{
+	padding:6px 8px;
+}
+/* 缩略图形式展示数据 */
+.fullWebConThumbnail{
+	padding:10px;
+}
+.fullWebConThumbnail .media{
+	border-bottom:1px solid #ddd;
+	padding-bottom:3px;
+} 
+.fullWebConThumbnail .media-left{
+	width:20%;
+}
+.fullWebConThumbnail .media-left img{
+	padding:0px;
+	max-width:131px;
+	max-height:80px;
+}
+.fullWebConThumbnail .media-body .mediaCon{
+	width:70%;
+}
+.fullWebConThumbnail .media-body  .mediaRight{
+	width: 30%;
+}
+.fullWebConThumbnail .list-group-item{
+	padding:3px 8px;
+	font-size: 12px;
+	border:0px;
+}
+.fullWebConThumbnail .list-group-item span{
+	margin-right:2px;
+}
+.fullWebConThumbnailTable.dataTable tbody th, 
+.fullWebConThumbnailTable.dataTable tbody td{
+	padding-left:0px;
+	padding-right:0px;
+}
+.fullWebConThumbnailTable>thead>tr>th, 
+.fullWebConThumbnailTable>tbody>tr>th, 
+.fullWebConThumbnailTable>tfoot>tr>th, 
+.fullWebConThumbnailTable>thead>tr>td, 
+.fullWebConThumbnailTable>tbody>tr>td, 
+.fullWebConThumbnailTable>tfoot>tr>td,
+.fullWebConThumbnailTable.dataTable thead th, 
+.fullWebConThumbnailTable.dataTable thead td{
+	border:0px;
+}
+.fullWebConThumbnailTable.dataTable thead th, 
+.fullWebConThumbnailTable.dataTable thead td{
+	padding:0px;
+}
+
+.fullWebConThumbnailTable h6.media-heading a{
+	display:inline-block;
+	width:100%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.fullWebConThumbnailTable .mediaConSummary a{
+	color:#666;
+	word-break:break-all;
+	word-wrap:break-word
+}
+.fullWebConThumbnailTable .mediaConSummary a:hover{
+	color:#F44336;
+}
+.fullWebConThumbnailTable .media-body{
+	padding-left:10px;
+	max-width:605px;
+}
+.popover-content{
+	word-break:break-all !important;
+	word-wrap:break-word !important;
+}
+/* 相关事件列表 */
+.listLabel a{
+	display: inline-block;
+	border:1px solid #ddd;
+	padding:3px 8px;
+	white-space:nowrap;
+	margin-right:5px;
+	margin-bottom: 5px;
+}
+.listLabel a:hover{
+	background: #F44336;
+	color: #fff;
+}
+.listEvent ul.list-group li{
+	padding:6px 8px;
+	border-bottom: 1px solid #ddd;
+}
+
+/* 相关检索词 */
+.fullWebInterrelated{
+	padding:10px 0px;
+}
+.fullWebInterrelated .interrelatedCon ul{
+	overflow: hidden;
+}
+.fullWebInterrelated .interrelatedCon ul li{
+	float: left;
+	width:150px;
+	margin-right:5px;
+	margin-bottom:3px;
+}
+.fullWebInterrelated .interrelatedCon ul li a{
+	color: #939393;
+	font-size: 12px;
+	border-bottom: 1px solid #939393;
+}
+.fullWebInterrelated .interrelatedCon ul li a:hover{
+	color:#F44336;
+}
+.fullWebBoxTable tbody td:nth-child(2){
+	text-align:center;
+}
+
+.fullWebBoxTable tbody td:nth-child(4){
+	text-align:center;
+}
+.fullWebBoxTable tbody td:nth-child(1) a{
+	display:inline-block;
+	width:100%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	height:21px;
+	line-height:25px;
+}
+.fullWebConTable{
+	padding-left:8px;
+	padding-bottom:8px;
+}
+.fullWebBoxTable{
+	border-top:2px solid #EAEAEA
+}
+
+
+table.dataTable tbody th, table.dataTable tbody td{
+	padding:8px 10px;
+}

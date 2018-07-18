@@ -1,0 +1,78 @@
+ #operateGroup{
+ 	margin-top:10px;
+ 	margin-bottom:10px;
+ }
+ .searchesTable{
+ 	border-top:2px solid #EAEAEA;
+ }
+ .searchesTable td:nth-child(1){
+	font-size:12px;
+}
+.searchesTable td{
+	text-align:center
+}
+.searchesTable td:nth-child(1),
+.searchesTable td:nth-child(3){
+	text-align:left;
+}
+
+/* 列表中的操作 */
+.searchesTable tbody td:nth-child(15) i{
+	margin-left:5px;
+	cursor:pointer;
+}
+.searchesTable tbody td:nth-child(15) i:first-child{
+	margin-left:0px;
+}
+.searchesTable tbody td:nth-child(15) i:hover{
+	color:#F44336
+}
+.searchesTable .inewsOperation i.active{
+	color:#F44336
+}
+
+.operationCon{
+	overflow:hidden;
+}
+.operationCon .periodItem{
+	padding:4px 10px;
+	border:1px solid #ccc;
+	margin-left:5px;
+}
+.operationCon .periodItem:hover{
+	background:#F44336;
+	color:#fff;
+}
+.operationCon .periodItem.active{
+	background:#F44336;
+	color:#fff;
+}
+.operationCon .period{
+	margin-top:16px;
+}
+/*媒体分类2018-3-15*/
+.screenConditionBox{
+	/*float:right;*/
+	margin-right:125px;
+}
+.operate{
+	display:flex;
+	justify-content: flex-end;
+}
+/*.table-operation-status{*/
+	/*margin-top:13px;*/
+/*}*/
+ .prosul li a:hover{
+	 color:#d03322;
+	 background:#fff;
+ }
+ .prosul li:hover{
+	 color:#d03322;
+	 background:#fff;
+ }
+ .green{
+	 color:red;
+ }
+ .gray{
+	 color:green;
+ }

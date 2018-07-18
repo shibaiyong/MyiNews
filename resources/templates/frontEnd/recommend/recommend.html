@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻线索-new -->
+	<title>iNews-为你推荐</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/recommended/recommended.css"	th:href="@{/frontEnd/css/recommended/recommended.css}" />
+	<script src="http://cdn.bootcss.com/echarts/3.4.0/echarts.min.js"></script>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/recommended/recommended.js"	th:src="@{/frontEnd/js/dynamic/common/pic.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/recommended/recommended.js"	th:src="@{/frontEnd/js/dynamic/recommended/recommended.js}"></script>
+	<style>
+		.paginationSkip{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div class="container" style="background: #fff">
+			<div id="main-content">
+				<div class="row">
+					<div class="pull-left siderLeftBox col-md-2 col-sm-12 col-xs-12">
+						<div class="box p-right p-left">
+							<ul id="accordion" class="accordion">
+								<li class="open">
+									<div class="link">线索</div>
+								</li>
+								<li class="hide">
+									<div class="link">热点</div>
+								</li>
+								<li>
+									<div class="link">图片</div>
+								</li>
+								<li>
+									<div class="link">视频</div>
+								</li>
+								<li>
+									<div class="link">新闻</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="pull-left col-md-10 col-sm-12 col-xs-12" >
+						<div id="recommendContent" th:include="frontEnd/recommend/recommendThread :: recommendThread"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

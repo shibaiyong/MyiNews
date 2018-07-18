@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head >
+	<meta charset="UTF-8" />
+	<title>iNLP核心技术演示_iNews</title>
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 首页 -->
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+	
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- bosen css -->
+	<link rel="stylesheet" href="../../../static/frontEnd/css/bosen/global.css"  th:href="@{/frontEnd/css/boson/global.css}" type="text/css" />
+	<link rel="stylesheet" href="../../../static/frontEnd/css/bosen/jquery-ui.min.css"  th:href="@{/frontEnd/css/boson/jquery-ui.min.css}" type="text/css" />
+	<link rel="stylesheet" href="../../../static/frontEnd/css/bosen/toggle-switch.min.css"  th:href="@{/frontEnd/css/boson/toggle-switch.min.css}" type="text/css" />
+	
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/boson/singleTextPre.css"  th:href="@{/frontEnd/css/boson/singleTextPre.css}"/>
+	
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/boson/singleTextPre.js"  th:src="@{/frontEnd/js/dynamic/boson/singleTextPre.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/echarts/echarts.min.js"  th:src="@{/common/plugins/echarts/echarts.min.js}"></script>
+	
+</head>
+<body data-spy="scroll" data-target="#sideBar">
+	
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="col-md-12">
+						<div id="content-page">
+		                    <div id="sub-navbar">
+								<div class="container">
+									<ul>
+										<li class="selected">
+											<a href="javascript:void(0)" th:href="@{/gotoSingleTextPre}">单文本演示</a>
+											<span></span>
+										</li>
+										<li>
+											<a href="javascript:void(0)" th:href="@{/gotoMoreTextPre}">多文本演示</a>
+											<span></span>
+										</li>
+										
+									</ul>
+								</div>
+							</div>
+							<div id="demo-page">
+								<div id="demo-container" class="container demo2">
+									<div class="input-chunk chunk">
+										<textarea id="txt-analysis" class="input" placeholder="请输入您要演示的文本..."  onkeyup="textAreaControl()"></textarea>
+						
+										<button id="btn-analysis" onclick="submitText()" type="button" class="btn btn-arrow btn-radius " >提交文本<span class="icon"></span></button>
+											
+									</div>
+									<div class="main-title">
+										<span class="dot-line-gray"></span>
+										<span class="title">分析结果</span>
+									</div>
+								    <div class="row analyzeResult">
+								        <div id="sideBar" class="col-xs-3 bs-sidebar" width="100%" role="complementary">
+								          <div   class="chunk bs-sidebar-chunk"  data-spy="affix" data-offset-top="650" >
+								            <ul class="nav">
+								                <li class="analysis active">
+								                	<a class="hide" href="#overview-analysis"></a>
+								                   <div class="arrow"></div>
+								                   <a href="#overview-analysis" class="title"><span class="icon"></span>词性分析</a>
+								                   <div class="line"></div>
+								                </li>
+								                	
+								                <li class="ner">
+								               		<a class="hide" href="#overview-ner"></a>
+								                	<div class="arrow"></div>
+								                	<a href="#overview-ner" class="title"><span class="icon"></span>实体识别</a>
+								                	<div class="line"></div>
+								                </li>
+								                <li class="emotion">
+								                	<a class="hide" href="#overview-emotion"></a>
+								                	<div class="arrow"></div>
+								                	<a href="#overview-emotion" class="title"><span class="icon"></span>情感分析</a>
+								                	<div class="line"></div>
+								                </li>
+								                <li class="key">
+								                	<a class="hide" href="#overview-key"></a>
+								                	<div class="arrow"></div>
+								                	<a href="#overview-key" class="title"><span class="icon"></span>关键词提取</a>
+								                	<div class="line"></div>
+								                </li>
+								                <li class="summary">
+								                	<a class="hide" href="#overview-summary"></a>
+								                	<div class="arrow"></div>
+								               		<a href="#overview-summary" class="title"><span class="icon"></span>新闻摘要</a>
+								               		<div class="line"></div>
+								               	</li>
+								            </ul>
+								          </div>
+								        </div>
+								        <div class="col-xs-9 main-content" role="main">
+											<div id="overview-analysis" class="chunk">
+												<div class="col-xs-12">
+													<div class="title">
+														词性分析:
+													</div>
+												</div>
+												<div class="col-xs-9">
+													<dl id="wordAnalysis" class="words"></dl>
+												</div>
+												<div class="col-xs-3">
+													<dl id="wordClassify" class="word-mean">
+														<dt>词性类别图示:</dt>
+					
+													</dl>
+												</div>
+												<div class="loading hide"></div>
+												<div class="warn-tips hide">
+													<span class="icon"></span>
+													<span class="txt">请求出错</span>
+												</div>
+											</div>
+					
+											<div id="overview-ner" class="chunk">
+												<div class="col-xs-12">
+													<div class="title">
+														实体识别:
+														<a class="docs" href="" target="_blank">查看文档</a>
+														<div class="switch-wrap switch-toggle switch-candy switch-5">
+															<input id="rd-c1" name="viewner" value="1" type="radio"
+																onclick="nerClick(this)"/>
+															<label for="rd-c1">更多</label>
+															<input id="rd-c2" name="viewner" value="2" type="radio"
+																onclick="nerClick(this)"/>
+															<label for="rd-c2">较多</label>
+															<input id="rd-c3" name="viewner" value="3" type="radio"
+																checked="" onclick="nerClick(this)"/>
+															<label
+																for="rd-c3">平衡</label>
+															<input id="rd-c4" name="viewner" 
+																value="4" type="radio" onclick="nerClick(this)"/>
+															<label
+																for="rd-c4">准确</label>
+															<input id="rd-c5" name="viewner"
+																value="5" type="radio" onclick="nerClick(this)"/>
+															<label
+																for="rd-c5" class="last-label">更准确</label>
+															<a></a>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-9">
+													<dl id="entityAnalysis" class="words"></dl>
+												</div>
+												<div class="col-xs-3">
+													<dl id="entityClassify" class="word-mean">
+														<dt>实体类别图示:</dt>
+					
+													</dl>
+												</div>
+												<div class="loading hide"></div>
+												<div class="warn-tips hide">
+													<span class="txt">
+														<span class="icon"></span>
+														请求出错
+													</span>
+												</div>
+											</div>
+					
+											<div id="overview-emotion" class="chunk">
+												<div class="title">
+													情感分析:
+													<div class="switch-wrap switch-toggle switch-candy switch-6">
+														<input id="sentiment-c1" name="viewemotion"  value="" type="radio"
+															onclick="sentimentClick(this)"/>
+														<label for="sentiment-c1">通用</label>
+														<input id="sentiment-c2" name="viewemotion" value="auto" type="radio"
+															onclick="sentimentClick(this)"/>
+														<label for="sentiment-c2">汽车</label>
+														<input id="sentiment-c3" name="viewemotion" value="kitchen" type="radio"
+															onclick="sentimentClick(this)"/>
+														<label
+															for="sentiment-c3">厨具</label>
+														<input id="sentiment-c4" name="viewemotion" value="food" type="radio" 
+															onclick="sentimentClick(this)"/>
+														<label
+															for="sentiment-c4">餐饮</label>
+														<input id="sentiment-c5" name="viewemotion" checked="" value="news" type="radio"
+															 onclick="sentimentClick(this)"/>
+														<label
+															for="sentiment-c5" class="last-label">新闻</label>
+															<input id="sentiment-c6" name="viewemotion" value="weibo" type="radio"
+																 onclick="sentimentClick(this)"/>
+														<label
+															for="sentiment-c6" class="last-label">微博</label>
+														<a></a>
+													</div>
+												</div>
+												<div class="row">
+													<dl class="emotion-tips">
+														<dt>
+															<ul>
+																<li></li>
+																<li></li>
+																<li class="positive">
+																	<span class="icon"></span>
+																	正面
+																</li>
+																<li class="passive">
+																	<span class="icon"></span>
+																	负面
+																</li>
+															</ul>
+														</dt>
+														<dd>判断标准:</dd>
+														<dd>0~0.5之间判断为负面，</dd>
+														<dd>0.5~1之间判断为正面。</dd>
+													</dl>
+													<div id="emotion-chart" class="emotion-chart"
+														data-highcharts-chart="0"></div>
+												</div>
+												
+												<span class="loading hide"></span>
+												<div class="warn-tips hide">
+													<span class="icon"></span>
+													<span class="txt">请求出错</span>
+												</div>
+											</div>
+					
+											<div id="overview-key" class="chunk">
+												<div class="title">
+													关键词提取:
+													<a class="docs" href="" target="_blank"
+														style="display: none;">查看文档</a>
+													<a class="docs feedback"
+														style="display: none;">结果不正确</a>
+												</div>
+												<div class="result">
+													<div class="col-small-0">
+														<table>
+															<thead>
+																<tr>
+																	<td>名称</td>
+																	<td>权重</td>
+																</tr>
+															</thead>
+															<tbody id="tbody0"></tbody>
+														</table>
+													</div>
+					
+													<div class="col-small-1">
+														<table>
+															<thead>
+																<tr>
+																	<td>名称</td>
+																	<td>权重</td>
+																</tr>
+															</thead>
+															<tbody id="tbody1"></tbody>
+														</table>
+													</div>
+													<div class="col-small-2">
+														<table>
+															<thead>
+																<tr>
+																	<td>名称</td>
+																	<td>权重</td>
+																</tr>
+															</thead>
+															<tbody id="tbody2"></tbody>
+														</table>
+													</div>
+												</div>
+												<span class="loading hide"></span>
+												<div class="warn-tips hide">
+													<span class="icon"></span>
+													<span class="txt">请求出错</span>
+												</div>
+											</div>
+											<div id="overview-summary" class="chunk">
+												<div class="col-xs-12">
+													<div class="title">
+														新闻摘要:
+														<div class="switch-wrap switch-toggle switch-candy switch-4">
+															<input id="rd-c14" name="viewsummary" value="0.5" type="radio" checked="" onclick="summaryClick(this)"/>
+															<label for="rd-c14">50%</label>
+															<input id="rd-c15" name="viewsummary" value="0.4" type="radio" onclick="summaryClick(this)" />
+															<label for="rd-c15">40%</label>
+															<input id="rd-c16" name="viewsummary" value="0.3" type="radio" onclick="summaryClick(this)" />
+															<label for="rd-c16">30%</label>
+															<input id="rd-c17" name="viewsummary" value="0.2" type="radio" onclick="summaryClick(this)" />
+															<label for="rd-c17" class="last-label">20%</label>
+															<a></a>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<p id="summaryResult" class="result">
+													</p>
+												</div>
+												<div class="loading hide"></div>
+												<div class="warn-tips hide">
+													<span class="icon"></span>
+													<span class="txt">请求出错</span>
+												</div>
+											</div>
+					
+										</div>
+		    						</div>
+		         				</div>
+		         			</div>
+		    			</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+	
+</body>
+</html>

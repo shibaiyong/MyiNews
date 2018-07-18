@@ -1,0 +1,236 @@
+/* 宸查�夊ご閮ㄦ爣棰� */
+.already-add h4{
+	margin:0px;
+	padding:5px;
+	font-size:14px;
+	background:#f1f1f1;
+	color:#666;
+}
+.alreadyCon{
+	padding:0px 15px;
+	background:rgba(238,238,238,0.2);
+	border:1px solid #f1f1f1
+}
+.alreadyCon>div{
+	position:relative;
+}
+.chooseContent{
+	margin:10px;
+	margin-right:10px;
+}
+.chooseContent .chooseProvinceCon{
+/* 	border:1px solid #ccc; */
+	padding:8px 10px;
+	background:#f1f1f1;
+}
+.chooseContent .chooseProvinceCon a{
+	display:inline-block;
+/* 	height:18px; */
+/* 	line-height:18px; */
+	color:#666;
+	padding:3px 6px;
+	margin:2px;
+}
+.chooseContent .chooseProvinceCon a:hover{
+	background:#F44336;
+	color:#fff;
+}
+.chooseContent .chooseProvinceCon a.choosen{
+	background:#F44336;
+	color:#fff;
+}
+.chooseContent .chooseWebSite{
+	padding:5px 8px;
+	margin:5px ;
+	border:1px solid #f1f1f1;
+}
+.chooseContent .chooseWebSite p{
+	margin-bottom:5px;
+	padding-bottom:3px;
+	border-bottom:1px solid #f1f1f1;
+}
+.chooseContent .chooseWebSite a{
+	display:inline-block;
+	width:100px;
+	margin:5px 5px;
+	height:20px;
+	line-height:20px;
+}
+.chooseContent .chooseWebSite a input{
+	float:left;
+	margin-right:3px;
+}
+.keywordsBox .has-feedback{
+	margin-right:0px;
+	margin-left:0px;
+}
+.form-control-remove{
+	position:absolute;
+	right:0px;
+	top:0px;
+	display:block;
+	width:34px;
+	height:34px;
+	line-height:34px;
+	text-align:center;
+	z-index:10;
+	cursor:pointer;
+}
+.sortDown span{
+	border-right:1px solid #ddd;
+}
+.sortDown i{
+	padding-right:5px;
+	padding-left:5px;
+	height:25px;
+	line-height:25px;
+	display:inline-block;
+}
+
+
+/* 浜岀骇鏄剧ず鏍峰紡 */
+.sortDownContent{
+/* 	background:#f1f1f1; */
+	padding:5px 10px;
+	box-shadow:0px 0px 4px #666;
+}
+.sortDownContent a{
+	padding:6px 8px;
+	display:inline-block;
+	width:85px;
+}
+.sortDownContent p{
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-bottom:0px;
+	border-bottom:1px solid #ccc;
+}
+
+.sortDownContent a:hover{
+	color:#F44336;
+}
+.sortDownContent a.active{
+	color:#F44336;
+}
+
+.keywordsBox p{
+	margin-bottom:0px;
+	margin-top:3px;
+}
+.form_datetime{
+	display:inline-block;
+	width:150px;
+}
+
+/* 鍙嶉�夌殑鏍峰紡 */
+.contraryFlag{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: transparent;
+    color: #666;
+    font-weight: normal;
+    box-shadow: 0 0 3px #999;
+    cursor:pointer;
+ }
+ .contraryFlag.active{
+ 	background:#F44336;
+ 	color:#fff;
+ }
+ /*  鍦板尯涓嶈鍙嶉�� */
+[data-position-right="8"] .contraryFlag{
+	display:none;
+}
+
+/* 浜岀骇鏍忕洰 */
+.configPre .keepTitle,
+.previewCon .keepTitle{
+    background: #f5f8fa;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-left: 3px solid #F44336;
+    position:relative;
+}
+.configPre .keepTitle .modifyConfig,
+.previewCon .keepTitle .modifyConfig{
+	position:absolute;
+	right:10px;
+	top:0;
+	padding:6px 12px;
+	cursor:pointer;
+}
+.configPre .keepTitle .modifyConfig .moveTitle{
+	display:inline-block;
+	padding:3px 6px;
+}
+.configPre .keepTitle .modifyConfig .modifyTitle{
+	display:inline-block;
+	padding:3px 6px;
+}
+.previewMain{
+	margin-bottom:10px;
+}
+.previewMain .mainCon ul{
+	overflow:hidden;
+	background:#dd2f39;
+}
+.previewMain .mainCon ul li{
+	float:left;
+}
+.previewMain .mainCon ul li a{
+	display:inline-block;
+	padding:15px 13px;
+	color:#fff;
+}
+.configPage .item { display: inline-block; margin-right: 20px; *display: inline; *zoom: 1;}
+
+.moveTitle.active,
+.modifyTitle.active{
+	color:#DD2F39;
+}
+.item label{
+	color:#ccc;
+}
+.item label.active{
+	color:#333;
+}
+
+
+#saveModal .modal-dialog,
+#saveTipModal .modal-dialog{
+	top:40%;
+	margin-top:-50px;
+}
+.tipModal,
+.saveTipModal{
+	text-align:center;
+}
+.navname{
+	font-weight:bold;
+}
+.btn-default{
+	background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+span.dragOn{
+	display: inline-block;
+    border: 1px solid #999;
+    padding: 3px 10px;
+}
+span.dragOff{
+	display: inline-block;
+    border: 1px dashed #ccc;
+    padding: 3px 10px;
+}
+
+.warmTip{
+	position:absolute;
+	right:10px;
+	top:8px;
+}
+.modTitle.form-control{
+	height:30px;
+}

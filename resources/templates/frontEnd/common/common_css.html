@@ -1,0 +1,16 @@
+<div th:fragment="common_css">
+
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/bootstrap-3.3.0/css/bootstrap.min.css"  th:href="@{/common/plugins/bootstrap-3.3.0/css/bootstrap.min.css}" />
+	
+	<!-- Fonts -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/font-awesome-4.4.0/css/font-awesome.min.css" th:href="@{/common/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" />	
+	
+	<!-- toastmessage CSS-->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/toastmessage/css/jquery.toastmessage.css" th:href="@{/common/plugins/toastmessage/css/jquery.toastmessage.css}" />	
+	
+	<!-- Common Css-->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/common.css" th:href="@{/frontEnd/css/common/common.css}" />
+	
+	<!--<input type="hidden" id="ctx" th:value="${session.ctx}"/>-->
+	<input type="hidden" id="session-debug" th:value="${session.debug}"/>
+</div>

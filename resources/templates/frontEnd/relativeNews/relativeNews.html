@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 相似、相关、事件媒体 -->
+	<title>iNews-智慧新闻</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/relativeNews/relativeNews.css" th:href="@{/frontEnd/css/relativeNews/relativeNews.css}"/>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/relativeNews/relativeNews.js" th:src="@{/frontEnd/js/dynamic/relativeNews/relativeNews.js}"></script>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content"  class="container">
+		<div class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="col-md-9 col-sm-12">
+						<div class="relativeNewsCon box p-right p-left">
+							<div class="box-header header-vimeo">
+								<h2>新闻列表</h2>
+							</div>
+								<input type="hidden" class="relativeType" th:attr="value=${relativeType}"></input>
+								<input type="hidden" class="webpageCode" th:attr="value=${webpageCode}"></input>
+								<input type="hidden" class="clusterid" th:attr="value=${clusterCode}"></input>
+								<input type="hidden" class="eventid" th:attr="value=${eventid}"></input>
+								<input type="hidden" class="sourceCrawl" th:attr="value=${sourceCrawl}"></input>
+							<table class="table table-hover relativeNewsTable">
+								<thead>
+									<tr>
+<!-- 										<th style="width:130px;">ID</th> -->
+										<th class="beyondEllipsisTh">标题</th>
+										<th style="width:90px;">爬取来源</th>
+										<th style="width:90px;">发稿来源</th>
+										
+										<th class="tableTime center" style="width:85px;">发布时间</th>
+										<th style="width:40px" >相关</th>
+									</tr>
+								</thead>
+								<tbody th:remove="all">
+									<tr>
+										<td>0123456789</td>
+										<td >
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+									<tr>
+										<td>0123456789</td>
+										<td>
+											<a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover"  >人民网评：遏制安全生产事故频发，须加强问责人民网评：遏制安全生产事故频发，须加强问责</a>
+										</td>
+										<td>人民网</td>
+										<td>2016-12-06 18:09</td>
+										<td>（2）</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+	  				<div class="col-md-3 col-sm-12">
+	  					<div class="relativeNewsKeys box p-right p-left" >
+	  						<div class="box-header header-vimeo">
+								<h2>关键词</h2>
+							</div>
+							<div class="keysCon box p-right p-left">
+								<div class="listLabel">
+									<a href="javascript:void(0)" th:remove="all">唐艳君</a>
+									<a href="javascript:void(0)" th:remove="all">小李</a>
+									<a href="javascript:void(0)" th:remove="all">王昊</a>
+									<a href="javascript:void(0)" th:remove="all">韦亮</a>
+									<a href="javascript:void(0)" th:remove="all">任志强</a>
+									<a href="javascript:void(0)" th:remove="all">王健林</a>
+									<a href="javascript:void(0)" th:remove="all">罗晋庞无忌</a>
+								</div>
+							</div>
+	  					</div>
+	  				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

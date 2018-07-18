@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>用户管理页</title>
+	<!-- iCheck CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/js/static/user/iCheck/flat/blue.css" th:href="@{/backEnd/js/static/user/iCheck/flat/blue.css}" />
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/user/user.css" th:href="@{/backEnd/css/user/user.css}" />
+
+	<!-- bootstrap-multiselect JS -->
+	<script type="text/javascript" src="../../../static/backEnd/plugins/bootstrap-multiselect/js/multiselect.min.js" th:src="@{/backEnd/plugins/bootstrap-multiselect/js/multiselect.min.js}" ></script>
+	<!-- iCheck JS -->
+	<script type="text/javascript" src="../../../static/backEnd/js/static/user/iCheck/icheck.min.js" th:src="@{/backEnd/js/static/user/iCheck/icheck.min.js}" ></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/backEnd/js/static/user/user.js" th:src="@{/backEnd/js/dynamic/user/user.js}" ></script>
+	<script type="text/javascript" src="../../../static/common/plugins/sha/sha256.js" th:src="@{/common/plugins/sha/sha256.js}" ></script>
+</head>
+<body>
+	<section class="content-header">
+		<h5 class="m-all">
+          用户账户管理列表
+        </h5>
+	</section>
+	<section class="content">
+		<div class="box p-right p-left">
+			<div class="box box-primary">
+                <div class="box-header with-border">
+                	<div class="box-title">
+                		<div class="has-feedback pull-left">
+	                      	<input id="queryStr" type="text" class="form-control input-sm" placeholder="用户查询" />
+	                      	<span class="glyphicon glyphicon-search form-control-feedback"></span>
+	                  	</div>
+	                  	&nbsp;
+	                  	<button type="button" class="btn btn-default" data-toggle="modal" onclick="listOrgs();" data-target="#userModal">添加用户</button>
+                	</div>
+                  	<div class="box-tools">
+                    	<button type="button" class="btn btn-primary" th:onclick="'batchDelete()'">批量删除</button>
+                  	</div>
+                </div>
+                <div class="box-body no-padding">
+                  <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover userTable">
+						<thead>
+							<tr>
+								<th>
+									<button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
+								</th>
+								<th>用户名</th>
+								<th>姓名</th>
+								<th>注册时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+	                    <tbody th:remove="body">
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>王嵘</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>郭晓鹏</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>陈金梁</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                           	<td><input type="checkbox" /></td>
+	                          	<td>康传扬</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>息振兴</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>黄硕</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>王嵘</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                         	<td>董小玉</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>杨小璐</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                            <td><input type="checkbox" /></td>
+	                            <td>孙强</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                            <td><input type="checkbox" /></td>
+  	                            <td>康传扬</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>息振兴</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>陈金梁</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>郭晓鹏</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                        <tr>
+	                          	<td><input type="checkbox" /></td>
+	                          	<td>黄硕</td>
+	                          	<td>管理员</td>
+	                          	<td>2016-12-24</td>
+	                          	<td>
+	                          		<div class="btn-group">
+									  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									    操作 <span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu">
+									    	<li><a href="#">密码重置</a></li>
+									    	<li><a href="#">删除用户</a></li>
+									    	<li><a href="#">修改用户</a></li>
+									  	</ul>
+									</div>
+	                          	</td>
+	                        </tr>
+	                     </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+            <!-- 添加用户模态框 -->
+            <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				    <div class="modal-content">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        	<h4 class="modal-title" id="myModalLabel">添加用户</h4>
+				      	</div>
+				      	<div class="modal-body">
+				        	<form class="form-horizontal" role="form" id="userModelForm">
+				        		<input type="hidden" id="innerid" value="" />
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">用户名称</label>
+							    	<div class="col-sm-7">
+							      		<input type="text" class="form-control" id="userName" placeholder="请输入用户名" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入用户名"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">用户姓名</label>
+							    	<div class="col-sm-7">
+							      		<input type="text" class="form-control" id="name" placeholder="请输入姓名" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入姓名"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">邮箱地址</label>
+							    	<div class="col-sm-7">
+							      		<input type="tel" class="form-control" id="email" placeholder="请输入邮箱地址" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入邮箱地址"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">手机号码</label>
+							    	<div class="col-sm-7">
+							      		<input type="tel" class="form-control" id="mobilePhone" placeholder="请输入手机号码" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入手机号码"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">最大在线</label>
+							    	<div class="col-sm-7">
+							      		<input type="number" class="form-control" id="onlineNum" placeholder="" min="1" value="1" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入用户最大在线数"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">有效天数</label>
+							    	<div class="col-sm-7">
+							      		<input type="number" class="form-control" id="effectiveTime" placeholder="" min="-1" value="30" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请输入用户账号有效天数"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">所属租户</label>
+							    	<div class="col-sm-7">
+							      		<select id="tenant" class="form-control" onchange="listOrgs();" th:remove="all-but-first" style="width: 100%;">
+										  <option th:each="tenant:${tenants}" th:value="${tenant.tenantId}" th:text="${tenant.name}">荣之联</option>
+					                    </select>
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请选择所属租户"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">所属部门</label>
+							    	<div class="col-sm-7">
+							      		<select id="org" class="form-control" th:remove="all-but-first" style="width: 100%;">
+										  <option >请选择</option>
+					                    </select>
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请选择所属租户"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label">角色</label>
+							    	<div class="col-sm-7">
+							      		<select id="role" class="form-control"  th:remove="all-but-first" style="width: 100%;">
+										  <option th:each="role:${roles}" th:value="${role.innerid}" th:selected="${role.innerid==2?true:false}" th:text="${role.description}" >管理员</option>
+					                    </select>
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="请选择角色"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-3 control-label">备注</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="userNote" placeholder="备注信息" />
+									</div>
+									<div class="col-sm-2">
+										<p class="form-control-static">
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="备注信息"></i>
+										</p>
+									</div>
+								</div>
+							  	<div class="form-group">
+							    	<label for="inputEmail3" class="col-sm-3 control-label"></label>
+							    	<div class="col-sm-7">
+							    		<p class="form-control-static">
+							    			<button type="button" class="btn btn-link " data-toggle="modal" data-target="#jurConfigure">角色权限配置</button>
+							    		</p>
+							    	</div>
+							    	<div class="col-sm-2">
+							    	</div>
+							  	</div>
+							</form>
+				      	</div>
+				      	<div class="modal-footer">
+				        	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				        	<button type="button" class="btn btn-primary" th:onclick="'addUser()'" >添加</button>
+				      	</div>
+				    </div>
+				</div>
+			</div>
+			<!-- 用户权限模态框 -->
+			<div class="modal fade" id="jurConfigure" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  	<div class="modal-dialog modal-lg">
+			    	<div class="modal-content">
+			      		<div class="modal-header">
+			        		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			        		<h4 class="modal-title" id="myModalLabel">用户角色权限配置</h4>
+			      		</div>
+			      		<div class="modal-body">
+			      			<div class="jurConfigureTit">
+			      				角色名称：<span>管理员</span>
+			      			</div>
+			        		<div class="row">
+								<div class="col-xs-5">
+									<div class="jurConfigureLeft">
+										<p>所属权限</p>
+									</div>
+									<select name="from" id="multiselect" class="form-control" size="8" multiple="multiple">
+										<option value="1">Item 1</option>
+										<option value="2">Item 5</option>
+										<option value="2">Item 2</option>
+										<option value="2">Item 4</option>
+										<option value="3">Item 3</option>
+										<option value="2">Item 2</option>
+										<option value="2">Item 4</option>
+										<option value="3">Item 3</option>
+									</select>
+								</div>
+								
+								<div class="col-xs-2 jurConfigureMi">
+									<button type="button " id="multiselect_rightAll" class="btn btn-block"><i class="fa fa-angle-double-right"></i></button>
+									<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="fa fa-angle-right"></i></button>
+									<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="fa fa-angle-left"></i></button>
+									<button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="fa fa-angle-double-left"></i></button>
+								</div>
+								
+								<div class="col-xs-5">
+									<div class="jurConfigureRight">
+										<p>所属权限</p>
+									</div>
+									<select name="to" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+								</div>
+							</div>
+							<div class="jurConfigureBotton">
+								<button type="button" class="btn btn-primary">同意</button>
+								<button type="button" class="btn btn-default">拒绝</button>
+							</div>
+			      		</div>
+			      		<div class="modal-footer">
+			        		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			        		<button type="button" class="btn btn-primary">确定</button>
+			      		</div>
+			    	</div>
+			  	</div>
+			</div>
+
+			<!-- 修改密码模态框 -->
+            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				    <div class="modal-content">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        	<h4 class="modal-title" id="passwordModalLabel">修改密码</h4>
+				      	</div>
+				      	<div class="modal-body">
+				        	<form class="form-horizontal" role="form" id="passwordModelForm">
+				        		<input type="hidden" id="pwd_innerid" />
+<!-- 							  	<div class="form-group"> -->
+<!-- 							    	<label for="oldPassword" class="col-sm-3 control-label">原密码</label> -->
+<!-- 							    	<div class="col-sm-7"> -->
+<!-- 							      		<input type="password" class="form-control" id="oldPassword" placeholder="请输入原密码" /> -->
+<!-- 							    	</div> -->
+<!-- 							    	<div class="col-sm-2"> -->
+<!-- 							    		<p class="form-control-static"> -->
+<!-- 							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on left"></i> -->
+<!-- 							    		</p> -->
+<!-- 							    	</div> -->
+<!-- 							  	</div> -->
+							  	<div class="form-group">
+							    	<label for="newPassword" class="col-sm-3 control-label">新密码</label>
+							    	<div class="col-sm-7">
+							      		<input type="password" class="form-control" id="newPassword" placeholder="请输入新密码" />
+							    	</div>
+							    	<div class="col-sm-2">
+							    		<p class="form-control-static">
+							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on left"></i>
+							    		</p>
+							    	</div>
+							  	</div>
+<!-- 							  	<div class="form-group"> -->
+<!-- 							    	<label for="newPassword2" class="col-sm-3 control-label">确认密码</label> -->
+<!-- 							    	<div class="col-sm-7"> -->
+<!-- 							      		<input type="password" class="form-control" id="newPassword2" placeholder="请再次输入新密码" /> -->
+<!-- 							    	</div> -->
+<!-- 							    	<div class="col-sm-2"> -->
+<!-- 							    		<p class="form-control-static"> -->
+<!-- 							    			<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on left"></i> -->
+<!-- 							    		</p> -->
+<!-- 							    	</div> -->
+<!-- 							  	</div> -->
+							</form>
+				      	</div>
+				      	<div class="modal-footer">
+				        	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				        	<button type="button" class="btn btn-primary" th:onclick="'savePassword()'" >保存</button>
+				      	</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

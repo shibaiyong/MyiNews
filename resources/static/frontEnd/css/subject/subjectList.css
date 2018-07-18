@@ -1,0 +1,32 @@
+/* 顶部搜索栏 */
+.latestNewsAddSearch{
+	padding-top:8px;
+}
+.latestNewsAddSearch .input-group .form-control{
+	width: 410px;
+	border-color: #F44336;
+	border-radius: 0px;
+}
+
+/* 搜索结果 */
+#subjectList .nav-tabs > li.active > a, 
+#subjectList .nav-tabs > li.active > a:focus, 
+#subjectList .nav-tabs > li.active > a:hover{
+	background: #F44336;
+	color: #fff;
+}
+#subjectList .nav-tabs>li>a{
+	padding:6px 10px 5px;
+	color:#666;
+	background: none;
+}
+.dataTables_wrapper .dataTables_info{
+	padding-top:15px;
+}
+
+#subjectHistoryTable em{
+	font-style: normal;
+}
+#subjectCurrentTable td a{
+	color:#F44336;
+}

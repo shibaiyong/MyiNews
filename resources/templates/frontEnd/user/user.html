@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 用户中心 -->
+	<title>iNews-用户中心</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+	
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- Daterangepicker Css -->
+    <link rel="stylesheet" type="text/css" href="../../static/assets/js/daterangepicker/css/daterangepicker.min.css" th:href="@{/common/plugins/daterangepicker/css/daterangepicker.min.css}"/>
+	<!-- iCheck CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/iCheck/flat/blue.css" th:href="@{/common/plugins/iCheck/flat/blue.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/user/user.css" th:href="@{/frontEnd/css/user/user.css}"/>
+	
+	
+	<!-- Daterangepicker Scripts -->
+    <script src="../../static/assets/js/daterangepicker/js/moment.min.js" th:src="@{/common/plugins/daterangepicker/js/moment.min.js}"></script>
+    <script src="../../static/assets/js/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.js}"></script>
+	<!-- iCheck CSS -->
+	<script type="text/javascript" src="../../../static/common/plugins/iCheck/icheck.min.js" th:src="@{/common/plugins/iCheck/icheck.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/user/user.js" th:src="@{/frontEnd/js/dynamic/user/user.js}"></script>
+	<style>
+		.userCenterCon .form-control.reset{
+			background: white;
+			border:none;
+			border:0px solid transparent;
+			box-shadow: none;
+		}
+		.userCenterCon .form-control-static{
+			padding-left:12px;
+		}
+		.user-btn-opt{
+			text-align: center;
+			display: none;
+		}
+		.user-btn-opt .btn{
+			margin: 40px 50px;
+		}
+		.user-modify{
+			cursor:pointer;
+		}
+        .name-error,.mobilePhone-error,.email-error{
+            color:#dd2f39;
+            display: none;
+        }
+
+        /*隐藏全选按钮*/
+
+	</style>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="box">
+						<div class="row">
+						  	<div class="col-md-12 col-sm-12">
+						  		<div class="userCon box p-right p-left p-top">
+						  			<!-- 用户中心 -->
+						  			<div class="userMain">
+						  				<div class="keepTitle">
+						  					<h6 class="m-all">个人信息</h6>
+						  				</div>
+										<div class="userCenterCon">
+											<div class="box p-right p-left p-top">
+												<div class="row">
+												  <div class="col-md-10">
+												  	<form class="form-horizontal">
+												  		<div class="form-group">
+												    		<label  class="col-sm-2 control-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
+												    		<div class="col-sm-5" style="width:auto;">
+                                                                <p class="form-control-static userName"></p>
+												    		</div>
+															<div class="col-sm-5 user-modify" style="width:auto;color:#333;">
+																<p class="form-control-static"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 16px;"></i>&nbsp;修改</p>
+															</div>
+												  		</div>
+                                                        <div class="form-group name-error">
+                                                            <label  class="col-sm-2 control-label"></label>
+                                                            <div class="col-sm-5">
+                                                                <p class="form-control-static">姓名不能为空！</p>
+                                                            </div>
+                                                        </div>
+												  		<div class="form-group">
+															<label  class="col-sm-2 control-label"><span style="color:#dd2f39;vertical-align: middle;">*</span>&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+												    		<div class="col-sm-5">
+                                                                <input type="text" readonly="readonly" class="form-control reset name" data-toggle="popover" data-placement="top" data-content=""/>
+												    		</div>
+												  		</div>
+                                                        <div class="form-group mobilePhone-error">
+                                                            <label  class="col-sm-2 control-label"></label>
+                                                            <div class="col-sm-5">
+                                                                <p class="form-control-static">联系方式不能为空！</p>
+                                                            </div>
+                                                        </div>
+													    <div class="form-group">
+												    		<label  class="col-sm-2 control-label"><span style="color:#dd2f39;vertical-align: middle;">*</span>&nbsp;联系方式：</label>
+												    		<div class="col-sm-5">
+                                                                <input type="text" readonly="readonly" class="form-control reset mobilePhone" data-toggle="popover" data-placement="top"/>
+												    		</div>
+												  		</div>
+                                                        <div class="form-group email-error">
+                                                            <label  class="col-sm-2 control-label"></label>
+                                                            <div class="col-sm-5">
+                                                                <p class="form-control-static">邮箱不能为空！</p>
+                                                            </div>
+                                                        </div>
+												  		<div class="form-group">
+												    		<label  class="col-sm-2 control-label"><span style="color:#dd2f39;vertical-align: middle;">*</span>&nbsp;邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</label>
+												    		<div class="col-sm-5">
+                                                                <input type="text" readonly="readonly" class="form-control reset email" data-toggle="popover" data-placement="top"/>
+												    		</div>
+												  		</div>
+
+														<div class="form-group">
+															<label  class="col-sm-2 control-label">机&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;构：</label>
+															<div class="col-sm-10">
+																<p class="form-control-static orgName"></p>
+															</div>
+														</div>
+												  		<div class="form-group">
+												    		<label  class="col-sm-2 control-label">角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</label>
+												    		<div class="col-sm-10">
+												      			<p class="form-control-static roleName"></p>
+												    		</div>
+												  		</div>
+														<div class="form-group">
+															<label  class="col-sm-2 control-label">注册时间：</label>
+															<div class="col-sm-10">
+																<p class="form-control-static createTime"></p>
+															</div>
+														</div>
+
+												  		<div class="form-group">
+												    		<label  class="col-sm-2 control-label">过期时间：</label>
+												    		<div class="col-sm-10">
+												      			<p class="form-control-static endTime"></p>
+												    		</div>
+												  		</div>
+													</form>
+													  <div class="col-md-12 user-btn-opt">
+														  <button class="btn btn-danger">保存</button>
+														  <button class="btn btn-default">取消</button>
+													  </div>
+
+												  </div>
+													<div class="col-md-2"></div>
+												</div>
+											</div>
+										</div>
+						  			</div>
+
+						  			<!-- 收藏列表 -->
+						  			<div class="keepTable hide">
+						  				<div class="keepTitle">
+						  					<h6 class="m-all">我的收藏</h6>
+						  				</div>
+
+						  				<div id="operateGroup"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+
+						  				<div class="selectTime">
+						  					<span class="input-icon icon-right">
+                                                <input type="text" class="form-control" placeholder="请选择时间段" id='time-slice'/>
+                                                <i class="fa fa-calendar"></i>
+                                                <input type="hidden" name="beginTime" id="beginTime" value="" />
+    											<input type="hidden" name="endTime" id="endTime" value="" />
+                                            </span>
+						  				</div>
+
+					                    <table class="table table-hover collectTable">
+					                    	<thead>
+					                    		<tr>
+					                    			<th style="width:18px;" class="center"></th>
+					                    			<th style="width: 83px;" class="center">发布时间</th>
+													<th >标题</th>
+						  							<th style="width: 85px;">采集来源</th>
+													<th style="width: 85px;">发稿来源</th>
+													<th style="width: 35px;">操作</th>
+					                    		</tr>
+					                    	</thead>
+					                       <tbody th:remove="body">
+
+						                        <tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+						  						<tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+						  						<tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+						  						<tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+						  						<tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+						  						<tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+						  						<tr>
+						  							<td>
+														<span class="check-box check-child"><i class="fa fa-check"></i></span>
+													</td>
+													<td class="">06-12 16:00</td>
+													<td class="titleRightClick stickTopContent">
+														<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+													</td>
+													<td class="">环球网</td>
+													<td class="">-</td>
+						  						</tr>
+					                      	</tbody>
+					                    </table>
+						  			</div>
+
+						  			<!-- 历史列表 -->
+						  			<div class="historyList clearfix hide">
+						  				<div class="keepTitle">
+						  					<h6 class="m-all">我的历史</h6>
+						  				</div>
+						  				<div>
+						  					<table class="table table-hover historyTable">
+						  						<thead>
+						  							<tr>
+						  								<th style="width:100px;text-align:center">发布时间</th>
+						  								<th style="width:100px;text-align:center">浏览时间</th>
+						  								<th>
+						  									标题
+						  								</th>
+						  								<th style="width:120px">发稿来源</th>
+						  								<th style="width:120px">爬取来源</th>
+						  								
+						  							</tr>
+						  						</thead>
+						  						<tbody th:remove="body">
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  							<tr>
+						  								<td>2016-08-24</td>
+						  								<td>2016-12-12</td>
+						  								<td><a href="javascript:void(0)">王宝强离婚案</a></td>
+						  								<td>新华网</td>
+						  								<td>新华网</td>
+						  								
+						  							</tr>
+						  						</tbody>
+						  					</table>
+						  				</div>
+						  			</div>
+						  		</div>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

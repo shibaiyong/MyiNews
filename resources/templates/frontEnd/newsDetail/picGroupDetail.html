@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="referrer" content="never"/>
+	<meta name="keywords"  />
+	<meta name="description"/>
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻详情页 -->
+	<title >iNews-组图</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/newsdetailcarousel/css/YuxiSlider.css"   th:href="@{/common/plugins/fullpage/fsgallery.css}"/>
+	<!-- YuxiSlider CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/newsdetailcarousel/css/YuxiSlider.css"   th:href="@{/common/plugins/newsdetailcarousel/css/YuxiSlider.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/newsDetail/picGroupDetail.css" th:href="@{/frontEnd/css/newsDetail/picGroupDetail.css}" />
+	
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/fullpage/fs_forse.js}"></script>
+	<!-- jquery.dotdotdot JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js}"></script>
+	
+	
+	
+	
+</head>
+<body>
+	<input type="hidden" value="" class="taskId"/>
+	<input type="hidden" th:value="aebdd9acaa28fec7edc07f1facfdbde6" class="webpageCode"/>
+	<input type="hidden" th:value="0" class="start"/>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container" >
+		<div  class="container" style="background:#fff;">
+			<div class="row">
+				<div id="main-content">
+					<div class="col-md-12 col-sm-12">
+						
+						<div class="newsDetailCon">
+							<div class="newsDetailTop">
+								<div class='newsDetailConTit clearfix'>
+									<h5 class="pull-left" th:remove='body'>
+										<span>中共中央政治局常务委员会召开会议 习近平发表重要讲话</span>
+									</h5>
+								</div>
+								
+								<div class="MainNews" th:remove="body">
+									<span class="gray">发布时间:</span>
+									<strong>2017-01-10 18:47</strong>
+									<span class="gray">来源:</span>
+									<em>新华网</em>
+									<span class="gray">爬取来源:</span>
+									<em>新华网</em>
+									<span class="gray">本站浏览量:</span>
+									<em>12345</em>
+									<a href="javascript:viod(0)" class="linkOriginal"><i class='fa fa-chain-broken'></i> 原文链接</a>
+								</div>
+								<div class="newsDetailConTitRight">
+									<a class="btn-sm  p-all"><i class="fa fa-share-alt"></i>&nbsp;分享</a>
+									<a class="btn-sm  p-all"><i class="fa fa-heart-o"></i>&nbsp;收藏</a>
+									<a class="btn-sm  p-all"><i class="fa fa-file-text-o"></i>&nbsp;建稿</a>
+								</div>
+								
+							</div>
+
+							
+							<div class="newsDetailText">
+							
+								<div class="picGroupContent">
+									<div class="uec_inews_picture_group_images">
+										<a class="control3 control prev"></a><a class="control3 control next abs"></a>
+										<div class="slider">
+											<ul>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/1.jpg" th:src="@{/frontEnd/image/picGroupDetail/30.jpg}" alt="1月18日清晨，数百辆外来务工者集体骑摩托车从中国石油福建晋江荆山加油站一起出发返乡过年。截至今天7时30分，804辆铁骑、1082人在中国石油福建泉州等地加油站免费加油、吃完早餐后出发，踏上返乡旅程。从2012年起，中国石油联合相关单位，利用中国石油国道、省道的加油站，为铁骑提供免费加油、免费热饭热菜、免费姜汤热茶等帮助。经统计，过去5年，中国石油已累计帮助铁骑近10万人次，今年是铁骑返乡的第六年。图为数百辆摩托车集中出发。 王东明 摄" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/2.jpg" th:src="@{/frontEnd/image/picGroupDetail/31.jpg}" alt="态生两靥之愁，娇袭一身之病。" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/3.jpg" th:src="@{/frontEnd/image/picGroupDetail/32.jpg}" alt="泪光点点，娇喘微微。" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/4.jpg" th:src="@{/frontEnd/image/picGroupDetail/33.jpg}" alt="闲静似娇花照水，行动如弱柳扶风。" /></a></li>
+												<li><a href=""><img src="../../../static/common/plugins/newsdetailcarousel/images/5.jpg" th:src="@{/frontEnd/image/picGroupDetail/34.jpg}" alt="心较比干多一窍，病如西子胜三分。" /></a></li>
+											</ul>
+										</div>
+										
+										<div id="img-title">
+							    		 	<label>816×600</label>
+							    		 	<label>360KB</label>
+							    		 	<label>jpg</label>
+<!-- 							    		 	<label>4:3</label> -->
+							    		 	<label class="fangpigpic"><i class="fa fa-arrows-alt"></i></label>
+							    		 </div>
+									</div>
+								</div>
+							    
+								 <div class="guanjianci">
+						         	<dl class="dl-horizontal">
+									  <dt>
+									  	<span>关&nbsp;&nbsp;键&nbsp;&nbsp;词：</span>
+									  </dt>
+									  <dd th:remove="body">
+									  	<div class="originalKeyWords">
+											<span class="label label-red-bg">彭宇案</span>
+											<span class="label label-red-bg">法制</span>
+											<span class="label label-red-bg">真相</span>
+										</div>
+										<div class="customKeyWords">
+											<span class="label label-orange-bg">彭宇案</span>
+											<span class="label label-orange-bg">壁上观</span>
+											<span class="label label-orange-bg">遇险者</span>
+											<span class="label label-orange-bg">真相</span>
+											<span class="label label-orange-bg">救助</span>
+										</div>
+									  </dd>
+									</dl>
+									<dl class="dl-horizontal">
+									  <dt>
+									  	<span>属性标签：</span>
+									  </dt>
+									  <dd th:remove="body">
+									  	<div class="originalKeyWords">
+											<span class="label label-red-bg">房价</span>
+											<span class="label label-red-bg">原创</span>
+											<span class="label label-red-bg">改革</span>
+										</div>
+										<div class="customKeyWords">
+											<span class="label label-orange-bg">房价</span>
+											<span class="label label-orange-bg">原创</span>
+											<span class="label label-orange-bg">改革</span>
+										</div>
+									  </dd>
+									</dl>
+									<dl class="dl-horizontal m-bottom">
+									  <dt>
+									  	<span>新&nbsp;闻&nbsp;ID&nbsp;：</span>
+									  </dt>
+									  <dd th:remove="body">
+									  	<span>170511_17123_3649111123</span>
+									  </dd>
+									</dl>
+								</div> 
+								<div class="container hide">
+									<ul class="thumbnails" id="gallery">
+									  <li class="span3"><a href="images/1a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic1.jpg}"><img alt="" src="images/1b.jpg" th:src="@{/frontEnd/image/picGroupDetail/bigpic1.jpg}"/></a></li>
+									  <li class="span3"><a href="images/2a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic2.jpg}"><img alt="" src="images/2b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									  <li class="span3"><a href="images/3a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic3.jpg}"><img alt="" src="images/3b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									  <li class="span3"><a href="images/4a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic4.jpg}"><img alt="" src="images/4b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									  <li class="span3"><a href="images/5a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic5.jpg}"><img alt="" src="images/5b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									  <li class="span3"><a href="images/6a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic6.jpg}"><img alt="" src="images/6b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									  <li class="span3"><a href="images/7a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic7.jpg}"><img alt="" src="images/7b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									  <li class="span3"><a href="images/8a.jpg" th:href="@{/frontEnd/image/picGroupDetail/bigpic8.jpg}"><img alt="" src="images/8b.jpg" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 词条百科-模态框 -->
+				<div class="modal bs-example-modal-lg" id="dictionaryModal" >
+				  	<div class="modal-dialog modal-lg">
+				    	<div class="modal-content">
+				      		<div class="modal-header">
+				        		<button type="button" class="close closeThreadModal" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        		<h6 class="modal-title" id="dictionary_title" >习近平</h6>
+				      		</div>
+				      		<div class="modal-body" style="height:450px;overflow-y:scroll" id="dictionary_content" >
+				      			<b>人物详情</b><div style="margin-top:10px;margin-bottom:20px;clear:both;overflow: hidden"><div class="col-sm-3" style="height:190px;text-align: center"><img src="../../../static/frontEnd/image/newsDetail/5_xijinping.jpg" /></div><div class="col-sm-9" style="height:190px;padding-left: 0px"><p>现任中国共产党中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席。</p><div class="col-sm-3">出生年月：</div><div class="col-sm-3">1953-6</div><div class="col-sm-3">性别：</div><div class="col-sm-3">男</div><div class="col-sm-3">籍贯：</div><div class="col-sm-3">陕西富平</div><div class="col-sm-3">民族：</div><div class="col-sm-3">汉族</div><div class="col-sm-3">毕业院校：</div><div class="col-sm-3">																									清华大学,</div><div class="col-sm-3">学位/学历：</div><div class="col-sm-3">博士,在职研究生,</div></div></div><b>主要经历</b><div style="clear:both;margin-top:10px"><div class="zyjl_content">
+                习近平，男，汉族，1953年6月生，陕西富平人，1969年1月参加工作，1974年1月加入中国共产党，清华大学人文社会学院马克思主义理论与思想政治教育专业毕业，在职研究生学历，法学博士学位。<br/>
+<br/>
+现任中国共产党中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席。<br/>
+<br/>
+1969－1975年　陕西省延川县文安驿公社梁家河大队知青、党支部书记<br/>
+<br/>
+1975－1979年　清华大学化工系基本有机合成专业学习<br/>
+<br/>
+1979－1982年　国务院办公厅、中央军委办公厅秘书(现役)<br/>
+<br/>
+1982－1983年　河北省正定县委副书记<br/>
+<br/>
+1983－1985年　河北省正定县委书记，正定县武装部第一政委、党委第一书记<br/>
+<br/>
+1985－1988年　福建省厦门市委常委、副市长<br/>
+<br/>
+1988－1990年　福建省宁德地委书记，宁德军分区党委第一书记<br/>
+<br/>
+1990－1993年　福建省福州市委书记、市人大常委会主任，福州军分区党委第一书记<br/>
+<br/>
+1993－1995年　福建省委常委，福州市委书记、市人大常委会主任，福州军分区党委第一书记<br/>
+<br/>
+1995－1996年　福建省委副书记，福州市委书记、市人大常委会主任，福州军分区党委第一书记<br/>
+<br/>
+1996－1999年　福建省委副书记，福建省高炮预备役师第一政委<br/>
+<br/>
+1999－2000年　福建省委副书记、代省长，南京军区国防动员委员会副主任，福建省国防动员委员会主任，福建省高炮预备役师第一政委<br/>
+<br/>
+2000－2002年　福建省委副书记、省长，南京军区国防动员委员会副主任，福建省国防动员委员会主任，福建省高炮预备役师第一政委<br/>
+<br/>
+(1998－2002年清华大学人文社会学院马克思主义理论与思想政治教育专业在职研究生班学习，获法学博士学位)<br/>
+<br/>
+2002－2002年　浙江省委副书记、代省长，南京军区国防动员委员会副主任，浙江省国防动员委员会主任<br/>
+<br/>
+2002－2003年　浙江省委书记、代省长，浙江省军区党委第一书记，南京军区国防动员委员会副主任，浙江省国防动员委员会主任<br/>
+<br/>
+2003－2007年　浙江省委书记、省人大常委会主任，浙江省军区党委第一书记<br/>
+<br/>
+2007－2007年　上海市委书记，上海警备区党委第一书记<br/>
+<br/>
+2007－2008年　中央政治局常委、中央书记处书记，中央党校校长<br/>
+<br/>
+2008－2010年　中央政治局常委、中央书记处书记，中华人民共和国副主席，中央党校校长<br/>
+<br/>
+2010－2012年　中央政治局常委、中央书记处书记，中华人民共和国副主席，中共中央军事委员会副主席，中华人民共和国中央军事委员会副主席，中央党校校长<br/>
+<br/>
+2012－2013年　中央委员会总书记，中共中央军事委员会主席，中华人民共和国副主席，中华人民共和国中央军事委员会副主席<br/>
+<br/>
+2013－　　　　中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席<br/>
+<br/>
+中共第十五届中央候补委员，十六届、十七届、十八届中央委员，十七届中央政治局委员、常委、中央书记处书记，十八届中央政治局委员、常委、中央委员会总书记。第十一届全国人大第一次会议当选为中华人民共和国副主席。十七届五中全会增补为中共中央军事委员会副主席。第十一届全国人大常委会第十七次会议任命为中华人民共和国中央军事委员会副主席。十八届一中全会任中共中央军事委员会主席。第十二届全国人大第一次会议当选为中华人民共和国主席、中华人民共和国中央军事委员会主席。<br/>
+<br/>
+习近平的父亲习仲勋曾是中国党和国家领导人之一，不满21岁就担任陕甘边区政府主席，被毛泽东称为“从群众中走出来的领袖”。“文革”结束后百业待兴的初期，他受命到改革开放的前沿广东担任省委第一书记，以开明开放、求真务实的作风，为广东“杀出一条血路”、“先走一步”建立经济特区以及后来的大发展作出了奠基性重要贡献。<br/>
+<br/>
+习近平的母亲齐心也是一位老干部、老党员，已近90岁高龄。<br/>
+<br/>
+习近平的妻子彭丽媛是中国家喻户晓的著名歌唱家和歌剧表演艺术家。1986年两人一见钟情，结下良缘。在彭丽媛眼中，丈夫既是一个与众不同的人，也是一个普通的人。他喜欢吃陕西、山东家常菜，朋友聚会时还会喝酒助兴。他喜欢游泳、登山，爱看篮球、足球、拳击等比赛，有时也会在深夜看电视转播的体育节目。两人育有一女，取名“明泽”。
+			</div></div>
+				        		
+				     	 	</div>
+				      		<div class="modal-footer">
+				        		<button type="button" class="btn btn-default closeThreadModal" data-dismiss="modal">关闭</button>
+<!-- 				        		<button type="button" class="btn btn-primary">确定</button> -->
+				      		</div>
+				    	</div>
+				  	</div>
+					</div>
+				</div>
+			    <div class="interrelated_newspic box">
+			    	<div class="box-header header-vimeo" style="margin-top:10px;">
+						<h2>相关图片新闻</h2>
+					</div>
+					<p style="text-align:right;margin-right:10px;"><a href="javascript:void(0)"><i class="fa fa-refresh"></i> 换一换</a></p>
+			    	<ul>
+			    		<li>
+			    			<div class='site-piclist_pic'>
+					  			<img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/21.jpg}"/>
+					  		</div>
+					  		<div class="site-piclist_info">
+					  			<p><a href="javascript:void(0)" th:href="@{/gotoPicGroupDetail}">扬州交通广播</a></p>
+					  		</div>
+					  		<div class="site-piclist_time">
+					  			<p>06-01 15:30</p>
+					  		</div>
+			    		</li>
+			    		<li>
+			    			<div class='site-piclist_pic'>
+					  			<img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/20.jpg}"/>
+					  		</div>
+					  		<div class="site-piclist_info">
+					  			<p><a href="javascript:void(0)" th:href="@{/gotoPicGroupDetail}">扬州交通广播</a></p>
+					  		</div>
+					  		<div class="site-piclist_time">
+					  			<p>06-01 15:30</p>
+					  		</div>
+			    		</li>
+			    		<li>
+			    			<div class='site-piclist_pic'>
+					  			<img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/19.jpg}"/>
+					  		</div>
+					  		<div class="site-piclist_info">
+					  			<p><a href="javascript:void(0)" th:href="@{/gotoPicGroupDetail}">扬州交通广播</a></p>
+					  		</div>
+					  		<div class="site-piclist_time">
+					  			<p>06-01 15:30</p>
+					  		</div>
+			    		</li>
+			    		<li>
+			    			<div class='site-piclist_pic'>
+					  			<img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/18.jpg}"/>
+					  		</div>
+					  		<div class="site-piclist_info">
+					  			<p><a href="javascript:void(0)" th:href="@{/gotoPicGroupDetail}">扬州交通广播</a></p>
+					  		</div>
+					  		<div class="site-piclist_time">
+					  			<p>06-01 15:30</p>
+					  		</div>
+			    		</li>
+			    		<li>
+			    			<div class='site-piclist_pic'>
+					  			<img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/17.jpg}"/>
+					  		</div>
+					  		<div class="site-piclist_info">
+					  			<p><a href="javascript:void(0)" th:href="@{/gotoPicGroupDetail}">扬州交通广播</a></p>
+					  		</div>
+					  		<div class="site-piclist_time">
+					  			<p>06-01 15:30</p>
+					  		</div>
+			    		</li>
+			    		<li>
+			    			<div class='site-piclist_pic'>
+					  			<img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/16.jpg}"/>
+					  		</div>
+					  		<div class="site-piclist_info">
+					  			<p><a href="javascript:void(0)" th:href="@{/gotoPicGroupDetail}">扬州交通广播</a></p>
+					  		</div>
+					  		<div class="site-piclist_time">
+					  			<p>06-01 15:30</p>
+					  		</div>
+			    		</li>
+			    		
+			    	</ul>
+			    </div>
+			    
+			</div>
+		</div>	
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer><!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	
+	<!-- YuxiSlider JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js}" ></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/newsDetail/picGroupDetail.js" th:src="@{/frontEnd/js/dynamic/newsDetail/picGroupDetail.js}"></script>
+</body>
+</html>

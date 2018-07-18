@@ -1,0 +1,42 @@
+.form-control{
+	height:auto;
+	padding:3px 5px;
+}
+
+
+.irobotTitle i{
+	cursour:pointer;
+}
+.form-inline{
+	padding:0px 10px;
+}
+.form-inline .form-group{
+	margin-bottom:15px !important;
+	margin-right:10px;
+}
+
+.detailTable{
+	border-top:2px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+	padding:8px 6px !important;
+}
+.btn-info{
+	background:#00acd6 !important;
+}
+.bottomBtn{
+	text-align:right
+}
+.labelDescribe{
+	padding-left:0px !important;
+	padding-right:0px !important;
+	margin-top:5px;
+}
+.startTask,
+.pause{
+	position:relative;
+}
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
+	width:100% !important;
+}

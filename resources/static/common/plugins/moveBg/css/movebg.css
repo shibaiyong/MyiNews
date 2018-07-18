@@ -1,0 +1,36 @@
+.nav-content{ 
+	position:relative;
+}
+.nav-content li.active{
+	background: #fff;
+	color:#000;
+	margin-top:1px;
+}
+.nav-item{ 
+	position:relative; 
+	float:left; 
+	width:86px; 
+	height:40px; 
+	line-height:40px; 
+	text-align:center; 
+	font-size:14px; 
+	z-index:1
+}
+.nav-item a{ 
+	display:block; 
+	height:40px; 
+	color:#fff;
+}
+.nav-item a:hover{ 
+	color:#000
+}  
+.move-bg{ 
+	display:none;
+	position:absolute;
+	left:0;
+	top:1px; 
+	width:86px; 
+	height:40px; 
+	background:#fff; 
+	z-index:0
+}

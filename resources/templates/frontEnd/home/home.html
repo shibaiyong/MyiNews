@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+	<meta charset="UTF-8" />
+	<title>iNews-首页</title>
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="referrer" content="never"/>
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 首页 -->
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+	
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- Carousel CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Carousel/css/Carousel.min.css" th:href="@{/common/plugins/Carousel/css/Carousel.min.css}" />
+	<!-- mCustomScrollbar CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/mCustomScrollbar/css/jquery.mCustomScrollbar.min.css" th:href="@{/common/plugins/mCustomScrollbar/css/jquery.mCustomScrollbar.min.css}"/>
+	<!-- calendar CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Cander/calendar.min.css"  th:href="@{/common/plugins/Cander/calendar.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/swiper/swiper-4.2.0.min.css"  th:href="@{/common/plugins/swiper/swiper-4.2.0.min.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/home/home.css"  th:href="@{/frontEnd/css/home/home.css}"/>
+	
+	<!-- Echarts Js -->
+	<script src="https://cdn.bootcss.com/echarts/4.0.2/echarts.js"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/Carousel/js/slides-1.1.1-min.min.js"  th:src="@{/common/plugins/echarts/china.min.js}"></script>
+	<!-- Carousel JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/Carousel/js/slides-1.1.1-min.min.js"  th:src="@{/common/plugins/Carousel/js/slides-1.1.1-min.min.js}"></script>
+	<!-- mCustomScrollbar JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/mCustomScrollbar/js/jquery.mCustomScrollbar.concat.min.js"  th:src="@{/common/plugins/mCustomScrollbar/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+	<!-- calendar JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/Cander/calendar.min.js"  th:src="@{/common/plugins/Cander/calendar.min.js}"></script>
+		<!-- qrcode JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/qrcode/qrcode.min.js}" ></script>
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/masonry/jquery.masonry.min.js}" ></script>
+	<!-- animateNum JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/animateNumber/jquery.animateNumber.js}" ></script>
+	<!--swiper-->
+
+	<script type="text/javascript" src="../../../static/common/plugins/swiper/swiper-4.2.0.min.js"  th:src="@{/common/plugins/swiper/swiper-4.2.0.min.js}"></script>
+
+
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/home/home.js"  th:src="@{/frontEnd/js/dynamic/home/showScreen.js}"></script>
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/home/home.js"  th:src="@{/frontEnd/js/dynamic/home/home.js}"></script>
+
+	<style>
+		.changewidth{
+			width:55%;
+			padding:10px 0px;
+		}
+		.swiper-wrapper .swiper-slide>img{
+			display: block;
+			width:100%;
+			height:100%;
+			margin-top: 4px;
+		}
+		.jump{
+			position:absolute;
+			top:4%;
+			right:11%;
+			z-index:9999;
+			border-radius: 3px;
+		}
+		.swiper-container{
+			height: 100%;
+		}
+		.swiper-container .swiper-slide{
+
+			position: relative;
+		}
+		.swiper-container .swiper-slide .zhe{
+			position: absolute;
+			left:0;top:0;
+			width: 100%;
+			height: 100%;
+
+		}
+		.swiper-container .swiper-slide .zhe .pagenum{
+			width:100%;
+			height: 100%;
+			position:absolute;
+			text-align: center;
+			top: 30%;
+			z-index: 999999;
+			left:50%;
+			transform: translateX(-50%);
+		}
+		.swiper-container .swiper-slide .zhe .pagenum>img{
+
+			margin: 10px;
+		}
+		.succescont .ssprev,.succescont .ssnext{
+			display:none;
+		}
+
+		.succescont:hover .ssprev{
+			display:block;
+		}
+		.succescont:hover .ssnext{
+			display:block;
+		}
+		.compelet{
+			position:absolute;
+			transform: translateX(-50%);
+			left:50%;
+			top:50%;
+			z-index:9999;
+		}
+		.swiper-pagination-bullet{
+			width:20px;
+			height: 20px;
+			background:white;
+		}
+
+		.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+			bottom: 15%;
+		}
+	</style>
+
+</head>
+<body>
+	
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	
+	<div class="showScreen screenLeft hide">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="screenItem screentTop">
+					<p>今日已采集媒体统计</p>
+					<p><span class="countMedia" th:remove="body">14,4000</span> 家</p>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="screenItem">
+					<div class="chartHeader">
+						<h6>载体介质</h6>
+					</div>
+					<div class="chartMain">
+						<div id="chartPie" style="width:270px;height:200px"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="screenItem">
+				 <div class="chartHeader">
+					<h6>来源</h6>
+				</div>
+				<div class="chartMain">
+					<div id="chartPieSource" style="width:286px;height:215px"></div>
+				</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="screenItem">
+					<div class="chartHeader">
+						<h6>分类</h6>
+					</div>
+					<div class="chartMain">
+						<div id="chartPieClass" style="width:286px;height:215px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="showScreen screenRight hide">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="screenItem screentTop">
+					<p>今日已采集数据统计</p>
+					<p><span class="count" th:remove="body">14,4000</span> 条</p>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="screenItem">
+					<div class="chartHeader">
+						<h6>小时采集</h6>
+					</div>
+					<div class="chartMain">
+						<div id="chartLineColl" style="width:270px;height:200px"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 hide hotFound">
+				<div class="screenItem">
+				 <div class="chartHeader">
+					<h6>热点分布</h6>
+				</div>
+				<div class="chartMain">
+					<div id="chartMap" style="width:286px;height:215px"></div>
+				</div>
+				</div>
+			</div>
+			<div class="col-md-12 hide">
+				<div class="screenItem">
+					<div class="chartHeader">
+						<h6>热门事件</h6>
+					</div>
+					<div class="chartMain eventMain">
+							<div class="eventMain">
+		
+								<ul class="waterfall" th:remove="body">
+						
+									<li>
+										<p>乌镇世界互联网大会</p>
+									</li>
+						
+									<li>
+										<p>上海携程托幼所老师被指殴打孩子喂芥末</p>
+									</li>
+						
+									<li>
+										<p>携程在手，看清楚再走</p>
+									</li>
+									<li>
+										<p>第十三届全国运动会开幕式在天津举行</p>
+									</li>
+									<li>
+										<p>手机长途漫游费明起取消</p>
+									</li>
+									<li>
+										<p>贵州纳雍山体崩塌</p>
+									</li>
+									
+								</ul>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+	
+		<div class="row homeTop">
+			<div class="col-md-12">
+				<!-- 今日已采集数据统计 -->
+				<div class="box p-all">
+					<div id="dataCount" class="hide">
+						
+					    <div class="row">
+					    	<div class="col-xs-12 col-md-6 col-sm-12" >
+						  		<div class="dataCountBtn clearfix box p-top p-right p-bottom">
+							    	<i class="fa fa-bar-chart"></i>&nbsp;<a href="javascript:void(0)">点击查看今日采集数据统计</a>
+							    	
+							    </div>
+						  	</div>
+						  	<div class="col-xs-12 col-md-6 col-sm-12 dataCountRight">
+						  		<div class="dataCountTit">
+									<p class='m-bottom'>
+										今日已采集数据统计(总数：<span class="red" th:text="${newsNum != null?newsNum.todayNum:'0'}">60321</span>条)
+										<em>统计截止时间：<span class="red" th:text="${newsNum != null?#dates.format(newsNum.updateTime,'[yyyy-MM-dd HH:mm]'):''}">2017-01-10</span></em>
+									</p>
+								</div>
+						  	</div>
+						  	
+						</div>
+					    
+						<div class="box p-all dataCountCon" style="display: none">
+							
+								<div class="dataCountCon">
+									<div class="box">
+										<div class="row">
+											<!-- 小时采集曲线图 -->
+										   	<div class="col-md-3 col-sm-6">
+										   		<div class="dataCountBox">
+												   	<div class="collection">
+												   		<p class="dataCountTitle">小时采集</p>
+												   		<div class="collectionCon">
+												   			<div id="collection" style="width: 100%;height:250px;"></div>
+												   		</div>
+												   	</div>
+											   	</div>
+										   	</div>
+										   	<!-- 来源饼图 -->
+										  	<div class="col-md-3 col-sm-6">
+										  		<div class="dataCountBox">
+											  		<div class="source">
+											   			<p class="dataCountTitle">来源</p>
+											   			<div class="sourceCon">
+											   				<div id="source" style="width: 100%;height:250px;"></div>
+											   			</div>
+											   		</div>
+										   		</div>
+										  	</div>
+										  	<!-- 分类饼图 -->
+										  	<div class="col-md-3 col-sm-6">
+										  		<div class="dataCountBox">
+											  		<div class="classification">
+											   			<p class="dataCountTitle">分类</p>
+											   			<div class="classificationCon">
+											   				<div id="classification" style="width: 100%;height:250px;"></div>
+											   			</div>
+											   		</div>
+										   		</div>
+										  	</div>
+										  	<!-- 原创/转载饼图 -->
+										  	<div class="col-md-3 col-sm-6">
+										  		<div class="dataCountBox">
+											  		<div class="original">
+											   			<p class="dataCountTitle">载体介质</p>
+											   			<div class="originalCon">
+											   				<div id="original" style="width: 100%;height:250px;"></div>
+											   			</div>
+											   		</div>
+										   		</div>
+										  	</div>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+		
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="row">
+						<div class="col-md-5 col-sm-12" >
+							<div id="qrcode" class="hide"></div>
+							<!-- 媒体头条 -->
+							<div class="box" style="padding-right:15px;">
+								<div class="box-header header-vimeo">
+									<h2 th:text="${null==navMap?'媒体头条':navMap.get('nav.top')}">媒体头条</h2>
+								</div>
+								<div class="successlunbo" th:remove="body" style="height:286px;overflow:hidden;width:100%;position:relative;">
+									<div class="succesny">
+										<div class="control">
+											<ul class="change">
+											</ul>
+										</div>
+										<div class="thumbWrap">
+											<div class="thumbCont" >
+												<!-- 							                    <ul th:remove="all-but-first"> -->
+												<!-- 							                        img属性, url=url, text=描述, bigimg=大图, alt=标题  -->
+												<!-- 							                        <li> -->
+												<!-- 							                            <div> -->
+												<!-- 							                            	<img src="../../../static/common/plugins/Carousel/images/s1.jpg" url="url" bigImg="../../../static/frontEnd/image/home/topNews8.png"  alt="习近平主持中共中央政治局常委会会议" text="央广网"  /> -->
+												<!-- 							                            </div> -->
+												<!-- 							                        </li> -->
+												<!-- 							                    </ul> -->
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="headLinesCon">
+									<div class="headLinesConHover"></div>
+									<ul class="list-group" th:remove="body">
+										<li class="list-group-item">
+											<span class='listMun'><i class="fa fa-angle-double-right"></i></span>
+											<a href="../newsDetail/newsDetail.html"   tabindex="0" data-content="中共中央政治局常" data-container=".headLinesConHover"  data-placement="right" data-toggle="popover"  class="listCon beyondEllipsis">
+												<span  class='listSou'>新华社</span> |&nbsp;
+												<span >中共中央政治局常务委员会召开会议</span></a>
+											<span class='listTit'  >[2017-01-01]&nbsp;</span>
+										</li>
+										<li class="list-group-item" >
+											<span class='listMun'><i class="fa fa-angle-double-right"></i></span>
+											<a href="../newsDetail/newsDetail.html" target='_blank' class="listCon beyondEllipsis">
+												<span class='listSou'>新华社 |&nbsp;</span>习近平将对瑞士进行国事访问、出席世界经济论坛年会并访问瑞士国际组织</a>
+											<span class='listTit'>[2017-01-01]&nbsp;</span>
+										</li>
+										<li class="list-group-item" >
+											<span class='listMun'><i class="fa fa-angle-double-right"></i></span>
+											<a href="../newsDetail/newsDetail.html" target='_blank' class="listCon beyondEllipsis">
+												<span class='listSou'>人民网 |&nbsp;</span>
+												习近平主持中共中央政治局常委会会议</a>
+											<span class='listTit'>[2017-01-01]&nbsp;</span>
+										</li>
+										<li class="list-group-item" >
+											<span class='listMun'><i class="fa fa-angle-double-right"></i></span>
+											<a href="../newsDetail/newsDetail.html" target='_blank' class="listCon beyondEllipsis">
+												<span class='listSou'>央视CNTV |&nbsp;</span>
+												习近平将对瑞士进行国事访问、出席世界经济论坛2017年年会并访问瑞士国际组织</a>
+											<span class='listTit'>[2017-01-01]&nbsp;</span>
+										</li>
+										<li class="list-group-item" >
+											<span class='listMun'><i class="fa fa-angle-double-right"></i></span>
+											<a href="../newsDetail/newsDetail.html" target='_blank' class="listCon beyondEllipsis">
+												<span class='listSou'>央视CNTV |&nbsp;</span>世界期待分享中国经验——国际人士瞩目习近平主席2017年首次出访 </a>
+											<span class='listTit'>[2017-01-01]&nbsp;</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12 box changewidth" >
+							<div id="homeHotList">
+								<div class="box-header header-vimeo">
+									<h2 th:text="${null==navMap?'热点发现':navMap.get('nav.cluster')}">热点发现</h2>
+								</div>
+								<!-- iNews -->
+								<div class="hotListContInews clusterRanking">
+
+									<div class="homeHotListSort">
+										<div class="clusterScreen" th:include="frontEnd/common/screenClassificationOne :: screenClassificationOne"></div>
+									</div>
+
+									<div class="rank p-left p-right p-top">
+										<div class="rank_cont" style="height: 370px;overflow:hidden;">
+											<table class="table table-hover m-bottom hotListContInewsTable">
+												<thead>
+												<tr>
+													<th style="width: 24px;" class="orderTableHeader">
+														<img src="../../../static/frontEnd/image/home/order1.png" th:src="@{/frontEnd/image/home/order1.png}" />
+													</th>
+													<th style="width:69%">标题</th>
+													<th style="text-align: center;width:80px;">报道量</th>
+													<th style="width:80px;text-align: center">热度</th>
+												</tr>
+												</thead>
+												<tbody class="clusterRanking" th:remove="body">
+												<tr>
+													<td class="number"><em class="hui">1</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" th:href="'javascript:loadHotNews(\'161228_18_3\')'"  tabindex="0" data-toggle="popover">特朗普,马云,女婿,白宫,高级顾问</a>
+													</td>
+													<td class="lTotal">87</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">2</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">微信,程序,app,quot,上线</a></td>
+													<td class="lTotal">30</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">3</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">cpi,涨幅,全年,调控,同比</a></td>
+													<td class="lTotal">29</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">4</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">产能,发改委,钢铁,煤炭,供给</a></td>
+													<td class="lTotal">28</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">5</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">两票,药价,制住,药品,计委</a></td>
+													<td class="lTotal">28</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">6</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">国足,里皮,中国杯,冰岛,新人</a></td>
+													<td class="lTotal">24</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">7</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">直播,红人,耿巍,玩命,网络</a></td>
+													<td class="lTotal">22</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">8</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">军机,战机,日本海,日本,升空</a></td>
+													<td class="lTotal">21</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">9</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">建委,房价,季度,北京,升至</a></td>
+													<td class="lTotal">20</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">10</em></td>
+													<td class="lTitle linkClustering"><a href="../newsPolymerize/newsPolymerizeDetail.html" target="_blank" tabindex="0" data-toggle="popover">退货,理由,适用,商品,一族</a></td>
+													<td class="lTotal">19</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-sm-12" style="width:30%;">
+							<!-- hot topic start -->
+							<!-- 热点事件 -->
+							<div class="box p-top" id="homeHotEvent"  style="padding-top:10px;padding-left:20px;">
+								<div class="box-header header-vimeo">
+									<h2 th:text="${null==navMap?'热门专题':navMap.get('nav.event')}">热门专题</h2>
+								</div>
+
+								<div class="homeHotEventCon" th:remove="all-but-first">
+
+									<div th:each="hotEvent:${eventList}">
+
+										<div class="HotEventCon" >
+											<p class="HotEventConTitle">
+												<a href="../hotEvent/hotEventDetail.html" th:href="'javascript:void(0)'" th:onclick="'loadEventDetail(\''+${hotEvent.event.eventCode}+'\')'" th:text="${hotEvent.event.eventName}" >俄罗斯驻土耳其大使遇刺事件</a>
+												<span class="f-right">共<span class="red" th:text="${hotEvent.event.newsNum}">178</span>条</span>
+											</p>
+											<p class="HotEventConImg">
+												<a href="../hotEvent/hotEventDetail.html" th:href="'javascript:void(0)'" th:onclick="'javascript:loadEventDetail(\''+${hotEvent.event.eventCode}+'\')'" ><img src='../../../static/frontEnd/image/hotEvent/1.png' th:src="${hotEvent.event.picPath}" /></a>
+											</p>
+
+										</div>
+										<div class="HotEventConUpdate">
+											<ul>
+												<li>
+													<dl class="dl-horizontal" th:if="${null != hotEvent.eventNews}" >
+														<dt>
+															<span>【最新】</span>
+														</dt>
+														<dd>
+															<a href="../hotEvent/hotEventDetail.html" th:href="@{/latest/front/news/detail/}+${hotEvent.eventNews.webpageCode}" target="_blank" th:text="${hotEvent.eventNews.title}">
+																随团翻译忆俄红旗歌舞团:很守纪律 从未迟到掉队
+															</a>
+															<p class="clearfix m-bottom">
+																<span th:text="${hotEvent.eventNews.sourceCrawlDetail!=null?hotEvent.eventNews.sourceCrawlDetail.website.displayName:''}">网易 </span> |&nbsp;
+																<span th:text="${#dates.format(hotEvent.eventNews.releaseDatetime,'MM-dd HH:mm')}">01-08 07:49</span>
+															</p>
+														</dd>
+													</dl>
+												</li>
+											</ul>
+											<p class="HotEventConLine"></p>
+										</div>
+									</div>
+									<div class="HotEventCon">
+										<p class="HotEventConTitle">
+											<a href="../hotEvent/hotEventDetail.html" target="_blank">俄罗斯军用飞机坠毁事件</a>
+											<span class="f-right">共<span class="red">245</span>条</span>
+										</p>
+										<p class="HotEventConImg">
+											<a href="../hotEvent/hotEventDetail.html" target="_blank"><img src='../../../static/frontEnd/image/hotEvent/9.png' th:src="@{/frontEnd/image/hotEvent/9.png}"/></a>
+										</p>
+
+									</div>
+									<div class="HotEventConUpdate">
+										<ul>
+											<li>
+												<dl class="dl-horizontal">
+													<dt>
+														<span>【最新】</span>
+														<!-- <i class='fa fa-clock-o orange' data-toggle="tooltip" data-placement="top" title="最新更新"></i>&nbsp;&nbsp; -->
+													</dt>
+													<dd>
+														<a href="../hotEvent/hotEventDetail.html" target="_blank">
+															俄坠机调查：无爆炸 有异常
+														</a>
+														<p class="clearfix m-bottom">
+															<span >中国新闻网 | </span>
+															<span >&nbsp;12-30 17:46</span>
+														</p>
+													</dd>
+												</dl>
+											</li>
+										</ul>
+										<p class="HotEventConLine"></p>
+									</div>
+
+									<div class="HotEventCon">
+										<p class="HotEventConTitle">
+											<a href="../hotEvent/hotEventDetail.html" target="_blank">柏林卡车冲撞事件</a>
+											<span class="f-right">共<span class="red">321</span>条</span>
+										</p>
+										<p class="HotEventConImg">
+											<a href="../hotEvent/hotEventDetail.html" target="_blank"><img src='../../../static/frontEnd/image/hotEvent/42.png' th:src="@{/frontEnd/image/hotEvent/42.png}" /></a>
+										</p>
+
+									</div>
+									<div class="HotEventConUpdate">
+										<ul>
+											<li>
+												<dl class="dl-horizontal">
+													<dt>
+														<span>【最新】</span>
+														<!-- <i class='fa fa-clock-o orange' data-toggle="tooltip" data-placement="top" title="最新更新"></i> -->
+													</dt>
+													<dd>
+														<a href="../hotEvent/hotEventDetail.html" target="_blank">
+															难民问题与欧洲焦虑（域外听风）
+														</a>
+														<p class="clearfix m-bottom">
+															<span >人民网 | </span>
+															<span >&nbsp;01-10 04:17</span>
+														</p>
+													</dd>
+												</dl>
+											</li>
+										</ul>
+										<p class="HotEventConLine"></p>
+									</div>
+								</div>
+							</div>
+							<!-- hot topic end -->
+						</div>
+
+						<div class="col-md-3 col-sm-12" style="width:38%;">
+	                    	
+							<div class="box" style="padding-top:0;">
+
+								<div class="row">
+									<div class="col-md-12">
+
+										<!-- 最新线索 -->
+										<div id="homeLatestThread">
+											<div class="box p-top">
+												<div class="box-header header-vimeo">
+													<h2 th:text="${null==navMap?'新闻线索':navMap.get('nav.clue')}">新闻线索</h2>
+												</div>
+
+												<div class="latestNewsCont">
+													<div class='latestNewsContSort'>
+														<div class="screenConditionBox">
+															<div class="pros subpage threadSrceenClassification ">
+																<h2 data-innerId='' data-inter='false'>分类<i class="fa fa-caret-down"></i></h2>
+																<ul class="prosul clearfix" id="threadSrceenClassificationPro" th:remove="body">
+																	<li class="">
+																		<a class="ti" href="#">经济<i class='fa fa-caret-right'></i></a>
+																		<div class="prosmore hide">
+																			<span><em><a href="#">宏观经济</a></em></span>
+																			<span><em ><a  href="#">产业经济</a></em></span>
+																			<span><em ><a  href="#">国际财经</a></em></span>
+																			<span><em><a href="#">公司新闻</a></em></span>
+																			<span><em><a href="#">金融新闻</a></em></span>
+																		</div>
+																	</li>
+																	<li class="">
+																		<a class="ti" href="#">政治</a>
+																	</li>
+																	<li class="">
+																		<a class="ti" href="#">社会</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+													<div class="rank newest">
+														<div class="rank_cont" style="height:707px;overflow:hidden;">
+															<table id="newsClueTable" class="table table-hover m-bottom newsClueTable">
+																<thead>
+																<tr>
+																	<th style="width: 80px;padding-right: 0px;" >时间</th>
+																	<th style="width:62%">标题</th>
+																	<th style="width:87px;padding-right: 0px;" class='center'>来源</th>
+																</tr>
+																</thead>
+																<tbody class ="newsClue" th:remove="body">
+																<tr>
+																	<td class="number">1s前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="聆听新年贺词，翻开2017年的日历，不禁感叹，时间是存在的维度，也是存在本身。我们的一切过往、一切奋斗、一切憧憬，都汇聚成奔腾不息的时间之河。">时间・奋斗・人类――聆听习近平主席2017年新年贺词</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">5m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="中新社北京1月9日电 (记者 张素)记者9日从中国卫星导航系统管理办公室获悉，将在2018年前后完成约18颗全球组网卫星发射，其中2017年计划发射6―8颗北斗导航卫星。">2017年中国计划发射6―8颗北斗导航卫星</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">7m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="宏润建设于近日收到盐城市市政公用投资有限公司中标通知书，盐城市新水源地及引水工程一标段项目由公司中标承建，工程中标价112，146.43万元。">1月10日晚间上市公司利好消息一览</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">8m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="在电视剧《三生三世十里桃花》中，杨幂饰演的青丘帝姬白浅是九尾白狐族白止帝君的小女儿，年少时拜入赵又廷饰演的墨渊门下，从此开启与其三生三世的虐恋纠葛。此前曝光的一则预告片中，杨幂被泼冷水关进水牢受尽折磨，关于这场戏份，杨幂聊到当日拍戏正值寒冬，水温极其冷，多亏导演组给自己裹了保鲜膜才不至于太惨。">《三生》杨幂为母则强 赵又廷唯妻钟情</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">9m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="青春冒险直播题材电影由美国狮门影业公司出品，中国电影集团引进，华夏电影发行有限责任公司发行，力邀好莱坞新锐青春偶像艾玛·罗伯茨与戴夫·弗兰科加盟，影片已于1月6日上映，这种以网络直播为视角的电影风格让观众大呼“路子野”，也让他们在观影过程中更容易被带入，感受青春的冒险和极限挑战般的直播人生。">电影《玩命直播》高能剧情直击网络暴力</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">10m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="为了增加土地储备，增强持续发展能力，深振业A全资子公司西安振业房地产开发有限公司于2014年10月9日参加西安市土地储备交易中心组织的土地使用权挂牌竞拍，以人民币28,300万元竞得西安市浐灞生态区编号为CB3-4-97宗地国有建设用地使用权，现将有关事项予以公告。">1月10日上市公司晚间公告速递</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">12m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="北京时间1月10日下午消息，消息应用Snapchat表示，其国际运营总部将设立在伦敦。这表明英国退欧后，又一家科技公司对英国投出信任票。">又有科技公司落户英国：Snapchat国际运营总部将设…</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">13m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="北京时间1月10日消息，上周日男排联赛第15轮比赛中，江苏男排3-2险胜山东体彩男排，保留晋级4强的希望。本场比赛，江苏男排队长张晨发挥神勇，一人砍下35分荣膺全场得分王。赛后，南京大学排球协会的小记者对张晨进行了专访，张晨表示全明星赛还是非常期待和妹妹（女排国手张常宁）同场竞技的。">全明星赛排坛第一兄妹同场竞技？ 张晨:还真期待</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">13m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="“新华视点”记者日前从教育部获悉，2017年春季教材将全面落实14年抗战概念，8年抗战一律改为14年抗战。在全国大中小学教材修改这一历史概念到底有何深意？">教育部:大中小学教材一律改为“十四年抗战”</a></td>
+																	<td class="lTotal">网易</td>
+																</tr>
+																<tr>
+																	<td class="number">13m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="据一名接近此次交易的内部人士向《华夏时报（公众号：chinatimes）》记者透露，三胞集团从2016年下半年开始接触这一项目，经过多轮谈判，击败多个竞争对手，拿下这一项目，这是中国企业首次在美国收购原创药物。而8.19亿美元的交易金额，也创下中国企业在美金额最大的药品收购纪录。">中国民企三胞集团8.19亿美元收购美国医药公司</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">14m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="1月8日早上六点多钟，河南郑州一高三女生赶公交上学考试，跑步过斑马线时摔倒，遭环卫垃圾大车碾轧身亡，垃圾车逃逸。">郑州高三女生追公交车滑倒 遭垃圾车碾压身亡</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">14m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="北京时间1月10日，嫘祖杯第29届中国围棋名人战挑战者半决赛在人民网战罢。最终，周睿羊和芈昱廷分别击败杨鼎新和黄云嵩，周睿羊将与芈昱廷在12日展开对决，争夺向现任名人连笑挑战的资格。">名人战周睿羊胜杨鼎新 将与芈昱廷争夺挑战权</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">15m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="北京时间1月10日消息，据西班牙媒体“okdiario”报道，多家中超俱乐部有意引进现效力于皇马的哥伦比亚球星J罗。广州恒大、河北华夏幸福等中超俱乐部为J罗提供的报价可能高达1亿欧元。">香饽饽!曝中超多队欲签J罗 恒大或已报价1亿欧元</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">21m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="电视剧《向着幸福前进》正在央视八套黄金档播出，吴奇隆、唐于鸿、王新、周韦彤等演员出演。昨晚的剧情中，婆婆李玉梅得知儿媳妇韩笑身患抑郁症，又听说沛青有机会去美国担任一家妇幼医院的院长，更加变本加厉想方设法拆散沛青与韩笑。面对内忧外患的婚姻，吴奇隆饰演的男主角颜沛青该何去何从？">《幸福》吴奇隆陷危机 前途婚姻如何取舍</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">22m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="法制晚报讯（记者 黎史翔）近日，维基百科网站在范围分类中将针灸归属为“伪科学”的消息引发关注，不少来自全球的中医师以及曾接受过针灸治疗的人都在请愿网站上签名，要求维基百科进行更正。目前，请愿网页有超过2500人签名表示对维基百科的抗议">维基百科回应为何将针灸归为“伪科学”</a></td>
+																	<td class="lTotal">网易</td>
+																</tr>
+																<tr>
+																	<td class="number">23m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="“洋葱新闻”公司与Serious Business制片公司达成协议，将在未来两年内制作多部“洋葱新闻”电影，狮门公司将负责发行这些电影。">这不是一条洋葱新闻：洋葱新闻要拍电影了</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">24m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="美银美林首席投资策略师Michael Hartnett称，2015年2月以来，股市和大宗商品市场的融涨无异于“玩火”，2017年下半年，将会出现“崩盘”。分析师预计，2017年1月和2月，这两大市场将出现“晃动”，但再次冲上新高前，第一季度料不会出现大幅回调。 ">美银美林：美股上半年料融涨10% 年底或“崩盘”</a></td>
+																	<td class="lTotal">新浪</td>
+																</tr>
+																<tr>
+																	<td class="number">25m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="中新网太原1月10日电 (任丽娜)擅自停用环保设施、企业违法超标排污、私设暗管偷排废水、未批先建擅自投运……10日，山西省环保厅对外通报该省“铁腕治污行动”最新战绩称，19天时间，全省各级环保部门发现1315家企业存在环境违法，对33名责任人进行了责任追究。">	山西1315家企业存在环境违法 33名责任人被追责</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">26m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="广州市第十五届人民代表大会第一次会议10日闭幕，温国辉全票当选为新一届广州市市长。在当选后记者见面会上，温国辉承诺年内完成35条黑臭河涌整治。">	温国辉当选广州市市长 承诺完成黑臭河涌整治任务</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">26m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="人民网北京1月10日电 据国家卫计委网站消息，卫计委今日解读《“十三五”卫生与健康规划》。">解读《“十三五”卫生与健康规划》</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">27m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="新京报快讯 网络主播凉山诈捐一事尘埃落定。今晚，凉山警方公布调查结果称，两名涉事网络主播通过“伪慈善”，从直播平台获利超40万元，目前均被采取强制措施。">“凉山诈捐”获利超40万 两主播被采取强制措施</a></td>
+																	<td class="lTotal">中国新闻网</td>
+																</tr>
+																<tr>
+																	<td class="number">27m前</td>
+																	<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="北京时间1月10日18点30分，上港阵中大将胡尔克接受了媒体群访。对于下赛季在追求冠军的道路上，上港能否先战胜一次从未战胜过的中超冠军广州恒大、昔日成功履历和经验会否帮助到中超提升等等问题，胡尔克给出了积极的回答。">胡尔克:在中超踢球压力不小 盼带动整个联赛水平</a></td>
+																	<td class="lTotal">网易</td>
+																</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+	                    </div>
+						<div class="col-md-3 col-sm-12" style="width:30%;">
+							<!-- 新闻日历 -->
+							<div class="box p-bottom" id="homeEventCander" style="padding-top:0;">
+								<div class="box-header header-vimeo">
+									<h2 th:text="${null==navMap?'新闻日历':navMap.get('nav.calendar')}">新闻日历</h2>
+								</div>
+								<div class="homeEventCanderBox">
+									<div class="eventCanderCon">
+										<div id="eventCander" style="font-size:16px;padding-top:10px;padding-bottom:10px;">
+											<img src="../../../static/frontEnd/image/home/data_icon.png" th:src="@{/frontEnd/image/home/data_icon.png}"  style="vertical-align: middle;"/>
+											<span style="vertical-align: middle;font-size:20px;"></span>
+										</div>
+
+									</div>
+									<div id="homeHistory">
+										<div class="box p-top">
+											<div class="homeHistoryTom">
+												<div class="rank newest p-all">
+												   <div class="rank_cont m-top">
+												   		<table class="table table-hover m-bottom homeHistoryTomTableTitle" >
+												   			<thead>
+																<tr>
+																	<th style="width: 50px;" >时间</th>
+																	<th >标题</th>
+																	<th style="width:50px;">类型</th>
+																</tr>
+															</thead>
+												   		</table>
+												   		<div class="homeHistoryTomTableHover"></div>
+												   		<div class="homeHistoryTomTable" style="height:190px;overflow:hidden;">
+															<table class="table table-hover m-bottom">
+																<thead>
+																	<tr>
+																		<th style="width: 50px;"></th>
+																		<th></th>
+																		<th style="width:50px;"></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content='聂树斌案' data-placement="left">聂树斌案</a></td>
+																		<td >
+																			事件
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover">内蒙古赤峰煤矿爆炸案</a></td>
+																		<td class="lTotal">
+																			事件
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover">中关村二小学生欺凌事件</a></td>
+																		<td class="lTotal">
+																			专题
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover">2016年最大雾霾</a></td>
+																		<td class="lTotal">
+																			专题
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover">俄罗斯驻土耳其大使遇刺事件</a></td>
+																		<td class="lTotal">
+																			专题
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover">柏林卡车冲撞事件</a></td>
+																		<td class="lTotal">
+																			事件
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="number">2016</td>
+																		<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover">俄罗斯军用飞机坠毁事件</a></td>
+																		<td class="lTotal">
+																			头条
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- 热点排行 start-->
+							<!-- 网站新闻排行 -->
+							<div class="box p-bottom" id="homeWebRank" style="margin-top:10px;">
+								<div class="box-header header-vimeo">
+									<h2 th:text="${null==navMap?'热点排行':navMap.get('nav.hot')}">热点排行</h2>
+								</div>
+								<!-- 网易 -->
+								<div class="hotListContOther">
+
+									<div class="rank p-all hotRanking1">
+										<div class="htmleaf-content">
+											<div class="screenConditionBox">
+												<div class="pros subpage srceenWeb" style="z-index:999">
+													<h2 data-innerId='2449' data-inter='false'>凤凰网<i class="fa fa-caret-down"></i></h2>
+													<ul class="prosul clearfix" id="srceenWebPro" th:remove="body">
+														<li class="">
+															<a class="ti" href="#">经济<i class='fa fa-caret-right'></i></a>
+															<div class="prosmore hide">
+																<span><em><a href="#">宏观经济</a></em></span>
+																<span><em ><a  href="#">产业经济</a></em></span>
+																<span><em ><a  href="#">国际财经</a></em></span>
+																<span><em><a href="#">公司新闻</a></em></span>
+																<span><em><a href="#">金融新闻</a></em></span>
+															</div>
+														</li>
+														<li class="">
+															<a class="ti" href="#">政治</a>
+														</li>
+														<li class="">
+															<a class="ti" href="#">社会</a>
+														</li>
+													</ul>
+												</div>
+
+												<div class="pros subpage srceenList1 hide" style="z-index:999">
+													<h2 data-inter='false' data-innerId='75'>点击榜<i class="fa fa-caret-down"></i></h2>
+													<ul class="prosul clearfix" id="srceenList1Pro" th:remove='body'>
+														<li class="">
+															<a class="ti" href="#">点击榜</a>
+														</li>
+														<li class="">
+															<a class="ti" href="#">排行榜</a>
+														</li>
+													</ul>
+												</div>
+												<div class="pros subpage srceenListPeriod1 hide" style="z-index:999">
+													<h2 data-inter='false' data-innerId='72'>24小时<i class="fa fa-caret-down"></i></h2>
+													<ul class="prosul clearfix" id="srceenListPeriod1Pro" th:remove='body'>
+														<li class="">
+															<a class="ti" href="#">全部</a>
+														</li>
+														<li class="">
+															<a class="ti" href="#">官方媒体</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="rank_cont  m-top hotListContOtherTable">
+											<table class="table table-hover m-bottom">
+												<thead>
+												<tr>
+													<th style="width: 24px;" class="orderTableHeader">
+													</th>
+													<th style="width:69%"></th>
+													<th style="width:50px;padding-right: 0px"></th>
+												</tr>
+												</thead>
+												<tbody class="hotnewsRanking1" th:remove="body">
+												<tr>
+													<td class="number"><em class="hui">1</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content="人民网资溪1月9日电 针对资溪县鹤城镇泸声村建设组村民徐晓洪建房过程中反映的相关问题和有关工作人员的不当言论，江西资溪县委、县政府高度重视，迅速启动对此事的全面调查，及时研究处置意见。经初步调查，决定对资溪县鹤城镇党委书记乔志平、县法制办主任周伟明、县国土资源局执法大队长吴剑进行立案调查。下一步还将对其他涉事人员作进一步调查处理。">江西资溪”农民建房遭强拆”问责3人:言论极其错误</a></td>
+													<td class="lTotal">6574</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">2</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content="">河南婴儿患先天性心脏病 父亲甩手而去</a></td>
+													<td class="lTotal"></td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">3</em></td>
+													<td class="lTitle"><a href="javascript:void(0)" target="_blank" tabindex="0" data-toggle="popover" data-content="中新网南宁1月9日电 广西南宁一名包工头1月9日疑因讨薪未果，驾奥迪Q5追赶工程负责人，并将其撞飞，后被制服。该包工头当天即被警方带走调查，而被撞者经医治无生命危险。">包工头讨薪未果驾豪车撞飞负责人 曾称”决一死战”</a></td>
+													<td class="lTotal">4273</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">4</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='山东泰安肥城市实验小学一男教师被指上班期间频繁电话骚扰学生的母亲，并多次在工作时间约该家长开房。1月9日肥城市实验小学桃花源校区石姓校长告诉澎湃新，学校已经下发对闫广宏处分决定，对该教师进行全校通报批评和警告处分，取消其当年度师德优秀资格处分，扣除相应考核成绩和绩效工资。'>男教师上班时间多次约女性家长开房 已被安排支教</a></td>
+													<td class="lTotal">5006</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">5</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='2016年1月1日，一声响亮的啼哭，郑州市民赵女士的第二个孩子降生了，比预产期晚了两天。'>全面两孩一周年:多出生人口一百万左右远低于预期</a></td>
+													<td class="lTotal">3284</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">7</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='昨日，两江新区交巡警支队开出罚单：一名开着700万元宾利车的车主，私自将车标改成卡通熊猫……'>宾利车主为追”女神”将车标改熊猫 女方:太不成熟</a></td>
+													<td class="lTotal">3771</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">7</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='霾是悬浮在大气中的大量微小尘粒、烟粒或盐粒的集合体，使空气浑浊，水平能见度降低到10公里以下的一种天气现象。霾一般呈乳白色，它使物体的颜色减弱，使远处光亮物体微带黄红色，而黑暗物体微带蓝色。'>北京发布《雾霾防护常识十三问》</a></td>
+													<td class="lTotal">3666</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">8</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='近日，一部仅有10秒的视频在网上热议。视频中，一名小男孩连续抬脚向自己的亲妈飞踹了五脚，伴随着怒吼，情绪十分激动。看到视频，网友们纷纷感叹到，感到震惊与寒心。'>广州一男童因被禁止玩手机 在医院飞踹妈妈五脚</a></td>
+													<td class="lTotal">3722</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">9</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='江西资溪强拆证照齐全在建房，执法人员不但不承认违法，反而口称“权大于法”。1月9日，资溪县委宣传部公布事件处理情况：三名涉事官员被立案调查。不过，事件当事人、被拆房房主徐应生告诉看看新闻Knews，口称“权大于法”的资溪县国土资源局执法大队长吴剑，以及对徐家人表示“法治从中央到地方层层减弱”、“政府不可能不违法”的资溪县鹤城镇党委书记乔志平、县法制办主任周伟明，这三人无非是说了实话，而真正应该出面负责的是拆房的决策者'>江西被强拆房主：他们法律观念还不如我一个农民</a></td>
+													<td class="lTotal">3556</td>
+												</tr>
+												<tr>
+													<td class="number"><em class="hui">10</em></td>
+													<td class="lTitle"><a href="../hotNews/hotNewsDetail.html" target="_blank" tabindex="0" data-toggle="popover" data-content='这是“假枪真定罪”第一人王国其的家，他站在照壁前，摇动着脑袋，对上游新闻-重庆晨报记者（全国爆料热线：M17702387875@163.com）说：“天津老太摆射气球摊被拘的事，和我那个事差不多，都是那个1.8焦耳标准闹的。我希望能通过我的案例，对她有一些帮助。'>销售仿真枪获刑第一人：相信天津老太会有好结果</a></td>
+													<td class="lTotal">1827</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="rank p-left p-right hotRanking2 ">
+
+									</div>
+								</div>
+							</div>
+							<!-- 热点排行 end-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="sidebar">
+
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+	<div class="maskLayer" style="z-index:999999999999;display:none;">
+		<div class="swiper-container" style="height:100%;">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/weinituijian.png}"/>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/wodedingzhi.png}"/>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/xinwenxiansuo.png}"/>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/redianpaihang.png}"/>
+
+					</div>
+				</div>
+
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/redianfaxian.png}"/>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/sanku.png}"/>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="../../../static/frontEnd/image/home/guidance01.gif" th:src="@{/frontEnd/image/home/guidance00.jpg}" />
+					<div class="zhe">
+						<img th:src="@{/frontEnd/image/home/tuisongxinwen.png}"/>
+
+					</div>
+				</div>
+			<!-- 如果需要分页器 -->
+
+		</div>
+			<div class="swiper-pagination" style="z-index:99999999999999999999;"></div>
+		</div>
+		<button class="btn btn-danger jump">跳过</button>
+
+		<button class="btn btn-danger compelet" style="display: none;width:100px;height: 40px;border-radius: 6px;">完成</button>
+
+	</div>
+</body>
+</html>
+<script>
+	 window.onload=function(){
+	     var isnew = $('#isNew').val();//===1
+	     console.log(isnew);
+        	if(isnew==1){
+			$(".maskLayer").css('display','block');
+			var swiper = new Swiper('.swiper-container', {
+                watchSlidesProgress : true,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 10000,
+                    stopOnLastSlide: true
+                },
+                on:{
+                    reachEnd: function(){
+                        $('.compelet').show();
+                        $('.jump').hide();
+                    },
+                    progress:function(progress){
+                        if(this.slides[6].progress=='0'){
+                            $('.compelet').show();
+                            $('.jump').hide();
+                        }else{
+                            $('.compelet').hide();
+                            $('.jump').show();
+                        };
+					}
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable :true
+                }
+			});
+		}else{
+
+		}
+		 	$('.jump').click(function(){
+            $(".maskLayer").css('display','none');
+            changeUserState();
+        })
+         $('.compelet').click(function(){
+             $(".maskLayer").css('display','none');
+             changeUserState();
+         })
+         //changeUserState
+		 function changeUserState(){
+	        $.ajax({
+				url:ctx+'/changeUserState',
+				data:{},
+				type:'get',
+				dataType:'json',
+				success:function(res){
+
+				}
+			})
+		 }
+	 }
+
+</script>

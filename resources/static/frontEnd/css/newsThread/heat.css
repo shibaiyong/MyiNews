@@ -1,0 +1,18 @@
+#operateGroup{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.heatTable {
+    border-top: 2px solid #EAEAEA;
+}
+
+.heatTable tbody td:nth-child(1), 
+.heatTable tbody td:nth-child(5), 
+.heatTable tbody td:nth-child(6), 
+.heatTable tbody td:nth-child(7), 
+.heatTable tbody td:nth-child(8){
+    text-align: center;
+}
+.heatTable .inewsOperation i.active {
+    color: #F44336;
+}

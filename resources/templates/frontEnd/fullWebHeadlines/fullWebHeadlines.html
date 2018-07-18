@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>iNews-媒体头条</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+<!-- 全网头条 -->
+<!-- 引用公共css -->
+<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+	
+<!-- 引用公共js -->
+<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+
+<!-- 引用dataTables -->
+<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/common/plugins/typeahead/bootstrap3-typeahead.min.js}"></script>
+<!-- Self CSS -->
+<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/fullWebHeadlines/fullWebHeadlines.css"	th:href="@{/frontEnd/css/fullWebHeadlines/fullWebHeadlines.css}" />
+
+
+<!-- masonry JS -->
+<script type="text/javascript"	src="../../../static/common/plugins/masonry/masonry.pkgd.min.js"	th:src="@{/common/plugins/masonry/masonry.pkgd.min.js}"></script>
+<script type="text/javascript"	src="../../../static/common/plugins/masonry/imagesloaded.pkgd.min.js"	th:src="@{/common/plugins/masonry/imagesloaded.pkgd.min.js}"></script>
+<!-- Self JS -->
+<script type="text/javascript"	src="../../../static/frontEnd/js/static/fullWebHeadlines/fullWebHeadlines.js"	th:src="@{/frontEnd/js/dynamic/fullWebHeadlines/fullWebHeadlines.js}"></script>
+</head>
+<body>
+
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+
+					<div class="col-md-12">
+						<div class="searchesLine ">
+							<!-- <div class="box-header header-vimeo">
+							 	<h2>热点检索</h2>
+							 </div> --> 
+							<div class="searchesTitle">
+								<div id="screen">
+								    <div class="box p-all">
+								    	<div class="box screenCon p-bottom p-left p-right">
+							    	 		<div class="customAdd">
+											    <form class="form-inline" role="form" action='javascript:void(0)'>
+											    	<div class="form-group">
+														<select class="form-control" id="timeSelect">
+															<option value="">全部</option>
+														  	<option value="day">最近一天</option>
+														  	<option value="threeDay">最近三天</option>
+														 	<option value="week">最近一周</option>
+														  	<option value="month">最近一月</option>
+														  <!-- <option class="timeCustom">自定义</option> -->
+														</select>
+													</div>
+												  	<div class="form-group">
+												    	<div class="input-group">
+												      		<input class="form-control customAddInput" type="text" placeholder="请输入关键词" id="queryStr"  />
+												      		<div class="input-group-addon btn-red customAddBtn">iSearch</div>
+												    	</div>
+												  	</div>
+												</form>
+								          	</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="searchesCon" style="display:none">
+								<table class="table table-hover searchesTable">
+									<thead>
+										<tr>
+											<th style="width: 60%">标题</th>
+											<th style="width: 20%" class="center">发布时间</th>
+											<th style="width: 20%" class="center">来源</th>
+										</tr>
+									</thead>
+									<tbody th:remove="body">
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>2017-01-10 18:34</td>
+											<td>新华社</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">习近平将对瑞士进行国事访问、出席世界经济论坛年会并访问瑞士国际组织	</a>
+											</td>
+											<td>2017-01-10 16:38 </td>
+											<td>新华社</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a>
+											</td>
+											<td>2017-01-11 03:57</td>
+											<td>人民网</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">习近平将对瑞士进行国事访问、出席世界经济论坛2017年年会并访问瑞士国际组织</a>
+											</td>
+											<td>2017-01-11 05:57</td>
+											<td>人民网</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">全面从严治党如何向纵深发展，习近平这样布局 </a>
+											</td>
+											<td>2017-01-01 07:00</td>
+											<td>央广网</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">世界期待分享中国经验——国际人士瞩目习近平主席2017年首次出访</a>
+											</td>
+											<td>2017-01-01 12:52</td>
+											<td>央广网</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void(0)" class="beyondEllipsis">习近平主持中共中央政治局常委会会议</a>
+											</td>
+											<td>2017-01-01 13:25</td>
+											<td>央视网</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="hotRankList box p-right p-left">
+							<div class="box-header header-vimeo">
+								<h2>今日头条</h2>
+							</div>
+							<div class="hotRankListSearch hide">
+								<div class="rankListTitle">
+									<div class="box screenCon p-all">
+										<div th:include="frontEnd/common/screenClassification :: screenClassification"></div>
+									</div>
+								</div>
+							</div>
+							<div class="rankListCon">
+								<div class="box rankListConBox">
+									<div role="tabpanel">
+									    <div class="tab-content">
+									      	<div role="tabpanel" class="tab-pane active" id="panel-2">
+										        <div class="row masonry-container headLinesContent" th:remove="body">
+
+										          	<div class="col-md-4 col-sm-12 item p-left" >
+											            <div class="thumbnail p-all">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix ">
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/xinhuashe.png"  />
+																<a href="javascript:void(0)" th:href="@{/gotoHotWebHeadlinesList}" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style"  >
+																  	<li class="list-style-item" >
+																  		<a href="javascript:void(0)"  class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			<em  >中共中央政治局常务委员会召开会议</em>
+																  		</a>
+																  		<span class=" listTil listTilNew"  >[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			习近平将对瑞士进行国事访问、出席世界经济论坛年会并访问瑞士国际组织
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/renminwang1.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			习近平主持中共中央政治局常委会会议
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			习近平将对瑞士进行国事访问、出席世界经济论坛2017年年会并访问瑞士国际组织
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">新浪</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/CNTV.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展，习近平这样布局
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			世界期待分享中国经验——国际人士瞩目习近平主席2017年首次出访
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">搜狐</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/CNR1.png"  />
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			习近平主持中共中央政治局常委会会议
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			习近平将访瑞士并出席达沃斯论坛年会
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">腾讯</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/huanqiuwng1.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展，习近平这样布局
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			奥巴马告别演说总结八年总统生涯：美国变得更好更强大
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">凤凰</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/xinwenwang.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展，习近平这样布局
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  		<i class='fa fa-angle-double-right red'></i>
+																  			欧洲各界期待习近平瑞士之行取得丰硕成果
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!-- <ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">百度</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/sina.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展 习近平这样布局
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			习近平将对瑞士进行国事访问
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">微信</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/souhu.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展 习近平这样布局
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			欧洲各界期待习近平瑞士之行取得丰硕成果
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">微博</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/tenxun.png" />
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展，习近平这样布局	
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			中国政府网开通部长之声：李克强要求实事求是回应公众重大关切
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!-- <ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">百度</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/wy.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			全面从严治党如何向纵深发展，习近平这样布局	
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			综述：欧洲各界期待习主席瑞士之行取得丰硕成果
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">微信</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/yidian.png" />
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			奥巴马发表告别演讲现场抹泪难掩落寞
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			奥巴马说再见，丢给特朗普一颗20万亿的“炸弹”
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-4 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">微博</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/fullWebHeadlines/jrtoutiao1.png"/>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			奥巴马发表告别演讲泪洒现场 8年总统生涯将结束
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="javascript:void(0)" class="beyondEllipsis">
+																  			<i class='fa fa-angle-double-right red'></i>
+																  			台防务部门：大陆辽宁舰上午7时进入台湾海峡	
+																  		</a>
+																  		<span class=" listTil listTilNew">[01-01 13:00]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										        </div>
+									      	</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

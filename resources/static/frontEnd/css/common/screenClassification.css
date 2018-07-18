@@ -1,0 +1,193 @@
+em,i,s{font-style:normal;}
+.screenConditionBox{
+	position:relative;
+	margin-top:10px;
+	height:35px;
+	margin-bottom:2px;
+}
+.screenConditionBox .clusterFenlei{
+	float:right;
+	margin-right:245px;
+}
+.pros{position:absolute;top:0px;left:0;z-index:1000;width:120px;background-color:#F44336;font-size:14px;}
+.pros h2{width:120px;height:30px;line-height:30px;color:#fff;padding-left:16px;font-size:14px;}
+.subpage h2{cursor:pointer;margin:0px;white-space: nowrap;overflow: hidden;width: 100%;text-overflow: ellipsis;}
+.subpage h2 i{position:absolute;top:9px;right:10px;font-size:12px;}
+.subpage .prosul{display:none}
+.prosul{margin-top:2px;_overflow:hidden;height:auto;border-top:1px solid #fff;}
+.prosul li{line-height:30px;height:30px;_overflow:hidden;border-bottom:1px #bb2d1e dashed;margin-right:3px;padding-left:10px}
+.prosul li.prosahover{border-bottom:1px #fff solid;background-color:#fff;margin-right:0;padding-right:3px;}
+.prosul a{color:#ffd0c0;padding-right:8px;_padding-right:6px;display:inline-block;width:100%}
+.prosul li.prosahover a{color:#636363}
+.prosul li a.ti{font-size:14px;color:#fff}
+.prosul li.prosahover a.ti{color:#d03322}
+.prosul li a:hover{color:#d03322}
+.prosul li.nochild a:hover{color:#fff}
+.prosul li i{float:right;display:block;width:3px;padding-right:12px;margin-top:7px}
+.prosul li.prosahover i{background-position:0 -326px}
+.prosul li.last{border-bottom:0 none}
+.prosul li.bd-solid{border-bottom:1px #c22900 solid}
+.prosul li.hotareas{background-image:none;padding-left:12px;line-height:26px;height:106px;*overflow:hidden}
+.prosul li.hotareas i{line-height:30px;margin-top:-2px;height:40px;background-position:0 -279px}
+.prosul li.hotareas a{line-height:30px;height:30px}
+.prosul li.hotareas a.hot{background-position:right 0}
+.prosul li h2{padding-left:0;line-height:40px;display:inline;font-size:14px;font-weight:400;}
+.prosul li.prosahover h2{color:#d03322}
+.prosmore{padding:5px 0 15px 15px;position:absolute;z-index:999;left:120px;top:30px;background-color:#fff;border:2px #d03322 solid;border-left:0 none;width:232px;height:183px}
+.prosul .prosmore{text-align:left}
+/* .prosul .prosmore span{float:left;height:30px;width:65px;line-height:30px} */
+.prosul .prosmore span{float:left;width:65px;}
+/* .prosul li .prosmore a{height:18px;line-height:18px;padding:0 4px;font-size:12px;} */
+.prosul li .prosmore a{line-height:18px;padding:0 4px;font-size:12px;}
+.prosul li .prosmore a:hover{background-color:#d03322;color:#fff}
+.prosmore em{font-weight:400;display:inline-block}
+
+.screenConditionBox .screenSearch{margin-left:375px;}
+.screenConditionBox .screenSearch .form-control{height:31px;}
+
+.customAddInput{width:250px}
+
+/* 江苏三级的展示样式 */
+.backshi{
+	font-size: 12px;
+    border-bottom: 1px solid #f1f1f1;
+    margin-right: 15px;
+    color: #d03322;
+    cursor:pointer;
+}
+/* 筛选的历史记录 */
+.prosul li.historyBox a{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.prosul li i.historyIcon{
+	float: inherit;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+/* 分页展示 */
+.fenleiBox{
+	text-align:center;
+}
+
+.fenleiBox .pagination{
+	margin:0px !important;
+}
+.fenleiBox .pagination>li{
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+.fenleiBox .pagination>a, .fenleiBox .pagination>span{
+	float:inherit;
+	width:auto;
+	background-color:transparent;
+	border:0px;
+	color:#fff !important;
+}
+.fenleiBox .pagination-sm>a, .fenleiBox .pagination-sm>span{
+	padding:5px;
+}
+.fenleiBox .pagination>a.active{
+	background:transparent;
+	color:#333 !important;
+}
+.zhanwei{
+	border:0px !important;
+}
+.zhanwei.prosahover{
+	background:transparent !important;
+}
+
+/* 时间段 */
+/* 选择时间 */
+.srceenCustomTime{
+	width:210px;
+}
+.srceenCustomTime #time-slice{
+	height:31px;
+}
+.input-icon{
+	display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.input-icon>input{
+	padding-left:6px;
+	padding-right:36px;
+}
+.input-icon>i{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    right:0;
+    width: 34px;
+    height: 100%;
+    line-height: 28px;
+    display: inline-block;
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 3px;
+    zoom: 1;
+}
+
+.daterangepicker td.in-range{
+	background:#f9eeed;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover{
+	background:#F44336;
+}
+.ranges li.active, .ranges li:hover{
+	background:#F44336;
+	border:1px solid #F44336;
+}
+.btn-warning{
+	background:#F44336;
+	border:1px solid #F44336;
+}
+.btn-warning:hover{
+	background:#fa8b83
+}
+.collectTable .inewsOperation{
+	text-align:center
+}
+.collectTable .inewsOperation span{
+	cursor:pointer;
+}
+
+.srceenTimeQuantum{
+	width:215px;
+}
+.multiButton{
+	padding: 0 10px;
+	width: 100%;
+	height: auto;
+	box-sizing: border-box;
+}
+.multiButton .multiSure{
+	float: left;
+	width: 50px;
+	padding-right: 10px;
+	text-align: right;
+	line-height: 30px;
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+}
+.multiButton .multiCancel {
+	float: right;
+	width: 50px;
+	padding-left: 10px;
+	line-height: 30px;
+	text-align: left;
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+}
+.subpage .srceenMapShow {
+	padding-right: 18px;
+	box-sizing: border-box;
+}

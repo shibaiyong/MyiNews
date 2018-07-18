@@ -1,0 +1,52 @@
+@media (min-width: 992px){
+	.col-md-10{
+		width: 87%;
+	}
+	.col-md-2{
+		width: 12%
+	}
+	
+	footer .col-md-2{
+		width:16.66666667%;
+	}
+}
+/* 合并相似-表格样式 */
+.dataConTable{
+	text-align: center;
+	margin-top:10px;
+}
+.dataConTable .table>thead>tr>th, 
+.dataConTable .table>tbody>tr>th, 
+.dataConTable .table>tfoot>tr>th, 
+.dataConTable .table>thead>tr>td, 
+.dataConTable .table>tbody>tr>td, 
+.dataConTable .table>tfoot>tr>td{
+	padding: 4px 2px;
+}
+.dataConTable table{
+	margin-bottom:6px;
+}
+.dataConTable table td.active a{
+/* 	color: #F44336; */
+	color:#fff;
+	font-weight: bold;
+}
+.dataConTable td.dataConTabTit{
+	background:#f7f5f5;
+}
+.dataConTable .table>tbody>tr>td.active{
+/* 	background-color: #fff; */
+	background:#F44336
+}
+
+/* table表格中的颜色 */
+.green{
+	color:red;
+}
+.gray{
+	color:green;
+}
+
+.accordion .link{
+	text-align:center;
+}

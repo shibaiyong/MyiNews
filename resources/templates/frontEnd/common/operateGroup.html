@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="operateGroup">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻线索-new -->
+	<title>iNews-操作组</title>
+	<!-- la-timer CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/screenClassification.css"  th:href="@{/frontEnd/css/latestNews/la-timer.css}" />
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/common/operateGroup.css"	th:href="@{/frontEnd/css/common/operateGroup.css}" />
+	
+	
+</head>
+<body>
+	<div class="table-operation">
+		<div class='table-operation-status'>
+			<a href="javascript:void(0)"><span class="check-box checked-all"><i class="fa fa-check"></i></span>&nbsp;全选</a><a href="javascript:void(0)" data-once="true" class="hide"><i class="fa fa-upload"></i>&nbsp;导出</a><a href="javascript:void(0)"><i class="fa fa-heart-o"></i>&nbsp;收藏</a><a href="javascript:void(0)" class="hide"><i class="fa fa-file-text-o"></i>&nbsp;建稿</a><a href="javascript:void(0)" data-once="true" class="hide"><i class="fa fa-trash"></i>&nbsp;取消收藏</a>
+			
+		</div>
+		<span class="heatSort hide">热度排序</span>
+	</div>
+	
+	<!-- jquery easing JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/easing/jquery.easing.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/common/operateGroup.js"	th:src="@{/frontEnd/js/dynamic/common/operateGroup.js}"></script>
+</body>
+</html>

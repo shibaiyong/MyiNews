@@ -1,0 +1,19 @@
+.serviceCon{
+	margin:10px;
+	margin-bottom:50px;
+	padding:0 35px;
+}
+.serviceCon p{
+	text-indent:2em;
+	line-height:30px;
+}
+.serviceCon h2{
+	text-align:center;
+}
+.serviceCon strong{
+	margin-bottom:10px;
+	display:block;
+}
+.serviceCon .right{
+	text-align:right
+}

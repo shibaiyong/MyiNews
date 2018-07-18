@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>用户管理页</title>
+	
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/accessLog/accessLog.css" th:href="@{/backEnd/css/accessLog/accessLog.css}" />
+	
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/backEnd/js/static/accessLog/accessLog.js" th:src="@{/backEnd/js/dynamic/accessLog/accessLog.js}" ></script>
+	<script type="text/javascript" src="../../../static/common/plugins/sha/sha256.js" th:src="@{/common/plugins/sha/sha256.js}" ></script>
+</head>
+<body>
+	<section class="content-header">
+		<h5 class="m-all">
+          用户访问日志列表
+        </h5>
+	</section>
+	<section class="content">
+		<div class="box p-right p-left">
+			<div class="box box-primary">
+                <div class="box-header with-border">
+                	<div class="box-title">
+                		<div class="has-feedback pull-left">
+	                      	<input id="queryStr" type="text" class="form-control input-sm" placeholder="用户查询" />
+	                      	<span class="glyphicon glyphicon-search form-control-feedback"></span>
+	                  	</div>
+	                  	&nbsp;
+                	</div>
+                </div>
+                <div class="box-body no-padding">
+                  <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover userTable">
+						<thead>
+							<tr>
+								<th>用户名称</th>
+								<th>用户ip</th>
+								<th>操作时间</th>
+								<th>操作类型</th>
+								<th>模块</th>
+							</tr>
+						</thead>
+						
+	                   <tbody th:remove="body">
+	                        <tr>
+	                          	<td>33</td>
+	                          	<td>10.200.6.124</td>
+	                          	<td>登录成功</td>
+	                          	<td>2017-3-22 10:24:54</td>
+	                          	<td>/login</td>
+	                          	<td>webpage</td>
+	                        </tr>
+	                        
+	                         <tr>
+	                          	<td>33</td>
+	                          	<td>10.200.6.124</td>
+	                          	<td>登录成功</td>
+	                          	<td>2017-3-22 10:24:54</td>
+	                          	<td>/login</td>
+	                          	<td>webpage</td>
+	                        </tr>
+	                        
+	                         <tr>
+	                          	<td>33</td>
+	                          	<td>10.200.6.124</td>
+	                          	<td>登录成功</td>
+	                          	<td>2017-3-22 10:24:54</td>
+	                          	<td>/login</td>
+	                          	<td>webpage</td>
+	                        </tr>
+	                        
+	                         <tr>
+	                          	<td>33</td>
+	                          	<td>10.200.6.124</td>
+	                          	<td>登录成功</td>
+	                          	<td>2017-3-22 10:24:54</td>
+	                          	<td>/login</td>
+	                        </tr>
+	                        
+	                         <tr>
+	                          	<td>33</td>
+	                          	<td>10.200.6.124</td>
+	                          	<td>登录成功</td>
+	                          	<td>2017-3-22 10:24:54</td>
+	                          	<td>/login</td>
+	                          	<td>webpage</td>
+	                        </tr>
+	                     </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+           
+		</div>
+	</section>
+
+</body>
+</html>

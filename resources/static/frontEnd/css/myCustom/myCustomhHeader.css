@@ -1,0 +1,125 @@
+/* 来源定制样式 */
+.rankListConBox .thumbnail{
+	margin-bottom: 5px;
+	border:0px;
+}
+.rankListConBox .thumbnail:hover{
+	box-shadow: 1px 2px 8px #ccc; 
+}
+.captionTitle{
+	padding:6px 8px;
+}
+.captionTitle p.imgiNews{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 50%;
+	box-shadow: 1px 1px 6px #ddd;
+	margin-bottom: 0px;
+	font-size: 12px;
+}
+.captionTitle img{
+	width:auto;
+	height: 25px;
+	line-height: 25px;
+	/* border-radius: 50%; */
+	/* box-shadow: 1px 1px 6px #ddd; */
+}
+.captionTitle .navTime{
+	position: absolute;
+	right: 25px;
+	top:14px;
+}
+.captionTitle ul.nav-tabs a{
+	padding: 6px 8px;
+	color: #333;
+	border-radius: 0px;
+}
+.captionTitle ul.nav-tabs .fixed a{
+	background: #F44336;
+	color: #fff;
+}
+.captionTitle ul.nav-tabs .fixed a:hover,
+.captionTitle ul.nav-tabs .fixed a:active{
+	background: #F44336;
+	color: #fff;
+}
+
+.captionTitle ul.nav-tabs a:hover,
+.captionTitle ul.nav-tabs a:active{
+	color: #F44336;
+}
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:focus, 
+.nav-tabs > li.active > a:hover{
+	color: #F44336;
+	background: #fff;
+	border:0px;
+	border-bottom:1px solid #F44336;
+}
+.rankListCon .captionCon{
+	background: #eee;
+	padding:3px;
+}
+.rankListCon div.rankListConBox{
+	padding-left:14px;
+	padding-right: 0px;
+}
+.rankListCon .captionCon .list-group-style{
+	background: #fff;
+	padding:6px 8px;
+}
+.rankListCon .captionCon .list-group-style a{
+	font-size: 13px;
+}
+.rankListCon .captionCon .list-group-style span{
+	font-size: 12px;
+	position: absolute;
+	right: 0px;
+	margin-top:4px;
+}
+.rankListCon .captionCon .list-group-style .list-style-item{
+	border-bottom:1px solid #ddd;
+	padding-top:5px;
+	padding-bottom: 5px;
+	color: #939393;
+	position: relative;
+}
+.rankListCon .captionCon .list-group-style .list-style-item em{
+	font-style: normal;
+}
+.rankListCon .captionCon .list-group-style .list-style-item a{
+	display: inline-block;
+	width: 73%;
+	height:20px;
+	line-height:27px;
+}
+
+.rankListCon .captionCon .list-group-style .list-style-item i{
+	display:inline-block;
+	width:16px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	vertical-align:middle;
+	text-indent: 0px;
+	margin-right: 2px;
+	float: left;
+	margin-top: 3px;
+}
+.rankListCon .captionCon .list-group-style .list-style-item em.red{
+	background: #F44336 !important
+}
+
+a.fullWebMore {
+    float: right;
+    margin-top: 5px;
+    font-size: 12px;
+}
+a.fullWebMore:hover{
+	color:#F44336;
+}
+/* 关键词定制 */
+#threadContent{
+	margin-top:8px;
+}

@@ -1,0 +1,74 @@
+
+.search-box{
+	margin:5px 0px 10px;
+}
+select.form-control{
+	height:auto;
+	padding:3px 5px;
+	width:110px !important;
+}
+.form-group{
+	margin-right:10px;
+}
+
+
+
+.mainLeft{
+	position:absolute;
+	float:left;
+	width:250px
+}
+.mainLeft .nav>li>a{
+	padding:6px 8px;
+}
+.mainRight{
+	margin-left:260px;
+}
+.mainRight .searchTop{
+	text-align:center;
+	margin:8px 0px 10px;
+}
+.mainRight .search-box input.customAddInput{
+	width:300px;
+}
+.mainRight .search-box .customAddBtn{
+	background:#00c0ef;
+	color:#fff;
+}
+.addCollectBtn{
+	background:#3c8dbc;
+}
+
+.collectManageTable{
+	border-top:2px solid #EAEAEA;
+/* 	margin-top:10px; */
+	table-layout:fixed;
+}
+.collectManageTable .linkBox{
+	word-wrap: break-word;
+}
+table.dataTable thead th, table.dataTable thead td{
+	border-bottom:0px !important;
+}
+.table>thead>tr>th, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>tbody>tr>td, 
+.table>tfoot>tr>td{
+	text-align:center;
+}
+
+.collectManageTable tbody td:nth-child(4), 
+.collectManageTable tbody td:nth-child(3){
+	text-align:left;
+}
+
+.collectManageTable .tableOperate a{
+	margin:0px 3px;
+}
+.dropdown-menu{
+	min-width:154px !important;
+	padding:0px;
+}
+

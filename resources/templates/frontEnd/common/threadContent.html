@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="threadContent">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻线索-new -->
+	<title>iNews-为你推荐</title>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	<!-- mCustomScrollbar CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/mCustomScrollbar/css/jquery.mCustomScrollbar.min.css" th:href="@{/common/plugins/mCustomScrollbar/css/jquery.mCustomScrollbar.min.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/common/threadContent.css"	th:href="@{/frontEnd/css/common/threadContent.css}" />
+	
+	<!-- mCustomScrollbar JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/mCustomScrollbar/js/jquery.mCustomScrollbar.concat.min.js"  th:src="@{/common/plugins/mCustomScrollbar/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/common/threadContent.js"	th:src="@{/frontEnd/js/dynamic/common/threadContent.js}"></script>
+	<style>
+		.dataConBoxTable tr{
+			border-bottom: 1px solid #ddd;
+		}
+		.dataConBoxTable thead tr th{
+			text-align: center;
+			padding:10px 8px;
+		}
+		.dataConBoxTable tbody tr td{
+			text-align: center;
+		}
+		.dataConBoxTable tbody tr td:nth-child(2){
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body>
+				
+<!-- 			列表展示方式 -->
+	<div class='dataShowTable' data-once='true'>
+		<table class="table table-hover dataConBoxTable">
+			<thead>
+				<tr>
+
+					<th class="center">发布时间</th>
+					<th class="center" style="width:200px;">标题</th>
+					<th>采集来源</th>
+					<th>发稿来源</th>
+					<th class="center">相关/相似</th>
+					<!--<th class="center" style="width: 43px;">相关</th>-->
+					<th class="center">QG指数</th>
+					<!--<th style="width: 55px;">浏览量</th>-->
+					<th class='center'></th>
+				</tr>
+			</thead>
+			<tbody th:remove='body'>
+				<tr>
+					<td>
+						<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class="titleRightClick stickTopContent">
+						<a href="javascript:void(0)"  class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">三路人马分进合击 马拉松破2的新年愿望能实现？</a>
+						<span class="label-status label-jian">【建】</span>
+					</td>
+					<td class="">环球网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">80%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							金裕贞出院家中静养 曾因压力性休克入院 金裕贞出院家中静养 曾因压力性休克入院金裕贞出院家中静养 曾因压力性休克入院</a><span class="label-status label-jian">【建】</span></td>
+					<td class="">信息时报</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="green">10%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							各地网约车新政逐步开始实施：再见，低价网约车 </a></td>
+					<td class="">澎湃新闻网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">80%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							一篇文章告诉你：OPPO和vivo怎么就抢了小米的市场 </a><span class="label-status label-cai">【采】</span></td>
+					<td class="">新浪科技</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="green">8%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							流言揭秘：轻断食+果蔬汁，果真可以甩掉一身小肉肉？ </a></td>
+					<td class="">中国新闻网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="gray">60%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							《春风》曝片花 张一山周冬雨怦然心动 </a></td>
+					<td class="">中国新闻网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">70%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							不惧英国脱欧：Snapchat在伦敦设立国际总部 </a></td>
+					<td class="">扬子晚报</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="green">20%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							外卖员不满投诉给顾客“外卖加屎” 外卖平台展开调查外卖员不满投诉给顾客“外卖加屎” 外卖平台展开调查 </a></td>
+					<td class="">北京日报</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="green">20%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							华北制药因雾霾停产1个多月 为治污亏损5493万 </a></td>
+					<td class="">北京日报</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">68%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							代驾将车开进水池 滴滴：要么负责修，要么赔1万 </a></td>
+					<td class="">北京日报</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">70%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							22个省级“两会”将于1月中旬密集召开  </a></td>
+					<td class="">齐鲁晚报</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">80%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							美国一高中800学生同日请病假 疑似诺如病毒引起 </a></td>
+					<td class="">美国CNN</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">80%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							军报：郭伯雄徐才厚自恃特殊 严重危害依法治军 </a></td>
+					<td class="">参考消息网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="green">20%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick "><a
+						href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							全新福特GT油耗惊人 平均16.8L领跑业界 </a></td>
+					<td class="">参考消息网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="gray">57%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick"><a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							养老金现在入市 是否意味着大盘很安全？养老金现在入市 是否意味着大盘很安全？ </a></td>
+					<td class="">央广网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="red">70%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td class="">06-12 16:00</td>
+					<td class=" titleRightClick"><a href="javascript:void(0)" class="beyondEllipsis" tabindex="0"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="短信发红包,Siri讲上海话……苹果发布了那么多更新,但关键词只有一个 ApplePay直接从短信给朋友转账、讲上海话的Siri、会提醒你完成健身计划的智能手表Apple Watch、“史上最强”的台……">
+							“卡特尔”交易员因操纵汇市在美遭起诉“卡特尔”交易员因操纵汇市在美遭起诉 “卡特尔”交易员因操纵汇市在美遭起诉   </a></td>
+					<td class="">中国经济网</td>
+					<td class="">-</td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(5)</a></td>
+					<td><a href="javascript:void(0)" th:href="@{/gotoRelativeNews}" target="_blank">(4)</a></td>
+					<td class="green">19%</td>
+					<td>12345</td>
+					<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<!-- 			缩略图展示方式 -->
+	<div class='dataConThumbnail hide'>
+		<table class="table dataConThumbnailTable">
+			<thead>
+				<th class="center p-all" style="width:25px;"></th>
+				<th class="p-all"></th>
+			</thead>
+			<tbody th:remove="body">
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/1.jpg" th:src="@{/frontEnd/image/picGroupDetail/11.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									<p class="mediaConSummary">服了！哈登自曝曾认为德帅疯了:论远见我服他北京时间1月20日，据《露天看台体育的过程充满乐趣。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+											<li class="list-group-item"><a
+											href="javascript:void">2</a> [相似新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/2.jpg" th:src="@{/frontEnd/image/picGroupDetail/12.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/3.jpg" th:src="@{/frontEnd/image/picGroupDetail/13.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/latestNews1.png" th:src="@{/frontEnd/image/picGroupDetail/14.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img  src="../../../static/frontEnd/image/latestNews/latestNews2.jpg"  th:src="@{/frontEnd/image/picGroupDetail/15.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/latestNews3.png" th:src="@{/frontEnd/image/picGroupDetail/16.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/1.jpg" th:src="@{/frontEnd/image/picGroupDetail/17.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/2.jpg" th:src="@{/frontEnd/image/picGroupDetail/18.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+					</td>
+					<td>
+						<div class="media">
+							<a class="media-left" href="javascript:void(0);"> <img src="../../../static/frontEnd/image/latestNews/3.jpg" th:src="@{/frontEnd/image/picGroupDetail/19.jpg}" alt="..." class="img-thumbnail" />
+							</a>
+							<div class="media-body">
+								<div class="mediaCon pull-left">
+									<h6 class="media-heading">特朗普提高关税之言只是一种谈判筹码？</h6>
+									
+									<p class="mediaConSummary">新浪美股讯
+										北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。
+									</p>
+									<p class="mediaConBottom">
+										<em>2345</em> <span>浏览量</span> <i>|</i> <em>2345</em> <span>建稿量</span>
+										<i>|</i> <em>2345</em> <span>采用量</span>
+									</p>
+									<p class="mediaConTag">
+										<span><i class='fa fa-tags'></i></span> <a
+											href="javascript:void">事件</a> <em>|</em> <a
+											href="javascript:void">转载</a> <em>|</em> <a
+											href="javascript:void">头条</a>
+									</p>
+								</div>
+								<div class="mediaRight pull-right">
+									<ul class="list-group">
+										<li class="list-group-item"><a
+											href="javascript:void">2016-11-29 13:00</a> [发布时间]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [发稿来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">新华网</a> [采集来源]</li>
+										<li class="list-group-item"><a
+											href="javascript:void">2</a> [相关新闻]</li>
+									</ul>
+									<p class="mediaOperation">
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-print"></i>打印</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a>
+										<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<!-- 			九宫格展示方式 -->
+	<div class="dataConSudoku hide">
+		<table class="table dataConSudokuTable" >
+			<thead>
+			</thead>
+			<tbody th:remove="body">
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  	<a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary clearfix">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+									805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)" >发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)">采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top"></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="" th:src="@{/frontEnd/image/picGroupDetail/11.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)">发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)" >采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top" ></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="../../../static/frontEnd/image/latestNews/1.jpg" th:src="@{/frontEnd/image/picGroupDetail/12.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary clearfix">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)" >发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)" >采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top"></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="../../../static/frontEnd/image/latestNews/1.jpg" th:src="@{/frontEnd/image/picGroupDetail/13.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+	
+								<p class="sudokuSummary clearfix">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)">发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)">采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top"></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="../../../static/frontEnd/image/latestNews/3.jpg" th:src="@{/frontEnd/image/picGroupDetail/14.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)" >发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)">采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top" ></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="../../../static/frontEnd/image/latestNews/2.jpg" th:src="@{/frontEnd/image/picGroupDetail/15.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)">发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)">采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top" ></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="../../../static/frontEnd/image/latestNews/3.jpg" th:src="@{/frontEnd/image/picGroupDetail/16.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)" >发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)" >采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top" ></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="col-md-3 p-right p-left">
+					<td>
+						<div class="thumbnail">
+							<div class="sudokuImg">
+								<img alt="..." src="../../../static/frontEnd/image/latestNews/latestNews1.png" th:src="@{/frontEnd/image/picGroupDetail/17.jpg}"/>
+							</div>
+							<div class="caption">
+								<dl class="dl-horizontal">
+									  <dt class="captionTitle">
+									  <a href="javascript:void">辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日辽宁“两证整合”改革首日</a>
+									  </dt>
+								</dl>
+								<p class="sudokuTime">11-29 13:00</p>
+								<p class="sudokuSummary">
+									<span>[摘要]</span>
+									新华社沈阳12月2日电（记者罗捷）12月1日起，辽宁全面实施个体工商户“两证整合”登记制度改革。改革首日，805个窗口受理的2171笔登记业务中，2094笔全部当场办结，办结率为97%。
+								</p>
+								
+								<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+							</div>
+							<div class="sudokuShowMore">
+								<p class="clearfix m-bottom">
+	
+									<a href="javascript:void(0)" >发稿来源：新华网&nbsp;&nbsp;</a>
+	
+									<a href="javascript:void(0)">采集来源：新华网</a>
+									<a href="javascript:void(0)" >
+									    <i class="fa fa-ellipsis-v fa-lg" tabindex="0" data-toggle="popover" data-placement="top" ></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<!-- 			含图片展示 -->
+<!-- 	<div class='dataConContainPic hide'> -->
+<!-- 		<div id="picBox" th:include="frontEnd/common/pic :: pic"></div> -->
+<!-- 	</div> -->
+	
+	<!-- 			含视频展示 -->
+<!-- 	<div class="dataConContainVideo hide"> -->
+<!-- 		<div id="videoBox" th:include="frontEnd/common/video :: video"></div> -->
+<!-- 	</div> -->
+</body>
+</html>

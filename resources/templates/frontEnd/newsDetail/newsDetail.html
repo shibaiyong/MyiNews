@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="referrer" content="never"/>
+	<meta name="keywords"  />
+	<meta name="description" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻详情页 -->
+	<title >iNews-智慧新闻</title>
+	
+	
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+
+</head>
+<body>
+	<input type="hidden" value="" class="taskId"/>
+	<input type="hidden" th:value="${webpageCode}" class="webpageCode"/>
+	<input type="hidden" th:value="${queryStr}" class="queryStr"/>
+	<input type="hidden" th:value="${releaseDateTime}" class="releaseDateTime"/>
+	<input type="hidden" th:value="${comment}" class="comment"/>
+	
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div class="declare container">
+		<div>免责声明：此内容来源于互联网公开发布渠道，对该内容的任何转载和引用责权请咨询内容版权拥有方。<span class="close" onclick="closeDeclare()">x&nbsp;&nbsp;</span></div>
+	</div>
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="col-md-8 col-sm-12">
+						<div class="newsDetailCon box p-left">
+							<div class="newsDetailTop">
+								<div class='newsDetailConTit clearfix'>
+									
+									<h5 class="pull-left" th:remove="body">
+										<span>中共中央政治局常务委员会召开会议 习近平发表重要讲话</span>
+									</h5>
+									<div class="newsDetailConTitRight hide">
+
+										<a class="btn-sm  p-all sharingBtn"  tabindex="0" data-toggle="popover" ><i class="fa fa-weixin"></i>&nbsp;分享</a>
+										<a class="btn-sm  p-all collect" data-id=""><i class="fa fa-heart-o"></i>&nbsp;收藏</a>
+										<a class="btn-sm  p-all jiangao " target="_blank"><i class="fa fa-file-text-o"></i>&nbsp;建稿</a>
+									</div>
+								</div>
+								<div class="clearfix newsDetailKeys hide">
+									<div class='pull-left'>
+										<dl class="dl-horizontal m-bottom">
+											<dt>
+												<span class="gray">关&nbsp;键&nbsp;词：</span>
+											</dt>
+											<dd th:remove="body" class="keyWords">
+												<div class='originalKeyWords' >
+													<span class="label label-red-bg"  >习近平</span>
+												</div>
+												<div class='customKeyWords'>
+													<span class="label label-orange-bg">军委改革</span>
+												</div>
+											</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="MainNews" th:remove="body">
+									<span class="gray">发布时间:</span>
+									<strong >2017-01-10 18:47:50</strong>
+									<span class="gray">来源:</span>
+									<em >新华网新华网新华网新</em>
+									<span class="gray" >爬取来源:</span>
+									<em >中国新闻网</em>
+									
+									<div class="changeFontStyle">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <label>字体：</label>
+										    <select class="form-control">
+										      <option select="selected">中号</option>
+											  <option>小号</option>
+											  <option>大号</option>
+											</select>
+										  </div>
+										</form>
+									</div>
+								</div>
+								<div class="MainNews" th:remove="body">
+									<span class="gray">新&nbsp;闻&nbsp;ID：</span><strong>170120_00017_20752</strong>
+									<span class="gray">本站浏览量:</span>
+									<em >123456</em>
+									<a href="javascript:viod(0)" class="linkOriginal" ><i class="fa fa-chain-broken"></i> 原文链接</a>
+								</div>
+
+							</div>
+
+							<div class="newsDetailSummary hide">
+								<div class="summaryCon" th:remove="body">
+									<p>新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。</p>
+									<p ></p>
+								</div>
+							</div>
+							
+							
+							<div class="newsDetailText">
+								<div id="newsContent" th:remove="body">
+								
+									<div id="uec_img_group_0"></div>
+									<script type='text/javascript'>var uec_inews_img_group={'length':1,uec_img_group_0:{"pic":[{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2EHS54T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2EHS64T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU6S4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU704T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU734T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU764T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7A4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7D4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7J4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7N4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7T4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU804T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU864T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU8I4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU8T4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU914T8E0001NOS.jpg","desc":""}]}}</script>
+<!-- 									<div class="left_zw" style="position:relative"> -->
+<!-- 									<p style="text-align: center;"><strong></strong><strong>中共中央政治局常务委员会召开会议</strong></p> -->
+<!-- 									<p style="text-align: center;"><strong>听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报</strong></p> -->
+<!-- 									<p style="text-align: center;"><strong>听取中央书记处工作报告</strong></p> -->
+<!-- 									<p style="text-align: center;"><strong>中共中央总书记习近平主持会议</strong></p> -->
+<!-- 									<p>新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。</p> -->
+<!-- 									<p>会议强调，办好中国的事情，关键在党。中国特色社会主义最本质的特征是中国共产党领导，中国特色社会主义制度的最大优势是中国共产党领导。坚持党的领导首先是坚持党中央集中统一领导。坚持党中央集中统一领导，是全面从严治党、严肃党内政治生活、加强党内监督的重要目的，也是一条根本的政治规矩。要深入学习贯彻党的十八届六中全会精神，严格执行《关于新形势下党内政治生活的若干准则》、《中国共产党党内监督条例》，牢固树立政治意识、大局意识、核心意识、看齐意识，坚持以党的旗帜为旗帜、以党的方向为方向、以党的意志为意志，切实把党中央重大决策部署落实到各项工作中去。</p> -->
+<!-- 									<p>会议认为，过去的一年，全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组坚持党中央集中统一领导，维护党中央权威，落实全面从严治党责任，规范党内政治生活制度，强化政治领导责任，扎实开展“两学一做”学习教育。坚持围绕中心、服务大局，在贯彻落实党中央重大决策部署上凝神聚焦发力，为推进党和国家各项事业发展、实现“十三五”良好开局作出了积极贡献。</p> -->
+<!-- 									<p>会议认为，过去的一年，中央书记处认真贯彻党中央决策部署，协助党中央抓全面从严治党，指导群团工作尤其是群团改革，推动一批党内法规文件制定和实施，配合办好一系列重要会议和重大纪念活动，各项工作取得了新成绩。</p> -->
+<!-- 									<p>会议强调，今年我们将召开党的十九大，也是实施“十三五”规划的重要一年、推进供给侧结构性改革的深化之年。全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组要坚决维护党中央权威，在思想上政治上行动上始终同以习近平同志为核心的党中央保持高度一致，抓好党中央重大决策部署落地生根，确保党中央令行禁止。要扎实做好党中央部署的各项工作，紧紧围绕大局履职尽责，坚持稳中求进工作总基调，着力防范和化解各种风险，促进经济平稳健康发展和社会和谐稳定。要落实全面从严治党责任，严肃党内政治生活，自觉接受党内监督和各方面监督，加强党组自身建设，不断提高党的建设水平。</p> -->
+<!-- 									<p>会议强调，中央书记处要带头讲政治，坚持正确政治方向，服务大局出谋划策，突出重点抓好落实，不断提高运用科学理论解决实际问题的能力，完成好党中央交办的各项任务。<div id="function_code_page"></div> -->
+<!-- 									</p></div> -->
+								</div>
+							</div>
+							<div class="newsDetailBottom clearfix hide">
+								<div class="bottomBox clearfix">
+									<!--<p class="newsID" th:remove="body">-->
+										<!--<span>新闻ID：</span><span >170120_00017_20752</span>-->
+									<!--</p>-->
+									<div class="clearfix">
+										<p class="pull-left textLink" th:remove="body">
+											<span>原文链接：</span>
+											<a href="javascript:void(0)" target="_blank" >http://www.chinanews.com/gn/2017/01-10/8119765.shtml</a>
+										</p>
+										<p class="pull-right newsDetailConTitRight">
+											<a class="btn-sm  p-all sharingBtn"  tabindex="0" data-toggle="popover" ><i class="fa fa-weixin"></i>&nbsp;分享</a>
+											<a class="btn-sm  p-all collect"><i class="fa fa-heart-o"></i>&nbsp;收藏</a>
+											<a class="btn-sm  p-all jiangao"><i class="fa fa-file-text-o"></i>&nbsp;建稿</a>
+										</p>
+									</div>
+								</div>
+							</div>
+<!-- 							评论分析 -->
+							<div class="analysisBox hide">
+								<div class="analysisCon">
+<!-- 									<button type="button" class="btn btn-red analysisBtn">评论分析</button> -->
+								</div>
+								<div class="analysisDetail">
+									<p class="time hide">分析时间：<span></span></p>
+									<p class="num hide" >共 <span>768</span> 条评论</p>
+								</div>
+							</div>
+							
+							<div class="newsDetailComment hide">
+								<!-- 最热评论 -->
+								<div class="commentHot">
+									<div class="box p-left">
+										<div class="box-header">
+											<h2>热门评论</h2><h3></h3>
+										</div>
+										<div class="commentHotCon">
+											<table class='table table-hover commentHotConTable1 m-bottom' >
+												<thead></thead>
+												<tbody th:remove="body">
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+																	
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<div>
+																		<p style="float:right"><i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span></p>
+																		<p><span>12-08 21:06</span></p>
+																	</div>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- 最新评论 -->
+								<div class="commentHot">
+									<div class="box p-left">
+	
+										<div class="box-header">
+											<h2>最新评论</h2><h3></h3>
+										</div>
+										<div class="commentHotCon">
+											<table class='table table-hover commentHotConTable2 m-bottom'>
+												<thead></thead>
+												<tbody th:remove="body">
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<dl class="dl-horizontal m-bottom">
+															  <dt>
+															  	<div>
+															  		<i class="fa fa-commenting-o fa-lg"></i>
+															  	</div>
+															  </dt>
+															  <dd>
+															  		<div class="WB_text" >
+																		<a href="javascript:void(0)">干掉胖编戏曲艺：</a>
+																		出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！出口的东西卖得比国内还便宜，东西更好。因为国家有补贴！
+																	</div>
+																	<p>
+																	  	<span>12-08 21:06</span>
+																	  	<em>|</em>
+																	  	<i class='fa fa-thumbs-o-up'></i>
+																	  	<span>155994</span>
+																	</p>
+															  </dd>
+															</dl>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="box p-right p-left p-bottom analyzeContent" th:remove="body">
+							<div class="entityWord" >
+								<div class="box-header header-vimeo" >
+									<h2>内容标签</h2>
+									<input type="hidden" value="0" class="labelCount"/>  
+								</div>
+								<div class="listPer box p-right p-left"  id="entityWordsDiv" >
+									<div class="listLabel" >
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="" class='set'>人物标签</a>
+										  	</dt>
+										  	<dd class="persontTag">
+										  		<a href="" class="dictionaryWord"><span>习近平</span></a>
+										  	</dd>
+										</dl>
+									</div>
+									<div class="listLabel" >
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="" class='set'>机构标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href=""  class="dictionaryWord"><span>全国政协</span></a>
+										  	</dd>
+										</dl>
+									</div>
+									<div class="listLabel" >
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="" class='set'>单位标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href=""  class="dictionaryWord"><span>军委</span></a>
+										  	</dd>
+										</dl>
+									</div>
+									<div class="listLabel" >
+										<dl class="dl-horizontal m-bottom">
+										  	<dt>
+										  		<a href="" class='set'>地点标签</a>
+										  	</dt>
+										  	<dd>
+										  		<a href="javascript:void(0)"  class="dictionaryWord"><span>北京</span></a>
+										  	</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+							
+							<div class="newsDetailLabel">
+								<div class="box-header header-vimeo">
+									<h2>属性标签</h2>
+								</div>
+								<div class="listPer box p-right p-left attributeContent">
+									<div class="listLabel">
+										<a href="javascript:void(0)" ><span>房价</span></a>
+										<a href="javascript:void(0)"><span>原创</span></a>
+										<a href="javascript:void(0)"><span>改革</span></a>
+									</div>
+									<div class="listLabel">
+										<a href="javascript:void(0)" ><span>房价</span></a>
+										<a href="javascript:void(0)"><span>原创</span></a>
+										<a href="javascript:void(0)"><span>改革</span></a>
+									</div>
+								</div>
+							</div>
+							<div class="bothSides" >
+								<div class="box-header header-vimeo">
+									<h2>负面指数</h2>
+								</div>
+								<div class="bothSidesData box p-right p-left">
+									<div class="row">
+									   	<div class="col-md-3 col-sm-3 col-xs-3 center">
+									   		<div class="bothSidesTit ">
+												<span>正</span>
+											</div>
+									   	</div>
+									  	<div class="col-md-6 col-sm-6 col-xs-6 p-right p-left">
+									  		<div class="progress_bar">
+												<div class="pro-bar" >
+													<small class="progress_bar_title" >
+														<span class="progress_number">10%</span>
+													</small>
+													<span class="progress-bar-inner"  style="background-color: #F44336;" data-value="36" data-percentage-value="36"></span>
+												</div>
+											</div>
+									  	</div>
+									 	<div class="col-md-3 col-sm-3 col-xs-3 center">
+									 		<div class="bothSidesTit bothSidesF">
+												<span>负</span>
+											</div>
+									 	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="box p-right p-left p-top">
+							<div class="newsDetailRelative similarCon hide">
+								<input type="hidden" class="relativeNum" ></input>
+								<div class="box-header" >
+									<h2>相似内容</h2><h3></h3>
+								</div>
+								<input type="hidden" class="changeNum" value="1"></input>
+								<div class="changeRelativeCon similarConMore">更多>></div>
+								<div class="box p-left p-right p-top similarConBox" th:remove="body">
+									<div class="similarNews similarItem">
+										<ul class="relativeList">
+											<li>
+												<dl class="dl-horizontal">
+												  	<dt><span>[新闻]</span></dt>
+												  	<dd>
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		<a href="javascript:void(0)">全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="similarImg similarItem">
+										<ul class="relativeList">
+											<li>
+												<dl class="dl-horizontal">
+												  	<dt><span>[图片]</span></dt>
+												  	<dd >
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="similarVideo similarItem" >
+										<ul class="relativeList">
+											<li >
+												<dl class="dl-horizontal"  >
+												  	<dt><span>[视频]</span></dt>
+												  	<dd>
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		<a target='_blank' href="#">老爸要就任美国总统 ”第一女儿”精心打扮赴华盛顿</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="box p-right p-left">
+							<div class="newsDetailRelative interrelatedCon hide">
+								<input type="hidden" class="relativeNum" ></input>
+								<div class="box-header" >
+									<h2>相关内容</h2><h3></h3>
+								</div>
+								<input type="hidden" class="changeNum" value="1"></input>
+								<div class="changeRelativeCon interrelatedConMore" >更多>></div>
+								<div class="box p-left p-right p-top interrelatedConBox" th:remove="body">
+									<div class="interrelatedNews interrelatedItem">
+										<ul class="relativeList">
+											<li >
+												<dl class="dl-horizontal">
+												  	<dt><span>[新闻]</span></dt>
+												  	<dd>
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		<a href="javascript:void(0)">全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="interrelatedTopic interrelatedItem">
+										<ul class="relativeList">
+											<li>
+												<dl class="dl-horizontal">
+												  	<dt><span>[专题]</span></dt>
+												  	<dd >
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="interrelatedImg interrelatedItem">
+										<ul class="relativeList">
+											<li >
+												<dl class="dl-horizontal">
+												  	<dt><span>[图片]</span></dt>
+												  	<dd>
+												  		<div class="interrelatedImgItem">
+												  			<p class="interrelatedImgItemImg"><img src='http://n.sinaimg.cn/sports/transform/20170801/Ah49-fyinvys9827094.jpg'/></p>
+												  			<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		</div>
+												  		<div class="interrelatedImgItem">
+												  			<p class="interrelatedImgItemImg"><img src='http://n.sinaimg.cn/sports/transform/20170801/Ah49-fyinvys9827094.jpg'/></p>
+												  			<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		</div>
+												  		<div class="interrelatedImgItem">
+												  			<p class="interrelatedImgItemImg"><img src='http://n.sinaimg.cn/sports/transform/20170801/Ah49-fyinvys9827094.jpg'/></p>
+												  			<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		</div>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+									<div class="interrelatedVideo interrelatedItem">
+										<ul class="relativeList">
+											<li >
+												<dl class="dl-horizontal">
+												  	<dt><span>[视频]</span></dt>
+												  	<dd>
+												  		<a target='_blank' >全国楼市成交量将继续下滑 房价下调或将蔓延更多城市</a>
+												  		<a target='_blank' href="#">老爸要就任美国总统 ”第一女儿”精心打扮赴华盛顿</a>
+												  	</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="box p-right p-left analysisResultCon">
+							<!-- 热门评论词 -->
+							<div class="hotCommentWord hide">
+								<div class="box-header">
+									<h2>热门评论词</h2><h3></h3>
+								</div>
+								<!-- 相关评论 -->
+								<div class="relativeComment hide">
+									<div class="box p-right p-left p-bottom listPer" th:remove="body">
+										<div class="listLabel" >
+											<dl class="dl-horizontal m-bottom" >
+											  	<dt>
+											  		<a href="javascript:void(0)" class='set'>相关人物</a>
+											  	</dt>
+											  	<dd>
+											  		<a href="javascript:void(0)" >唐艳君</a>
+											  		<a href="javascript:void(0)" >川普</a>
+										  			<a href="javascript:void(0)" >奥巴马</a>
+											  	</dd>
+											</dl>
+										</div>
+										<div class="listLabel" >
+											<dl class="dl-horizontal m-bottom" >
+											  	<dt>
+											  		<a href="javascript:void(0)" class='set'>相关机构</a>
+											  	</dt>
+											  	<dd>
+											  		<a href="javascript:void(0)" >中国政府</a>
+											  		<a href="javascript:void(0)" >欧盟</a>
+										  			<a href="javascript:void(0)" >联合国</a>
+										  			<a href="javascript:void(0)" >英国</a>
+											  	</dd>
+											</dl>
+											
+										</div>
+										<div class="listLabel">
+											<dl class="dl-horizontal m-bottom" >
+										  	<dt>
+										  		<a href="javascript:void(0)" class='set'>相关单位</a>
+										  	</dt>
+										  	<dd >
+										  		<a href="javascript:void(0)" >中国政府</a>
+										  		<a href="javascript:void(0)" >华为</a>
+										  		<a href="javascript:void(0)" >中兴</a>
+										  		<a href="javascript:void(0)" >IBM</a>
+										  	</dd>
+										</dl>
+										</div>
+										<div class="listLabel" >
+											<dl class="dl-horizontal m-bottom" >
+											  	<dt >
+											  		<a href="javascript:void(0)" class='set'>相关地点</a>
+											  	</dt>
+											  	<dd >
+											  		<a href="javascript:void(0)" >中国政府</a>
+											  		<a href="javascript:void(0)" >平遥古城</a>
+										  			<a href="javascript:void(0)" >大理</a>
+										  			<a href="javascript:void(0)" >太原</a>
+										  			<a href="javascript:void(0)" >凤凰古城</a>
+											  	</dd>
+											</dl>
+										</div>
+									</div>
+								</div>
+								<div class="hotCommentWordCon ">
+									<div id="hotCWEcharts" style="width：100%;height: 300px;"></div>
+								</div>
+							</div>
+							
+							<!-- 典型意见 -->
+							<div class="typicalOpinion hide">
+								<div class="box p-right p-left p-bottom">
+									<div class="box-header">
+										<h2>典型意见</h2><h3></h3>
+									</div>
+									<div class="typicalOpinionBox">
+										<div id="reportCountCharts" style="width:100%;height: 360px;"></div>
+									</div>
+								</div>
+							</div>
+							<!-- 网络评论统计 -->
+							<div class="reportCount hide">
+								<div class="box p-right p-left p-bottom">
+									<div class="box-header">
+										<h2>网络评论统计</h2><h3></h3>
+									</div>
+									<div class="reportCountBox">
+										<div class="bleft">
+											<div class="bcon" id="list_mark">
+												<h1>
+												<b class="reportCountDate">日期</b>
+												<b class="active reportCountArea">地域</b>
+												<b class="reportCountEmotion">情感</b>
+												</h1>
+												<div class="list1 reportCountDate">
+													<!-- 日期 -->
+													<p class="trendChart"><i class="fa fa-bar-chart red"></i>&nbsp;趋势图</p>
+													<div id="commentCountCharts"  style="width: 100%;height: 360px;"></div>
+												</div>
+												<div class="list1 reportCountArea">
+													<p class="trendChart"><i class="fa fa-bar-chart red"></i>&nbsp;趋势图</p>
+													<!-- 地域 -->
+													<div id="cAEchartsMap"  style="width: 100%;height: 360px"></div>
+												</div>
+												<div class="list1 reportCountEmotion">
+													<p class="trendChart"><i class="fa fa-bar-chart red"></i>&nbsp;趋势图</p>
+													<!-- 情感 -->
+													<div id="emotionAnalyzeEchart" style="width:100%;height: 360px;"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+					
+
+					<!-- 词条百科-模态框 -->
+					<div class="modal bs-example-modal-lg" id="dictionaryModal" >
+					  	<div class="modal-dialog modal-lg">
+					    	<div class="modal-content">
+					      		<div class="modal-header">
+					        		<button type="button" class="close closeThreadModal" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					        		<h6 class="modal-title" id="dictionary_title" th:remove="body">习近平</h6>
+					      		</div>
+					      		<div class="modal-body" style="height:450px;overflow-y:scroll" id="dictionary_content" th:remove="body">
+					      			<b>人物详情</b><div style="margin-top:10px;margin-bottom:20px;clear:both;overflow: hidden"><div class="col-sm-3" style="height:190px;text-align: center"><img src="../../../static/frontEnd/image/newsDetail/5_xijinping.jpg" /></div><div class="col-sm-9" style="height:190px;padding-left: 0px"><p>现任中国共产党中央委员会总书记，中共中央军事委员会主席，中华人民共和国主席，中华人民共和国中央军事委员会主席。</p><div class="col-sm-3">出生年月：</div><div class="col-sm-3">1953-6</div><div class="col-sm-3">性别：</div><div class="col-sm-3">男</div><div class="col-sm-3">籍贯：</div><div class="col-sm-3">陕西富平</div><div class="col-sm-3">民族：</div><div class="col-sm-3">汉族</div><div class="col-sm-3">毕业院校：</div><div class="col-sm-3">																									清华大学,</div><div class="col-sm-3">学位/学历：</div><div class="col-sm-3">博士,在职研究生,</div></div></div><b>主要经历</b><div style="clear:both;margin-top:10px"><div class="zyjl_content"></div></div>
+					     	 	</div>
+					      		<div class="modal-footer">
+					        		<button type="button" class="btn btn-default closeThreadModal" data-dismiss="modal">关闭</button>
+	<!-- 				        		<button type="button" class="btn btn-primary">确定</button> -->
+					      		</div>
+					    	</div>
+					  	</div>
+					</div>
+					
+					
+					<!-- 微信分享-模态框 -->
+					<div class="modal bs-example-modal-sm" id="weixinModal" >
+					  	<div class="modal-dialog modal-sm">
+					    	<div class="modal-content">
+					    		<div class="modal-header">
+								   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								   <h4 class="modal-title" id="myModalLabel">打开微信扫一扫</h4>
+								</div>
+					      		<div class="modal-body">
+					      			
+					      			<div id="qrcode"></div>
+					     	 	</div>
+					    	</div>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer><!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	
+	
+	<!-- weibo CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/newsdetailcarousel/css/YuxiSlider.css"   th:href="@{/common/plugins/weibo/css/weibo.css}"/>
+	<!-- video CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/newsdetailcarousel/css/YuxiSlider.css"   th:href="@{/common/plugins/video/video-js.css}"/>
+	<!-- la-timer CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/screenClassification.css"  th:href="@{/frontEnd/css/latestNews/la-timer.css}" />
+	<!-- YuxiSlider CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/newsdetailcarousel/css/YuxiSlider.css"   th:href="@{/common/plugins/newsdetailcarousel/css/YuxiSlider.css}"/>
+	<!-- la-timer CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/screenClassification.css"  th:href="@{/frontEnd/css/latestNews/la-timer.css}" />
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/newsDetail/newsDetail.css" th:href="@{/frontEnd/css/newsDetail/newsDetail.css}" />
+	
+	<!-- weibo js -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/weibo/nineslide.js}"></script>
+	<!-- video js -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/video/js/video.min.js}"></script>
+	<!-- Echarts Js -->
+	<script src="http://cdn.bootcss.com/echarts/3.4.0/echarts.min.js"></script>
+	<!-- Echarts WorldCloud -->
+	<script type="text/javascript" src="../../../static/common/plugins/echarts/echarts-wordcloud.min.js" th:src="@{/common/plugins/echarts/echarts-wordcloud.min.js}" ></script>
+	<!-- Echarts China -->
+	<script type="text/javascript" src="../../../static/common/plugins/echarts/china.min.js" th:src="@{/common/plugins/echarts/china.min.js}" ></script>
+	<!-- tab Scroll -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/hotEvent/lrtk.min.js" th:src="@{/frontEnd/js/static/hotEvent/lrtk.min.js}" ></script>
+	<!-- jquery.dotdotdot JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js}"></script>
+	<!-- YuxiSlider JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js}" ></script>
+
+	<!-- qrcode JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/qrcode/qrcode.min.js}" ></script>
+	
+	
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/newsDetail/newsDetail.js" th:src="@{/frontEnd/js/dynamic/latestNews/latestNewsDetail.js}"></script>
+	
+</body>
+</html>

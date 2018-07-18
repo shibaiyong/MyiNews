@@ -1,0 +1,316 @@
+@media (max-width: 1100px){
+	/* .col-md-4{
+		width: 33.33333333% ;
+	} */
+	.col-md-8{
+		width: 66.66666667%;
+	}
+	.col-ms-12{
+		width: 100%;
+	}
+	.advancedFilterCon .col-md-4{
+		padding-left: 15px !important;
+	}
+	.screenCon .col-md-4{
+		padding-left:15px !important;
+}
+}
+@media (max-width: 769px){
+	#screen .form-control{
+		width: 100% !important;
+	}
+	#screen .input-group {
+		margin-bottom: 10px;
+	}
+	#screen .screenCon .customAdd form button{
+		width: 100%;
+	}
+}
+/* 热点查询-隐藏提示 */
+.toHideSearchCon{
+	text-align: center;
+	margin-top: 15px;
+	color: #939393
+}
+.toHideSearchCon i{
+	color: #ddd
+}
+/* 热点查询-筛选 */
+.clearAllBtn{
+	color:#F44336;
+}
+.searchesTitle{
+	padding-right: 10px;
+}
+#screen .list-screen{
+	margin-top:5px;
+}
+#screen .form-control{
+	height: 30px;
+	padding:2px 8px;
+	border-radius: 0px;
+	width:300px;
+	border:1px solid #F44336;
+}
+#screen .input-group-addon{
+	border-radius: 0px;
+	cursor: pointer;
+}
+#screen .screenSearch{
+	width:50px;
+}
+#screen .screenCon .customAdd{
+	margin-bottom: 8px;
+}
+#screen .screenCon .customAdd form{
+	display: inline-block;
+}
+#screen .screenCon .customAdd form button{
+	background: #ff6600;
+	color: #fff;
+	border-color: #ff6600
+}
+#screen  .timeCustomCon{
+	margin-top: -3px;
+	margin-left: 20px;
+}
+#screen  .timeCustomCon .form-control{
+	width: 119px;
+	border:1px solid #ccc;
+}
+#screen  .timeCustomCon button{
+	padding: 6px 10px;
+	font-size: 12px;
+}
+#select4{
+	border-right:#ccc 1px dashed;
+}
+.screenCon .col-md-4{
+		padding-left:0px;
+}
+.advancedFilterCon{
+	border:1px solid #ddd;
+	margin-left: 0px;
+	margin-right: 0px;
+	display: none;
+	margin-bottom: 10px;
+}
+.advancedFilterCon .col-md-4{
+	padding-left: 0px;
+}
+ .selectedBox{
+	overflow: hidden;
+}
+/* 热点搜索-结果 */
+.searchesTable{
+	text-align: center;
+}
+.searchesTable thead th{
+	text-align: center;
+}
+.searchesTable thead th:nth-child(2){
+	text-align: left;
+}
+.searchesTable tbody td:nth-child(2){
+	text-align:left;
+}
+.searchesTable thead tr{
+	background: #f5f5f5;
+}
+.timeCustomCon{
+	font-size: 14px;
+}
+/* 热点排行-筛选条件 */
+.rankListTitle{
+/* 	border: 1px solid #ddd; */
+/* 	margin-top: 10px; */
+/* 	padding-left: 10px; */
+/* 	padding-right: 10px; */
+}
+#screenRank .list-screen{
+	margin-top:5px;
+}
+#screenRank .dl-horizontal dt{
+	width: 65px;
+	margin-top: 4px;
+	margin-bottom: 8px;
+}
+#screenRank .form-control{
+	height: 30px;
+	padding:2px 8px;
+	border-radius: 0px;
+	width:300px;
+	border:1px solid #F44336;
+}
+#screenRank .input-group-addon{
+	border-radius: 0px;
+	cursor: pointer;
+}
+#screenRank .screenSearch{
+	width:50px;
+}
+#screenRank .screenCon .customAdd{
+	margin-bottom: 8px;
+}
+#screenRank .screenCon .customAdd form{
+	display: inline-block;
+}
+#screenRank  .hotTank-timeCustomCon{
+	margin-top: -3px;
+	margin-left: 20px;
+}
+#screenRank  .hotTank-timeCustomCon .form-control{
+	width: 140px;
+}
+#screenRank  .hotTank-timeCustomCon button{
+	padding: 6px 10px;
+	font-size: 12px;
+}
+#listType,
+#listPeriod{
+	/* border-right:#ccc 1px dashed; */
+}
+/* 热点排行-具体内容 */
+.rankListConBox .thumbnail{
+	margin-bottom: 5px;
+	border:0px;
+}
+.rankListConBox .thumbnail:hover{
+	box-shadow: 1px 2px 8px #ccc; 
+}
+.captionTitle{
+	padding:6px 8px;
+}
+.captionTitle p.imgiNews{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 50%;
+	box-shadow: 1px 1px 6px #ddd;
+	margin-bottom: 0px;
+	font-size: 12px;
+}
+.captionTitle img{
+	width: auto;
+	height: 25px;
+	line-height: 25px;
+}
+.captionTitle .navTime{
+	position: absolute;
+	right: 25px;
+	top:14px;
+}
+.captionTitle ul.nav-tabs a{
+	padding: 6px 8px;
+	color: #333;
+	border-radius: 0px;
+}
+.captionTitle ul.nav-tabs .fixed a{
+	background: #F44336;
+	color: #fff;
+}
+.captionTitle ul.nav-tabs .fixed a:hover,
+.captionTitle ul.nav-tabs .fixed a:active{
+	background: #F44336;
+	color: #fff;
+}
+
+.captionTitle ul.nav-tabs a:hover,
+.captionTitle ul.nav-tabs a:active{
+	color: #F44336;
+}
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:focus, 
+.nav-tabs > li.active > a:hover{
+	color: #F44336;
+	background: #fff;
+	border:0px;
+	border-bottom:1px solid #F44336;
+}
+
+.rankListCon .captionCon{
+	background: #eee;
+	padding:3px;
+}
+.rankListCon div.rankListConBox{
+	padding-left:14px;
+	padding-right: 0px;
+}
+.rankListCon .captionCon .list-group-style{
+	background: #fff;
+	padding:6px 8px;
+}
+.rankListCon .captionCon .list-group-style a{
+	font-size: 13px;
+}
+.rankListCon .captionCon .list-group-style span{
+	font-size: 12px;
+	position: absolute;
+	right: 0px;
+	margin-top:1px;
+}
+.rankListCon .captionCon .list-group-style .list-style-item{
+	border-bottom:1px solid #ddd;
+	padding-top:5px;
+	padding-bottom: 5px;
+	color: #939393;
+	position: relative;
+}
+.rankListCon .captionCon .list-group-style .list-style-item a{
+	display: inline-block;
+	width: 80%;
+	height:17px;
+	line-height:20px;
+}
+.rankListCon .captionCon .list-group-style .list-style-item em{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	text-align:center;
+	color:#fff;
+	font:12px/16px arial;
+	vertical-align:middle;
+	/* background:grey; */
+	background: #ccc;
+	text-indent: 0px;
+	margin-right: 5px;
+	margin-top: 2px;
+	float: left;
+}
+.rankListCon .captionCon .list-group-style .list-style-item em.red{
+	background: #F44336 !important
+}
+
+
+a.fullWebMore{
+	float:right;
+	margin-top:5px;
+	font-size:12px;
+}
+a.fullWebMore:hover{
+	color:#F44336;
+}
+
+.classification{
+	margin-top:10px;
+}
+.classification a.classificationItem{
+	display:inline-block;
+	padding:5px 13px;
+	border:1px solid #ddd;
+	text-align:center;
+	margin-right:5px;
+}
+.classification a.classificationItem:hover{
+	background:#F44336;
+	color:#fff;
+}
+.classification a.classificationItem.active{
+	background:#F44336;
+	color:#fff
+}
+
+.screenConditionBox{
+	float:right;
+	margin-right:245px;
+}

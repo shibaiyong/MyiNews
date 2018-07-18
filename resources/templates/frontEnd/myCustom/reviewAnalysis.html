@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news"/>
+    <meta name="description"
+          content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。"/>
+    <link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen"
+          th:href="@{/frontEnd/image/logo/favicon.ico}"/>
+    <!-- 我的定制 -->
+    <title>iNews-我的定制</title>
+
+
+    <!-- 引入公用的插件 注：必须放在最开始的位置 -->
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/myCustomThread.css"
+          th:href="@{/frontEnd/css/myCustom/reviewAnalysis.css}"/>
+    <!--<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/reviewAnalysis.css"/>-->
+
+</head>
+<body>
+<div class="reviewAnalysisCon box">
+    <div style="width: 450px;padding-left: 82px;padding-right: 40px">
+        <p class="linkTips"
+           style=" color: white;background: rgba(244,47,54,0.8);margin-bottom: 8px;text-align: center">
+            11</p>
+    </div>
+    <div class="inputBox">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-1 control-label linkText"><i class="red">*</i> 文章链接</label>
+                <div class="col-sm-5">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control linkUrl" placeholder="请输入链接地址"/>
+
+                        <div class="input-group-addon btn-red linkBtn">提交</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label "></label>
+                <div class="col-sm-5">
+                    <div class="input-group commentaries">
+                        <!-- 							<p>(1) 文章来源限定在“网易、新浪、微博、凤凰”这4个网站范围内</p> -->
+                        <!-- 							<p>(2) 每条评论分析提交后，分析结果需要等待。。分钟</p> -->
+                        <p>(1) 目前仅支持网易、新浪、凤凰三个网站及新浪微博的评论分析</p>
+                        <p>(2) 每天最多可提交三条评论分析</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="reviewAnalysisShow">
+        <!-- 			<div class="box-header header-vimeo"> -->
+        <!-- 				<h2>已添加文章列表</h2> -->
+        <!-- 			</div> -->
+        <table class="table table-hover reviewAnalysisTable">
+            <thead>
+            <tr>
+                <th style="text-align:center">序号</th>
+                <th>文章链接</th>
+                <th>文章标题</th>
+                <th style="width: 100px;">分析时间</th>
+                <th style="width: 165px;">分析状态</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+            </thead>
+            <tbody th:remove="body">
+            <tr>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">http://inewsengine.com/uec/latest/front/news/detail/bde36e3e6cb7af326bf1661dff995bb4</a>
+                </td>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">就差加氢站了 试本田CLARITY燃料电池车</a>
+                </td>
+                <td class="">06-12 16:00</td>
+                <td class="">
+                    <button type="button" class="btn btn-default btn-xs">正在分析</button>
+                    <button type="button" class="btn btn-danger btn-xs">查看分析结果</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">http://inewsengine.com/uec/latest/front/news/detail/bde36e3e6cb7af326bf1661dff995bb4</a>
+                </td>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">就差加氢站了 试本田CLARITY燃料电池车</a>
+                </td>
+                <td class="">06-12 16:00</td>
+                <td class="">
+                    <button type="button" class="btn btn-default btn-xs">重新分析</button>
+                    <button type="button" class="btn btn-danger btn-xs">查看分析结果</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">http://inewsengine.com/uec/latest/front/news/detail/bde36e3e6cb7af326bf1661dff995bb4</a>
+                </td>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">就差加氢站了 试本田CLARITY燃料电池车</a>
+                </td>
+                <td class="">06-12 16:00</td>
+                <td class="">
+                    <button type="button" class="btn btn-default btn-xs">重新分析</button>
+                    <button type="button" class="btn btn-danger btn-xs">查看分析结果</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">http://inewsengine.com/uec/latest/front/news/detail/bde36e3e6cb7af326bf1661dff995bb4</a>
+                </td>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">就差加氢站了 试本田CLARITY燃料电池车</a>
+                </td>
+                <td class="">06-12 16:00</td>
+                <td class="">
+                    <button type="button" class="btn btn-default btn-xs">重新分析</button>
+                    <button type="button" class="btn btn-danger btn-xs">查看分析结果</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">http://inewsengine.com/uec/latest/front/news/detail/bde36e3e6cb7af326bf1661dff995bb4</a>
+                </td>
+                <td class="titleRightClick">
+                    <a href="javascript:;" target="_blank" class="beyondEllipsis">就差加氢站了 试本田CLARITY燃料电池车</a>
+                </td>
+                <td class="">06-12 16:00</td>
+                <td class="">
+                    <button type="button" class="btn btn-default btn-xs">重新分析</button>
+                    <button type="button" class="btn btn-danger btn-xs">查看分析结果</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="confirmModal" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                存在相同的分析任务，是否进行更新？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default confirmN" data-dismiss="modal">否</button>
+                <button type="button" class="btn btn-red confirmY">是</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="delModal" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                是否删除该条任务？
+            </div>
+            <div class="modal-footer">
+                <div class="noMoreReminder" style="cursor: pointer;display: inline; float: left">
+                    <i id="noMoreReminder-i" class="fa fa-square-o"/>&nbsp;以后不再提示
+                </div>
+                <button type="button" class="btn btn-default delN">否</button>
+                <button type="button" class="btn btn-red delY">是</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Self JS -->
+<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/myCustomThread.js"
+        th:src="@{/frontEnd/js/dynamic/myCustom/reviewAnalysis.js}"></script>
+</body>
+</html>

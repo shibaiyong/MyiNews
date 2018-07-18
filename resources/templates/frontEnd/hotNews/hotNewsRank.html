@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 热点排行 -->
+	<title>iNews-热点排行</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+	<!-- daterangepicker CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/daterangepicker/css/daterangepicker.min.css" th:href="@{/common/plugins/daterangepicker/css/daterangepicker.min.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/hotNews/hotNewRank.css" th:href="@{/frontEnd/css/hotNews/hotNewRank.css}"/>
+	
+	<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/common/plugins/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!-- daterangepicker JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/daterangepicker/js/moment.min.js"  th:src="@{/common/plugins/daterangepicker/js/moment.min.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.min.js}"></script>
+	<!-- masonry JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/masonry/masonry.pkgd.min.js" th:src="@{/common/plugins/masonry/masonry.pkgd.min.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/masonry/imagesloaded.pkgd.min.js"  th:src="@{/common/plugins/masonry/imagesloaded.pkgd.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/hotNews/hotNewsRank.js" th:src="@{/frontEnd/js/dynamic/hotNews/hotNewsRank-static.js}"></script>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+
+					<div class="col-md-12 hide">
+						<div class="searchesLine ">
+							<!-- <div class="box-header header-vimeo">
+							 	<h2>热点检索</h2>
+							 </div> --> 
+							<div class="searchesTitle">
+								<div id="screen">
+								    <div class="box p-all">
+								    	<div class="box screenCon p-bottom p-left p-right">
+							    	 		<div class="customAdd">
+											    <form class="form-inline" role="form" action='javascript:void(0)'>
+												  	<div class="form-group">
+												    	<div class="input-group ">
+												      		<input class="form-control customAddInput" type="text" placeholder="请输入关键词" />
+												      		<div class="input-group-addon btn-red customAddBtn">iSearch</div>
+												    	</div>
+<!-- 												    	<button type="button" class="btn btn-default btn-sm advancedFilter">高级筛选&nbsp;<i class="fa fa-angle-double-down"></i></button> -->
+												  	</div>
+												</form>
+								          	</div>
+<!-- 								          	<div> -->
+<!-- 								          		<ul class="select row"> -->
+<!-- 								          			<li class="select-result"> -->
+<!-- 														<dl class="dl-horizontal"> -->
+<!-- 															<dt>已选：</dt> -->
+<!-- 															<dd class="select-no">暂时没有选择过滤条件</dd> -->
+<!-- 															<span type="button" class="btn btn-link pull-right  clearAllBtn">清空全部</span> -->
+<!-- 														</dl> -->
+<!-- 													</li> -->
+<!-- 								          		</ul> -->
+<!-- 								          	</div> -->
+<!-- 								          	<ul class="select row advancedFilterCon"> -->
+												
+<!-- 												<div class="row"> -->
+<!-- 												  	<div class="col-md-8 col-ms-12"> -->
+<!-- 												  		<li class="select-list"> -->
+<!-- 													  		<dl id="hotRankClassification" class="dl-horizontal"> -->
+<!-- 																<dt>分类：</dt> -->
+<!-- 																<div class='selectedBox'> -->
+<!-- 																	<dd class="select-all selected"><a href="javascript:void(0);">全部</a></dd> -->
+<!-- 																	<dd th:each="classification,detailStat:${classList}"><a href="javascript:void(0);" th:text="${classification.name}" th:if="${classification.name ne '其他'}">要闻</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >政治</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >经济</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >社会</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >文化</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >生活</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >体育</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >娱乐</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >军事</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >法制</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >教育</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >科技</a></dd> -->
+<!-- 																	<dd th:remove="all"><a href="javascript:void(0);" >其他</a></dd> -->
+<!-- 																</div> -->
+<!-- 															</dl> -->
+<!-- 														</li> -->
+<!-- 												  	</div> -->
+<!-- 												  	<div class="col-md-4 col-ms-12"> -->
+<!-- 												  		<li class="select-list"> -->
+<!-- 													  		<dl id="hotSale" class="dl-horizontal"> -->
+<!-- 																<dt>榜单：</dt> -->
+<!-- 																<dd class="select-all selected"><a href="javascript:void(0);">全部</a></dd> -->
+<!-- 																<dd th:each="type,detailStat:${typeList}"><a href="javascript:void(0);" th:if="${type.name!='综合榜'}" th:text="${type.name}">点击榜</a></dd> -->
+<!-- 																<dd th:remove="all"><a href="javascript:void(0);" >评论榜</a></dd> -->
+<!-- 															</dl> -->
+<!-- 														</li> -->
+<!-- 												  	</div> -->
+<!-- 												</div> -->
+													
+<!-- 												<li class="select-list"> -->
+													
+<!-- 													<dl id="customTime" class="dl-horizontal"> -->
+<!-- 														<dt>时间：</dt> -->
+<!-- 														<dd class="select-all selected"><a href="javascript:void(0);">全部</a></dd> -->
+<!-- 														<dd><a href="javascript:void(0);">最近一天</a></dd> -->
+<!-- 														<dd><a href="javascript:void(0);">最近三天</a></dd> -->
+<!-- 														<dd><a href="javascript:void(0);">最近一周</a></dd> -->
+<!-- 														<dd><a href="javascript:void(0);">最近一月</a></dd> -->
+<!-- 														<dd><a href="javascript:void(0);" class="timeCustom">自定义</a></dd> -->
+<!-- 														<span class='timeCustomCon'></span> -->
+<!-- 													</dl> -->
+<!-- 													<dl class="classificationAmb" style="display: none"> -->
+<!-- 													</dl> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="searchesCon row" style="display:none">
+								<div class="col-xs-12 col-md-12">
+									<table class="table table-hover searchesTable ">
+										<thead>
+											<tr>
+												<th style="width:90px;">发布时间</th>
+												<th>标题</th>
+												<th style="width: 70px;">榜单</th>
+												<th style="width: 70px;">榜单周期</th>
+												<th style="width: 70px;">榜单排名</th>
+												<th style="width: 60px;">点击量</th>
+												<th style="width: 60px;">评论量</th>
+												<th style="width: 60px;">参与量</th>
+												<th style="width: 60px;">负面指数</th>
+												<th style="width: 60px;">浏览量</th>
+											</tr>
+										</thead>
+										<tbody th:remove="body">
+											<tr>
+												<td>
+													<a href="javascript:void" class="beyondEllipsis">
+														支付宝回应修改密码漏洞：仅在特定情况下才会实现
+													</a>
+												</td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>7</td>
+												<td>7900</td>
+												<td>3003</td>
+												<td>10430</td>
+											</tr>
+											<tr>
+												<td><a href="javascript:void(0)" class="beyondEllipsis">徐绍史传递2017中国经济新信号：三去一降一补任务更重</a></td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>6</td>
+												<td>8848</td>
+												<td>4300</td>
+												<td>12032</td>
+											</tr>
+											<tr>
+												<td><a href="javascript:void(0)" class="beyondEllipsis">教育部：8年抗战一律改为14年抗战 今年春季落实</a></td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>5</td>
+												<td>9891</td>
+												<td>4502</td>
+												<td>13061</td>
+											</tr>
+											<tr>
+												<td><a href="javascript:void(0)" class="beyondEllipsis">221天不胜+2017开门黑 国足赢一场要等到何时</a></td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>4</td>
+												<td>9983</td>
+												<td>5421</td>
+												<td>14130</td>
+											</tr>
+											<tr>
+												<td><a href="javascript:void(0)" class="beyondEllipsis">特朗普见马云背后有门道 专家称释放积极经济信号</a></td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>3</td>
+												<td>10500</td>
+												<td>3599</td>
+												<td>14390</td>
+											</tr>
+											<tr>
+												<td><a href="javascript:void(0)" class="beyondEllipsis">外媒称国际足联内部达一致 2026世界杯扩军至48队</a></td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>2</td>
+												<td>11023</td>
+												<td>4289</td>
+												<td>15684</td>
+											</tr>
+											<tr>
+												<td><a href="javascript:void(0)" class="beyondEllipsis">春节将至物价或继续走高 2017年CPI预计温和上升</a></td>
+												<td>2017-01-11 08:01:52</td>
+												<td>点击榜</td>
+												<td>一周</td>
+												<td>inews</td>
+												<td>1</td>
+												<td>12300</td>
+												<td>5432</td>
+												<td>16392</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="hotRankList box p-right p-left">
+							<div class="box-header header-vimeo">
+								<h2>最新排行</h2>
+							</div>
+							<!--<div class="screenClassification" th:include="frontEnd/common/screenClassification :: screenClassification"></div>-->
+
+							<div class="rankListTitle">
+								
+								<div class="box screenCon p-all">
+								
+									<div class="screenClassification" th:include="frontEnd/common/screenClassification :: screenClassification"></div>
+<!-- 									<div class="classification"> -->
+<!-- 										<a href="javascript:void(0)" class="classificationItem active" data-innerid="">综合</a> -->
+<!-- 										<a href="javascript:void(0)" class="classificationItem" data-innerid="">体育</a> -->
+<!-- 										<a href="javascript:void(0)" class="classificationItem" data-innerid="">财经</a> -->
+<!-- 										<a href="javascript:void(0)" class="classificationItem" data-innerid="">娱乐</a> -->
+<!-- 										<a href="javascript:void(0)" class="classificationItem" data-innerid="">科技</a> -->
+<!-- 										<a href="javascript:void(0)" class="classificationItem" data-innerid="">军事</a> -->
+<!-- 									</div> -->
+									
+								</div>
+							</div>
+							<div class="rankListCon" >
+								<div class="box rankListConBox">
+									<div role="tabpanel">
+									    <div class="tab-content">
+									      	<div role="tabpanel" class="tab-pane active rankList" id="panel-2" th:remove="body">
+										        <div class="row masonry-container" >
+
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix ">
+																<img src="../../../static/frontEnd/image/hotNewsRank/iNews.png"/>
+											              		<a href="/ns/hot/front/hot/more/1" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">1</em>
+																  			他们仨是娱乐圈中的顶级学霸！
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[13万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a  href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">2</em>
+																  			资产遍全球 揭秘特朗普庞大商业帝国
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[13万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a  href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">3</em>
+																  			发改委：2017年去产能将将扩围至煤炭钢铁以外领域
+																  		</a>
+																  		<span class=" listTil">[12万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a  href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">4</em>
+																  			 春节将至物价或继续走高 2017年CPI预计温和上升
+																  		</a>
+																  		<span class="pull-right listTil">[11万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a  href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">5</em>
+																  			外媒称国际足联内部达一致 2026世界杯扩军至48队
+																  		</a>
+																  		<span class="pull-right listTil">[10万]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">网易</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/hotNewsRank/wy.png"/>
+																<a href="/ns/hot/front/hot/more/1" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a  href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">1</em>
+																  			28岁销售经理开车时猝死 曾称”累的时候不能倒下
+																  		</a>
+																  		<span class=" listTil listTilNew">[12万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">2</em>
+																  			你以为俄航很牛逼，他们只不过是不把人命当回事 |
+																  		</a>
+																  		<span class=" listTil listTilNew">[12万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">3</em>
+																  			女子两万元卖了亲生女儿 转身花两千买了只宠物猫
+																  		</a>
+																  		<span class="pull-right listTil">[10万]</span>
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis" >
+																  		<em class="hui">4</em>
+																  			外交部:辽宁舰依国际法享有海上航行自由
+																  		</a>
+																  		<span class="pull-right listTil">[10万]</span>
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">5</em>
+																  			央媒点名批评豆瓣:恶评引导观众拒看国产影片
+																  		</a>
+																  		<span class="pull-right listTil">[10万]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+																<img src="../../../static/frontEnd/image/hotNewsRank/sina.png"/>
+																<a href="/ns/hot/front/hot/more/1" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">1</em>
+																  			詹皇31分欧文准绝杀 库里打铁圣诞战骑士险胜
+																  		</a>
+																  		<span class=" listTil listTilNew">[12万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">2</em>
+																  			中央释放的这些改革信号 将影响你的买房决定
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[10万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">3</em>
+																  			辽宁舰航母编队首次突破第一岛链 已形成战斗力
+																  		</a>
+																  		<span class="pull-right listTil">[9万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">4</em>
+																  			外媒称大陆梵蒂冈建交在即 台当局回应密切关注
+																  		</a>
+																  		<span class="pull-right listTil">[9万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">5</em>
+																  			中国高校最大腐败案：副校长褚健被指掏空浙大
+																  		</a>
+																  		<span class="pull-right listTil">[8万]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+																<img src="../../../static/frontEnd/image/hotNewsRank/souhu.png" />
+																<a href="/ns/hot/front/hot/more/1" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">1</em>
+																  			新疆外援锁喉犯规遭驱逐！比赛中断10分钟
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[10万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">2</em>
+																  			大雪致500名同胞被困北海道 中国多架航班救援
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[8万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">3</em>
+																  			台湾初审通过同性婚姻法制化 反对者:继续抗争
+																  		</a>
+																  		<span class="pull-right listTil">[8万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">4</em>
+																  			英超-阿扎尔破门佩刀2球 切尔西3-0豪夺12连胜
+																  		</a>
+																  		<span class="pull-right listTil">[7万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">5</em>
+																  			女干部冲进小学当众猛扇老师耳光 拒绝正式道歉
+																  		</a>
+																  		<span class="pull-right listTil">[7万]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">腾讯</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/hotNewsRank/tenxun.png" />
+																<a href="/ns/hot/front/hot/more/1" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">1</em>
+																  			云南村庄“制止”八旬老翁寿宴 被指凑数式反腐
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[14万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">2</em>
+																  			黄兴国落马后 李鸿忠如何带天津市委整改
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[13万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="red">3</em>
+																  			辽宁舰赴西太平洋训练 中方回应称航行自由
+																  		</a>
+																  		<span class=" listTil">[12万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  		<em class="hui">4</em>
+																  			 组阿根廷双枪?曝申花欲签迪马利亚 身价5500万欧
+																  		</a>
+																  		<span class="pull-right listTil">[10万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">5</em>
+																  			京名嘴谈李根北京矛盾：给球迷个交代或能解决
+																  		</a>
+																  		<span class="pull-right listTil">[8万]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">凤凰</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/hotNewsRank/ifeng.png" />
+																<a href="javascript:void(0)" th:href="@{/gotoHotNewsList}" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">1</em>
+																  			台媒：直9起飞系因日本潜艇企图混入辽宁舰编队
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[9万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">2</em>
+																  			港媒称第2艘国产航母已在上海开工 将配蒸汽弹射器
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[8万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">3</em>
+																  			中央副部长10月空降河北 该省后脚就放大招
+																  		</a>
+																  		<span class="pull-right listTil">[8万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">4</em>
+																  			大陆与圣普复交引岛内紧张 台媒忧“武统”临近
+																  		</a>
+
+																  		<span class="pull-right listTil">[7万]</span>
+
+																  		
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">5</em>
+																  			骑士勇士裁判报告:两次漏判 KD最后一攻遭犯规
+																  		</a>
+																  		<span class="pull-right listTil">[6万]</span>
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!-- <ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">百度</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/hotNewsRank/baidu.png"/>
+																<a href="javascript:void(0)" th:href="@{/gotoHotNewsList}" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">1</em>
+																  			京名嘴谈李根北京矛盾：给球迷个交代或能解决
+																  		</a>
+																  		<span class=" listTil listTilNew">[12万]</span>
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">2</em>
+																  			篮协回应“京骂”争议：不会处罚北京赛区
+																  		</a>
+																  		<span class="pull-right listTil listTilNew">[10万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">3</em>
+																  			北京保利俱乐部涉黄被查 牵出多名赛车手富二代
+																  		</a>
+																  		<span class="pull-right listTil">[9万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">4</em>
+																  			90后原创歌手本兮因故去世 年仅22岁
+																  		</a>
+
+																  		<span class="pull-right listTil">[8万]</span>
+
+																  		
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">5</em>
+																  			高校学子着汉服上街 举标牌呼吁抵制圣诞节(图)
+																  		</a>
+
+																  		<span class="pull-right listTil">[8万]</span>
+
+																  		
+
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">微信</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/hotNewsRank/weixin.png"/>
+																<a href="javascript:void(0)" th:href="@{/gotoHotNewsList}" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">1</em>
+																  			宗庆后评马云“五新”:只认同新技术一说
+																  		</a>
+
+																  		<span class="pull-right listTil listTilNew">[13万]</span>
+
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">2</em>
+																  			曼联冬季第一签突生变故 为21万无限期后延
+																  		</a>
+																  		<span class=" listTil listTilNew">[12万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">3</em>
+																  			独家!神秘北京企业曝光 中赫集团或成国安大股东
+																  		</a>
+																  		<span class=" listTil">[12万]</span>
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">4</em>
+																  			山东女生裸坠死亡 校方要求家属向学校道歉
+																  		</a>
+
+																  		<span class="pull-right listTil">[10万]</span>
+
+																  		
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">5</em>
+																  			首艘国产航母高清照源自日媒 军报：让人警醒
+																  		</a>
+
+																  		<span class="pull-right listTil">[9万]</span>
+
+																  		
+
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										          	<div class="col-md-6 col-sm-6 item p-left">
+											            <div class="thumbnail p-all ">
+											              <div class="caption p-all">
+											              	<div class="captionTitle clearfix">
+											              		<!--<ul class="nav nav-tabs" role="tablist">
+																  	<li class="fixed"><a  href="javascript:void(0)">微博</a></li>
+																</ul>-->
+																<img src="../../../static/frontEnd/image/hotNewsRank/weibo.png"/>
+																<a href="javascript:void(0)" th:href="@{/gotoHotNewsList}" target="_blank" class="fullWebMore">更多 >></a>
+											              	</div>
+											              	<div class="captionCon">
+												                <ul class="list-group-style">
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">1</em>
+																  			原东海舰队副司令员李文模逝世 系毛岸英好友(图)
+																  		</a>
+
+																  		<span class="pull-right listTil listTilNew">[11万]</span>
+
+																  	</li>
+																 	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">2</em>
+																  			这个开发商花了300万 把县委书记副书记撂倒了
+																  		</a>
+
+																  		<span class="pull-right listTil listTilNew">[10万]</span>
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="red">3</em>
+																  			002航母或已开工19个月：排水量8万吨可载48架歼15
+																  		</a>
+
+																  		<span class="pull-right listTil">[9万]</span>
+
+																  		
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">4</em>
+																  			篮协回应“京骂”争议：不会处罚北京赛区
+																  		</a>
+
+																  		<span class="pull-right listTil">[9万]</span>
+
+																  	</li>
+																  	<li class="list-style-item">
+																  		<a href="../hotNews/hotNewsDetail.html" target="_black" class="beyondEllipsis">
+																  			<em class="hui">5</em>
+																  			2016年国内油价三连涨收官：每升涨8分钱 坐稳6元时代
+																  		</a>
+
+																  		<span class="pull-right listTil">[8万]</span>
+
+																  		
+
+																  	</li>
+																</ul>
+															</div>
+											              </div>
+											            </div>
+										          	</div>
+										        </div>
+									      	</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

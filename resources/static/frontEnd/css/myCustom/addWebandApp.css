@@ -1,0 +1,59 @@
+.blodFont{
+    font-weight: bold;
+}
+.width40{
+    width:40%;
+}
+.floatleft{
+     float:left;
+ }
+.floatright{
+    float:right;
+}
+.clearfixed:after{
+    content:'';
+    width:0;
+    height:0;
+    font-size: 0;
+    display: block;
+    clear:both;
+}
+.clearfixed{
+    zoom:1;
+}
+.searchContainer{
+    width:50%;
+    font-size: 0;
+    overflow: hidden;
+    margin: 40px
+}
+.searchContainer input{
+    width:90%;
+    display: inline-block;
+    float:left;
+}
+.searchContainer button{
+    width: 10%;
+    display: inline-block;
+    float:left;
+    border-left:none;
+    background:#ddd;
+    color:black;
+}
+.customInfoContainer{
+    margin-left:40px;
+}
+.customInfoContainer a{
+    display: inline-block;
+    width:30%;
+    background:#ddd;
+    height:40px;
+    line-height: 40px;
+    text-align:center;
+    margin:6px;
+    font-size:16px;
+    font-weight: normal;
+}
+.customInfoContainer .hasAddWeb h5{
+    color:#333;
+}

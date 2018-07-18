@@ -1,0 +1,161 @@
+.toast-container {
+	width: 280px;
+	z-index: 9999;
+}
+
+
+* html .toast-container {
+	position: absolute;
+}
+
+.toast-item {
+	height: auto;
+    opacity: 0.9;
+	color: #fff;
+	padding-left: 6px;
+	padding-right: 6px;
+	font-size: 14px;
+	border-left-width:5px;
+	display: block;
+	position: relative;
+	margin: 0 0 12px 0;
+}
+
+.toast-item p {
+    text-align: left;
+    margin-left: 25px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.toast-item-close {
+    width:22px;
+    height:22px;
+    line-height:22px;
+    position: absolute;
+    top:7px;
+    right:7px;
+    text-align:center;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: 0.4;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.toast-item-image {
+    width:20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    text-align:center;
+}
+
+.toast-item-image-notice {
+    background:url(../images/notice.png) no-repeat;
+}
+
+.toast-item-image-success {
+    background:url(../images/success.png) no-repeat;
+}
+
+.toast-item-image-warning {
+    background:url(../images/warning.png) no-repeat;
+}
+
+.toast-item-image-error {
+    background:url(../images/error.png) no-repeat;
+}
+
+
+/**
+ * toast types
+ *
+ * pattern: toast-type-[value]
+ * where 'value' is the real value of the plugin option 'type'
+ *
+ */
+.toast-type-notice {
+    color: white;
+    border-left:5px solid  #11a9cc;
+    background:#57b5e3;
+}
+
+.toast-type-success {
+    color: white;
+    border-left:5px solid  #8cc474;
+    background:#a0d468;
+}
+
+.toast-type-warning {
+    color: white;
+    border-left:5px solid  #ffce55;
+    background:#fff1a8;
+}
+
+.toast-type-error {
+    color: white;
+    border-left:5px solid  #df5138;
+    background:#e46f61;
+}
+
+/**
+ * positions
+ *
+ * pattern: toast-position-[value]
+ * where 'value' is the real value of the plugin option 'position'
+ *
+ */
+.toast-position-top-left {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+
+.toast-position-top-center {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    margin-left: -140px;
+}
+
+.toast-position-top-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.toast-position-middle-left {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    margin-top: -40px;
+}
+
+.toast-position-middle-center {
+    position: fixed;
+    left: 50%;
+    margin-left: -140px;
+    margin-top: -40px;
+    top: 50%;
+}
+
+.toast-position-middle-right {
+    position: fixed;
+    right: 20px;
+    margin-left: -140px;
+    margin-top: -40px;
+    top: 50%;
+}
+.toast-position-bottom-left{
+	position: fixed;
+    left: 20px;
+   	bottom:0px;
+}
+.toast-position-bottom-right{
+	position: fixed;
+    bottom:0px;
+    right: 20px;
+}

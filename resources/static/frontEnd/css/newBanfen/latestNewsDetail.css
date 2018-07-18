@@ -1,0 +1,96 @@
+.latestNewsDetailSource{
+	margin-right: 20px;
+	margin-top:3px;
+	display:inline-block; 
+	font-family: Microsoft Yahei; 
+	font-weight: normal; 
+	color: #666
+}
+.latestNewsDetailTime{
+	display:inline-block;
+	white-space:nowrap;
+	margin-top:3px;
+}
+.latestNewsDetailCon p{
+	margin-top: 20px;
+}
+.lNDOriginalLink{
+	padding-right:15px;
+	padding-left:15px;
+}
+.lNDOriginalLink .lNDOriginalLinkDiv{
+	float:left;
+	width:100%;
+	overflow:hidden;
+	text-overflow:ellipsis
+}
+.lNDOriginalLink .lNDOriginalLinkDiv span{
+	white-space: nowrap
+}
+.lNDOriginalLink .lNDOriginalLinkDiv a{
+	color: green;
+	word-wrap:break-word;
+	overflow:hidden;
+}
+/* 实体词 */
+#notionalWordsDiv div.content div{
+	padding-top:5px;
+}
+#notionalWordsDiv .dictionaryWord{
+	white-space: nowrap;
+}
+/* 关键字 */
+#keyWordsDiv div.content{
+	padding-bottom:10px
+}
+#keyWordsDiv div.content div{
+	padding-top:5px;
+}
+#keyWordsDiv div.content a{
+	white-space: nowrap;
+}
+/* 相关新闻 */
+#newsRelevantDiv .content{
+	padding-bottom: 20px;
+}
+#newsRelevantDiv .change{
+	text-align: right; 
+	padding-right: 10px; 
+	margin-bottom: 3px
+}
+#newsRelevantDiv .newsRelevantTable{
+	margin-bottom: 16px;
+}
+#newsRelevantDiv .newsRelevantTable .lTitle{
+	white-space: normal;
+}
+
+.widget.wid-relative .rcontent{
+	height:auto !important;
+}
+.vid-name a{
+	font-size:18px;
+}
+#vid_tags_keywords{
+	border:0px;
+	font-weight:bold;
+	padding:0px;
+}
+.widget.wid-tags a:hover{
+	color:#fff;
+	background:#d9534f;
+}
+.widget.wid-relative .number{
+	width:8%;
+	line-height: 1
+}
+.rank .number em.red{
+	margin-top:3px;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+	border-bottom:1px solid #ddd;
+}
+.more a:hover{
+	color:#d9534f;
+	text-decoration:underline;
+}

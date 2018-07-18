@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>修改数据字典</title>
+<!-- Self Css -->
+<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/latestNews/latestNewsDetail.css" th:href="@{/backEnd/css/latestNews/latestNewsDetail.css}" />
+
+<script type="text/javascript" src="../static/common/plugins/ajaxfileupload.js" th:src="@{/common/plugins/ajaxfileupload.js}"></script>
+<!-- Self Js -->
+<script type="text/javascript" src="../../../static/backEnd/js/static/latestNews/latestNewsDetail.js" th:src="@{/backEnd/js/dynamic/sysDic/sysDicDetail.js}" ></script>
+</head>
+
+<body>
+	<section class="content box m-bottom"  >
+		<div class="box latestNewsPage">
+			<form class="form-horizontal" role="form">
+			  <button type="button" class="btn btn-primary" th:onclick="'updateNews();'">保存</button>
+			  <button type="button" class="btn btn-primary" th:onclick="'goback();'">返回</button>
+			  <input id="innerid" type="hidden" th:value="${sysDic.innerid}" />
+  			  <div class="form-group">
+  			    <label for="inputTextTitle" class="col-sm-2 control-label">数据名称</label>
+  			    <div class="col-sm-7">
+  			      <input id="dataName" type="text" class="form-control"  th:value="${sysDic.dataName}" placeholder="请输入数据名称" />
+  			    </div>
+  			    <div class="col-sm-3"></div>
+  			  </div>
+  			  <div class="form-group">
+  			    <label for="inputKeyWord" class="col-sm-2 control-label">数据值</label>
+  			    <div class="col-sm-7">
+  			      <input id="dataValue" type="text" class="form-control"  th:value="${sysDic.dataValue}" placeholder="请输入数据值" />
+  			    </div>
+  			    <div class="col-sm-3"></div>
+  			  </div>
+  			  <div class="form-group">
+  			    <label for="textareaSummary" class="col-sm-2 control-label">描述</label>
+  			    <div class="col-sm-7">
+  			      <textarea class="form-control" id="description" rows="3" th:text="${sysDic.description}"></textarea>
+  			    </div>
+  			    <div class="col-sm-3"></div>
+  			  </div>
+  			  <div class="form-group">
+  			    <label for="textareaCon" class="col-sm-2 control-label">权重</label>
+  			    <div class="col-sm-7">
+  			      <input id="weight" type="text" class="form-control"  th:value="${sysDic.weight}" placeholder="请输入权重值" />
+  			    </div>
+  			    <div class="col-sm-3"></div>
+  			  </div>
+  			</form>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 相似、相关、事件媒体 -->
+	<title>iNews-智慧新闻</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/relativeNews/relativenews-static.css" th:href="@{/frontEnd/css/relativeNews/relativenews-static.css}"/>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/relativeNews/relativenews-static.js" th:src="@{/frontEnd/js/dynamic/relativeNews/relativenews-static.js}"></script>
+</head>
+<body>
+
+	<input type="hidden" th:value="${webpageCode}" class="webpageCode"/>
+	<input type="hidden" th:value="${type}" class="type"/>
+	
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header"></div>
+	<!-- 主体内容 -->
+	<div id="page-content"  class="container">
+		<div class="container" style="background:#fff">
+			<div class="row">
+				<div id="main-content">
+					<div class="col-md-12 col-sm-12">
+						<div class="relativeNewsCon box p-right p-left">
+							<div class="box-header header-vimeo">
+								<h2 th:remove="body">相似相关新闻列表</h2>
+							</div>
+							
+							<div class='operationBox'>
+								<div id="operateGroup" class='pull-left'  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+								
+								<div class="guanjianci" >
+									<span>相关关键词：</span>
+<!-- 									<a href="javascript:void(0)" >唐艳君</a>  -->
+<!-- 									<a href="javascript:void(0)" >小李</a> -->
+<!-- 									<a href="javascript:void(0)" >王昊</a> -->
+<!-- 									<a href="javascript:void(0)" >韦亮</a> -->
+<!-- 									<a href="javascript:void(0)">任志强</a> -->
+<!-- 									<a href="javascript:void(0)" >王健林</a> -->
+<!-- 									<a href="javascript:void(0)">罗晋庞无忌</a> -->
+								</div>
+							</div>
+							
+								<table class="table table-hover searchesTable" >
+									<thead>
+										<tr>
+											<th style="width:18px"></th>
+											<th style="width: 83px" class="center">发布时间</th>
+											<th>标题</th>
+											<th style="width:60px" class='center'>类型</th>
+											<!-- <th style="width: 100px">采集来源</th> -->
+											<th style="width: 100px">发稿来源</th>
+											<th style="width:40px" class="center">相似</th>
+											<th style="width:40px" class="center">相关</th>
+											<th style="width: 60px" class='center'> 负面指数</th>
+											<th style="width:55px" class="center">浏览量</th>
+											<th style="width: 40px;" class='center'>操&nbsp;作</th>
+										</tr>
+									</thead>
+									<tbody th:remove="body">
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+										<tr>
+											<td>
+												<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+											</td>
+											<td>01-10 18:34</td>
+											<td >
+												<a href="javascript:void(0)" class="beyondEllipsis">中共中央政治局常务委员会召开会议</a>
+											</td>
+											<td>事件</td>
+											<td>新浪微博</td>
+											<td>中国证券网</td>
+											<td>(2)</td>
+											<td>(2)</td>
+											<td class="red">80%</td>
+											<td>12345</td>
+											<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+										</tr>
+									</tbody>
+								</table>
+						</div>
+					</div>
+<!-- 	  				<div class="col-md-3 col-sm-12"> -->
+<!-- 	  					<div class="relativeNewsKeys box p-right p-left" > -->
+<!-- 	  						<div class="box-header header-vimeo"> -->
+<!-- 								<h2>关键词</h2> -->
+<!-- 							</div> -->
+<!-- 							<div class="keysCon box p-right p-left"> -->
+<!-- 								<div class="listLabel"> -->
+<!-- 									<a href="javascript:void(0)" >唐艳君</a> -->
+<!-- 									<a href="javascript:void(0)" >小李</a> -->
+<!-- 									<a href="javascript:void(0)" >王昊</a> -->
+<!-- 									<a href="javascript:void(0)" >韦亮</a> -->
+<!-- 									<a href="javascript:void(0)">任志强</a> -->
+<!-- 									<a href="javascript:void(0)" >王健林</a> -->
+<!-- 									<a href="javascript:void(0)">罗晋庞无忌</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 	  					</div> -->
+<!-- 	  				</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,121 @@
+/* 添加定制-顶部tab菜单 */
+.myCustom .nav>li>a{
+	padding:10px 20px;
+	border-radius: 0px;
+	line-height: 1;
+}
+.myCustom .nav-tabs>li.active>a, 
+.myCustom .nav-tabs>li.active>a:hover, 
+.myCustom .nav-tabs>li.active>a:focus{
+	color: #333;
+	
+}
+.myCustom .nav-tabs > li.active > a, 
+.myCustom .nav-tabs > li.active > a:focus, 
+.myCustom .nav-tabs > li.active > a:hover{
+	background: #eeeeee
+}
+.tab-content{
+	margin-top:20px;
+}
+
+/* 头条 */
+.tabs-vertical{
+    background-color: #f7f7f7;
+    border-radius: 2px;
+    font-size:12px;
+    border:1px solid #eee;
+    margin-top:10px;
+}
+.tabs-vertical ul{
+    float: left;
+    list-style: none;
+    text-align: left;
+
+    margin: 0;
+    padding-left: 0;
+}
+
+.tabs-vertical ul li{
+    margin-right: -1px;
+}
+
+.tabs-vertical ul li a{
+    display: block;
+    text-decoration: none;
+    color: #656a6d;
+    border: 1px solid transparent;
+    border-right: 0;
+    border-left: 0;
+    padding: 5px 40px 5px 20px;
+}
+
+.tabs-vertical ul li a.tab-active {
+    border-color: #dddddd;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 0px #EFEFEF;
+}
+
+.tabs-vertical ul li:first-child a{
+    border-top: 0;
+}
+
+/* 已选头部标题 */
+.already-add h4{
+	margin:0px;
+	padding:5px;
+	font-size:14px;
+	background:#f1f1f1;
+	color:#666;
+}
+.alreadyCon{
+	padding:0px 15px;
+	background:rgba(238,238,238,0.2);
+	border:1px solid #f1f1f1
+}
+.chooseContent{
+	margin:10px;
+	margin-right:10px;
+}
+.chooseContent .chooseProvinceCon{
+/* 	border:1px solid #ccc; */
+	padding:8px 10px;
+	background:#f1f1f1;
+}
+.chooseContent .chooseProvinceCon a{
+	display:inline-block;
+/* 	height:18px; */
+/* 	line-height:18px; */
+	color:#666;
+	padding:3px 6px;
+	margin:2px;
+}
+.chooseContent .chooseProvinceCon a:hover{
+	background:#F44336;
+	color:#fff;
+}
+.chooseContent .chooseProvinceCon a.choosen{
+	background:#F44336;
+	color:#fff;
+}
+.chooseContent .chooseWebSite{
+	padding:5px 8px;
+	margin:5px ;
+	border:1px solid #f1f1f1;
+}
+.chooseContent .chooseWebSite p{
+	margin-bottom:5px;
+	padding-bottom:3px;
+	border-bottom:1px solid #f1f1f1;
+}
+.chooseContent .chooseWebSite a{
+	display:inline-block;
+	width:100px;
+	margin:5px 5px;
+	height:20px;
+	line-height:20px;
+}
+.chooseContent .chooseWebSite a input{
+	float:left;
+	margin-right:3px;
+}

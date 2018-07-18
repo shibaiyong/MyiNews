@@ -1,0 +1,105 @@
+/* 领导人-查询框 */
+.leaderQuerySearch input.form-control{
+	border-color: #F44336;
+}
+.leaderQuerySearch .input-group-addon{
+	background: #F44336;
+	color: #fff;
+	border-color:#F44336;
+}
+/* 领导人-查询结果 */
+.captionTitle{
+	padding:6px 8px;
+}
+.captionTitle ul.nav-tabs a{
+	padding: 6px 8px;
+	color: #333;
+	border-radius: 0px;
+}
+.captionTitle ul.nav-tabs .fixed a{
+	background: #F44336;
+	color: #fff;
+}
+.captionTitle ul.nav-tabs .fixed a:hover,
+.captionTitle ul.nav-tabs .fixed a:active{
+	background: #F44336;
+	color: #fff;
+}
+
+.captionTitle ul.nav-tabs a:hover,
+.captionTitle ul.nav-tabs a:active{
+	color: #F44336;
+}
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:focus, 
+.nav-tabs > li.active > a:hover{
+	color: #F44336;
+	background: #fff;
+	border:0px;
+	border-bottom:1px solid #F44336;
+}
+
+.leaderQueryCon .captionCon{
+	background: #eee;
+	padding:6px;
+}
+.leaderQueryCon div.rankListConBox{
+	padding-left:14px;
+	padding-right: 0px;
+}
+.leaderQueryCon .captionCon .list-group-style{
+	background: #fff;
+	padding:6px 8px;
+}
+.leaderQueryCon .captionCon .list-group-style a{
+	font-size: 13px;
+}
+.leaderQueryCon .captionCon .list-group-style span{
+}
+.leaderQueryCon .captionCon .list-group-style .list-style-item{
+	border-bottom:1px solid #ddd;
+	padding-top:5px;
+	padding-bottom: 5px;
+	color: #939393;
+}
+
+/* 地方领导活动报道-文字滚动 */
+.wordScoll .captionCon{
+	height: 300px;
+	overflow: hidden;
+}
+
+/* 被审计人-查询框 */
+.auditSearch input.form-control{
+	border-color: #F44336;
+}
+.auditSearch .input-group-addon{
+	background: #F44336;
+	color: #fff;
+	border-color:#F44336;
+}
+
+/* 被审计人-查询结果 */
+.auditCon .auditConList p{
+	margin-bottom: 5px;
+}
+.auditCon .auditConList p span.spanOne{
+	font-weight: bold;
+	padding-left:4px;
+}
+.auditCon .auditConList p span.spanTwo{
+	font-size: 12px;
+}
+.auditCon .auditConList ul{
+	margin-bottom: 10px;
+}
+.auditCon .auditConList ul li{
+	border-bottom:1px solid #ddd;
+}
+.auditCon .auditConList ul li a{
+	width: 78%;
+	display: inline-block;
+}
+.auditCon .auditConList ul li span{
+	float: right;
+}

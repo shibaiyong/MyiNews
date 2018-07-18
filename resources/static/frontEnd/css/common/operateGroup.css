@@ -1,0 +1,33 @@
+/* 打印、建稿、收藏样式 */
+.table-operation .table-operation-status{
+ 	display:inline-block;
+}
+.table-operation .table-operation-status a{
+	display:inline-block;
+	padding:4px 8px;
+	border:1px solid #ccc;
+	border-right:0px;
+}
+.table-operation .table-operation-status a:last-child{
+	border-right:1px solid #ccc;
+}
+
+.table-operation-status a.active{
+	color:#F44336;
+}
+
+.table-operation-status{
+	border-right:1px solid #ccc;
+}
+
+.heatSort{
+	float: right;
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.heatSort.active{
+	background:#F44336;
+	color:#fff;
+}

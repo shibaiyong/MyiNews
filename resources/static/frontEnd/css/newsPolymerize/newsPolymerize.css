@@ -1,0 +1,53 @@
+@media (max-width: 1100px){
+	/* .col-md-4{
+		width: 33.33333333% ;
+	} */
+	.col-md-8{
+		width: 66.66666667%;
+	}
+	.col-ms-12{
+		width: 100%;
+	}
+	.screenCon .col-md-4{
+		padding-left:15px !important;
+	}
+}
+@media (max-width: 769px){
+	#screen .form-control{
+		width: 100% !important;
+	}
+	#screen .screenCon .customAdd form button{
+		width: 100%;
+		margin-top: 10px;
+	}
+}
+
+.rankListTitle{
+	position:relative;
+	height:35px;
+}
+.screenConditionBox .screenSearch{
+	margin-left:505px;
+}
+
+.form_datetime{
+	display:inline-block;
+	margin-right:5px;
+	width:120px;
+	position:absolute;
+	height:31px;
+}
+
+.customAddBtn{
+	cursor:pointer;
+}
+.screenConditionBox{
+	margin-top:0px !important;
+}
+
+.green{
+	color:red;
+}
+.gray{
+	color:green;
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" />
+	<!-- 相似、相关、事件媒体 -->
+	<title>iNews-热点排行新闻列表</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/hotNews/hotNewsList.css" th:href="@{/frontEnd/css/hotNews/hotNewsList.css}"/>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/hotNews/hotNewsList.js" th:src="@{/frontEnd/js/dynamic/hotNews/hotNewsList.js}"></script>
+</head>
+<body>
+<input type="hidden" class="source" th:value="${source}"/>
+
+<!-- 头部内容 -->
+<div id="header" th:include="frontEnd/common/header :: header"></div>
+<!-- 主体内容 -->
+<div id="page-content"  class="container">
+	<div class="container" style="background:#fff">
+		<div class="row">
+			<div id="main-content">
+				<div class="col-md-12 col-sm-12">
+					<div class="relativeNewsCon box p-right p-left">
+						<div class="box-header header-vimeo">
+							<h2>热点排行新闻列表</h2>
+						</div>
+						<div class="operate">
+							<div class="screenClassification" th:include="frontEnd/common/screenClassification :: screenClassification"></div>
+							<div class='table-operation-status hide'>
+								<a href="javascript:void(0)"><i class="fa fa-heart-o"></i></a>
+							</div>
+						</div>
+
+
+						<div class="operationCon hide">
+							<div id="operateGroup" class="pull-left"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+
+							<div class="period pull-right hide" th:remove="body">
+								<a href="javascript:void(0)" class='periodItem active'>4小时</a>
+								<a href="javascript:void(0)" class='periodItem'>12小时</a>
+								<a href="javascript:void(0)" class='periodItem'>24小时</a>
+								<a href="javascript:void(0)" class='periodItem'>一周</a>
+							</div>
+						</div>
+						<table class="table table-hover searchesTable" >
+							<thead>
+							<tr>
+								<th style="width:18px">
+									<span class="check-box checked-all hide"><i class="fa fa-check"></i></span>
+								</th>
+								<th style="width: 83px;" class="center">发布时间</th>
+								<th style="width: 183px;" class="center">标题</th>
+								<!--<th style="width: 62px;">榜单</th>-->
+								<!--<th style="width: 57px;">榜单周期</th>-->
+								<!--<th style="width: 65px;">榜单来源</th>-->
+								<th style="width: 57px;" class="center">榜单排名</th>
+								<th style="width: 50px;" class="center">评论量</th>
+								<th style="width: 50px;" class="center">点击量</th>
+
+								<!--<th style="width: 50px;" class="center">参与量</th>-->
+								<th style="width:40px" class="center">相关/相似</th>
+								<!--<th style="width:40px" class="center">相关</th>-->
+								<th style="width:60px" class="center">QG指数</th>
+								<!--<th style="width:50px" class="center">浏览量</th>-->
+								<th style="width: 40px;" class='center'></th>
+							</tr>
+							</thead>
+							<tbody th:remove="body">
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="check-box check-child checked"><i class="fa fa-check"></i></span>
+								</td>
+								<td>01-11 08:01</td>
+								<td>
+									<a href="javascript:void" class="beyondEllipsis">
+										支付宝回应修改密码漏洞：仅在特定情况下才会实现
+									</a>
+								</td>
+
+								<td>点击榜</td>
+								<td>一周</td>
+								<td>inews</td>
+								<td>7</td>
+								<td>7900</td>
+								<td>3003</td>
+								<td>10430</td>
+								<td>(2)</td>
+								<td>(2)</td>
+								<td class="red">80%</td>
+								<td>12345</td>
+								<td class="inewsOperation"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i> <i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 尾部内容 -->
+<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+</body>
+</html>

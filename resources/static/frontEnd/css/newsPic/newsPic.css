@@ -1,0 +1,22 @@
+.customAddBtn{
+	cursor:pointer
+}
+.moreOperate{
+	margin-top:5px;
+}
+.moreOperate a{
+	border:1px solid #ddd;
+	padding:6px 12px;
+	margin-right:3px;
+}
+.moreOperate a.active{
+	background:#F44336;
+	color:#fff;
+}
+
+.defaultImg{
+	width:100px;
+}
+.screenConditionBox{
+	margin-top:0px !important;
+}

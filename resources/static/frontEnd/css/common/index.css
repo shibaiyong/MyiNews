@@ -1,0 +1,15 @@
+#particles {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.intro {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left:0px;
+  right: 0px;
+  bottom:0px;
+
+}

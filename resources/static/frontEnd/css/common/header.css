@@ -1,0 +1,345 @@
+/* ---------------------------------------------------------------------------- */
+/* ------------------------------------Menu------------------------------------ */
+/* ---------------------------------------------------------------------------- */
+html,body{height: 100%}
+.header-top-box{background: #fff;height: 50px;line-height: 50px;border-top:2px solid #F44336;}
+.header-top{padding: 0px;}
+
+.header-top .header-logo{float: left;width: auto;height: 50px;}
+.header-top .header-logo img{height: 35px;}
+.header-top .navbar-right{font-size: 20px; text-align: center;}
+.header-top ul.navbar-right{margin: 0;}
+.header-top ul.navbar-right  li{height: 45px; /* width: 38px; */line-height:50px;margin-left: 10px;} 
+.header-top ul.navbar-right a{padding:0px;font-size: 14px;/* color: #8c8c8c */}
+/* .header-top ul.navbar-right a:hover{color: #F44336} */
+.header-top ul.navbar-right a i{color: #444;line-height: 1.7;height: 34px; width: 34px;border-radius: 50%;}
+.header-top ul.navbar-right .editConfig{
+    line-height: 40px;
+    position: relative;
+}
+.header-top ul.navbar-right .editConfig a i:hover {
+    color: #F44336
+}
+.header-top ul.navbar-right .userCenter .navUserName{
+    /* margin-right: 10px; */
+    display: block;
+    width: 120px;
+    height: 100%;
+    line-height: 56px;
+    text-align: right;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+ .navUserName span {
+     display: inline;
+ }
+.header-top ul.navbar-right .userCenter .navUserName:hover span {
+    color: #F44336
+}
+
+.header-top ul.navbar-right .dropDownMenu .hover i,
+.header-top ul.navbar-right .dropDownMenu .hover span {
+    color: #F44336;
+}
+
+#inews_nav{
+    width: 100%;
+    height: 100%;
+    background-color: #dd2f39;
+    display: flex;
+    justify-content: space-between;
+} 
+.navbar-brand{
+    display: none;
+}
+#inews_nav  .navbar-nav>li>a{
+    color:#fff;
+}
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:hover, 
+.navbar-default .navbar-nav>.active>a:focus{
+    background: #fff;
+    color: #555 !important;
+}
+.container-fluid{
+	padding:0px;
+}
+.headerSearch{
+	padding:0px;
+}
+.navbar-toggle{
+    float: left;
+    margin-left:15px;
+    margin-right:0px;
+}
+.navbar-brand{
+    float: right;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+    background-color:transparent;
+}
+.navbar-default .navbar-toggle{
+    border-color: transparent;
+}
+.header-top ul.navbar-right a .fa{
+    width: 20px;
+}
+.header-top ul.navbar-right .userCenter a .fa-caret-down {
+    line-height: 1px;
+    width: 16px;
+}
+.header-top ul.navbar-right .userCenter a .fa-caret-down{
+    margin-left: -5px;
+}
+.header-top ul.navbar-right .userDropDown{
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    vertical-align: sub;
+    font-weight: 500;
+    margin-left: -8px;
+}
+.header-top ul.navbar-right .userDropDown .fa {
+    width: 16px;
+}
+/* 弹窗样式 */
+.header-top ul.navbar-right .dropdown-menu{
+    width: 148px;
+    min-width: 148px;
+}
+.header-top ul.navbar-right .dropdown-menu li{
+    padding: 0;
+    margin: 0;
+}
+.header-top ul.navbar-right .dropdown-menu li:hover a,
+.header-top ul.navbar-right .dropdown-menu li:hover a i {
+    color: #F44336;
+}
+.header-top ul.navbar-right .dropdown-menu li a{
+    padding: 0px 26px;
+    line-height: 45px;
+    width: 100%;
+}
+.header-top ul.navbar-right .dropdown-menu li a i{
+    vertical-align: middle
+}
+.header-top ul.navbar-right .btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+/* #menu ul.navbar-right a i:hover{background-color:#fff;color: #000;border-radius: 50%} */
+@media (min-width: 768px){
+    #example-navbar-collapse{
+        padding-left: 0px;
+    }
+}
+@media (max-width: 1000px){
+    .headerSearch{
+        display: none;
+    }
+}
+@media  (max-width: 768px){
+	.container-fluid{
+		padding:0px 15px;
+	}
+    .navbar-brand{
+        display: inline-block;
+        position: relative;
+    }
+    .navbar-brand li{
+        float: left;
+        margin-left:10px;
+    }
+    .navbar-brand li>a{
+        color: #fff;
+    }
+	.headerSearch{
+	    padding:10px 15px;
+	}
+	.search-wrapper{
+		width:100% !important;
+	}
+	.search-wrapper .input-holder{
+	 	width:100% !important;
+	}
+    .header-top  .navbar-nav{
+        display: none;
+    }
+    .header-top .header-logo{
+        width: 100%;
+        text-align: center;
+    }
+    
+    .smartickerBox{
+    	margin-left:0px !important;
+    	width:100% !important
+    }
+    .theme2 .tickertitle{
+    	display:none;
+    }
+    .header-top-box{
+    	height:35px;
+    	line-height:35px;
+    }
+    .header-top .header-logo{
+    	display:none
+    }
+}
+
+
+/* 返回顶部 */
+.dn{display: none;}
+
+/* 返回顶部 */
+.go-top{position: fixed;bottom: 40px;right: 0px;width: 46px;z-index: 999;}
+.go-top a{display: block;width: 46px;height: 46px;margin-bottom: 10px;background-image: url(../../image/backTop/go-top.png);}
+.go-top a:last-child{margin-bottom: 0;box-shadow: 1px 2px 8px rgba(0,0,0,.2)}
+.go-top .go{background-position: 0 -150px;}
+.go-top .go:hover{background-position: 0 -250px;}
+.go-top .feedback{background-position: 0 -100px;}
+.go-top .feedback:hover{background-position: 0 -300px;}
+.go-top .uc-2vm{background-position: 0 0;}
+.go-top .uc-2vm:hover{background-position: 0 -350px;}
+/*
+.go-top .share{background-position: 0 -50px;}
+.go-top .share:hover{background-position: 0 -200px;}
+*/
+.go-top .uc-2vm-pop{
+	position: absolute;right: 60px;top: -100px;
+	width: 240px;box-shadow: 0px 1px 4px rgba(0,0,0,.1);
+	background: #fff;
+}
+.go-top .uc-2vm-pop .title-2wm{font-size: 14px; margin: 10px 20px;}
+.go-top .uc-2vm-pop .logo-2wm-box{position: relative;}
+
+#menu .navbar-right  .input-group-btn button{
+	background: #F44336;
+	border-color: #F44336;
+	margin-top:1px;
+	color: #fff
+}
+
+/* 提示工具的透明度 */
+.tooltip.in{
+	opacity: 0.8
+}
+
+/* 搜索框 */
+.search-wrapper {
+	position: relative;
+    width: 250px;
+    margin-top: 2px;
+}
+.search-wrapper .input-holder {
+    overflow: hidden;
+    height: 33px;
+    position: relative;
+    width:70px;
+    /* border-radius: 33px; */
+    width:250px;
+    background: rgba(147,12,60,0.2);
+}
+
+.search-wrapper .input-holder .search-input {
+    width:100%;
+    height: 33px;
+    padding:0px 96px 0 15px;
+    opacity:1;
+    position: absolute;
+    top:0px;
+    left:0px;
+    /* background: transparent; */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border:none;
+    outline:none;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 33px;
+    color:#333;
+}
+
+.search-wrapper .input-holder .search-icon {
+    width:85px;
+    height:33px;
+    margin: 0px;
+    /* border-radius: 33px; */
+    border:none;
+    background: #ff6600;
+    color: #fff;
+    padding:0px;
+    outline:none;
+    position: relative;
+    z-index: 2;
+    float:right;
+    cursor: pointer;
+    font-size:12px;
+}
+.search-wrapper .input-holder .search-icon em{
+	font-style:normal;
+}
+.search-wrapper .input-holder .search-icon span{
+	display:inline-block;
+	width:40px;
+	height:33px;
+	line-height:33px;
+	text-align:center;
+}
+
+.search-wrapper .input-holder .search-icon span.active{
+	font-size:16px;
+}
+
+.nav>li>a{
+	padding:15px 13px;
+}
+
+/* 置顶样式 */
+.smartickerBox{
+	position:absolute;
+	top:3px;
+	/* width:700px;
+	margin-left:180px; */
+}
+.smartickerBox .more{
+	display:inline-block;
+	position:absolute;
+	top:-10px;
+	right:10px;
+	color:#999;
+	cursor:pointer;
+	font-size:12px;
+}
+.smartickerBox .more a:hover{
+	color:#F44336;
+	text-decoration:underline;
+}
+.navbar{
+	margin-bottom:10px !important;
+}
+.newsholder a:visited{
+	color:#c9c9c9;
+}
+.navbar-right .editConfig .active>i,
+.navbar-right li.active a{
+	color:#F44336;
+}
+.navbar-right li.active a i{
+	color:#F44336;
+}
+/* 复写弹窗样式 */
+.header-top-box .header-top .navbar-nav .editConfig>a>.popover {
+    width: 90px;
+    min-width: 90px;
+    border-radius: 6px;
+    /* background-color: #fff; */
+}
+.header-top-box .header-top .navbar-nav .editConfig>a>.popover>.popover-content {
+    padding: 6px;
+    text-align: center;
+}

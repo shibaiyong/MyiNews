@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Inews Backend</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/common/common.css" th:href="@{/backEnd/css/hotAndTopNews/topNews.css}" />
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Cander/calendar.min.css" th:href="@{/common/plugins/jedate/skin/jedate.6.0.css}"/>
+    <script type="text/javascript" src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/datatable/jquery3.3.1.min.js}" ></script>
+    <!--<script type="text/javascript" src="../../../static/common/plugins/dataTables/jquery.dataTables.js" th:src="@{/common/plugins/datatable/dataTable.js}" ></script>-->
+    <script type="text/javascript" src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jedate/jedate_6.0.js}" ></script>
+    <!--<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/common/common.css" th:href="@{/backEnd/css/hotAndTopNews/topNews.css}" />-->
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Cander/calendar.min.css"  th:href="@{/common/plugins/dataTables/jquery.dataTables.css}"/>
+    <!--<script type="text/javascript" src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/datatable/jquery3.3.1.min.js}" ></script>-->
+    <script type="text/javascript" src="../../../static/common/plugins/dataTables/jquery.dataTables.js" th:src="@{/common/plugins/dataTables/jquery.dataTables.js}" ></script>
+    <style>
+        #topNewTable input {
+            border:1px solid transparent;
+        }
+        #topNewTable input:hover{
+            border:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<table id="topNewTable" class="display">
+    <thead>
+    <tr>
+        <th>排位</th>
+        <th>来源</th>
+        <th>发布时间</th>
+        <th>文章标题</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<div class="modal fade" id="probationCommon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <p style="text-align:center;margin-bottom:0px">是否删除？</p>
+                <div style="margin-top:10px;text-align:right">
+                    <button type="button" class="btn btn-red btn-sm" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready( function () {
+        var count = 0;
+        //修改默认配置。
+        $.extend($.fn.dataTable.defaults, {
+            searching: false,
+            ordering: false
+        });
+        var dataTable = $('#topNewTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '/ns' + "/topNews/back/pageTopNews",
+                data: {
+                },
+                dataSrc: function (json) {
+                    return json.resultObj.aaData;
+                }
+            },
+            "lengthChange": false,
+            rowCallback: function (row, data, index) {
+                count=count+1;
+                var localDate = new Date(data.releaseDatetime).formatDate("yyyy-MM-dd hh:mm:ss");
+                $('td:eq(0)', row).html(count);
+                $('td:eq(2)', row).html( '<input type="text" class="form-control jedate" value="'+localDate+'" data-webpageCode="'+data.webpageCode+'" data-title="'+data.title+'"/>');
+                $('td:eq(3)', row).html( '<input type="text" class="form-control title" value="'+data.title+'" data-webpageCode="'+data.webpageCode+'" data-date="'+localDate+'"/>' );
+            },
+            columns: [
+                {data: "rankWeight", bSortable: false},
+                {data: "sourceCrawlDetail", bSortable: false,
+                    render: function(data, type, row){
+                        return data.website.displayName;
+                    }
+                },
+                {data: "releaseDatetime"},
+                {data: "title"},
+                {data: null, bSortable: false}
+            ],
+            "aoColumnDefs": [
+                {//倒数第一列
+                    "targets": -1,
+                    "bSortable": false,
+                    render: function (data, type, row) {
+                        var html = '<button class="btn btn-xs jfhide btn-danger" webpageCode="' + row.webpageCode + '" data-ishow="1">隐藏</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+                            + '<button class="btn btn-xs btn-danger jfdelete" webpageCode="' + row.webpageCode + '" data-delete="1">删除</button>';
+                        return html;
+                    }
+                }
+            ],
+            oLanguage: {
+                sProcessing: "努力加载数据中.",
+                sLengthMenu: "每页显示 _MENU_ 条记录",
+                sZeroRecords: "抱歉,没有找到",
+                sInfo: "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                sInfoEmpty: "没有数据",
+                sInfoFiltered: "(从 _MAX_ 条数据中检索)",
+                sZeroRecords: "没有检索到数据",
+                sSearch: "模糊查询:  ",
+                oPaginate: {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+        var ctx = '/ns'
+        var status = 0;
+        var is_delete = 0;
+        //隐藏功能
+        $('#topNewTable').on('click',"td .jfhide",function(){
+            if($(this).text()=='隐藏'){
+                $(this).text('取消隐藏');
+                //$(this).attr('data-ishow',1);
+                status = 1;
+            }else{
+                $(this).text('隐藏');
+                //$(this).attr('data-ishow',0);
+                status = 0;
+            }
+            var options = {
+                data:{
+                    status:status,
+                    isDeleted:0,//可以隐藏的数据，删除状态一定为0；
+                    webpageCode:$(this).attr('webpageCode')
+                },
+                callback:processing
+            }
+            var url = ctx + '/topNews/back/updateTopNewsState';
+            ajaxMethod(url,'get',options);
+        })
+
+        //删除功能
+        $('#topNewTable').on('click',"td .jfdelete",function(){
+            var $this = $(this);
+            $('#probationCommon').modal('show');
+            $('.btn-red').click(function(){
+                var options = {
+                    data:{
+                        status:status,
+                        isDeleted:1,
+                        webpageCode:$this.attr('webpageCode')
+                    },
+                    callback:processing
+                }
+                var url = ctx + '/topNews/back/updateTopNewsState';
+                ajaxMethod(url,'get',options);
+            })
+
+        })
+
+        //修改功能
+        $('#topNewTable').on('blur','input.title',function(){
+            var options = {
+                data:{
+                    webpageCode:$(this).attr('data-webpageCode'),
+                    time:$(this).parent().prev().children('input').val(),
+                    title:$(this).val()
+                },
+                callback:processing
+            }
+            var url = ctx + '/topNews/back/updateTopNews';
+            ajaxMethod(url,'get',options);
+        })
+
+        dataTable.on( 'draw.dt', function () {
+            $(".jedate").each(function(){
+                var $this = $(this);
+                $(this).jeDate({
+                    format: "YYYY-MM-DD hh:mm:ss",
+                    onClose:true,
+                    okfun:function(obj){
+                        console.log(obj.val)
+                        var options = {
+                            data:{
+                                webpageCode:$this.attr('data-webpageCode'),
+                                time:obj.val,
+                                title:$this.parent().next().children('input').val()
+                            },
+                            callback:processing
+                        }
+                        var url = ctx + '/topNews/back/updateTopNews';
+                        ajaxMethod(url,'get',options);
+                    }
+                });
+            });
+        } )
+
+        function ajaxMethod(url, type, options){
+            console.log(options);
+            $.ajax({
+                url:url,
+                type:type,
+                data:options.data,
+                dataType:'json',
+                async : true,
+                success:function( res ){
+                    if(options.callback){
+                        options.callback(res);
+                    }else{
+                        return;
+                    }
+                },
+                error:function(res){
+                    console.log(res);
+                }
+            })
+        }
+        //ajax 成功时，来处理返回数据的函数；重新加载表格数据
+        function processing( res ){
+            console.log(res)
+            dataTable.ajax.reload( null, false ); // 刷新表格数据，分页信息不会重置
+        }
+    })
+
+
+
+</script>

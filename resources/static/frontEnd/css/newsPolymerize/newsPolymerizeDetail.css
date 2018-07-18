@@ -1,0 +1,106 @@
+/* 核心报道 */
+.nucleusReport .nucleusReportTitle{
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+.nucleusReport .nucleusReportBox{
+	background: #fafafa;
+	border-bottom: 0px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top:0px;
+}
+
+.nucleusReport .nucleusReportItem{
+	border: 1px solid #f2f2f2;
+	border-bottom: 0px;
+	margin-top: 20px;
+	background: #f9fafa; 
+}
+.nucleusReport .nucleusReportItem p.itemTitle{
+	margin-top: 5px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 18px;
+	padding: 15px 20px 5px;
+
+}
+.nucleusReport .nucleusReportItem .itemDigest{
+	font-size: 14px;
+	padding: 0px 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	line-height: 28px;
+}
+.nucleusReport .nucleusReportItem .itemDigest p{
+	text-indent: 2em;
+	display: inline-block;
+	margin-bottom: 0px;
+}
+.nucleusReport .nucleusReportItem .itemDigest .continueRead a{
+	color: #f5960e;
+}
+.nucleusReport .nucleusReportItem .itemInfo em{
+	font-style: normal;
+	margin-right: 10px;
+}
+.nucleusReport .nucleusReportItem .itemInfo{
+	font-size: 14px;
+	overflow: hidden;
+	margin-top: 5px;
+	padding-top:3px;
+}
+.nucleusReport .nucleusReportItem .itemInfo p{
+	text-align: right;
+	padding-bottom: 10px;
+	padding-left:10px;
+	padding-right:10px;
+}
+.nucleusReport .nucleusReportItem .itemInfo p span{
+	margin-right: 20px;
+}
+.nucleusReport .nucleusReportItem .itemInfo .source span:first-child{
+	font-weight: bold;
+}
+.dataTables_wrapper .dataTables_info{
+	margin-top:5px;
+}
+/* 相关报道 */
+.relativeReport .relativeReportTable thead th:last-child{
+	width: 150px;
+	text-align: center;
+}
+.relativeReport .relativeReportTable tbody tr td:last-child{
+	text-align: center;
+}
+
+
+.toggle .open{
+	color: #f00
+}
+.toggle .close1,
+.opened .toggle .open
+	{
+		display: none;
+	}
+.toggle .opened,
+.opened .toggle .close1
+	{
+		display: inline;
+		color: #f44336;
+	}
+table td, table th{
+	text-indent:0px !important;
+}	
+table.relativeReportTable tbody th, 
+table.relativeReportTable tbody td{
+	padding:3px 8px !important;
+}
+table.relativeReportTable tbody td a{
+	height:21px;
+	line-height:25px;
+}
+
+/*标签样式修改*/
+.box .box-header h2{font-size: 16px;padding: 8px 18px 5px 25px;background-color: #DE2F37;background:linear-gradient(135deg,transparent 8px,#DE2F37 0) top left;display: inline-block;margin-left: 15px;margin-bottom:0px;color: #fff;}
+.box .box-header h3{margin-top:0px;margin-left:15px;border-bottom:3px solid #DE2F37}

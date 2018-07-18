@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>网站和</title>
+    <!--<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>-->
+    <!-- 引入公用的插件 注：必须放在最开始的位置 -->
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/addWebandApp.css"  th:href="@{/frontEnd/css/myCustom/addWebandApp.css}" />
+    <script src="../../../static/common/plugins/toastmessage/js/jquery.toastmessage.js" th:src="@{/common/plugins/toastmessage/js/jquery.toastmessage.js}" ></script>
+    <style>
+
+        .contentWidth{
+            display: inline-block;
+            width:90px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+        .customInfoContainer a span{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .customInfoContainer .hasAddWeb{
+            max-height: 193px;
+            overflow: hidden;
+        }
+        .customInfoContainer .hasAddApp{
+            max-height: 193px;
+            overflow: hidden;
+        }
+        .container-fluid{
+            padding:0;
+        }
+        #example-navbar-collapse{
+            padding:0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="searchContainer">
+    <button class="btn btn-default">添加</button>
+    <input type="text" autocomplete="off" data-provide="typeahead" class="form-control addSources" />
+
+</div>
+<div class="customInfoContainer clearfixed">
+    <div class="hasAddWeb width40 floatleft">
+        <h5>已添加网站</h5>
+
+    </div>
+    <div class="hasAddApp width40 floatleft" style="margin-left:25px;">
+        <h5>已添加APP</h5>
+
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/myCustom.js" th:src="@{/frontEnd/js/dynamic/myCustom/addWebandApp.js}"></script>

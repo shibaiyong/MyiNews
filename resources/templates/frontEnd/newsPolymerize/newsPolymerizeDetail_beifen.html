@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords"  th:content="${keywords}?${keywords}:'iNews-智慧新闻'"/>
+	<meta name="description" th:content="${webpage}?${webpage.nlpSummary}:'iNews-智慧新闻'"/>
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 自动聚类详情页 -->
+	<title th:text="'关于 '+${title}+' 的新闻 _iNews-智慧新闻'">iNews-智慧新闻</title>
+	<!-- 引用公共css -->
+	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
+		
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	
+	<!-- 引用dataTables -->
+	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all" ></script>
+
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/newsPolymerize/newsPolymerizeDetail.css"   th:href="@{/frontEnd/css/newsPolymerize/newsPolymerizeDetail.css}"/>
+	
+	<!-- Echarts Js -->
+	<!-- <script type="text/javascript" src="../../../static/common/plugins/echarts/echarts.min.js"  th:src="@{/common/plugins/echarts/echarts.min.js}"></script> -->
+	<script src="http://cdn.bootcss.com/echarts/3.4.0/echarts.min.js"></script>
+	<!-- jquery.dotdotdot JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js" th:src="@{/common/plugins/jquery.dotdotdot/jquery.dotdotdot.min.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/newsPolymerize/newsPolymerizeDetail.js" th:src="@{/frontEnd/js/dynamic/newsPolymerize/newsPolymerizeDetail.js}" ></script>
+</head>
+<body>
+	<!-- 头部内容 -->
+	<div id="header" th:include="frontEnd/common/header :: header" ></div>
+	<!-- 主体内容 -->
+	<div id="page-content" class="container">
+		<div  class="container" style="background:#fff" >
+			<div class='row'>
+				<div id="main-content">
+					<div class="col-md-8">
+					
+						<!-- 核心报道 -->
+						<div class="nucleusReport box p-left p-right p-top">
+							<input type="hidden" id="innerid" th:value="${innerid}" />
+							<input type="hidden" id="queryStr" th:value="${queryStr}" />
+							<div class="nucleusReportTitle">
+								<h4>关于&nbsp;<span class='red' th:text="${title}">污染,环保部,不赖,消散,预警</span>&nbsp;的新闻</h4>
+							</div>
+								<div class="nucleusReportBox">
+									<div class="nucleusReportItem ">
+										<p class="itemTitle"><a href="javascript:void(0)" th:href="'javascript:loadWebpageDetail('+${webpage.innerid}+')'" th:text="${webpage.title}">重度雾霾来袭 环保部认为治理方向正确措施有效</a></p>
+										<div class="itemDigest">
+											<div class="summaryCon">
+												<p  th:if="${#strings.contains(webpage.nlpSummary,sp)}" th:utext="'&lt;p&gt;'+${#strings.replace(webpage.nlpSummary,sp,'&lt;p/&gt;&lt;p&gt;')}+'&lt;p/&gt;'"><span>[摘要]</span>冯军连续5天的重度雾霾天气，让全国人们“谈霾色变”。面对今年持续时间最长、污染程度最重、影响范围最大的雾霾，目前京津冀及周边地区共有27个城市启动了红色预警，18个城市启动橙色预警，多地采取工业企业停产限产、工地停工、机动车限行等措施。然而民众不禁困惑，为何每年冬天雾霾“照常来临”？连续多年的治理效果到底如何？雾霾成因到底是什么？雾霾源头到底在哪里？红色预警效果如何？为解答公众疑惑，环保部于1..冯军连续5天的重度雾霾天气，让全国人们“谈霾色变”。面对今年持续时间最长、污染程度最重、影响范围最大的雾霾，目前京津冀及周边地区共有27个城市启动了红色预警，18个城市启动橙色预警，多地采取工业企业停产限产、工地停工、机动车限行等措施。然而民众不禁困惑，为何每年冬天雾霾“照常来临”？连续多年的治理效果到底如何？雾霾成因到底是什么？雾霾源头到底在哪里？红色预警效果如何？为解答公众疑惑，环保部于1..</p>
+												<p  th:unless="${#strings.contains(webpage.nlpSummary,sp)}" th:utext="${webpage.nlpSummary}"></p>
+											</div>
+										</div>
+										<div class="itemInfo">
+											<p >
+												来源：<span th:text="${webpage.sourceCrawlLevelTwo}">新华网</span>
+												发布时间：<span th:text="${#dates.format(webpage.releaseDatetime,'yyyy-MM-dd HH:mm')}">2016-12-26</span>
+												关键词：<em th:text="${keywords}"></em><em th:remove="all">环保部</em><em th:remove="all">不赖</em><em th:remove="all">消散</em>										
+											</p>
+										</div>
+									</div>
+								</div>
+						</div>
+						<!-- 相关报道 -->
+						<div class='relativeReport box p-left p-right p-top'>
+							<div class="box-header header-vimeo">
+								<h2>相关报道</h2>
+							</div>
+							<div class="relativeReportCon">
+								<table class="table table-hover relativeReportTable">
+									<thead>
+										<tr>
+											<th>标题</th>
+											<th style="width:90px">爬取来源</th>
+											<th style="width:90px">发稿来源</th>
+											<th style="width:95px">时间</th>
+											
+										</tr>
+									</thead>
+									<tbody >
+<!-- 										<tr th:each="relevantNews:${relevantNewsList}" > -->
+<!-- 											<td> -->
+<!-- 												<a href="javascript:void" th:href="'javascript:loadWebpageDetail('+${relevantNews.innerid}+')'" th:text="${relevantNews.title}" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效重度雾霾来袭 环保部认为治理方向正确措施有效重度雾霾来袭 环保部认为治理方向正确措施有效</a> -->
+<!-- 											</td> -->
+<!-- 											<td th:text="${relevantNews.sourceCrawlLevelTwo}"></td> -->
+<!-- 											<td th:text="${relevantNews.sourceReport}"></td> -->
+<!-- 											<td th:text="${#dates.format(relevantNews.releaseDatetime,'[MM-dd hh:mm]')}">2016-12-26</td> -->
+<!-- 										</tr> -->
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="javascript:void" class="beyondEllipsis">重度雾霾来袭 环保部认为治理方向正确措施有效</a>
+											</td>
+											<td>2016-12-26</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<!-- 报道统计量 -->
+						<div class="box countReport p-left p-right">
+							<div class="box-header header-vimeo">
+								<h2>报道统计量</h2>
+							</div>
+							<div class="countReportCon">
+								<div id="countReport" style="width: 100%;height: 350px;"></div>
+							</div>
+						</div>
+						<!-- 媒体提及率 -->
+						<div class="box mediaMention p-left p-right p-top">
+							<div class="box-header header-vimeo">
+								<h2>媒体提及率</h2>
+							</div>
+							<div class="mediaMentionCon">
+								<div id="mediaMention" style="width: 100%;height: 350px;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 尾部内容 -->
+	<footer id="footer" th:include="frontEnd/common/footer :: footer" ></footer>
+</body>
+</html>

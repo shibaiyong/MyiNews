@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+	
+    <title>事件管理页</title>
+	
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" type="text/css" />
+    <link rel="stylesheet" href="../static/css/jquery.dataTables.css" th:href="@{/css/jquery.dataTables.css}" />
+	
+    <!-- bootstrap-datetimepicker -->
+    <link rel="stylesheet" href="../static/css/bootstrap-datetimepicker.min.css"  type="text/css" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+    
+    <!-- select2.min.css -->
+    <link rel="stylesheet" href="../static/css/select2.min.css" th:href="@{/css/select2.min.css}" type="text/css" />
+	
+    <script src="../static/js/jquery-2.1.1.js" th:src="@{/js/jquery-2.1.1.js}"></script>
+
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../static/js/jquery.dataTables.js" th:src="@{/js/jquery.dataTables.js}"></script>
+	<script type="text/javascript" src="../static/js/dataTables.bootstrap.js" th:src="@{/js/dataTables.bootstrap.js}"></script>
+	<script type="text/javascript" src="../static/js/ajaxfileupload.js" th:src="@{/js/ajaxfileupload.js}"></script>
+	<script type="text/javascript" src="../static/js/bootstrap-datetimepicker.js" th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+	<script type="text/javascript" src="../static/js/bootstrap-datetimepicker.zh-CN.js" th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+	<script type="text/javascript" src="../static/js/select2.full.min.js" th:src="@{/js/select2.full.min.js}"></script>
+	
+	<style>
+	  .dropdown-menu{
+	  left:17px;
+	  }
+	</style>
+</head>
+
+<body>
+<div class="modal  form-horizontal " id="addEventModal" data-backdrop="static" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<form action="" id="addEventForm">
+			<div class="modal-header">
+				<button type="button" class="close" onclick="modalClose()" data-dismiss="modal"> &times;</button>
+				<h4 class="modal-title">新增/修改事件</h4>
+			</div>
+			<div class="modal-body">
+				<div class="center-block" style="width:500px">
+					<input type="hidden" id="innerid"/>
+					<div class="form-group" id = "">
+						<label for="name" class="col-sm-3 control-label"><span class="text-danger">* </span>事件名称</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="name" maxlength="20"/>
+						</div>
+					</div>
+					<div class="form-group" id = "">
+						<label for="keywords" class="col-sm-3 control-label"><span class="text-danger">* </span>关键词组</label>
+						<div class="col-sm-9">
+							<input name="keywords" type="text" class="form-control" placeholder="逗号分隔" maxlength="20"/><br/>
+							<input name="keywords" type="text" class="form-control" placeholder="逗号分隔" maxlength="20"/><br/>
+							<input name="keywords" type="text" class="form-control" placeholder="逗号分隔" maxlength="20"/><br/>
+							<input name="keywords" type="text" class="form-control" placeholder="逗号分隔" maxlength="20"/>
+						</div>
+					</div>
+					<div class="form-group" id = "">
+						<label for="keyword" class="col-sm-3 control-label">事件类型</label>
+						<div class="col-sm-9">
+							<select id="classification" class="form-control select2" multiple="multiple" data-placeholder="请选择事件类型" style="width: 100%;">
+		                      <option value="社会">社会</option>
+		                      <option value="经济">经济</option>
+		                      <option value="政治">政治</option>
+		                      <option value="法制">法制</option>
+		                      <option value="娱乐">娱乐</option>
+		                      <option value="体育赛事">体育赛事</option>
+		                      <option value="灾难">灾难</option>
+		                      <option value="会议">会议</option>
+		                    </select>
+						</div>
+					</div>
+					<div class="form-group" id = "">
+						<label for="occurrenceTime" class="col-sm-3 control-label">发生时间</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="occurrenceTime" maxlength="20"/>
+						</div>
+					</div>
+					<div class="form-group" id = "">
+						<label for="level" class="col-sm-3 control-label">事件等级</label>
+						<div class="col-sm-9">
+							<select id="level" class="form-control" >
+		                      <option value="1">一般</option>
+		                      <option value="2">较为重要</option>
+		                      <option value="3">重要</option>
+		                      <option value="4">非常重要</option>
+		                    </select>
+						</div>
+					</div>
+					<div class="form-group" id = "">
+						<label for="image" class="col-sm-3 control-label">图片选择</label>
+						<div class="col-sm-9">
+							<input id="image" name="image" type="file" class="form-control"/>
+						</div>
+					</div>
+					<div class="form-group" id = "">
+						<label for="description" class="col-sm-3 control-label">事件描述</label>
+						<div class="col-sm-9">
+							<textarea id="description" name="description" class="form-control"  maxlength="500"></textarea>
+						</div>
+					</div>
+				</div>
+		    </div>
+			<div class="modal-footer">
+			    <button type="button" onclick="save()" class="btn btn-primary">保存</button>
+			    <button type="button" class="btn btn-default"  onclick="modalClose()" data-dismiss="modal">取消</button>
+			</div>
+		</form>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->
+	<section class="content " id="content" >
+	     <div class='box' style="padding:15px;padding-top:0px">
+			<div class="row" >
+			    <div class="box" style="margin-bottom:15px;">
+			        <button  class="btn btn-default" type="button" data-toggle="modal" data-target="#addEventModal" >新增事件</button>
+			    </div>
+				
+				<table id="event_list" class="table table-hover">
+				   <caption></caption>
+				   <thead>
+				      <tr class="row">
+				         <th class="col-sm-2">名称</th>
+				         <th class="col-sm-1">创建时间</th>
+				         <th class="col-sm-1">发生时间</th>
+				         <th class="col-sm-1">类型</th>
+				         <th class="col-sm-1">等级</th>
+				         <th class="col-sm-5">描述</th>
+				         <th class="col-sm-1 text-center">操作</th>
+				      </tr>
+				   </thead>
+				   <tbody>
+				      <tr class="row" th:each="event,eventsStat:${events}">
+				         <td style="text-indent:4px;" th:text="${event.name }">神州十一号发射</td>
+				         <td th:text="${#dates.format(event.createTime,'yyyy-MM-dd HH:mm:ss')}">2016-10-17 08:58:03</td>
+				         <td th:text="${#dates.format(event.occurrenceTime,'yyyy-MM-dd')}">2016-10-17</td>
+				         <td th:text="${event.classification }">政治</td>
+				         <td th:switch="${event.level}">
+				         	<span th:case="1" th:text="一般"></span>
+				         	<span th:case="2" th:text="较为重要"></span>
+				         	<span th:case="3" th:text="重要"></span>
+				         	<span th:case="4" th:text="非常重要"></span>
+				         	<span th:case="*" th:text="未知">重要</span>
+				         </td>
+				         <td th:text="${event.description }">	2016年10月17日7时30分，搭载着神舟十一号载人飞船的长征二号F遥十一运载火箭在酒泉卫星发射中心点火升空</td>
+				         <td class="text-center">
+				         	<div class="dropdown">
+							   <button type="button" class="btn dropdown-toggle" id="operatedropdown" data-toggle="dropdown">
+							   		操作<span class="caret"></span>
+							   </button>
+							   <ul class="dropdown-menu" role="menu" aria-labelledby="operatedropdown">
+							      <li role="presentation" >
+							         <a role="menuitem" th:href="'javascript:toUpdate('+${event.innerid}+')'">修改</a>
+							      </li>
+							      <li role="presentation">
+							         <a role="menuitem" th:href="'javascript:deleteEvent(${event.innerid})'">删除</a>
+							      </li>
+							   </ul>
+							</div>
+				         </td>
+				      </tr>
+				   </tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+<script type="text/javascript">
+$(function(){
+	$('#occurrenceTime').datetimepicker({
+// 		minView: "month",
+// 		datePicker:true,
+// 		timePicker:false,
+        showSecond: true,
+        dateFormat:'yy-mm-dd',
+		timeFormat: 'HH:mm:ss',
+		autoclose:true,
+		language:  'zh-CN',
+	});
+	
+	$(".select2").select2();
+	
+	var table = $('#event_list').DataTable({
+		bAutoWidth:false,//自动计算列宽
+		bLengthChange: false, //每页显示数量选择
+		"searching": false,	//搜索框
+	    iDisplayLength : 8,//每页显示条数
+	    bInfo : true,  //页脚信息  (当前第 1 - 1 条　共计 1 条)
+	    bPaginate : true,//是否启用翻页功能
+	    sPaginationType : "full_numbers",//是否显示所有页码，数字的翻页样式
+	    bProcessing: true,//开关，以指定当正在处理数据的时候，是否显示“正在处理”这个提示信息;true or false, defualt false;
+	    "aaSorting": [[1, "desc"]],
+		// serverSide: true,//标示从服务器获取数据
+	    oLanguage: { // 对表格国际化
+	    	// "sLengthMenu" : "每页显示 _MENU_条",
+	    	"sZeroRecords" : "没有找到符合条件的数据",/*在查询的时候没有查找到相关信息的时候显示*/
+	    	"sProcessing" : "数据加载中...",
+	    	"sInfo" : "当前第 _START_ - _END_ 条　共计 _TOTAL_ 条",
+	    	"sInfoEmpty" : "当前第0条　共计0条",
+	    	"sEmptyTable":"没有可以显示的数据",/*没有数据的显示 No data available in table*/
+	    	"sInfoFiltered" : "(从 _MAX_ 条记录中过滤)",
+	    	"sSearch" : "搜索：",
+	    	"sFirst": "首页",    
+	        "sPrevious": "前一页",    
+	        "sNext": "后一页",    
+	        "sLast": "尾页"
+	    },
+	});
+});
+
+function modalClose(){
+	$("#addEventForm")[0].reset();
+	$("#addEventModal").modal('hide');
+	$("input[name='keywords']").each(function(i){
+		$(this).prop("disabled",false);
+	});
+	$("#classification").trigger("change");
+}
+
+
+
+function toUpdate(id){
+	$.ajax({
+        type:"GET",
+        //提交的网址
+        url:"/demo/ns/event/findById/"+id,
+        //提交的数据
+        //返回数据的格式
+        datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
+        //在请求之前调用的函数
+        beforeSend:function(){
+        },
+        //成功返回之后调用的函数             
+        success:function(data){
+        	var msg = '';
+        	if(null != data){
+        		$("#innerid").val(data.innerid);
+        		$("#name").val(data.name);
+        		$("#description").val(data.description);
+        		$('#occurrenceTime').datetimepicker('setDate',new Date(parseInt(data.occurrenceTime)));
+        		var classfis = data.classification.split(",");
+        		$('#classification').select2("val",classfis);
+        		$("#level").val(data.level);
+//         		$('#classification').val(["娱乐","政治"]);
+        		var otime= new Date(parseInt(data.occurrenceTime+"")).toLocaleString().replace(/\//g, "-").replace(/日/g, " ");
+        		var keywordArray = data.keywords.split('|');
+        		$("input[name='keywords']").each(function(i){
+        			/*<![CDATA[*/
+        			if(null != keywordArray[i] && "" != keywordArray[i]){
+        				$(this).val(keywordArray[i]);
+        				$(this).prop("disabled",true);
+        			}else{
+        				$(this).prop("disabled",false);
+        			}
+        			/*]]>*/
+        			$("#addEventModal").modal('show');
+        		});
+        		
+        	}else{
+        		msg += "查询事件失败";
+        		alert(msg);
+        	}
+        }   ,
+        error: function(){
+            //请求出错处理
+        }         
+     });
+}
+
+function save(){
+	var innerid = $("#innerid").val().trim();
+	var name = $("#name").val().trim();
+	var picPath = "";
+	var keywords = "";
+	var keywordList  = $("input[name='keywords']").each(function(i){
+		var keyword = $(this).val().trim();
+		/*<![CDATA[*/
+		if(null != keyword && "" != keyword){
+			if("" == keywords){
+				keywords += keyword;
+			}else{
+				keywords += "|" +keyword;
+			}
+		}
+		/*]]>*/
+	});
+	var occurrenceTime = $("#occurrenceTime").val();
+	var classifications = $("#classification").val();
+	var level = $("#level").val();
+	if(""==classifications||null==classifications){
+		alert("事件类型不能为空");
+		return;
+	}
+	var classification="";
+	/*<![CDATA[*/
+	for (var i = 0; i < classifications.length; i++) {
+		if(i==0 && null !== classifications[i] && "" !== classifications[i] ){
+			classification = classifications[i];
+		}else{
+			classification += "," + classifications[i];
+		}
+	}
+	/*]]>*/
+	
+	var description = $("#description").val();
+	if(""==name||null==name){
+		alert("事件名称不能为空");
+		return;
+	}
+	if(""==keywords||null==keywords){
+		alert("关键词组不能为空");
+		return;
+	}
+	if(""==occurrenceTime||null==occurrenceTime){
+		alert("事件发生时间不能为空");
+		return;
+	}
+	
+	var param;
+	var fileObj = document.getElementById("image").files[0];
+		$.ajaxFileUpload({
+			url:"/demo/ns/event/uploadImage",
+			type:'POST',
+			secureuri: false,
+			async:false,
+	        fileElementId:'image',
+	        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	        data:{"id":innerid},
+			dataType :'text',
+			success :function (data){
+			},error :function(data){
+				alert("上传图片失败");
+			}
+		});
+	
+	
+}
+
+</script>
+
+</body>
+</html>

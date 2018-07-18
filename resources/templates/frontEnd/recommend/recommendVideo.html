@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="recommendVideo">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻线索-new -->
+	<title>iNews-为你推荐</title>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css"	href="../../../static/frontEnd/css/recommended/recommendImg.css"	th:href="@{/frontEnd/css/recommended/recommendImg.css}" />
+	
+	
+</head>
+<body>
+	<div class="recommend-video">
+		<div class="dataConBox">
+			<div id="operateGroup" class="pull-left"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+				
+			<div class="pull-right listTableOperate">
+				<div class="btn-group" role="group" aria-label="...">
+				  <button type="button" class="btn btn-default active merge"><a href="javascript:void(0)">相似合并</a></button>
+				
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-default dropdown-toggle" id="sourcesCon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-innerid="">
+				      来源
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" id="sourceSelect" th:remove="body">
+				      	<li >
+			            	<a role="menuitem" tabindex="-1" href="#">官方媒体</a>
+			        	</li>
+			        	<li >
+			            	<a role="menuitem" tabindex="-1" href="#">商业媒体</a>
+			        	</li>
+			        	<li>
+			           		<a role="menuitem" tabindex="-1" href="#">政府网站</a>
+			        	</li>
+				        <li>
+				            <a role="menuitem" tabindex="-1" href="#">微博</a>
+				        </li>
+				        <li>
+				            <a role="menuitem" tabindex="-1" href="#">微信</a>
+				        </li>
+				        <li>
+				            <a role="menuitem" tabindex="-1" href="#">自媒体</a>
+				        </li>
+				        <li>
+				            <a role="menuitem" tabindex="-1" href="#">国外媒体</a>
+				        </li>
+				    </ul>
+				  </div>
+				  <button type="button" class="btn btn-default refreshButton"><a href="javascript:void(0)"><i class="fa fa-refresh"></i></a></button>
+				</div>
+			</div>
+			<div class="row box p-top">
+			
+				<div id="videoBox" th:include="frontEnd/common/video :: video"></div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- Self JS -->
+	<script type="text/javascript"	src="../../../static/frontEnd/js/static/recommended/recommendVideo.js"	th:src="@{/frontEnd/js/dynamic/recommended/recommendVideo.js}"></script>
+</body>
+</html>

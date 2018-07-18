@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news"/>
+    <meta name="description"
+          content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../../static/common/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/common/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/newsEvent/eventManage.css"
+          th:href="@{/backEnd/css/newsEvent/eventManage.css}"/>
+    <!-- bootstrap-datetimepicker JS -->
+    <script type="text/javascript"
+            src="../../../static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"
+            th:src="@{/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+    <script type="text/javascript"
+            src="../../../static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js"
+            th:src="@{/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+
+    <script type="text/javascript" src="../static/common/plugins/ajaxfileupload.js"
+            th:src="@{/common/plugins/ajaxfileupload.js}"></script>
+
+    <link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen"
+          th:href="@{/frontEnd/image/logo/favicon.ico}"/>
+    <!-- 我的定制 -->
+    <title>iNews-我的定制</title>
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+    <!--Self CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/customSpecial.css"
+          th:href="@{/frontEnd/css/myCustom/customSpecial.css}"/>
+
+</head>
+<body>
+<div class="custom-special">
+    <div class="custom-button-box" data-toggle="modal" data-target="#addEventModal">
+        <i class="fa fa-plus"></i>
+        <span class="button">
+            定制专题
+        </span>
+    </div>
+    <div class="title">
+        已添加的专题
+    </div>
+    <div class="list-title">
+        <span style="width: 13%">序号</span>
+        <span style="width: 40%">标题</span>
+        <span style="width: 18%">添加时间</span>
+        <span style="width: 25%">操作</span>
+    </div>
+    <div id="specialList">
+        <div style=" height: 38px;line-height: 38px;width: 100%;text-align: center;color: #aaaaaa;">暂无数据
+        </div>
+    </div>
+    <div class="modal  form-horizontal " id="addEventModal" data-backdrop="static">
+        <div class="modal-dialog" style="margin-top: 5%;">
+            <div class="modal-content">
+                <form action="" id="addEventForm">
+                    <div class="modal-header">
+                        <button type="button" class="close" onclick="modalClose()" data-dismiss="modal"> &times;
+                        </button>
+                        <h4 class="modal-title">新增/修改专题</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="center-block" style="width:500px">
+                            <input type="hidden" id="eventCode"/>
+                            <div class="form-group">
+                                <label for="name" class="col-sm-3 control-label"><span class="text-danger">* </span>专题名称</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="name" maxlength="20"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="keywords" class="col-sm-3 control-label"><span class="text-danger">* </span>关键词组</label>
+                                <div class="col-sm-9">
+                                    <input name="keywords" type="text" class="form-control" placeholder="逗号分隔"
+                                           maxlength="20"/><br/>
+                                    <input name="keywords" type="text" class="form-control" placeholder="逗号分隔"
+                                           maxlength="20"/><br/>
+                                    <input name="keywords" type="text" class="form-control" placeholder="逗号分隔"
+                                           maxlength="20"/><br/>
+                                    <input name="keywords" type="text" class="form-control" placeholder="逗号分隔"
+                                           maxlength="20"/>
+                                </div>
+                            </div>
+                            <!--<div class="form-group" >-->
+                            <!--<label for="keyword" class="col-sm-3 control-label">专题类型</label>-->
+                            <!--<div class="col-sm-9">-->
+                            <!--<select id="classification" class="form-control" th:remove="all-but-first" style="width: 100%;">-->
+                            <!--<option th:each="classifi:${classList}" th:value="${classifi.labelId}" th:text="${classifi.name}">重大事故</option>-->
+                            <!--<option >自然灾害</option>-->
+                            <!--<option >政治专题</option>-->
+                            <!--<option >刑事专题</option>-->
+                            <!--<option >明星专题</option>-->
+                            <!--<option >经济专题</option>-->
+                            <!--<option >社会专题</option>-->
+                            <!--</select>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="form-group">
+                                <label for="occurrenceTime" class="col-sm-3 control-label">发生时间</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="occurrenceTime" maxlength="20"/>
+                                </div>
+                            </div>
+                            <!--<div class="form-group" >-->
+                            <!--<label for="level" class="col-sm-3 control-label">专题等级</label>-->
+                            <!--<div class="col-sm-9">-->
+                            <!--<select id="level" class="form-control" >-->
+                            <!--<option value="1">一般</option>-->
+                            <!--<option value="2">较为重要</option>-->
+                            <!--<option value="3">重要</option>-->
+                            <!--<option value="4">非常重要</option>-->
+                            <!--</select>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="form-group">
+                                <label for="image" class="col-sm-3 control-label">图片选择</label>
+                                <div class="col-sm-9">
+                                    <input id="image" name="image" type="file" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-sm-3 control-label">专题描述</label>
+                                <div class="col-sm-9">
+                                    <textarea id="description" name="description" class="form-control"
+                                              maxlength="500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="save()" class="btn btn-primary" id="submit">保存</button>
+                        <button type="button" class="btn btn-default" onclick="modalClose()" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+
+
+</div>
+
+
+<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/customSpecial.js"
+        th:src="@{/frontEnd/js/dynamic/myCustom/customSpecial.js}"></script>
+</body>
+</html>

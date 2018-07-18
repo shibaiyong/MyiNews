@@ -1,0 +1,44 @@
+.screen{
+	position:relative;
+}
+.screen .screenCon{
+	display:inline-block;
+}
+.screen .screenCon .form-group{
+	margin-right:10px;
+}
+.screen .operateBtn{
+	/* position:absolute;
+	top:0px;
+	right:0px; */
+	float:right;
+	margin-left:10px;
+}
+.screen .addDicBtn a{
+	color:#fff;
+}
+.screen .screenCon .form-control{
+	height:30px !important; 
+	padding:0px 10px !important;
+}
+.mainContent{
+	margin-top:10px;
+}
+.dictionaryTable{
+	border-top:2px solid #EAEAEA;
+/* 	margin-top:10px; */
+}
+table.dataTable thead th, table.dataTable thead td{
+	border-bottom:0px !important;
+}
+.dictionaryTable tbody td:nth-child(8){
+	text-align:center;
+}
+
+.dictionaryTable .tableOperate a{
+	margin-right:5px;
+}
+
+.updateMeta{
+	position:relative;
+}

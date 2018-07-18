@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>iRobot - 新增采集任务页</title>
+	
+	<!-- bootstrap-select Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/collectManage.css" th:href="@{/backEnd/js/dynamic/iRobot/plug/bootstrap-select/dist/css/bootstrap-select.min.css}" />
+	<!-- Self Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/collectManage.css" th:href="@{/backEnd/css/iRobot/addManage.css}" />
+
+</head>
+<body>
+	<div class="wrapper">
+		
+		<div id="header" th:include="backEnd/iRobot/common/header :: header"></div>
+		
+        <div class="content-wrapper" style="margin-left:0px;">
+			<section class="content">
+				<div class="box p-right p-left">
+					<div class="box box-primary">
+						<div class="box-body">
+							<div>
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">网站采集</a></li>
+								    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">微博采集</a></li>
+								    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">微信采集</a></li>
+								    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">APP采集</a></li>
+								</ul>
+								<!-- Tab panes -->
+								<div class="tab-content">
+								    <div role="tabpanel" class="tab-pane active" id="home">
+								    	<div class="box webBox">
+									    	<form class="form-horizontal">
+									    		<div class="row">
+												  <div class="col-md-4">
+													  <div class="form-group">
+												    	  <label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集任务名称</label>
+												    	  <div class="col-sm-7">
+												    	  	<input type="text" class="form-control collectMission" placeholder="将自动生成任务名称" disabled="disabled"/>
+												    	  </div>
+												    	  <div class="col-sm-1"><i style="margin-top:10px" class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"  title="" data-original-title="根据填写的内容自动生成"></i></div>
+											  		  </div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集来源名称</label>
+												    	<div class="col-sm-8">
+<!-- 												    		<input type="text" class="form-control collectSources" placeholder="新华社（控件）"/> -->
+															<input autocomplete="off" data-provide="typeahead" type="text" class="form-control collectSources" placeholder="请输入采集来源名称"/>
+												    	</div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集链接地址</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control linkAddress" placeholder=""/>
+												    	</div>
+												  	</div>
+												  </div>
+												 
+												  
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集类型</label>
+												    	<div class="col-sm-8 ">
+													    	<select class="form-control collectType" th:remove="body">
+															  	<option>新闻列表</option>
+															  	<option>热点列表</option>
+															</select>
+														</div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集频率</label>
+												    	<div class="col-sm-8">
+<!-- 												    		<input type="text" class="form-control collectFrequency" placeholder="5"/> -->
+															<select class="form-control collectFrequency" th:remove="body">
+															  	<option>采集频率</option>
+															</select>
+												    	</div>
+<!-- 												    	<div class="col-sm-1 labelDescribe">分钟</div> -->
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集优先级</label>
+												    	<div class="col-sm-8">
+													    	<input type="text" class="form-control collectWeight" placeholder=""/>
+													    </div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label p-right"><i class='mandatory'>*</i>解析数据类型</label>
+												    	<div class="col-sm-8 ">
+												    		<select class="form-control parseDataType" th:remove="body">
+															  	<option>浏览器方式</option>
+															  	<option>普通方式</option>
+															  	<option>正则方式</option>
+															</select>
+												    	</div>
+												  	</div>
+												  </div>
+												   <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">分类导航路径</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control navigationPath"  placeholder="以逗号分隔"/>
+												    	</div>
+												  	</div>
+												  </div>
+												  
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">日期规则</label>
+												    	<div class="col-sm-8">
+<!-- 												    		<input type="text" class="form-control dateRule" placeholder=""/> -->
+												    		<select class="form-control dateRule" th:remove="body">
+															  	<option>政治</option>
+															  	<option>经济</option>
+															</select>
+												    	</div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label p-right">单条采集时间间隔</label>
+												    	<div class="col-sm-7">
+												    		<input type="text" class="form-control timeInterval" placeholder="60"/>
+												    	
+												    	</div>
+												    	<div class="col-sm-1 labelDescribe">秒</div>
+												  	</div>
+												  </div>
+												  
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">客户标签</label>
+												    	<div class="col-sm-8">
+												    		<select class="clientLabel" multiple="multiple" data-live-search="true" data-live-search-placeholder="输入查询的内容" data-actions-box="true" data-title="请选择客户标签" th:remove="body">
+													            <optgroup label="filter1">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													            <optgroup label="filter2">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													            <optgroup label="filter3">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													        </select>
+												    	</div>
+												  	</div>
+												  </div>
+<!-- 												  <div class="col-md-4"> -->
+<!-- 												  	<div class="form-group"> -->
+<!-- 												    	<label for="sourcesName" class="col-sm-4 control-label">客户标签</label> -->
+<!-- 												    	<div class="col-sm-8"> -->
+<!-- 												    		<input type="text" class="form-control clientLabel" placeholder="中国经营报"/> -->
+<!-- 												    	</div> -->
+<!-- 												  	</div> -->
+<!-- 												  </div> -->
+												<div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="" class="col-sm-4 control-label">内容分类</label>
+												    	<div class="col-sm-8" style="margin-bottom:5px">
+												    		<select class="contentLabel" multiple="multiple" data-live-search="true" data-live-search-placeholder="输入查询的内容" data-actions-box="true" data-title="请选择内容分类" th:remove="body">
+													            <optgroup label="filter1">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													            <optgroup label="filter2">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													            <optgroup label="filter3">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													        </select>
+												    	</div>
+												  	</div>
+												  </div>
+												  <!-- <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">内容分类</label>
+												    	<div class="col-sm-8 ">
+													    	<select class="form-control contentLabel" th:remove="body">
+															  	<option>政治</option>
+															  	<option>经济</option>
+															</select>
+														</div>
+												  	</div>
+												  </div> -->
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">所属地区</label>
+												    	<div class="col-sm-8 region">
+<!-- 													    	<select class="form-control listRegion" th:remove="body"> -->
+<!-- 															  	<option>北京</option> -->
+<!-- 															  	<option>上海</option> -->
+<!-- 															</select> -->
+															<input autocomplete="off" data-provide="typeahead" type="text" class="form-control listRegion" placeholder="请输入地区名称"/>
+														</div>
+												  	</div>
+												  </div>
+												  
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">所属行业</label>
+												    	<div class="col-sm-8 ">
+													    	<select class="form-control industry" th:remove="body">
+															  	<option>能源</option>
+															  	<option>化工</option>
+															  	<option>证券</option>
+															</select>
+														</div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4" style="margin-bottom:5px;">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">下载图片</label>
+												    	<div class="col-sm-8 dowmloadPic">
+													    	<label class="radio-inline">
+															  <input type="radio" name="downloadPic"  value="1" /> 是
+															</label>
+															<label class="radio-inline">
+															  <input type="radio" name="downloadPic" value="0" checked='checked'/> 否
+															</label>
+														</div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">图片重命名</label>
+												    	<div class="col-sm-8 renamePic">
+													    	<label class="radio-inline">
+															  <input type="radio"  value="1" name="renamepic" /> 是
+															</label>
+															<label class="radio-inline">
+															  <input type="radio" value="0" name="renamepic" checked='checked'/> 否
+															</label>
+														</div>
+												  	</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="sourcesName" class="col-sm-4 control-label">新闻类型</label>
+												    	<div class="col-sm-8">
+												    		<select class="newsType" multiple="multiple" data-live-search="true" data-live-search-placeholder="输入查询的内容" data-actions-box="true" data-title="请选择新闻类型" th:remove="body">
+													            <optgroup label="filter1">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													            <optgroup label="filter2">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													            <optgroup label="filter3">
+													              <option>option1</option>
+													              <option>option2</option>
+													              <option>option3</option>
+													              <option>option4</option>
+													            </optgroup>
+													        </select>
+												    	</div>
+												  	</div>
+												  </div>
+												</div>
+											</form>
+											
+											<div class="editBtn text-right">
+												<button type="button" class="btn btn-info btn-notuse">快速采集模板</button>
+<!-- 												<a class="" href="javascript:void(0)" th:href="@{/crawl/back/configuration}" target="_blank"><button type="button" class="btn btn-info customFormwork" >自定义采集模板</button></a> -->
+												<button type="button" class="btn btn-info customFormwork" >自定义采集模板</button>
+												<button type="button" class="btn btn-info startTask">启用</button>
+<!-- 												<button type="button" class="btn btn-info">删除</button> -->
+											</div>
+										</div>
+								    </div>
+								    <div role="tabpanel" class="tab-pane" id="profile">
+								    	<div class="weiboBox">
+								    		<div class='weiboBoxTitle irobotTitle'>
+								    			<h6>微博采集任务基本信息</h6>
+								    		</div>
+								    		<form class="form-horizontal">
+								    			<div class="row">
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集任务名称</label>
+												    	<div class="col-sm-7">
+												    		<input type="text" class="form-control" id="name" placeholder="新华社政治要闻新闻列表" disabled="disabled"/>
+												    	</div>
+												    	<div class="col-sm-1"><i style="margin-top:10px" class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"  title="" data-original-title="根据填写的内容自动生成"></i></div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集账号</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="新华社"/>
+												    	</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集频率</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="5"/>
+												    	</div>
+<!-- 												    	<div class="col-sm-1 labelDescribe">分钟</div> -->
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集优先级</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="5"/>
+												    	</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">任务来源</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="中国经营报"/>
+												    	</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">客户标签</label>
+												    	<div class="col-sm-8">
+													    	<input type="text" class="form-control" placeholder="中国经营报"/>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">内容分类</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control conClassification" th:remove="body">
+															  	<option>政治</option>
+															  	<option>经济</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">所属地区</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control">
+															  	<option>北京</option>
+															  	<option>上海</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">所属行业</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control">
+															  	<option>能源</option>
+															  	<option>化工</option>
+															  	<option>证券</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">来源机构属性</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control">
+															  	<option>官方媒体</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												</div>
+										  	</form>
+											
+											<div class="weobiBtn text-right">
+												<button type="button" class="btn btn-info">启用</button>
+												<button type="button" class="btn btn-info">删除</button>
+											</div>
+											
+								    	</div>
+								    	<div class='weiboConfiguration'>
+								    		<div class='weiboBoxTitle irobotTitle'>
+								    			<h6>微博详情配置</h6>
+								    		</div>
+								    		<div class="weiboConfigurationCon">
+								    			<div class="batchOperation">
+													<label class="radio-inline">
+													  	<i class="fa fa-play"></i>&nbsp;启动
+													</label>
+													<label class="radio-inline">
+													  	<i class="fa fa-stop"></i>&nbsp;暂停
+													</label>
+													<label class="radio-inline">
+													  	<i class="fa fa-trash-o"></i>&nbsp;删除
+													</label>
+												</div>
+												
+												<div class="batchOperationRight">
+									    			<form class="form-inline">
+													  <div class="form-group">
+													    <label >账号名称</label>
+													    <input type="text" class="form-control" placeholder="" />
+													  </div>
+													  <div class="form-group">
+													    <label >USER-ID</label>
+													    <input type="text" class="form-control"  placeholder="" />
+													  </div>
+													  <button type="submit" class="btn btn-default">确认添加</button>
+													</form>
+									    		</div>
+								    		</div>
+								    		
+								    		
+								    		<table class="table table-hover weiboConfigurationTable">
+												<thead>
+											        <tr>
+											         	<th style="text-align:center">
+											         		<span>
+														    	<span class="check-box checked-all"><i class="fa fa-check"></i></span>
+														  	</span>					         	
+														</th>
+											            <th>账号名称</th>
+											            <th>USER-ID</th>
+											            <th>权重</th>
+											            <th>来源机构属性</th>
+											            <th style='width:150px'>添加时间</th>
+											            <th style='width:150px'>最新采集时间</th>
+											            <th style='width:200px' >操作</th>
+											      	</tr>
+											    </thead>
+											    <tbody>
+											    	<tr>
+											    		<td>
+											    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											    </tbody>
+											</table>
+								    	</div>
+								    </div>
+								    <div role="tabpanel" class="tab-pane" id="messages">
+								    	<div class="weixinBox">
+								    		<div class='weiboBoxTitle irobotTitle'>
+								    			<h6>微信采集任务基本信息</h6>
+								    		</div>
+								    		<form class="form-horizontal">
+								    			<div class="row">
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集任务名称</label>
+												    	<div class="col-sm-7">
+												    		<input type="text" class="form-control" disabled='disabled' placeholder="新华社政治要闻新闻列表"/>
+												    	</div>
+												    	<div class="col-sm-1"><i style="margin-top:10px" class="fa fa-question-circle" data-toggle="tooltip" data-placement="top"  title="" data-original-title="根据填写的内容自动生成"></i></div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集账号</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="请输入手机号"/>
+												    	</div>
+											  		</div>
+												  </div>
+												  
+												  <div class="col-md-4">
+												  
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集频率</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="5"/>
+												    	</div>
+<!-- 												    	<div class="col-sm-1 labelDescribe">分钟</div> -->
+											  		</div>
+												  </div>
+												  
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label"><i class='mandatory'>*</i>采集优先级</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="5"/>
+												    	</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">任务来源</label>
+												    	<div class="col-sm-8">
+												    		<input type="text" class="form-control" placeholder="中国经营报"/>
+												    	</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+													  <div class="form-group">
+													    	<label for="name" class="col-sm-4 control-label">客户标签</label>
+													    	<div class="col-sm-8">
+														    	<input type="text" class="form-control" placeholder="中国经营报"/>
+															</div>
+												  		</div>
+												  </div>
+												  <div class="col-md-4">
+													  <div class="form-group">
+													    	<label for="name" class="col-sm-4 control-label">内容分类</label>
+													    	<div class="col-sm-8">
+														    	<select class="form-control" th:remove="body">
+																  	<option>政治</option>
+																  	<option>经济</option>
+																</select>
+															</div>
+												  		</div>
+												  </div>
+												  <div class="col-md-4">
+												    <div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">所属地区</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control listRegion" th:remove="body">
+															  	<option>北京</option>
+															  	<option>上海</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">所属行业</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control industry" th:remove="body">
+															  	<option>能源</option>
+															  	<option>化工</option>
+															  	<option>证券</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label">来源机构属性</label>
+												    	<div class="col-sm-8">
+													    	<select class="form-control">
+															  	<option>官方媒体</option>
+															</select>
+														</div>
+											  		</div>
+												  </div>
+												  <div class="col-md-4">
+												  	<div class="form-group">
+												    	<label for="name" class="col-sm-4 control-label p-right">单账号采集随机间隔</label>
+												    	<div class="col-sm-8">
+												    		<div class="row">
+															  <div class="col-md-5 p-right"><input type="text" class="form-control " placeholder="30s"/></div>
+															  <div class="col-md-2" style="margin-top:5px;">到</div>
+															  <div class="col-md-5 p-left"><input type="text" class="form-control " placeholder="70s"/></div>
+															</div>
+												    	</div>
+											  		</div>
+												  </div>
+										  		</div>
+										  	</form>
+										  	<div class="weixinBtn text-right">
+												<button type="button" class="btn btn-info">启用</button>
+												<button type="button" class="btn btn-info">删除</button>
+										  	</div>
+								    	</div>
+								    	<div class='weixinConfiguration'>
+								    		<div class='weixinBoxTitle irobotTitle'>
+								    			<h6>微信详情配置</h6>
+								    		</div>
+								    		<div class="weixinConfigurationCon">
+								    			<div class="batchOperation">
+													<label class="radio-inline">
+													  	<i class="fa fa-play"></i>&nbsp;启动
+													</label>
+													<label class="radio-inline">
+													  	<i class="fa fa-stop"></i>&nbsp;暂停
+													</label>
+													<label class="radio-inline">
+													  	<i class="fa fa-trash-o"></i>&nbsp;删除
+													</label>
+												</div>
+												
+												<div class="batchOperationRight">
+									    			<form class="form-inline">
+													  <div class="form-group">
+													    <label >账号名称</label>
+													    <input type="text" class="form-control" placeholder="" />
+													  </div>
+													  <div class="form-group">
+													    <label >USER-ID</label>
+													    <input type="text" class="form-control"  placeholder="" />
+													  </div>
+													  <button type="submit" class="btn btn-default">确认添加</button>
+													</form>
+									    		</div>
+								    		</div>
+								    		
+								    		
+								    		<table class="table table-hover weixinConfigurationTable">
+												<thead>
+											        <tr>
+											         	<th style="text-align:center">
+											         		<span>
+														    	<span class="check-box checked-all"><i class="fa fa-check"></i></span>
+														  	</span>				         	
+														</th>
+											            <th>账号名称</th>
+											            <th>USER-ID</th>
+											            <th>权重</th>
+											            <th>来源机构属性</th>
+											            <th style='width:150px'>添加时间</th>
+											            <th style='width:150px'>最新采集时间</th>
+											            <th style='width:200px' >操作</th>
+											      	</tr>
+											    </thead>
+											    <tbody>
+											    	<tr>
+											    		<td>
+											    			<label>
+														    	<span class="check-box check-child"><i class="fa fa-check"></i></span>
+														  	</label>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<label>
+														    	<span class="check-box check-child"><i class="fa fa-check"></i></span>
+														  	</label>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<label>
+														    	<span class="check-box check-child"><i class="fa fa-check"></i></span>
+														  	</label>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<label>
+														    	<span class="check-box check-child"><i class="fa fa-check"></i></span>
+														  	</label>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<label>
+														    	<span class="check-box check-child"><i class="fa fa-check"></i></span>
+														  	</label>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											  	    <tr>
+											    		<td>
+											    			<label>
+														    	<span class="check-box check-child"><i class="fa fa-check"></i></span>
+														  	</label>
+											    		</td>
+											    		<td>人民日报</td>
+											    		<td>WDSWD213421</td>
+											    		<td>1.0</td>
+											    		<td>官方媒体</td>
+											    		<td>02-15 24:00</td>
+											    		<td>02-15 24:00</td>
+											    		<td>
+											    			<label>启动/禁用</label>
+											    			<label>保存/修改</label>
+											    			<label>删除</label>
+											    		</td>
+											  	    </tr>
+											    </tbody>
+											</table>
+								    	</div>
+								    </div>
+								    <div role="tabpanel" class="tab-pane" id="settings">
+								    	<div class="appBox">
+								    		<p>暂时没有开发</p>
+								    	</div>
+								    </div>
+								 </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	
+	
+	<!-- bootstrap-select JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
+		<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/bootstrap-select/dist/js/i18n/defaults-zh_CN.js}"></script>
+	<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!-- Self Js -->
+     <script type="text/javascript" src="../../../static/backEnd/js/static/iRobot/collectManage.js" th:src="@{/backEnd/js/dynamic/iRobot/addManage.js}"></script>
+</body>
+</html>

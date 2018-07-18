@@ -1,0 +1,84 @@
+.reviewAnalysisCon{
+	margin-top:10px;
+}
+.inputBox{
+	margin-bottom:20px;
+}
+.inputBox .form-group{
+	margin-bottom:10px;
+}
+
+.inputBox .linkText{
+	height:30px;
+	line-height:30px;
+	padding:0px;
+}
+.inputBox .commentaries p{
+	font-size: 12px;
+    color: #999;
+    margin-bottom:3px;
+}
+
+
+
+.reviewAnalysisShow .reviewAnalysisTable {
+    border-top: 2px solid #EAEAEA;
+}
+.reviewAnalysisTable td .btn{
+	border-radius:4px;
+}
+
+/* 错误提示 */
+.linkTips{
+	margin:0px;
+	height:30px;
+	line-height:30px;
+	color:#F44336;
+}
+.linkBtn{
+	cursor:pointer;
+}
+.reviewAnalysisTable tbody td:nth-child(1),
+.reviewAnalysisTable tbody td:nth-child(6){
+	text-align:center;
+}
+.reviewAnalysisTable tbody td:nth-child(6){
+	cursor:pointer;
+}
+.reviewAnalysisTable tbody td:nth-child(6)>a{
+	width:45%;
+	display:inline-block;
+}
+.reviewAnalysisTable tbody td:nth-child(6)>a:hover{
+	color:#F44336;
+}
+
+/* 评论分析提交重复判断 */
+
+#confirmModal .modal-footer{
+	padding:10px 15px;
+}
+#confirmModal .modal-footer button{
+	padding:3px 10px;
+}
+#confirmModal .modal-dialog{
+	top:40%;
+	margin-top:-50px;
+}
+
+/* 评论分析删除 */
+
+#delModal .modal-footer{
+	padding:10px 15px;
+}
+#delModal .modal-footer button{
+	padding:3px 10px;
+}
+#delModal .modal-dialog{
+	top:40%;
+	margin-top:-50px;
+}
+
+.reviewAnalysisTable .title:hover{
+	color:#333;
+}

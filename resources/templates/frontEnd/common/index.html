@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>新媒体-iNews</title>
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/bootstrap-3.3.0/css/bootstrap.min.css"  th:href="@{/common/plugins/bootstrap-3.3.0/css/bootstrap.min.css}" />
+<!-- bootstrap-select CSS -->
+<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/bootstrap-select/dist/css/bootstrap-select.css" th:href="@{/common/plugins/bootstrap-select/dist/css/bootstrap-select.css}" />
+<!-- Fonts -->
+<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/font-awesome-4.4.0/css/font-awesome.min.css" th:href="@{/common/plugins/font-awesome-4.4.0/css/font-awesome.min.css}" />
+<!-- moveBg CSS -->
+<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/moveBg/css/movebg.css"  th:href="@{/common/plugins/moveBg/css/movebg.css}" />
+<!-- mCustomScrollbar CSS -->
+<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/mCustomScrollbar/css/jquery.mCustomScrollbar.min.css"  th:href="@{/common/plugins/mCustomScrollbar/css/jquery.mCustomScrollbar.min.css}"/>
+<!-- dataTables CSS -->
+<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/dataTables/jquery.dataTables.min.css" th:href="@{/common/plugins/dataTables/jquery.dataTables.min.css}" />
+
+<!-- Common Css-->
+<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/common.css" th:href="@{/frontEnd/css/common/common.css}" />
+<!-- Self Js -->
+<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/index.css" />
+
+
+<!-- jQuery 2.1.4-->
+<script src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jQuery/jQuery-2.1.4.min.js}" ></script>
+<!-- Bootstrap Core Js -->
+<script src="../../../static/common/plugins/bootstrap-3.3.0/js/bootstrap.min.js" th:src="@{/common/plugins/bootstrap-3.3.0/js/bootstrap.min.js}"></script>
+<!-- bootstrap-select js -->
+<script type="text/javascript" src="../../../static/common/plugins/bootstrap-select/dist/js/bootstrap-select.js" th:src="@{/common/plugins/bootstrap-select/dist/js/bootstrap-select.js}"></script>
+<!-- Echarts Js -->
+<script type="text/javascript" src="../../../static/common/plugins/echarts/echarts3.js"  th:src="@{/common/plugins/echarts/echarts3.js}"></script>
+<!-- moveBg Js -->
+<script src="../../../static/common/plugins/moveBg/js/jquery.movebg.js" th:src="@{/common/plugins/moveBg/js/jquery.movebg.js}" ></script>
+<!-- mCustomScrollbar JS -->
+<script type="text/javascript" src="../../../static/common/plugins/mCustomScrollbar/js/jquery.mCustomScrollbar.concat.min.js" th:src="@{/common/plugins/mCustomScrollbar/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- dataTables JS -->
+<script type="text/javascript" src="../../../static/common/plugins/dataTables/jquery.dataTables.min.js" th:src="@{/common/plugins/dataTables/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" src="../../../static/common/plugins/dataTables/dataTables.bootstrap.min.js" th:src="@{/common/plugins/dataTables/dataTables.bootstrap.min.js}"></script>
+<script type="text/javascript" src="../../../static/common/plugins/dataTables/dataTables-style.js" th:src="@{/common/plugins/dataTables/dataTables-style.js}"></script>
+
+<!-- Common Js -->
+<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common-custom.js" th:src="@{/frontEnd/js/static/common/common-custom.js}"></script>
+<!-- Self Js -->
+<script type="text/javascript" src="../../../static/frontEnd/js/static/common/index.js" th:src="@{/frontEnd/js/dynamic/common/index.js}"></script>
+
+</head>
+<body>
+	<input type="hidden" id="ctx" th:value="${ctx}"/>
+
+
+	<div id="header">
+		<!-- 头部内容 -->
+	</div>
+	<div id="page-content" class="container">
+		<!-- 主体内容 -->
+	</div>
+	<footer id="footer">
+		<!-- 底部内容 -->
+	</footer>
+	<!-- 返回顶部 -->
+	<div class="go-top dn" id="go-top">
+	    <a href="javascript:;" class="uc-2vm"></a>
+		<div class="uc-2vm-pop dn">
+			<h2 class="title-2wm">用微信扫一扫</h2>
+			<div class="logo-2wm-box">
+				<img src="../../../static/frontEnd/image/backTop/weixin.jpg" th:src="@{/frontEnd/image/backTop/weixin.jpg}"  width="344" height="344" />
+			</div>
+		</div>
+	    <a href="javascript:void(0)" target="_blank" class="feedback"></a>
+	    <a href="javascript:void(0)" class="go"></a>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+.newsDetailConTit h5{
+	font-size: 0.48rem;
+    color: #1a1a1a;
+    line-height: 0.68rem;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    padding: .3rem .3rem .2rem;
+    margin:0px;
+    font-weight: 700;
+    text-align: justify;
+    background: #fff;
+}
+
+.mainNews{
+	margin: 0 0.3rem 0.3rem;
+}
+.mainNews span{
+	margin-right:0.2rem;
+	color:#999;
+	font-size:12px;
+}
+.newsDetailText{
+	margin: 0 .3rem .5rem;
+}
+#newsContent p{
+    
+    font-size: .34rem;
+    color: #1a1a1a;
+    line-height: .6rem;
+    word-break: normal;
+    text-align: justify;
+
+}

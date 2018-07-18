@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>领导动态</title>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/leaderDyn/leaderDyn.css">
+	
+	<!-- wordScoll JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/leaderDyn/wordScroll.js"></script>
+	<!-- masonry JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/masonry/masonry.pkgd.min.js" th:src="@{/common/plugins/masonry/masonry.pkgd.min.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/masonry/imagesloaded.pkgd.min.js"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/leaderDyn/leaderDyn.js"></script>
+</head>
+<body>
+	<div  class="container" style="background:#fff">
+		<div id="main-content">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="leaderQuery">
+						<div class="box p-right p-left">
+							<div class="leaderQuerySearch box p-right p-left">
+								<form class="form-inline" role="form">
+								  	<div class="form-group">
+								    	<div class="input-group">
+								      		<input class="form-control" type="text" placeholder="请输入领导人的名字">
+								      		<div class="input-group-addon ">查询</div>
+								    	</div>
+								  	</div>
+								</form>
+							</div>
+							<div class="leaderQueryCon">
+								<div class="row">
+								  	<div class="col-md-6 col-sm-12 p-right">
+								  		<div class="thumbnail p-all shadowBg">
+										    <div class="caption p-all">
+										        <div class="captionTitle clearfix">
+								              		<ul class="nav nav-tabs" role="tablist">
+													  	<li class="fixed"><a  href="javascript:void(0)">会见</a></li>
+													</ul>
+								              	</div>
+								              	<div class="captionCon">
+									                <ul class="list-group-style">
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[网易]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													 	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[新华网]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[凤凰网]&nbsp;</span>上海现"最贵钉子户" 周边房价每平米七
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span> 习近平会见候任联合国秘书长古特雷斯
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													</ul>
+												</div>
+										    </div>
+										</div>
+								  	</div>
+								  	<div class="col-md-6 col-sm-12 p-right">
+								  		<div class="thumbnail p-all shadowBg">
+										    <div class="caption p-all">
+										        <div class="captionTitle clearfix">
+								              		<ul class="nav nav-tabs" role="tablist">
+													  	<li class="fixed"><a  href="javascript:void(0)">讲话</a></li>
+													</ul>
+								              	</div>
+								              	<div class="captionCon">
+									                <ul class="list-group-style">
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[网易]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													 	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[新华网]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[凤凰网]&nbsp;</span>上海现"最贵钉子户" 周边房价每平米七
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span> 习近平会见候任联合国秘书长古特雷斯
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													</ul>
+												</div>
+										    </div>
+										</div>
+								  	</div>
+								  	<div class="col-md-6 col-sm-12 p-right">
+								  		<div class="thumbnail p-all shadowBg">
+										    <div class="caption p-all">
+										        <div class="captionTitle clearfix">
+								              		<ul class="nav nav-tabs" role="tablist">
+													  	<li class="fixed"><a  href="javascript:void(0)">考察出访</a></li>
+													</ul>
+								              	</div>
+								              	<div class="captionCon">
+									                <ul class="list-group-style">
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[网易]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													 	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[新华网]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[凤凰网]&nbsp;</span>上海现"最贵钉子户" 周边房价每平米七
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span> 习近平会见候任联合国秘书长古特雷斯
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													</ul>
+												</div>
+										    </div>
+										</div>
+								  	</div>
+								  	<div class="col-md-6 col-sm-12 p-right">
+								  		<div class="thumbnail p-all shadowBg">
+										    <div class="caption p-all">
+										        <div class="captionTitle clearfix">
+								              		<ul class="nav nav-tabs" role="tablist">
+													  	<li class="fixed"><a  href="javascript:void(0)">其他</a></li>
+													</ul>
+								              	</div>
+								              	<div class="captionCon">
+									                <ul class="list-group-style">
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[网易]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													 	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[新华网]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[凤凰网]&nbsp;</span>上海现"最贵钉子户" 周边房价每平米七
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span> 习近平会见候任联合国秘书长古特雷斯
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													</ul>
+												</div>
+										    </div>
+										</div>
+								  	</div>
+								  	<div class="col-md-12 p-right">
+								  		<div class="thumbnail p-all shadowBg wordScoll">
+										    <div class="caption p-all">
+										        <div class="captionTitle clearfix">
+								              		<ul class="nav nav-tabs" role="tablist">
+													  	<li class="fixed"><a  href="javascript:void(0)">地方领导活动报道</a></li>
+													</ul>
+								              	</div>
+								              	<div class="captionCon">
+									                <ul class="list-group-style">
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[网易]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													 	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[新华网]&nbsp;</span>军改一年间，习近平这样排兵布阵
+													  		</a>
+													  		<span class="pull-right listTil listTilNew">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[凤凰网]&nbsp;</span>上海现"最贵钉子户" 周边房价每平米七
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span> 习近平会见候任联合国秘书长古特雷斯
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+													  	<li class="list-style-item">
+													  		<a href="javascript:void(0)">
+													  			<span>[百度]&nbsp;</span>严肃党内政治生活是全面从严治党重要基础
+													  		</a>
+													  		<span class="pull-right listTil">[2016-06-12]</span>
+													  	</li>
+
+													</ul>
+												</div>
+										    </div>
+										</div>
+								  	</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+  				<div class="col-md-4">
+  					<div class="audit">
+  						<div class="box p-right p-left">
+  							<div class="auditSearch box p-right p-left">
+								<form class="form-inline" role="form">
+								  	<div class="form-group">
+								    	<div class="input-group">
+								      		<input class="form-control" type="text" placeholder="请输入被审计人员">
+								      		<div class="input-group-addon">查询</div>
+								    	</div>
+								  	</div>
+								</form>
+							</div>
+							<div class="auditCon">
+								<div class="box-header header-vimeo">
+									<h2>中管干部</h2>
+								</div>
+								<div class="auditConList">
+									<div class="box p-right p-left">
+										<p>
+											<span class="spanOne red">执纪审查</span>
+											<span class="pull-right spanTwo gray">更多&nbsp;<i class="fa fa-angle-double-right"></i></span>
+										</p>
+										<ul>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;河南省委员常委、政法委书记吴天君接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;湖南省常委、宣传部部长张文涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;安徽省副省长陈树隆涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;湖南省常委、宣传部部长张文涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;安徽省副省长陈树隆涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+										</ul>
+
+										<p>
+											<span class="spanOne red">党纪处分</span>
+											<span class="pull-right spanTwo gray">更多&nbsp;<i class="fa fa-angle-double-right"></i></span>
+										</p>
+										<ul>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;国家开发银行原党委副书记、监事长姚忠明严重违纪被开除党籍和公职</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;国家统计局原党组书记、局长王保安严重违纪开除党籍</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;辽宁省人大常委会副主任郑玉被开除党籍和公职</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;国家统计局原党组书记、局长王保安严重违纪开除党籍</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;辽宁省人大常委会副主任郑玉被开除党籍和公职</a>
+												<span>2016-11-12</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="box-header header-vimeo">
+									<h2>省管干部</h2>
+								</div>
+								<div class="auditConList">
+									<div class="box p-right p-left">
+										<p>
+											<span class="spanOne red">执纪审查</span>
+											<span class="pull-right spanTwo gray">更多&nbsp;<i class="fa fa-angle-double-right"></i></span>
+										</p>
+										<ul>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;河南省委员常委、政法委书记吴天君接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;湖南省常委、宣传部部长张文涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;安徽省副省长陈树隆涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;湖南省常委、宣传部部长张文涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;安徽省副省长陈树隆涉嫌严重违纪接受组织调查</a>
+												<span>2016-11-12</span>
+											</li>
+										</ul>
+
+										<p>
+											<span class="spanOne red">党纪处分</span>
+											<span class="pull-right spanTwo gray">更多&nbsp;<i class="fa fa-angle-double-right"></i></span>
+										</p>
+										<ul>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;国家开发银行原党委副书记、监事长姚忠明严重违纪被开除党籍和公职</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;国家统计局原党组书记、局长王保安严重违纪开除党籍</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;辽宁省人大常委会副主任郑玉被开除党籍和公职</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;国家统计局原党组书记、局长王保安严重违纪开除党籍</a>
+												<span>2016-11-12</span>
+											</li>
+											<li>
+												<a href="javascript:void(0)" class="beyondEllipsis"><i class="fa fa-angle-double-right red"></i>&nbsp;辽宁省人大常委会副主任郑玉被开除党籍和公职</a>
+												<span>2016-11-12</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+  						</div>
+  					</div>
+  				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

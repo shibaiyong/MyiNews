@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:50px">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<meta charset="utf-8"/>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta name="referrer" content="never"/>
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻详情页 -->
+	<title >iNews-智慧新闻</title>
+	<!-- jQuery 2.1.4-->
+	<script src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jQuery/jQuery-2.1.4.min.js}" >
+	</script>
+	<!-- 引用公共js -->
+	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
+	<script>
+		$(function(){
+        var webpageCode = $(" #webpageCode ").val();
+		$.ajax({
+			url : ctx + "/latest/front/draft/release?webpageCode="+webpageCode,//这个就是请求地址对应sAjaxSource
+			type : 'get',
+			dataType : 'json',
+			success : function(data) {
+				if(data.result){
+
+					if(data.resultObj.requestType=="sbs"){
+						//location.href("localhost:8080/ns/latest/front/draft/release/view?msg="+data.resultObj)
+						var body = data.resultObj.requestBody;
+						console.log(body);
+						post(data.resultObj.url,body);
+					}else if(data.resultObj.requestType=="sxdzyd"){
+                        var body = data.resultObj.requestBody;
+                        console.log(body);
+                        post(data.resultObj.url,body);
+					}else{
+						var tempwindow = window.open();
+						tempwindow.location=data.resultObj.editUrl;
+						$().toastmessage('showToast', {
+							text: '建稿成功！',
+							sticky: false,
+							position : 'bottom-right',
+							type: 'success',
+						});
+					}
+				}else{
+					$().toastmessage('showToast', {
+						text: '建稿失败！',
+						sticky: false,
+						position : 'bottom-right',
+						type: 'error',
+					});
+				}
+			},
+			error : function(msg) {
+			}
+		});
+        function post(URL, PARAMS) {
+            var temp = document.createElement("form");
+            temp.action = URL;
+            temp.method = "post";
+            temp.style.display = "none";
+            for (var x in PARAMS) {
+                var opt = document.createElement("textarea");
+                opt.name = x;
+                opt.value = PARAMS[x];
+                // alert(opt.name)
+                temp.appendChild(opt);
+            }
+            document.body.appendChild(temp);
+            temp.submit();
+            return temp;
+        }
+	})
+	</script>
+</head>
+<body >
+	<input id="webpageCode" type="hidden" th:value="${webpageCode}"/>
+</body>
+<script>
+	
+</script>
+</html>

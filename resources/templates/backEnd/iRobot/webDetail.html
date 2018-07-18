@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>iRobot - 网采集任务详情页</title>
+	<!-- bootstrap-select Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/collectManage.css" th:href="@{/backEnd/js/dynamic/iRobot/plug/bootstrap-select/dist/css/bootstrap-select.min.css}" />
+	<!-- Self Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/detail.css" th:href="@{/backEnd/css/iRobot/webDetail.css}" />
+
+</head>
+<body>
+	<div class="wrapper">
+		
+		<div id="header" th:include="backEnd/iRobot/common/header :: header"></div>
+		
+		<input type="hidden" th:value="${taskId}" id="taskId" />
+<!-- 		<input type="hidden" th:value="13" id="taskId" /> -->
+		
+        <div class="content-wrapper" style="margin-left:0px;">
+			<section class="content">
+				<div class="box p-right p-left">
+					<div class="box box-primary">
+						<div class="box-body">
+							<div class="detailTop">
+								<div class="irobotTitle">
+									<h6>采集任务基本信息</h6>
+									<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="所有信息可修改，点击启用即可生效（除采集任务名称外）"></i>
+								</div>
+								<form class="form-horizontal">
+									<div class="row">
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">采集任务名称</label>
+									    	<div class="col-sm-8">
+									    		<p class="form-control-static p-bottom collectMission" th:remove="body">新华社-军事-深度-01</p>
+										   	</div>
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">采集来源名称</label>
+									    	<div class="col-sm-8">
+									    		<input autocomplete="off" data-provide="typeahead" type="text" class="form-control taskDetailShow collectSources" placeholder="请输入采集来源名称"/>
+									    	</div>
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">采集链接地址</label>
+									    	<div class="col-sm-8">
+									    		<input type="text" class="form-control taskDetailShow linkAddress" placeholder=""/>
+									    	</div>
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">采集类型</label>
+									    	<div class="col-sm-8">
+										    	<select class="form-control taskDetailShow collectType" th:remove="body">
+												  	<option>新闻列表</option>
+												  	<option>热点列表</option>
+												</select>
+											</div>
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">采集频率</label>
+									    	<div class="col-sm-8">
+									    		<select class="form-control taskDetailShow collectFrequency" th:remove="body">
+												  	<option>采集频率</option>
+												</select>
+									    	</div>
+<!-- 									    	<div class="col-sm-1 labelDescribe">分钟</div> -->
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">采集优先级</label>
+									    	<div class="col-sm-8">
+									    		<input type="text" class="form-control taskDetailShow collectWeight"  placeholder="5"/>
+									    	</div>
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="name" class="col-sm-4 control-label">解析数据类型</label>
+									    	<div class="col-sm-8">
+										    	<select class="form-control parseDataType taskDetailShow" th:remove="body">
+												  	<option>浏览器方式</option>
+												  	<option>json方式</option>
+												</select>
+											</div>
+								  		</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">分类导航路径</label>
+									    	<div class="col-sm-8">
+									    		<input type="text" class="form-control navigationPath taskDetailShow"  placeholder="以逗号分隔"/>
+									    	</div>
+									  	</div>
+									  </div>
+									  
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">日期规则</label>
+									    	<div class="col-sm-8">
+<!-- 									    		<input type="text" class="form-control dateRule taskDetailShow" placeholder=""/> -->
+									    		<select class="form-control taskDetailShow dateRule" th:remove="body">
+												  	<option>政治</option>
+												  	<option>经济</option>
+												</select>
+									    	</div>
+									  	</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label p-right">单条采集时间间隔</label>
+									    	<div class="col-sm-7">
+									    		<input type="text" class="form-control timeInterval taskDetailShow" placeholder="60"/>
+									    	
+									    	</div>
+									    	<div class="col-sm-1 labelDescribe">秒</div>
+									  	</div>
+									  </div>
+									  
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">客户标签</label>
+									    	<div class="col-sm-8">
+									    		<select class="clientLabel taskDetailShow" multiple="multiple" data-live-search="true" data-live-search-placeholder="输入查询的内容" data-actions-box="true" data-title="请选择客户标签" th:remove="body">
+										            <optgroup label="filter1">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										            <optgroup label="filter2">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										            <optgroup label="filter3">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										        </select>
+									    	</div>
+									  	</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="" class="col-sm-4 control-label">内容分类</label>
+									    	<div class="col-sm-8" style="margin-bottom:5px;">
+									    		<select class="contentLabel taskDetailShow" multiple="multiple" data-live-search="true" data-live-search-placeholder="输入查询的内容" data-actions-box="true" data-title="请选择内容分类" th:remove="body">
+										            <optgroup label="filter1">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										            <optgroup label="filter2">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										            <optgroup label="filter3">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										        </select>
+									    	</div>
+									  	</div>
+									  </div>
+<!-- 									  <div class="col-md-4"> -->
+<!-- 									  	<div class="form-group"> -->
+<!-- 									    	<label for="sourcesName" class="col-sm-4 control-label">内容分类</label> -->
+<!-- 									    	<div class="col-sm-8 "> -->
+<!-- 										    	<select class="form-control taskDetailShow contentLabel" th:remove="body"> -->
+<!-- 												  	<option>政治</option> -->
+<!-- 												  	<option>经济</option> -->
+<!-- 												</select> -->
+<!-- 											</div> -->
+<!-- 									  	</div> -->
+<!-- 									  </div> -->
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">所属地区</label>
+									    	<div class="col-sm-8 region">
+<!-- 										    	<select class="form-control taskDetailShow listRegion" th:remove="body"> -->
+<!-- 												  	<option>北京</option> -->
+<!-- 												  	<option>上海</option> -->
+<!-- 												</select> -->
+												<input autocomplete="off" data-provide="typeahead" type="text" class="form-control taskDetailShow listRegion" placeholder="请输入地区名称"/>
+											</div>
+									  	</div>
+									  </div>
+									  
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">所属行业</label>
+									    	<div class="col-sm-8 ">
+										    	<select class="form-control taskDetailShow industry" th:remove="body">
+												  	<option>能源</option>
+												  	<option>化工</option>
+												  	<option>证券</option>
+												</select>
+											</div>
+									  	</div>
+									  </div>
+									  <div class="col-md-4" style="margin-bottom:5px;">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">下载图片</label>
+									    	<div class="col-sm-8 dowmloadPic">
+										    	<label class="radio-inline">
+												  <input type="radio" name="downloadPic" class="taskDetailShow"  value="1" /> 是
+												</label>
+												<label class="radio-inline">
+												  <input type="radio" name="downloadPic" class="taskDetailShow" value="0" /> 否
+												</label>
+											</div>
+									  	</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">图片重命名</label>
+									    	<div class="col-sm-8 renamePic">
+										    	<label class="radio-inline">
+												  <input type="radio"  value="1" name="renamepic" class="taskDetailShow"/> 是
+												</label>
+												<label class="radio-inline">
+												  <input type="radio" value="0" name="renamepic" class="taskDetailShow"/> 否
+												</label>
+											</div>
+									  	</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="sourcesName" class="col-sm-4 control-label">新闻类型</label>
+									    	<div class="col-sm-8">
+									    		<select class="newsType" multiple="multiple" data-live-search="true" data-live-search-placeholder="输入查询的内容" data-actions-box="true" data-title="请选择新闻类型" th:remove="body">
+										            <optgroup label="filter1">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										            <optgroup label="filter2">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										            <optgroup label="filter3">
+										              <option>option1</option>
+										              <option>option2</option>
+										              <option>option3</option>
+										              <option>option4</option>
+										            </optgroup>
+										        </select>
+									    	</div>
+									  	</div>
+									  </div>
+									  <div class="col-md-4">
+									  	<div class="form-group">
+									    	<label for="" class="col-sm-4 control-label">metaInfoKey</label>
+									    	<div class="col-sm-8 metaInfoKey">
+									    		<input type="text" class="form-control taskDetailShow"  placeholder=""/>
+									    	</div>
+									  	</div>
+									  	<div class="form-group">
+									    	<label for="" class="col-sm-4 control-label">taskId</label>
+									    	<div class="col-sm-8 taskId">
+									    		<input type="text" class="form-control taskDetailShow"  placeholder=""/>
+									    	</div>
+									  	</div>
+									  </div>
+									</div>
+							  	</form>
+						  	</div>
+						  	<div class="detailBottom">
+						  		<div class="irobotTitle">
+									<h6>采集任务状态信息</h6>
+								</div>
+								<div class='bottomCon'>
+									<table class="table detailTable">
+										<thead>
+									        <tr>
+									            <th>采集状态</th>
+									            <th>最新执行时间</th>
+									            <th>最新采集时间</th>
+									            <th>今日采集数</th>
+									            <th>总采集数</th>
+									      	</tr>
+									    </thead>
+									    <tbody class="detailTableCon" th:remove="body">
+									    	<tr>
+									    		<td>采集中</td>
+									    		<td>02-15 24:00</td>
+									    		<td>12-19 24:00</td>
+									    		<td>2345</td>
+									    		<td>1234576</td>
+									  	    </tr>
+									    </tbody>
+									</table>
+								</div>
+								<div class="bottomBtn">
+									<button type="button" class="btn btn-info btn-notuse">快速采集模板</button>
+									<button type="button" class="btn btn-info">修改采集模板</button>
+									<button type="button" class="btn btn-info start startTask hide">启用</button>
+									<button type="button" class="btn btn-info pause hide">暂停</button>
+<!-- 									<button type="button" class="btn btn-info">删除</button> -->
+								</div>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- bootstrap-select JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/bootstrap-select/dist/js/i18n/defaults-zh_CN.js}"></script>
+	<!-- typeahead JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/typeahead/bootstrap3-typeahead.min.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!-- Self Js -->
+     <script src="../../../static/backEnd/js/static/iRobot/webDetail.js" th:src="@{/backEnd/js/dynamic/iRobot/webDetail.js}"></script>
+</body>
+</html>

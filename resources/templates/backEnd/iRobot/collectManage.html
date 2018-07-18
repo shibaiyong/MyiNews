@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>iRobot - 采集任务列表页</title>
+	
+	<!-- Menu Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/plug/menu/css/menu.css" th:href="@{/backEnd/js/dynamic/iRobot/plug/menu/css/menu.css}" />
+	<!-- Self Css -->
+	<link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/iRobot/collectManage.css" th:href="@{/backEnd/css/iRobot/collectManage.css}" />
+
+</head>
+<body>
+	<div class="wrapper">
+		
+		<div id="header" th:include="backEnd/iRobot/common/header :: header"></div>
+		
+        <div class="content-wrapper" style="margin-left:0px;">
+           <section class="content">
+		
+				<div class="box p-right p-left">
+					<div class="box box-primary">
+						<div class="box-body">
+							<div class="mainLeft">
+								<div class='box'>
+									 <ul class="nav nav-tabs" role="tablist">
+									    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">按来源</a></li>
+									    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">按地区</a></li>
+									    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">按内容</a></li>
+									    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">按载体</a></li>
+									  </ul>
+									
+									  <!-- Tab panes -->
+									  <div class="tab-content">
+									    <div role="tabpanel" class="tab-pane active" id="home">
+									    	<div class="menu menu1">
+												<ul>
+													<li><a class="active" href="javascript:;">官方媒体</a>
+														<ul style="display: block;">
+															<li><a href="javascript:;">人民日报-网站</a></li>
+															<li><a href="javascript:;">人民日报-网站</a>
+																<ul>
+																	<li><a href="javascript:;">时政</a>
+																		<ul>
+																			<li><a href="javascript:;">评论</a></li>
+																			<li><a href="javascript:;">专题</a></li>
+																		</ul>
+																	</li>
+																	<li><a href="javascript:;">体育</a></li>
+																	<li><a href="javascript:;">社会</a></li>
+																</ul>
+															</li>
+															<li><a href="javascript:;">人民日报-微信</a></li>
+															<li><a href="javascript:;">人民日报-微博</a>
+																<ul>
+																	<li><a href="javascript:;">Subitem 1</a></li>
+																	<li><a href="javascript:;">Subitem 2</a></li>
+																</ul>
+															</li>
+															<li><a href="javascript:;">央视</a></li>
+														</ul>
+													</li>
+													<li><a href="javascript:;">商业媒体</a>
+														<ul>
+															<li><a href="javascript:;">新浪网</a></li>
+															<li><a href="javascript:;">腾讯网</a></li>
+															<li><a href="javascript:;">凤凰网</a></li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+									    </div>
+									    <div role="tabpanel" class="tab-pane" id="profile">
+									    	<div class="menu menu2">
+												<ul>
+													<li><a href="javascript:;">国际</a></li>
+													<li><a class="active" href="javascript:;">国内</a>
+														<ul style="display:block">
+															<li><a href="javascript:;">北京</a>
+																<ul>
+																	<li><a href="javascript:;">朝阳区</a></li>
+																	<li><a href="javascript:;">海淀区</a></li>
+																	<li><a href="javascript:;">西城区</a></li>
+																</ul>
+															</li>
+															<li><a href="javascript:;">湖南</a></li>
+															<li><a href="javascript:;">上海</a></li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+									    	
+									    </div>
+									    <div role="tabpanel" class="tab-pane" id="messages">
+									    	<div class="menu menu3">
+												<ul>
+													<li><a href="javascript:;">社会</a></li>
+													<li><a class="active" href="javascript:;">经济</a>
+														<ul style="display:block">
+															<li><a href="javascript:;">宏观经济</a></li>
+															<li><a href="javascript:;">公司</a></li>
+															<li><a href="javascript:;">证券</a></li>
+															<li><a href="javascript:;">股票</a></li>
+														</ul>
+													</li>
+													<li><a href="javascript:;">文化</a>
+														<ul>
+															<li><a href="javascript:;">文学</a></li>
+															<li><a href="javascript:;">小说</a></li>
+															<li><a href="javascript:;">漫画</a></li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+									    </div>
+									    <div role="tabpanel" class="tab-pane" id="settings">
+									    	<div class="menu menu4">
+												<ul>
+													<li><a href="javascript:;">网站</a></li>
+													<li><a href="javascript:;">微博</a></li>
+													<li><a href="javascript:;">微信</a></li>
+													<li><a href="javascript:;">APP</a></li>
+													<li><a href="javascript:;">论坛</a></li>
+													<li><a href="javascript:;">贴吧</a></li>
+												</ul>
+											</div>
+									    </div>
+									  </div>
+						    	</div>
+							</div>
+							<div class='mainRight'>
+								
+								<form class="form-inline search-box">
+									<div class="form-group">
+									    <label for="">采集类型</label>
+									    <select class="form-control acquisitionType" th:remove="body">
+										  <option>新闻列表</option>
+										</select>
+									</div>
+<!-- 									<div class="form-group"> -->
+<!-- 									    <label for="">任务来源</label> -->
+<!-- 									    <select class="form-control taskSources" th:remove="body"> -->
+<!-- 										  <option>中国经营报</option> -->
+<!-- 										</select> -->
+<!-- 									</div> -->
+									
+									<div class="form-group">
+									    <label for="">任务来源</label>
+										<input autocomplete="off" data-provide="typeahead" type="text" class="input-sm form-control taskSources" placeholder="请输入任务来源"/>
+									</div>
+									
+									<div class="form-group">
+										<div class="input-group">
+											<input autocomplete="off" data-provide="typeahead" type="text" class="input-sm form-control customAddInput" placeholder="请输入关键词"/>
+											<div class="input-group-addon btn-red customAddBtn">iSearch</div>
+										</div> 
+									</div>
+									
+									<a th:href="@{/crawl/back/addManage}" target="_blank"><button type="button" class="addCollectBtn btn btn-info">新增采集任务</button></a>
+								</form>
+								
+								<div class="batchOperation">
+									<label class="radio-inline">
+									  	<i class="fa fa-play"></i>&nbsp;启动
+									</label>
+									<label class="radio-inline">
+									  	<i class="fa fa-stop"></i>&nbsp;暂停
+									</label>
+									<label class="radio-inline">
+									  	<i class="fa fa-trash-o"></i>&nbsp;删除
+									</label>
+								</div>
+								
+								<table class="collectManageTable table table-hover">
+									<thead>
+								        <tr>
+								         	<th style="text-align:center;width:20px;">
+								         		<span class="check-box checked-all"><i class="fa fa-check"></i></span>				         	
+											</th>
+								            <th style="width:62px;">采集载体</th>
+								            <th style="text-align:left;width:110px">任务名称</th>
+								            <th style="text-align:left">采集链接</th>
+								            <th style="width:90px">创建时间</th>
+								            <th style="width:100px">最新执行时间</th>
+								            <th style="width:130px">采集频率</th>
+								            <th style="width:60px">采集状态</th>
+								            <th style='text-align:center;width:70px'>操作</th>
+								      	</tr>
+								    </thead>
+								    <tbody th:remove="body">
+								    	<tr>
+								    		<td>
+								    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+								    		</td>
+								    		<td>网站</td>
+								    		<td><a href="javascript:void(0)" th:href="@{/crawl/back/detail}" target="_blank">新浪体育NBA</a></td>
+								    		<td>http://sports.sina.com.cn/nba/</td>
+								    		<td>2016-12-19</td>
+								    		<td>2017-01-11</td>
+								    		<td>5分钟</td>
+								    		<td>采集中</td>
+								    		<td class="tableOperate">
+								    			<a href="javascript:void(0)" class="tableOperateItem pause">暂停</a>
+								    			<a href="javascript:void(0)" class="tableOperateItem detele">删除</a>
+								    		</td>
+								  	    </tr>
+								  	    <tr>
+								    		<td>
+								    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+								    		</td>
+								    		<td>微信</td>
+								    		<td><a href="javascript:void(0)" target="_blank">官方媒体</a></td>
+								    		<td>18611380433</td>
+								    		<td>2016-12-19</td>
+								    		<td>2017-01-11</td>
+								    		<td>30分钟</td>
+								    		<td>暂停</td>
+								    		<td class="tableOperate">
+								    			<a href="javascript:void(0)" class="tableOperateItem start">启动</a>
+								    			<a href="javascript:void(0)" class="tableOperateItem detele">删除</a>
+								    		</td>
+								  	    </tr>
+								  	    <tr>
+								    		<td>
+								    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+								    		</td>
+								    		<td>微博</td>
+								    		<td><a href="javascript:void(0)" target="_blank">商业媒体</a></td>
+								    		<td>http://sports.sina.com.cn/nba/</td>
+								    		<td>2016-12-19</td>
+								    		<td>2017-01-11</td>
+								    		<td>1分钟</td>
+								    		<td>报警-1</td>
+								    		<td class="tableOperate">
+								    			<a href="javascript:void(0)" class="tableOperateItem start">启动</a>
+								    			<a href="javascript:void(0)" class="tableOperateItem detele">删除</a>
+								    		</td>
+								  	    </tr>
+								  	    <tr>
+								    		<td>
+								    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+								    		</td>
+								    		<td>网站</td>
+								    		<td><a href="javascript:void(0)" th:href="@{/crawl/back/detail}" target="_blank">新浪体育NBA</a></td>
+								    		<td>http://sports.sina.com.cn/nba/</td>
+								    		<td>2016-12-19</td>
+								    		<td>2017-01-11</td>
+								    		<td>5分钟</td>
+								    		<td>采集中</td>
+								    		<td class="tableOperate">
+								    			<a href="javascript:void(0)" class="tableOperateItem start">启动</a>
+								    			<a href="javascript:void(0)" class="tableOperateItem detele">删除</a>
+								    		</td>
+								  	    </tr>
+								  	    <tr>
+								    		<td>
+								    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+								    		</td>
+								    		<td>微信</td>
+								    		<td><a href="javascript:void(0)" target="_blank">官方媒体</a></td>
+								    		<td>18611380433</td>
+								    		<td>2016-12-19</td>
+								    		<td>2017-01-11</td>
+								    		<td>30分钟</td>
+								    		<td>暂停</td>
+								    		<td class="tableOperate">
+								    			<a href="javascript:void(0)" class="tableOperateItem start">启动</a>
+								    			<a href="javascript:void(0)" class="tableOperateItem detele">删除</a>
+								    		</td>
+								  	    </tr>
+								  	    <tr>
+								    		<td>
+								    			<span class="check-box check-child"><i class="fa fa-check"></i></span>
+								    		</td>
+								    		<td>微博</td>
+								    		<td><a href="javascript:void(0)" target="_blank">商业媒体</a></td>
+								    		<td>http://sports.sina.com.cn/nba/</td>
+								    		<td>2016-12-19</td>
+								    		<td>2017-01-11</td>
+								    		<td>1分钟</td>
+								    		<td>报警-1</td>
+								    		<td class="tableOperate">
+								    			<a href="javascript:void(0)" class="tableOperateItem start">启动</a>
+								    			<a href="javascript:void(0)" class="tableOperateItem detele">删除</a>
+								    		</td>
+								  	    </tr>
+								    </tbody>
+								</table>
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+			</section>
+        </div>
+    </div>
+	
+	<script src="../../../static/backEnd/js/static/iRobot/collectManage.js" th:src="@{/common/plugins/typeahead/bootstrap3-typeahead.min.js}"></script>
+	<!-- Menu Js -->
+	 <script src="../../../static/backEnd/js/static/iRobot/collectManage.js" th:src="@{/backEnd/js/dynamic/iRobot/plug/menu/js/menu_min.js}"></script>
+	<!-- Self Js -->
+     <script src="../../../static/backEnd/js/static/iRobot/collectManage.js" th:src="@{/backEnd/js/dynamic/iRobot/collectManage.js}"></script>
+</body>
+</html>

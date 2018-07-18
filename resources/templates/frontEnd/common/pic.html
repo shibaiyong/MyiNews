@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="pic">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
+	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 我的定制 -->
+	<title>iNews-为你推荐-含图片</title>
+
+	<!-- 引入公用的插件 注：必须放在最开始的位置 -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/pic.css"  th:href="@{/frontEnd/css/common/pic.css}" />
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/pic.js" th:src="@{/frontEnd/js/dynamic/common/pic.js}"></script>
+</head>
+<body>
+	<!-- 图片 -->
+	<div class="picContent">
+			<div class="row">
+				<table class="table imgConBoxTable ">
+					<thead>
+					</thead>
+					<tbody th:remove="body">
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/10.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/11.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child checked"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/12.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/13.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/14.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/15.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/16.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/17.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/18.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/19.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/20.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check"></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+						<tr class="col-md-3 p-right p-left">
+							<td>
+								<div class='site-piclist_pic'>
+						  			<a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank"><img src="../../../static/frontEnd/image/mycustom_test/1.png" th:src="@{/frontEnd/image/picGroupDetail/21.jpg}"/></a>
+						  		</div>
+						  		<div class="site-piclist_info">
+						  			<p><a href="javascript:void(0)" th:href="@{/gotoPicBankDetail}" target="_blank">扬州交通广播</a></p>
+						  			<p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i>123 | <span >中国经营网</span></p>
+						  		</div>
+<!-- 						  		<div class="site-piclist_liulan"> -->
+<!-- 						  			<p>123456</p> -->
+<!-- 						  		</div> -->
+						  		<div class="site-piclist_time">
+						  			<p>06-01 15:30</p>
+						  		</div>
+						  		<div class="site-piclist_check">
+						  			<span class="check-child"><i class="fa fa-check" ></i></span>
+						  		</div>
+					  		</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+	</div>
+		
+</body>
+</html>

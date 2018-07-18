@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
+	<!-- 新闻预测 -->
+	<title>iNews-智慧新闻</title>
+	<!-- Screen CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/screen/css/list.css"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/newsPredict/newsPredict.css">
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/newsPredict/newsPredict.js"></script>
+</head>
+<body>
+	<div  class="container" style="background:#fff">
+		<div class="row">
+			<div id="main-content">
+				<div class="col-md-12">
+					<div class="box screenCon">
+					    <div class="screen-term">
+						    <div class="selectNumberScreen">
+						        <div id="selectList" class="screenBox screenBackground">
+						          	<dl class="listIndex" attr="价格范围">
+						            	<dt>排&nbsp;&nbsp;序：</dt>
+								 	    <dd>
+							              <label class="checked">
+							                <a href="javascript:;">预测时间</a></label>
+							              <label>
+							                <a href="javascript:;">预测值</a></label>
+							            </dd>
+						          	</dl>
+						          	<dl class=" listIndex" attr="terminal_os_s">
+						           		<dt>分&nbsp;&nbsp;类：</dt>
+						            	<dd>
+								              <label class="checked">
+								                <a href="javascript:;">要闻</a> 
+								              </label>
+								              <label>
+								                <a href="javascript:;">政治</a>
+								                
+								              </label>
+								              <label>
+								                <a href="javascript:;">经济</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">社会</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">文化</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">生活</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">体育</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">娱乐</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">军事</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">法制</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;" >科技</a>
+								              </label>
+								              <label>
+								                <a href="javascript:;">其他</a>
+								              </label>
+						            	</dd>
+						          	</dl>
+						          	<dl class="listIndex" attr="terminal_brand_s">
+						            	<dt>时&nbsp;&nbsp;间：</dt>
+						            	<dd data-more=true>
+							              	<label class="checked">
+							                <a href="javascript:;">最近一天</a></label>
+							                <label>
+							                <a href="javascript:;">最近一周</a></label>
+							              	<label>
+							                <a href="javascript:;">最近一月</a></label>
+							            </dd> 
+						          	</dl>
+						        </div>
+						    </div>   
+						</div>
+						<div class="hasBeenSelected clearfix">
+						    <div style="float:right;width:350px;" class="eliminateCriteria m-top">
+								<button type="button" class="btn btn-red btn-sm pull-right"><i class="fa fa-trash-o"></i>&nbsp;清空全部</button>
+								<!-- <div class="eliminateCriteria pull-right">&nbsp;&nbsp;[清空全部]</div> -->
+								<form class="form-inline pull-right" role="form" style="margin-right: 10px;">
+								  <div class="form-group">
+								    <div class="input-group">
+								      <input class="form-control" type="text" placeholder="请输入关键词">
+								      <div class="input-group-addon btn-red">添加</div>
+								    </div>
+								  </div>
+								</form>
+						    </div>
+						    <dl>
+						        <dt>已&nbsp;&nbsp;选：</dt>
+						        <dd style="display: none" class='clearDd'>
+						            <div class='clearList'></div>
+						        </dd>
+						    </dl>
+						</div>
+					</div>
+					<div class="newsPredictCon">
+						<table class="table table-hover newsPredictConTable">
+							<thead>
+								<tr>
+									<th>标题</th>
+									<!-- <td>摘要</td> -->
+									<th>分类</th>
+									<th>发布时间</th>
+									<th>预测时间</th>
+									<th>(已发布N小时)</th>
+									<th>发稿来源</th>
+									<th>爬取来源</th>
+									<th>预测值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><a href="javascript:void(0)">特朗普提高关税之言只是一种谈判筹码？</a></td>
+									<!-- <td>新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。</td> -->
+									<td>社会</td>
+									<td>2016-11-29 13:00</td>
+									<td>2016-11-29 13:00</td>
+									<td>1小时</td>
+									<td>新华网</td>
+									<td>新华网</td>
+									<td>1234</td>
+								</tr>
+								<tr>
+									<td><a href="javascript:void(0)">特朗普提高关税之言只是一种谈判筹码？</a></td>
+									<!-- <td>新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。</td> -->
+									<td>社会</td>
+									<td>2016-11-29 13:00</td>
+									<td>2016-11-29 13:00</td>
+									<td>1小时</td>
+									<td>新华网</td>
+									<td>新华网</td>
+									<td>1234</td>
+								</tr>
+								<tr>
+									<td><a href="javascript:void(0)">特朗普提高关税之言只是一种谈判筹码？</a></td>
+									<!-- <td>新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。</td> -->
+									<td>社会</td>
+									<td>2016-11-29 13:00</td>
+									<td>2016-11-29 13:00</td>
+									<td>1小时</td>
+									<td>新华网</td>
+									<td>新华网</td>
+									<td>1234</td>
+								</tr>
+								<tr>
+									<td><a href="javascript:void(0)">特朗普提高关税之言只是一种谈判筹码？</a></td>
+									<!-- <td>新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。</td> -->
+									<td>社会</td>
+									<td>2016-11-29 13:00</td>
+									<td>2016-11-29 13:00</td>
+									<td>1小时</td>
+									<td>新华网</td>
+									<td>新华网</td>
+									<td>1234</td>
+								</tr>
+								<tr>
+									<td><a href="javascript:void(0)">特朗普提高关税之言只是一种谈判筹码？</a></td>
+									<!-- <td>新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。</td> -->
+									<td>社会</td>
+									<td>2016-11-29 13:00</td>
+									<td>2016-11-29 13:00</td>
+									<td>1小时</td>
+									<td>新华网</td>
+									<td>新华网</td>
+									<td>1234</td>
+								</tr>
+								<tr>
+									<td><a href="javascript:void(0)">特朗普提高关税之言只是一种谈判筹码？</a></td>
+									<!-- <td>新浪美股讯 北京时间2日彭博称，候任美国总统特朗普的过渡团队一位成员表示，特朗普威胁上调进口关税实际上是一种谈判筹码，为的是能得到更加公平的贸易协议。</td> -->
+									<td>社会</td>
+									<td>2016-11-29 13:00</td>
+									<td>2016-11-29 13:00</td>
+									<td>1小时</td>
+									<td>新华网</td>
+									<td>新华网</td>
+									<td>1234</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

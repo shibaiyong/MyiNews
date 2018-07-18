@@ -1,0 +1,69 @@
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------------Footer--------------------------------- */
+/* ---------------------------------------------------------------------------- */
+footer{background-color: #eaeaea;margin-top: 20px;color: #666;padding: 20px 0 10px;}
+footer .wrap-footer{padding-bottom: 0px;}
+footer .copy-right{text-align: center;padding-top: 20px;}
+footer .footer-heading h4{color: #fff;font-size: 20px;}
+footer .content{}
+footer .col-footer{}
+footer .footer-1{}
+footer .footer-1 img{max-width: 140px;margin-bottom: 20px;}
+footer .footer-1 p{/* border-bottom: 1px solid #444; */margin-bottom: 5px;padding-bottom: 7px;font-size:12px;}
+footer .footer-1 p a{color:#333s}
+footer .footer-1 input[type="text"]{ 
+	border: 2px solid #E7E7E7;
+	outline: medium none;
+    color: #999999;
+    display: block;
+    font-size: 14px;
+    height: 40px;
+    line-height: 1.2;
+    margin: 10px 0;
+    padding: 5px 10px 0;
+    width: 100%;
+	background-color: transparent;
+    border: 2px solid #444444;
+}
+
+footer .footer-2{}
+footer .footer-2 a{color: #999; border: 1px solid #999; padding: 1px 10px;line-height: 2.2;font-size: 14px;text-transform: capitalize;}
+footer .footer-2 a:hover{color: #7DC314;}
+
+footer .footer-3{}
+footer .footer-3 ul {padding: 0;}
+footer .footer-3 ul li {list-style: none;margin-bottom: 15px; border-bottom: 1px dashed #999;padding-bottom: 10px;}
+footer .footer-3 ul li:last-child{border-bottom: none;}
+footer .footer-3 ul li a{color: #999;}
+footer .footer-3 ul li a:hover{color: #666;}
+footer .footer-uec img{width:140px;}
+footer .container{
+	margin-top:20px;
+}
+footer .footer-bottom{
+	text-align:center;
+	padding-top:10px;
+	border-top:1px solid #999;
+}
+footer .footer-bottom p{
+	font-size:12px;
+	margin-bottom:5px;
+}
+footer .dimension{
+	padding:0px;
+	overflow:hidden;
+}
+footer .dimension ul li{
+	float:left;
+	margin-left:10px;
+	border:0px;
+}
+/* footer .dimension ul li:last-child{ */
+/* 	border-bottom:1px dashed #999; */
+/* } */
+footer .dimension ul li img{
+	width:80px;
+}
+/* footer .zhanwei{ */
+/* 	width:2%; */
+/* } */

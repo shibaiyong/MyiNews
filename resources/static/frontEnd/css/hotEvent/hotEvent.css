@@ -1,0 +1,277 @@
+
+@media (min-width: 768px){
+	.col-sm-12{
+		padding: 0px;
+	}
+}
+@media (max-width:768px){
+	.historyFollowCon .hotEventTablePagination, 
+	.historyPeriodCon .hotEventTablePagination, 
+	.hotEventCon .hotEventTablePagination{
+		position: inherit !important;
+	}
+	.pagination>.active>a, 
+	.pagination>.active>span, 
+	.pagination>.active>a:hover, 
+	.pagination>.active>span:hover, 
+	.pagination>.active>a:focus, 
+	.pagination>.active>span:focus{
+		background: #F44336 !important;
+	} 
+	.historyFollowCon .hotEventTablePagination .paginate_button a, 
+	.historyPeriodCon .hotEventTablePagination .paginate_button a, 
+	.hotEventCon .hotEventTablePagination .paginate_button a{
+		width: auto !important;
+		height: auto !important;
+		/*background: #fff !important;*/ 
+		padding:6px 12px !important;
+		line-height: normal !important;
+	}
+	.historyFollowCon .hotEventTablePagination .paginate_button.next a, 
+	.historyPeriodCon .hotEventTablePagination .paginate_button.next a, 
+	.hotEventCon .hotEventTablePagination .paginate_button.next a{
+		position: inherit !important;
+	}
+	.historyFollowCon .hotEventTablePagination .paginate_button.previous a, 
+	.historyPeriodCon .hotEventTablePagination .paginate_button.previous a, 
+	.hotEventCon .hotEventTablePagination .paginate_button.previous a{
+		position: inherit !important;
+	}
+	#screen .form-control{
+		width: 100% !important;
+	}
+	#screen .screenCon .customAdd form button{
+		width: 100%;
+		margin-top: 10px;
+	}
+	
+}
+@media (max-width: 1200px){
+	.historyFollowCon table.historyFollowTable .hotEventConListBox h6.hotEventConListTit a,
+	.historyPeriodCon table.historyPeriodTable .hotEventConListBox h6.hotEventConListTit a,
+	.hotEventCon table.hotEventTable .hotEventConListBox h6.hotEventConListTit a{
+		width: 190px !important;
+	}
+}
+
+/* 热点查询-筛选 */
+table th, table td{
+	text-indent: 0px;
+}
+.searchesTitle{
+	padding-right: 10px;
+}
+#screen .list-screen{
+	margin-top:5px;
+}
+#screen .form-control{
+	height: 30px;
+	padding:2px 8px;
+	border-radius: 0px;
+	width:300px;
+	border:1px solid #F44336;
+}
+#screen .input-group-addon{
+	border-radius: 0px;
+	cursor: pointer;
+}
+#screen .screenSearch{
+	width:50px;
+}
+.clearAllBtn{
+	color: #F44336;
+}
+#screen .screenCon .customAdd{
+	margin-bottom: 8px;
+}
+#screen .screenCon .customAdd form{
+	display: inline-block;
+}
+#screen .screenCon .customAdd form button{
+	/* background: #fec200;
+	color: #fff;
+	border-color: #fec200; */
+	background:#ff6600;
+	color:#fff;
+	border-color:#ff6600;
+}
+#screen  .timeCustomCon{
+	margin-top: -3px;
+	margin-left: 20px;
+}
+#screen  .timeCustomCon .form-control{
+	width: 119px;
+	border:1px solid #ccc;
+}
+#screen  .timeCustomCon button{
+	padding: 6px 10px;
+	font-size: 12px;
+}
+#select4{
+	border-right:#ccc 1px dashed;
+}
+.select{
+	padding-right:5px;
+}
+.searchesCon{
+	padding-left:15px;
+	padding-right:15px;
+}
+.advancedFilterCon{
+	border:1px solid #ddd;
+	margin-left: 0px;
+	margin-right: 0px;
+	display: none;
+	margin-bottom: 10px;
+}
+/* 热点搜索-结果 */
+.searchesTable thead tr{
+	background: #f5f5f5;
+}
+.searchesTable tbody td{
+	text-align: center;
+}
+.searchesTable tbody tr td:first-child,
+.searchesTable tbody tr td:nth-child(2){
+	text-align: left;
+}
+.timeCustomCon{
+	font-size: 14px;
+}
+
+/* 历史跟踪 */
+.historyFollowCon,
+.historyPeriodCon,
+.hotEventCon{
+	position: relative;
+}
+.historyFollowCon table.table,
+.historyPeriodCon table.table,
+.hotEventCon table.table{
+	border-bottom: 0px;
+	padding: 0px 10px;
+}
+.historyFollowCon table.table tbody td,
+.historyPeriodCon table.table tbody td,
+.hotEventCon table.table tbody td{
+	border-top:0px;
+}
+.historyFollowCon table.table tbody td .hotEventConListBox,
+.historyPeriodCon table.table tbody td .hotEventConListBox,
+.hotEventCon table.table tbody td .hotEventConListBox{
+	border:1px solid #ddd;
+}
+.historyFollowCon table.historyFollowTable thead th,
+.historyFollowCon table.historyFollowTable tbody td,
+.historyPeriodCon table.historyPeriodTable thead th,
+.historyPeriodCon table.historyPeriodTable tbody td,
+.hotEventCon table.hotEventTable thead th,
+.hotEventCon table.hotEventTable tbody td{
+	border: 0px;
+	padding: 0px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox,
+.hotEventCon table.hotEventTable .hotEventConListBox{
+	padding: 0px 10px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox .thumbnail,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox .thumbnail,
+.hotEventCon table.hotEventTable .hotEventConListBox .thumbnail{
+	margin-bottom: 10px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox h6.hotEventConListTit a,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox h6.hotEventConListTit a,
+.hotEventCon table.hotEventTable .hotEventConListBox h6.hotEventConListTit a{
+	width: 245px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox .thumbnail,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox .thumbnail,
+.hotEventCon table.hotEventTable .hotEventConListBox .thumbnail{
+	height: 141px;
+	padding:0px;
+	/* box-shadow:0px 1px 0px #ddd; */
+	border:0px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox .thumbnail img,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox .thumbnail img,
+.hotEventCon table.hotEventTable .hotEventConListBox .thumbnail img{
+	height: 100%;
+	/* width:100%; */
+	/* object-fit:cover; */
+	border-radius:4px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox .thumbnail img.defaultImg,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox .thumbnail img.defaultImg,
+.hotEventCon table.hotEventTable .hotEventConListBox .thumbnail img.defaultImg{
+	width:100px;
+	height:auto;
+	padding-top:50px;
+}
+
+.historyFollowCon table.historyFollowTable .hotEventConListBox .sudokuSummary,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox .sudokuSummary,
+.hotEventCon table.hotEventTable .hotEventConListBox .sudokuSummary{
+	/* height: 140px;
+	overflow: hidden; */
+	line-height:22px;
+}
+.historyFollowCon table.historyFollowTable .hotEventConListBox .sudokuSummary span,
+.historyPeriodCon table.historyPeriodTable .hotEventConListBox .sudokuSummary span,
+.hotEventCon table.hotEventTable .hotEventConListBox .sudokuSummary span{
+	font-weight: bold;
+}
+.historyFollowCon .hotEventTablePagination,
+.historyPeriodCon .hotEventTablePagination,
+.hotEventCon .hotEventTablePagination{
+	position: absolute;
+	width: 100%;
+	top: 37%;
+	margin:0 auto;
+}
+.historyFollowCon .hotEventTablePagination .paginate_button a,
+.historyPeriodCon .hotEventTablePagination .paginate_button a,
+.hotEventCon .hotEventTablePagination .paginate_button a{
+	width: 42px;
+	height: 42px;
+	line-height: 42px;
+	padding: 0px 4px;
+	background: transparent;
+}
+
+.historyFollowCon .hotEventTablePagination .paginate_button.previous a,
+.historyPeriodCon .hotEventTablePagination .paginate_button.previous a,
+.hotEventCon .hotEventTablePagination .paginate_button.previous a{
+	position: absolute;
+	left: -50px;
+	border:0px;
+}
+.historyFollowCon .hotEventTablePagination .paginate_button.next a,
+.historyPeriodCon .hotEventTablePagination .paginate_button.next a,
+.hotEventCon .hotEventTablePagination .paginate_button.next a{
+	position: absolute;
+	right: 0px;
+	border:0px;
+}
+.historyFollowCon .hotEventTablePagination .paginate_button.previous a i,
+.historyPeriodCon .hotEventTablePagination .paginate_button.previous a i,
+.hotEventCon .hotEventTablePagination .paginate_button.previous a i{
+	color:#ccc;
+}
+.historyFollowCon .hotEventTablePagination .paginate_button.next a i,
+.historyPeriodCon .hotEventTablePagination .paginate_button.next a i,
+.hotEventCon .hotEventTablePagination .paginate_button.next a i{
+	color:#ccc;
+}
+.historyFollowCon table.historyFollowTable tr.col-md-3,
+.historyPeriodCon table.historyPeriodTable .col-md-3,
+.hotEventCon table.hotEventTable .col-md-3{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.historyFollowCon	.pagination,
+.historyPeriodCon .pagination,
+.hotEventCon .pagination{
+	display:none;
+}

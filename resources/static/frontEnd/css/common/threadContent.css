@@ -1,0 +1,408 @@
+
+
+.dataConBoxTable{
+	border-top:2px solid #EAEAEA;
+}
+
+/* 建、采样式 */
+.titleRightClick{
+	position:relative;
+}
+.titleRightClick a{
+	display: inline-block;
+	width: 100%;
+	height: 21px;
+	line-height: 25px;
+}
+
+.titleRightClick  span.label-status{
+	float:right;
+	margin-left:1px;
+	margin-top:3px;
+	font-size:12px;
+	display:inline-block;
+	height:20px;
+	line-height:19px;
+	width:34px;
+	text-align:center;
+}
+
+.dataShowTable{
+	margin-top:8px;
+}
+.label-jian{
+	color:#3fad7e;
+}
+.label-cai{
+	color:#ff6600;
+}
+/* 置顶的样式 */
+.stickTopContent a{
+	color:#ff6600;
+/* 	font-weight:bold; */
+}
+/* 列表展示 */
+.dataConBoxTable tbody td:nth-child(6),
+.dataConBoxTable tbody td:nth-child(7),
+.dataConBoxTable tbody td:nth-child(8),
+.dataConBoxTable tbody td:nth-child(9){
+	text-align:center
+}
+.dataConBoxTable tbody td:nth-child(10){
+	text-align:center;
+	padding-left:0px;
+	padding-right:0px;
+}
+.dataConBoxTable tbody td:nth-child(10) i{
+	margin-left:5px;
+	cursor:pointer;
+}
+.dataConBoxTable tbody td:nth-child(10) i:hover{
+	color:#F44336
+}
+.dataConBoxTable .inewsOperation i.active{
+	color:#F44336
+}
+
+/* 缩略图展示 */
+.dataConThumbnail table.dataTable thead th, 
+.dataConThumbnail table.dataTable thead td{
+	border-bottom:0px;
+	padding:0px;
+}
+.dataConThumbnail .table>thead>tr>th, 
+.dataConThumbnail .table>tbody>tr>th, 
+.dataConThumbnail .table>tfoot>tr>th, 
+.dataConThumbnail .table>thead>tr>td, 
+.dataConThumbnail .table>tbody>tr>td, 
+.dataConThumbnail .table>tfoot>tr>td{
+	border-top:0px;
+}
+.dataConThumbnail .table>tbody>tr>td{
+	padding-left:0px;
+	padding-right: 0px;
+}
+.dataConThumbnail table.dataTable.no-footer{
+	border-bottom: 0px;
+}
+.dataConThumbnail .media{
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+}
+.dataConThumbnail em,
+.dataConThumbnail i{
+	font-style: normal;
+}
+.dataConThumbnail p{
+	margin-top:8px;
+	margin-bottom:0px;
+}
+.dataConThumbnail .media-left{
+	/* width:20%; */
+	width: 204px;
+	height: 120px;
+	border:1px solid #ddd;
+	padding:2px;
+	text-align:center;
+	border-radius:4px;
+	vertical-align:middle;
+}
+.dataConThumbnail .media-left img{
+	max-height:118px;
+	max-width:190px; 
+	padding:0px;
+	border:0px;
+}
+.dataConThumbnail .media-left img.defaultImg{
+	width:100px;
+}
+.dataConThumbnail .media-left img.defaultImgOrange{
+	width:120px;
+}
+.dataConThumbnail .media-body{
+	width: 80%;
+	padding-left:10px;
+	max-width:816px;
+}
+.dataConThumbnail .mediaCon{
+	width:75%;
+	padding-right:10px;
+}
+.dataConThumbnail .mediaCon h6{
+	font-size:15px;
+}
+.dataConThumbnail .mediaCon h6 a{
+	display:inline-block;
+	width:100%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.dataConThumbnail .mediaCon .mediaConSummary{
+	min-height:83px;
+	margin-bottom: 0px;
+	clear: both;
+	margin-top: 12px;
+}
+.dataConThumbnail .mediaCon .mediaConBottom,
+.dataConThumbnail .mediaCon .mediaConTag{
+	float: left;
+}
+.dataConThumbnail .mediaCon .mediaConTag{
+	margin-left: 15px;
+}
+
+.dataConThumbnail .mediaCon .mediaConTag em,
+.dataConThumbnail .mediaCon .mediaConBottom i{
+	margin:1px 5px 1px;
+	color:#a6a6a6;
+}
+.dataConThumbnail .mediaCon .mediaConBottom em{
+	color:#F44336;
+}
+.dataConThumbnail .mediaCon .mediaConBottom span,
+.dataConThumbnail .mediaCon .mediaConTag a{
+	font-size: 12px;
+	color:#939393;
+}
+.dataConThumbnail .mediaCon .mediaConTag i{
+	margin-right:3px;
+	font-size: 12px
+}
+.dataConThumbnail .mediaRight{
+	width: 25%;
+	text-align: right;
+	margin-top: 10px;
+}
+.dataConThumbnail .mediaRight p.mediaOperation a{
+	background: none;
+	border: 0px;
+/* 	color: #F44336; */
+	padding-right: 0px;
+	cursor:pointer;
+}
+.dataConThumbnail .mediaRight p.mediaOperation a.active{
+	color:#F44336;
+	box-shadow:none;
+}
+.dataConThumbnail .mediaRight p.mediaOperation a:hover{
+	color:#F44336;
+}
+.dataConThumbnail .mediaRight p.mediaOperation a i{
+	margin-right:3px;
+}
+.dataConThumbnail .mediaRight p{
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+.dataConThumbnail .mediaRight ul.list-group{
+	margin-bottom: 0px;
+}
+.dataConThumbnail .mediaRight .list-group-item{
+	padding:2px 10px;
+	border:0px;
+	font-size: 12px;
+}
+.dataConThumbnail .mediaRight .list-group-item a,
+.dataConThumbnail .mediaRight .list-group-item span{
+	font-size: 12px;
+}
+.dataConThumbnail .mediaRight p{
+	margin-right:10px;
+}
+.dataConThumbnail .paginationBox{
+	text-align:right; 
+}
+.dataConThumbnailTable tbody td:nth-child(1){
+	vertical-align:middle;
+	text-align:center;
+}
+table.dataConThumbnailTable thead th,
+table.dataConThumbnailTable thead td{
+	padding:0px !important
+}
+/* 九宫格展示 */
+.dataConSudoku table{
+	table-layout: fixed;
+}
+.dataConSudoku table th, 
+.dataConSudoku table td{
+	text-indent: 0px;
+}
+.dataConSudoku table.dataTable thead th, 
+.dataConSudoku table.dataTable thead td{
+	border-bottom: 0px;
+	padding:0px;
+}
+.dataConSudoku .table>tbody>tr>th, 
+.dataConSudoku .table>tfoot>tr>th, 
+.dataConSudoku .table>thead>tr>td, 
+.dataConSudoku .table>tbody>tr>td, 
+.dataConSudoku .table>tfoot>tr>td{
+	border-top:0px;
+	padding: 6px 3px;
+}
+.dataConSudoku .thumbnail{
+	margin-bottom: 0px;
+}
+.dataConSudoku table.dataTable.no-footer{
+	border-bottom: 0px;
+}
+.dataConSudoku .sudokuSummary{
+	margin-top:5px !important;
+	margin-bottom: 0px !important;
+	line-height:22px;
+	min-height:132px;
+	overflow:hidden;
+}
+.dataConSudoku .sudokuSummary span{
+	font-weight: bold;
+}
+.dataConSudoku .caption dl.dl-horizontal{
+	clear: both;
+	overflow: hidden;
+	width: 100%;
+}
+.dataConSudoku .caption .dl-horizontal dt{
+	width: 214px;
+	text-align:left;
+}
+.dataConSudoku .caption p{
+	margin-top:12px;
+	margin-bottom: 8px;
+}
+.dataConSudoku p.sudokuTime{
+/* 	position:absolute; */
+/* 	top:116px; */
+/* 	background:rgba(0,0,0,0.5); */
+/* 	border-radius:3px; */
+/* 	font-size:12px; */
+/* 	padding:0px 5px; */
+/* 	color:#fff; */
+/* 	right:13px; */
+	color:#666;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.dataConSudoku .list-group-item span{
+	float: right
+}
+.dataConSudoku .sudokuBtn{
+	position: absolute;
+	top:0px;
+	right: 12px;
+}
+.dataConSudoku .sudokuBtn button{
+	background: none;
+	border:0px;
+	padding-left: 0px;
+	/* text-shadow: #fff 0 1px 0; */
+	color: #fec200;
+
+}
+.dataConSudoku .sudokuShowMore{
+	position: relative;
+	font-size: 12px;
+	border-top:1px solid #ddd;
+	padding:6px 3px 0px;
+	background: #fff;
+
+}
+.dataConSudoku .sudokuShowMore a:nth-child(1),
+.dataConSudoku .sudokuShowMore a:nth-child(2){
+	overflow: hidden;
+	white-space:nowrap; 
+	text-overflow:ellipsis;
+	width:85%;
+}
+.dataConSudoku .sudokuShowMore a:last-child{
+	position: absolute;
+	right: 10px;
+	top: 34%;
+	width:15px;
+	text-align:center;
+}
+.dataConSudoku .sudokuShowMore a:last-child a{
+	position:initial;
+	width:auto;
+}
+.dataConSudoku .sudokuShowMore a{
+	color:#939393;
+	display: block;
+}
+.dataConSudoku .thumbnail .sudokuImg{
+	height: 135px;
+	text-align:center;
+	background:#f9f9f9;
+	border-radius:4px;
+	line-height:10;
+}
+.dataConSudoku .thumbnail img{
+	max-width:239px;
+	max-height:135px;
+}
+.dataConSudoku .thumbnail img.defaultImg{
+	width:100px;
+}
+.dataConSudoku .thumbnail img.defaultImgOrange{
+	width:130px;
+}
+.thumbnail .caption .dl-horizontal{
+	margin-bottom:0px;
+}
+
+table.dataConSudokuTable thead th,
+table.dataConSudokuTable thead td{
+	padding:0px !important
+}
+
+.popover{
+	border-radius: 0px;
+}
+.popover-content{
+	padding:6px 8px;
+}
+
+/* 其余样式 */
+.activeBg{
+	background:#F44336;
+}
+.activeBg a{
+	color:#fff;
+}
+
+/* 缩略图上的全选 */
+.site-piclist_check{
+	position:absolute;
+	top:11px;
+	right:13px;
+	z-index:100;
+}
+
+.site-piclist_check span{
+	display:inline-block;
+	height:17px;
+	line-height:14px;
+	width:17px;
+	background:url('../../../frontEnd/image/picGroupDetail/check_16.png') no-repeat;
+/* 	border:1px solid #666; */
+	box-shadow:0px 0px 4px #999 inset;
+	border-radius:3px;
+	cursor:pointer;
+	
+}
+.site-piclist_check span i{
+	color:#fff;
+	opacity:0;
+	margin-left:1px;
+}
+.site-piclist_check span.checked{
+	background:url('../../../frontEnd/image/picGroupDetail/check_red_16.png') no-repeat -1px -1px;
+	border:1px solid #fff;
+	box-shadow:0px 0px 3px #fff inset;
+}
+.site-piclist_check span.checked i{
+	opacity:1;
+}
+

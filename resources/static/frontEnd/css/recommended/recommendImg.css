@@ -1,0 +1,16 @@
+#operateGroup{
+	margin-top:10px;
+}
+.listTableOperate{
+	margin-top:10px;
+}
+.listTableOperate .btn{
+	padding:4px 12px;
+}
+
+.listTableOperate button.active{
+	background:#F44336;
+}
+.listTableOperate button.active a{
+	color:#fff;
+}

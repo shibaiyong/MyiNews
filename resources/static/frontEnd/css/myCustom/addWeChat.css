@@ -1,0 +1,143 @@
+.addWeChatCon{
+	margin-top:10px;
+}
+.inputBox{
+	margin-bottom:20px;
+}
+.inputBox .form-group{
+	margin-bottom:10px;
+}
+
+.inputBox .linkText{
+	height:30px;
+	line-height:30px;
+	padding:0px;
+}
+.inputBox .commentaries p{
+	font-size: 12px;
+    color: #999;
+    margin-bottom:3px;
+}
+
+
+/* 错误提示 */
+.linkTips{
+	margin:0px;
+	height:30px;
+	line-height:30px;
+	color:#F44336;
+}
+
+
+/* 已选头部标题 */
+.already-add h4{
+	margin:0px;
+	padding:5px;
+	font-size:14px;
+	background:#f1f1f1;
+	color:#666;
+}
+.alreadyCon{
+	padding:0px 15px;
+	background:rgba(238,238,238,0.2);
+	border:1px solid #f1f1f1
+}
+
+.wechatItem{
+/* 	height: 30px; */
+/*     line-height: 30px; */
+    position: relative;
+    padding: 5px 5px 0;
+    padding-right:0px;
+    border: 1px solid #ccc;
+    margin: 10px 0px;
+}
+.wechatItem .wechatAccount{
+	display:inline-block;
+	width:85%;
+	overflow:hidden;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.wechatItem .close{
+	height:30px;
+	line-height:30px;
+	width:30px;
+	text-align:center;
+}
+.searchWechat{
+	cursor:pointer;
+}
+.wechatItem .wechatItemBtn{
+	position:absolute;
+	top:50%;
+	right:0px;
+	margin-top:-15px;
+}
+.wechatItem .wechatAccount span{
+	color:#999;
+}
+
+
+/* 相似微信表格 */
+.familiarTable table.table{
+	border-bottom: 1px solid #111;
+	border-top: 2px solid #EAEAEA;
+}
+
+.familiarTable table.table thead th{
+	border-bottom:0px;
+}
+.familiarTable table.table tbody tr td:nth-child(4){
+	text-align:center;
+	background: transparent;
+	
+}
+.familiarTable table.table tbody tr td:nth-child(4) span{
+	cursor:pointer;
+}
+.familiarTable table.table tbody tr td:nth-child(4).active span{
+	background:#F44336;
+}
+
+
+.conserveWechat{
+	color:#fff;
+}
+
+.noSearch{
+	text-align:center;
+	margin:20px;
+}
+.noSearch p{
+	font-size:18px;
+}
+
+/* 评论分析删除 */
+#delModal .modal-footer{
+	padding:10px 15px;
+}
+#delModal .modal-footer button{
+	padding:3px 10px;
+}
+#delModal .modal-dialog{
+	top:40%;
+	margin-top:-50px;
+}
+/*loading模体框*/
+.loading {
+	width: 150px;
+	height:150px;
+	position: absolute;
+	top: 40%;
+	left:45%;
+	color: #fff;
+	padding-left: 60px;
+	background: #000 url(../../image/loader.gif) no-repeat 50%;
+	opacity: 0.7;
+	z-index: 9999;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}

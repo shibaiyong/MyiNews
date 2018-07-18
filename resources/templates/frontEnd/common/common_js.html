@@ -1,0 +1,23 @@
+<div th:fragment="common_js">
+
+	<!-- jQuery 2.1.4-->
+	<script src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jQuery/jQuery-2.1.4.min.js}" ></script>
+	
+	<!-- Bootstrap Core Js -->
+	<script src="../../../static/common/plugins/bootstrap-3.3.0/js/bootstrap.min.js" th:src="@{/common/plugins/bootstrap-3.3.0/js/bootstrap.min.js}"></script>
+	
+	<!-- highLight Js-->
+	<script src="../../../static/common/plugins/highLight/highlight.js" th:src="@{/common/plugins/highLight/highlight.js}" ></script>
+	
+	<!-- toastmessage Js-->
+	<script src="../../../static/common/plugins/toastmessage/js/jquery.toastmessage.js" th:src="@{/common/plugins/toastmessage/js/jquery.toastmessage.js}" ></script>
+	
+	<!-- Common Js -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common-custom.js" th:src="@{/frontEnd/js/static/common/common-custom.js}"></script>
+	
+	<input type="hidden" id="ctx" th:value="${#httpServletRequest.contextPath+'/'+session.tenant.tenantMark}"/>
+<!-- 	<input type="hidden" id="ctx" th:value="${session.ctx}"/> -->
+	<input type="hidden" id="picHandleFlag" th:value="${session.picHandleFlag}"/>
+	<input type="hidden" id="inewsImageManager" th:value="${session.inewsImageManager}"/>
+	<input type="hidden" id="isNew" th:value="${session.userEntity.isNew}"/>
+</div>

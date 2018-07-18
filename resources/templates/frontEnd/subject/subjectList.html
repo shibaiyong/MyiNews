@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iNews-首页</title>
+	<!-- dataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/dataTables/jquery.dataTables.css" th:href="@{/common/plugins/dataTables/jquery.dataTables.css}"/>
+	<!-- Self CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/subject/subjectList.css" th:href="@{/frontEnd/css/subject/subjectList.css}"/>
+
+	<!-- dataTables JS -->
+	<script type="text/javascript" src="../../../static/common/plugins/dataTables/jquery.dataTables.js" th:src="@{/common/plugins/dataTables/jquery.dataTables.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/dataTables/dataTables.bootstrap.js"  th:src="@{/common/plugins/dataTables/dataTables.bootstrap.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/dataTables/dataTables-style.js"  th:src="@{/common/plugins/dataTables/dataTables-style.js}"></script>
+	<!-- Self JS -->
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/subject/subjectList.js"  th:src="@{/frontEnd/js/dynamic/subject/subjectList.js}"></script>
+</head>
+<body>
+	<!-- Page Content -->
+	<div  class="container">
+		<div class="row">
+			<div id="main-content">
+				<!-- 其他 -->
+				<div class="box center">
+				    <div class="latestNewsAddSearch">
+				       <form class="form-inline" role="form">
+						  <div class="form-group">
+						    <div class="input-group">
+						      <input class="form-control" type="text" placeholder="请输入检索词">
+						      <div class="input-group-addon btn-red" id="keyWordBtn">搜索</div>
+						    </div>
+						  </div>
+						</form>
+				    </div>
+				</div>
+			    <!-- 主要内容 -->
+			    <div id="subjectList" >
+			    	<div class="box p-top">
+			    		<ul class="nav nav-tabs" role="tablist">
+						  	<li role="presentation" class="active">
+						  		<a href="#home" role="tab" data-toggle="tab">当前专题</a>
+						  	</li>
+						  	<li role="presentation">
+						  		<a href="#profile" role="tab" data-toggle="tab">历史专题</a>
+						  	</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+						  	<div role="tabpanel" class="tab-pane active" id="home">
+							  	<table class="table  table-hover" id="subjectCurrentTable">
+				        			<thead>
+				        				<tr>
+				        					<th style="width: 50%">名称</th>
+				        					<th style="width: 20%">时间</th>
+				        					<th>类型</th>
+				        					<th>收录新闻数量</th>
+				        				</tr>
+				        			</thead>
+				   			        <tbody>
+				   			        	<tr>	
+				   			        	  	<td>
+				   			        	  		<a href="javascript:;void(0)" class="subjectDetailBtn">春晚</a>
+				   			        	  	</td>
+				   			        	  	<td>2016-01-27</td>
+				   			        	  	<td>重大活动</td>
+				   			        	  	<td>117</td>
+				   			        	</tr>
+				   			        	<tr>	
+				   			        	 	 <td>
+				   			        	  		<a href="javascript:;void(0)" class="subjectDetailBtn">2018世界杯</a>
+				   			        	  	</td>
+				   			        	  	<td>2015-06-11</td>
+				   			        	  	<td>重大赛事</td>
+				   			        	  	<td>245</td>
+				   			        	</tr>
+				   			        	<tr>	
+				   			        	 	<td>
+				   			        	 		<a href="javascript:;void(0)" class="subjectDetailBtn">二胎政策</a>
+				   			        	 	</td>
+				   			        	  	<td>2015-06-11</td>
+				   			        	  	<td>政策发布</td>
+				   			        	  	<td>166</td>
+				   			        	</tr>
+				   			        </tbody>
+				        		</table>
+						  	</div>
+						  	<div role="tabpanel" class="tab-pane" id="profile">
+						  		<table class="table  table-hover" id="subjectHistoryTable">
+			        				<thead>
+			        					<tr>
+			        					    <th style="width: 50%">名称</th>
+			        					    <th style="width: 20%">时间</th>
+			        					    <th>类型</th>
+			        					    <th>收录新闻数量</th>
+			        					</tr>
+			        			    </thead>
+							        <tbody>
+							        	<tr>	
+							        	  	<td>
+							        	  		<a href="javascript:;void(0)" class="subjectDetailBtn">春晚</a>
+							        	  	</td>
+							        	  	<td>
+							        	  		<span>2016-01-27</span>
+							        	  		<em>/</em>
+							        	  		<span>2016-01-28</span>
+							        	  	</td>
+							        	  	<td>重大活动</td>
+							        	  	<td>117</td>
+							        	</tr>
+							        	<tr>	
+							        	  	<td>
+							        	  		<a href="javascript:;void(0)" class="subjectDetailBtn">	2018世界杯</a>
+							        	  	</td>
+							        	  	<td>
+							        	  		<span>2016-01-27</span>
+							        	  		<em>/</em>
+							        	  		<span>2016-01-28</span>
+							        	  	</td>
+							        	  	<td>重大赛事</td>
+							        	  	<td>245</td>
+							        	</tr>
+							        	<tr>	
+							        	  	<td>
+							        	  		<a href="javascript:;void(0)" class="subjectDetailBtn">二胎政策</a>
+							        	  	</td>
+							        	  	<td>
+							        	  		<span>2016-01-27</span>
+							        	  		<em>/</em>
+							        	  		<span>2016-01-28</span>
+							        	  	</td>
+							        	  	<td>政策发布</td>
+							        	  	<td>166</td>
+							        	</tr>
+							        	<tr>	
+							        	  	<td>
+							        	  		<a href="javascript:;void(0)" class="subjectDetailBtn">二胎政策</a>
+							        	  	</td>
+							        	  	<td>
+							        	  		<span>2016-01-27</span>
+							        	  		<em>/</em>
+							        	  		<span>2016-01-28</span>
+							        	  	</td>
+							        	  	<td>政策发布</td>
+							        	  	<td>166</td>
+							        	</tr>
+							        </tbody>
+			        			</table>
+						  	</div>
+						</div>
+			    	</div>
+
+			        <!-- <div class="col-md-6">
+			        	<div class="box-header header-vimeo">
+			        							<h2>当前专题</h2>
+			        						</div>
+			        	<table class="table  table-hover" id="subjectCurrentTable">
+			        		<thead>
+			        					            <tr>
+			        					              <th>专题名称</th>
+			        					              <th>专题时间</th>
+			        					              <th>专题类型</th>
+			        					              <th>收录新闻数量</th>
+			        					            </tr>
+			        					        </thead>
+			        					        <tbody>
+			        					        	<tr>	
+			        					        	  <td><a href="javascript:;void(0)" class="subjectDetailBtn">春晚</a></td>
+			        					        	  <td>2016年1月27日</td>
+			        					        	  <td>重大活动</td>
+			        					        	  <td>117</td>
+			        					        	</tr>
+			        					        	<tr>	
+			        					        	  <td><a href="javascript:;void(0)" class="subjectDetailBtn">2018世界杯</a></td>
+			        					        	  <td>2015年6月11日</td>
+			        					        	  <td>重大赛事</td>
+			        					        	  <td>245</td>
+			        					        	</tr>
+			        					        	<tr>	
+			        					        	  <td><a href="javascript:;void(0)" class="subjectDetailBtn">二胎政策</a></td>
+			        					        	  <td>2015年6月11日</td>
+			        					        	  <td>政策发布</td>
+			        					        	  <td>166</td>
+			        					        	</tr>
+			        					        	
+			        					        </tbody>
+			        	</table>
+			        </div>
+			        <div class="col-md-6">
+			        	<div class="box-header header-vimeo">
+			        							<h2>历史专题</h2>
+			        						</div>
+			        	<table class="table  table-hover" id="subjectHistoryTable">
+			        		<thead>
+			        					            <tr>
+			        					              <th>专题名称</th>
+			        					              <th>专题时间</th>
+			        					              <th>专题类型</th>
+			        					              <th>收录新闻数量</th>
+			        					            </tr>
+			        					        </thead>
+			        					        <tbody>
+			        					        	<tr>	
+			        					        	  <td><a href="javascript:;void(0)" class="subjectDetailBtn">春晚</a></td>
+			        					        	  <td>2016年1月27日</td>
+			        					        	  <td>重大活动</td>
+			        					        	  <td>117</td>
+			        					        	</tr>
+			        					        	<tr>	
+			        					        	  <td><a href="javascript:;void(0)" class="subjectDetailBtn">2018世界杯</a></td>
+			        					        	  <td>2015年6月11日</td>
+			        					        	  <td>重大赛事</td>
+			        					        	  <td>245</td>
+			        					        	</tr>
+			        					        	<tr>	
+			        					        	  <td><a href="javascript:;void(0)" class="subjectDetailBtn">二胎政策</a></td>
+			        					        	  <td>2015年6月11日</td>
+			        					        	  <td>政策发布</td>
+			        					        	  <td>166</td>
+			        					        	</tr>
+			        					        	
+			        					        </tbody>
+			        	</table>
+			        </div> -->
+			    </div>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

@@ -1,0 +1,48 @@
+
+.searchesTable td:nth-child(1){
+	font-size:12px;
+}
+.searchesTable tbody  td:nth-child(2),
+.searchesTable tbody  td:nth-child(4),
+.searchesTable tbody  td:nth-child(7),
+.searchesTable tbody  td:nth-child(8),
+.searchesTable tbody  td:nth-child(9),
+.searchesTable tbody  td:nth-child(10){
+	text-align:center;
+}
+.searchesTable{
+	border-top:2px solid #EAEAEA;
+}
+
+.operationBox{
+	position:relative;
+	overflow:hidden;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+ .guanjianci{
+ 	position:absolute;
+ 	top:0px;
+ 	right:0px;
+ }
+.guanjianci span{
+  	margin-right:8px;
+ }
+.guanjianci a:last-child{
+	margin-right:0px;
+ } 
+ /* 列表中的操作 */
+.searchesTable tbody td:nth-child(10) i{
+	margin-left:5px;
+	cursor:pointer;
+}
+.searchesTable tbody td:nth-child(10) i:first-child{
+	margin-left:0px;
+}
+.searchesTable tbody td:nth-child(10) i:hover{
+	color:#F44336
+}
+.searchesTable .inewsOperation i.active{
+	color:#F44336
+}
+ 

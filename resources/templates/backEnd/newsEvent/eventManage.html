@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件管理</title>
+    <!-- bootstrap-datetimepicker CSS -->
+    <link rel="stylesheet" type="text/css"
+          href="../../../static/common/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/common/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
+    <!-- select2 CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/select2/select2.min.css"
+          th:href="@{/common/plugins/select2/select2.min.css}"/>
+    <!-- Self CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/css/newsEvent/eventManage.css"
+          th:href="@{/backEnd/css/newsEvent/eventManage.css}"/>
+
+    <!-- bootstrap-datetimepicker JS -->
+    <script type="text/javascript"
+            src="../../../static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"
+            th:src="@{/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+    <script type="text/javascript"
+            src="../../../static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js"
+            th:src="@{/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+
+    <script type="text/javascript" src="../static/common/plugins/ajaxfileupload.js"
+            th:src="@{/common/plugins/ajaxfileupload.js}"></script>
+    <!-- select2 JS-->
+    <script type="text/javascript" src="../../../static/common/plugins/select2/select2.full.min.js"
+            th:src="@{/common/plugins/select2/select2.full.min.js}"></script>
+    <!-- Self JS -->
+    <script type="text/javascript" src="../../../static/backEnd/js/static/newsEvent/eventManage.js"
+            th:src="@{/backEnd/js/dynamic/newsEvent/eventManage.js}"></script>
+</head>
+<body>
+<section class="content-header">
+    <h5 class="m-all">
+        专题管理
+    </h5>
+</section>
+<section class="content">
+    <div class="box p-right p-left">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="addEvent">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEventModal">
+                    添加专题
+                </button>
+                    <button type="button" id="deleteList" class="btn btn-primary">
+                        批量删除
+                    </button>
+                    <div class="modal  form-horizontal " id="addEventModal" data-backdrop="static">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="" id="addEventForm">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" onclick="modalClose()" data-dismiss="modal">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title">新增/修改专题</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="center-block" style="width:500px">
+                                            <input type="hidden" id="eventCode"/>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 control-label"><span
+                                                        class="text-danger">* </span>专题名称</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="name" maxlength="20"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="keywords" class="col-sm-3 control-label"><span
+                                                        class="text-danger">* </span>关键词组</label>
+                                                <div class="col-sm-9">
+                                                    <input name="keywords" type="text" class="form-control"
+                                                           placeholder="逗号分隔" maxlength="20"/><br/>
+                                                    <input name="keywords" type="text" class="form-control"
+                                                           placeholder="逗号分隔" maxlength="20"/><br/>
+                                                    <input name="keywords" type="text" class="form-control"
+                                                           placeholder="逗号分隔" maxlength="20"/><br/>
+                                                    <input name="keywords" type="text" class="form-control"
+                                                           placeholder="逗号分隔" maxlength="20"/>
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group" >-->
+                                            <!--<label for="keyword" class="col-sm-3 control-label">专题类型</label>-->
+                                            <!--<div class="col-sm-9">-->
+                                            <!--<select id="classification" class="form-control" th:remove="all-but-first" style="width: 100%;">-->
+                                            <!--<option th:each="classifi:${classList}" th:value="${classifi.labelId}" th:text="${classifi.name}">重大事故</option>-->
+                                            <!--<option >自然灾害</option>-->
+                                            <!--<option >政治专题</option>-->
+                                            <!--<option >刑事专题</option>-->
+                                            <!--<option >明星专题</option>-->
+                                            <!--<option >经济专题</option>-->
+                                            <!--<option >社会专题</option>-->
+                                            <!--</select>-->
+                                            <!--</div>-->
+                                            <!--</div>-->
+                                            <div class="form-group">
+                                                <label for="occurrenceTime" class="col-sm-3 control-label">发生时间</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="occurrenceTime"
+                                                           maxlength="20"/>
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group" >-->
+                                            <!--<label for="level" class="col-sm-3 control-label">专题等级</label>-->
+                                            <!--<div class="col-sm-9">-->
+                                            <!--<select id="level" class="form-control" >-->
+                                            <!--<option value="1">一般</option>-->
+                                            <!--<option value="2">较为重要</option>-->
+                                            <!--<option value="3">重要</option>-->
+                                            <!--<option value="4">非常重要</option>-->
+                                            <!--</select>-->
+                                            <!--</div>-->
+                                            <!--</div>-->
+                                            <div class="form-group">
+                                                <label for="image" class="col-sm-3 control-label">图片选择</label>
+                                                <div class="col-sm-9">
+                                                    <input id="image" name="image" type="file" class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description" class="col-sm-3 control-label">专题描述</label>
+                                                <div class="col-sm-9">
+                                                    <textarea id="description" name="description" class="form-control"
+                                                              maxlength="500"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick="save()" class="btn btn-primary" id="submit">保存
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="modalClose()"
+                                                data-dismiss="modal">取消
+                                        </button>
+                                    </div>
+                                </form>
+                            </div><!-- /.modal-content -->
+                        </div>
+                    </div><!-- /.modal -->
+                    <!-- 添加事件-模态框 -->
+                    <!-- 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+                    <!-- 						  	<div class="modal-dialog"> -->
+                    <!-- 						    	<div class="modal-content"> -->
+                    <!-- 						      		<div class="modal-header"> -->
+                    <!-- 						        		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                    <!-- 						        		<h4 class="modal-title" id="myModalLabel">添加事件</h4> -->
+                    <!-- 						      		</div> -->
+                    <!-- 								    <div class="modal-body"> -->
+                    <!-- 								        <form class="form-horizontal" role="form"> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">事件名称</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      <input type="text" class="form-control" id="inputEmail3" placeholder="请输入事件名称" /> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">关键词一</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      <input type="text" class="form-control" id="inputEmail3" placeholder="请输入关键词" /> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">关键词二</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      <input type="text" class="form-control" id="inputEmail3" placeholder="请输入关键词" /> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">关键词三</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      <input type="text" class="form-control" id="inputEmail3" placeholder="请输入关键词" /> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">关键词四</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      <input type="text" class="form-control" id="inputEmail3" placeholder="请输入关键词" /> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">事件类型</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      	<select class="form-control select2" th:remove="all-but-first" multiple="multiple" data-placeholder="Select a State" style="width: 100%;"> -->
+                    <!-- 								                      	<option th:each="classifi:${classList}" th:value="${classifi.innerid}" th:text="${classifi.dataName}">Alabama</option> -->
+                    <!-- 								                      	<option>Alaska</option> -->
+                    <!-- 								                     	<option>California</option> -->
+                    <!-- 								                      	<option>Delaware</option> -->
+                    <!-- 								                      	<option>Tennessee</option> -->
+                    <!-- 								                      	<option>Texas</option> -->
+                    <!-- 								                      	<option>Washington</option> -->
+                    <!-- 								                    </select> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 												<label for="inputEmail3" class="col-sm-2 control-label">发生时间</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 												    <div class="input-group"> -->
+                    <!-- 												      	<input type="text" class="form-control" id="datetimepicker" placeholder="" /> -->
+                    <!-- 												      	<div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
+                    <!-- 												    </div> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">事件等级</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											      	<select class="form-control"> -->
+                    <!-- 													  	<option>一般</option> -->
+                    <!-- 													  	<option>比较重要</option> -->
+                    <!-- 													  	<option>重要</option> -->
+                    <!-- 													  	<option>非常重要</option> -->
+                    <!-- 													</select> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">图片选择</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											    	<input id="image" name="image" type="file" class="form-control" /> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 											<div class="form-group"> -->
+                    <!-- 											    <label for="inputEmail3" class="col-sm-2 control-label">事件描述</label> -->
+                    <!-- 											    <div class="col-sm-9"> -->
+                    <!-- 											    	<textarea class="form-control" rows="3"></textarea> -->
+                    <!-- 											    </div> -->
+                    <!-- 											    <div class="col-sm-1"></div> -->
+                    <!-- 											</div> -->
+                    <!-- 										</form> -->
+                    <!-- 								    </div> -->
+                    <!-- 						      		<div class="modal-footer"> -->
+                    <!-- 						        		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
+                    <!-- 						        		<button type="button" class="btn btn-primary">确定</button> -->
+                    <!-- 						      		</div> -->
+                    <!-- 						    	</div> -->
+                    <!-- 						  	</div> -->
+                    <!-- 						</div> -->
+                </div>
+                <table class="table table-hover eventManageTable">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;&nbsp;</th>
+                        <th>名称</th>
+                        <th>所属用户</th>
+                        <th>创建时间</th>
+                        <th>发生时间</th>
+                        <!--<th>类型</th>-->
+                        <!--<th>等级</th>-->
+                        <th style="width: 30%">描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="body">
+                    <tr>
+                        <td><input type="checkbox" class="delete-list"/></td>
+                        <td>罗一笑事件</td>
+                        <td>公有</td>
+                        <td>2016-12-16 09:04:32</td>
+                        <td>2016-12-16</td>
+                        <td>社会</td>
+                        <td>一般</td>
+                        <td>
+                            2016年11月底，网友被一位不幸罹患白血病的小女孩笑笑的故事刷爆了，数以万计的人通过各种方式进行捐赠，希望为这个悲伤的家庭送去温暖。2016年11月30日，剧情翻转，与作者罗尔同在深圳女报的知情人Po了真相，爆料罗尔家底深厚，此事背后营销。
+                            2016年12月1日，罗尔就“罗一笑事件”发声明：260余万捐款将全部捐出。
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-toggle="modal" data-target="#myModal"><a href="#">修改</a></li>
+                                    <li><a href="#">删除</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>罗一笑事件</td>
+                        <td>公有</td>
+                        <td>2016-12-16 09:04:32</td>
+                        <td>2016-12-16</td>
+                        <td>社会</td>
+                        <td>一般</td>
+                        <td>
+                            2016年11月底，网友被一位不幸罹患白血病的小女孩笑笑的故事刷爆了，数以万计的人通过各种方式进行捐赠，希望为这个悲伤的家庭送去温暖。2016年11月30日，剧情翻转，与作者罗尔同在深圳女报的知情人Po了真相，爆料罗尔家底深厚，此事背后营销。
+                            2016年12月1日，罗尔就“罗一笑事件”发声明：260余万捐款将全部捐出。
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-toggle="modal" data-target="#myModal"><a href="#">修改</a></li>
+                                    <li><a href="#">删除</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>罗一笑事件</td>
+                        <td>公有</td>
+                        <td>2016-12-16 09:04:32</td>
+                        <td>2016-12-16</td>
+                        <td>社会</td>
+                        <td>一般</td>
+                        <td>
+                            2016年11月底，网友被一位不幸罹患白血病的小女孩笑笑的故事刷爆了，数以万计的人通过各种方式进行捐赠，希望为这个悲伤的家庭送去温暖。2016年11月30日，剧情翻转，与作者罗尔同在深圳女报的知情人Po了真相，爆料罗尔家底深厚，此事背后营销。
+                            2016年12月1日，罗尔就“罗一笑事件”发声明：260余万捐款将全部捐出。
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-toggle="modal" data-target="#myModal"><a href="#">修改</a></li>
+                                    <li><a href="#">删除</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>罗一笑事件</td>
+                        <td>公有</td>
+                        <td>2016-12-16 09:04:32</td>
+                        <td>2016-12-16</td>
+                        <td>社会</td>
+                        <td>一般</td>
+                        <td>
+                            2016年11月底，网友被一位不幸罹患白血病的小女孩笑笑的故事刷爆了，数以万计的人通过各种方式进行捐赠，希望为这个悲伤的家庭送去温暖。2016年11月30日，剧情翻转，与作者罗尔同在深圳女报的知情人Po了真相，爆料罗尔家底深厚，此事背后营销。
+                            2016年12月1日，罗尔就“罗一笑事件”发声明：260余万捐款将全部捐出。
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-toggle="modal" data-target="#myModal"><a href="#">修改</a></li>
+                                    <li><a href="#">删除</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>罗一笑事件</td>
+                        <td>公有</td>
+                        <td>2016-12-16 09:04:32</td>
+                        <td>2016-12-16</td>
+                        <td>社会</td>
+                        <td>一般</td>
+                        <td>
+                            2016年11月底，网友被一位不幸罹患白血病的小女孩笑笑的故事刷爆了，数以万计的人通过各种方式进行捐赠，希望为这个悲伤的家庭送去温暖。2016年11月30日，剧情翻转，与作者罗尔同在深圳女报的知情人Po了真相，爆料罗尔家底深厚，此事背后营销。
+                            2016年12月1日，罗尔就“罗一笑事件”发声明：260余万捐款将全部捐出。
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-toggle="modal" data-target="#myModal"><a href="#">修改</a></li>
+                                    <li><a href="#">删除</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
