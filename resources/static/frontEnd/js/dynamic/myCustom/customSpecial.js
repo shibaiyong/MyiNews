@@ -36,7 +36,7 @@ function rendererList(listData) {
         var time = new Date(listData[i].createDatetime).toString()
         html += "<div class=\"list-item\">\n" +
             "            <div style=\"width: 13%\">" + (i + 1) + "</div>\n" +
-            "            <div style=\"width: 40%\">" + listData[i].eventName + "</div>\n" +
+            "            <div style=\"width: 40%;cursor: pointer\" class='specialUrl' data-group-index='" + i + "'>" + listData[i].eventName + "</div>\n" +
             "            <div style=\"width: 18%\">" + time + "</div>\n" +
             "            <div style=\"width: 25%\">\n" +
             "                <span class=\"handle-special deleteSpecial\" data-group-index='" + i + "'>删除专题</span>\n" +
@@ -52,6 +52,10 @@ function rendererList(listData) {
     $('.updateSpecial').click(function (event) {
         var index = this.getAttribute("data-group-index")
         toUpdate(listData[index])
+    }); //http://localhost:8080/ns/uec/event/front/detail/85e3ca93db47692ef88aa5259802cc2c
+    $('.specialUrl').click(function (event) {
+        var index = this.getAttribute("data-group-index")
+        open(ctx + "/event/front/detail/"+listData[index].eventCode)
     });
 }
 
@@ -279,7 +283,7 @@ function loadTableList() {
     table = $.ajax({
         type: "GET",
         //提交的网址
-        url: ctx + '/event/front/pageLatestEvent',
+        url: ctx + '/event/front/pageUserLatestEvent',
         //参数
         data: parames,
         //返回数据的格式

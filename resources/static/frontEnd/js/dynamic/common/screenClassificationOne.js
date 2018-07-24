@@ -8,7 +8,7 @@
 (function($){
 	"use strict";
 	
-	$.fn.getData = function(options){
+	$.fn.getSignleData = function (options) {
 		var defaults = {
 				getAjaxUrl:'',  //请求路径
 				boxClassName:'',
@@ -21,7 +21,7 @@
 		};
 		var options = $.extend(defaults,options);
 		if(options.getAjaxUrl == ''){
-			$().screenConditionFun({
+			$().screenSignleConditionFun({
 				className:options.boxClassName,  
 				idName:options.ulClassName,
 				multiSelect: options.multiSelect,
@@ -57,11 +57,11 @@
 											}
 										}
 									});
-									conditionsHandler(options, obj);
+									conditionsSignleHandler(options, obj);
 								}
 							});
 						}else{
-							conditionsHandler(options, obj);
+							conditionsSignleHandler(options, obj);
 						}	        			
 		        	}		        	
 		        },
@@ -74,7 +74,7 @@
 	};
 	
 	// 将生成下拉列表部分的代码单独取出
-	function conditionsHandler(options, obj) {
+	function conditionsSignleHandler(options, obj) {
 		// 添加历史记录（历史记录暂时移除）
 		// var historyCon = JSON.parse(localStorage.getItem('conditions'));
 		// var historyText = '';
@@ -222,7 +222,7 @@
 
 			// 将多选确定按钮加入
 			if(options.multiSelect){
-				var multiButton = '<div class="multiButton"><div class="multiSure">确定</div><div class="multiCancel">取消</div></div>';
+				var multiButton = '<div class="multiButton"><div class="multiSure">确定</div><div class="multiCancel">清空</div></div>';
 				$(options.ulClassName).append(multiButton);
 				prosmoreHeight = 17 * 30 + 4;
 			} 						
@@ -231,13 +231,13 @@
 			if (options.multiSelect) {
 				// 加一个空白隐藏的标签
 				$(options.ulClassName).append('<div class="fenleiBox" style="display:none;"><nav aria-label="Page navigation"><div class="pagination pagination-sm"></div></nav></div>');
-				var multiButton = '<div class="multiButton"><div class="multiSure">确定</div><div class="multiCancel">取消</div></div>';
+				var multiButton = '<div class="multiButton"><div class="multiSure">确定</div><div class="multiCancel">清空</div></div>';
 				$(options.ulClassName).append(multiButton);
 				prosmoreHeight = $(options.ulClassName).find('li').length * 30 + 4 + 30;
 			}
 		}
 
-		$().screenConditionFun({
+		$().screenSignleConditionFun({
 			className: options.boxClassName,
 			idName: options.ulClassName,
 			multiSelect: options.multiSelect,
@@ -256,7 +256,7 @@
 	}
 
 	//地区、来源、分类下拉事件
-	$.fn.screenConditionFun = function(options){
+	$.fn.screenSignleConditionFun = function (options) {
 		var defaults = {
 			className:'',  
 			idName:'',
@@ -269,6 +269,7 @@
 			$ul = $(options.idName),
 			$lis = $ul.find("li"),
 			$multiCancel = $ul.find('.multiButton').find('.multiCancel'),
+			$multiSure = $ul.find('.multiButton').find('.multiSure'),
 			inter = $head.attr('data-inter');
 				
 		$head.click(function(e){
@@ -344,6 +345,7 @@
 					});
 					var textShow = '全部' + '<i class="fa fa-caret-down"></i>';
 					$head.attr('data-content', '全部');
+					$head.attr('data-middle', '全部');
 					$head.html(textShow);
 				}						
 			}else{
@@ -402,18 +404,21 @@
 					if (selectValues.length >0) {
 						$head.attr('data-selectValue', selectValues.join('、'));
 						var textShow = selectValues.join('、') + '<i class="fa fa-caret-down"></i>';
-						$head.html(textShow);						
+						$head.html(textShow);
+						if (selectValues.length >= 4) {
+							selectValues = selectValues.slice(0, 3);
+							selectValues.push('...');
+						}
+						$head.attr('data-content', selectValues.join('、'));
 					}else{
 						// 特殊情形：选择了全部之后，再点击选单个元素
 						$head.attr('data-selectValue', '');
-						var textShow = '地区' + '<i class="fa fa-caret-down"></i>';
+						var textShow = '全部' + '<i class="fa fa-caret-down"></i>';
 						$head.html(textShow);
+						$head.attr('data-content', '全部');
 					}
-					if (selectValues.length >6) {
-						selectValues = selectValues.slice(0, 5);
-						selectValues.push('...');
-					}
-					$head.attr('data-content', selectValues.join('、'));					
+					
+										
 				}
 								
 //				将选择的东西记录到localstorage中
@@ -505,41 +510,22 @@
 			if (multi) {
 				var listLi = $(this).parent().siblings();
 				var $liLists = listLi.slice(0, listLi.length - 1);
-				var listObj = {};
-				// 默认选中的参数
-				var defaultInnerIds = [];
-				var defaultValues = [];
-				if ($head.attr('data-old').length > 0) {
-					var inners = $head.attr('data-old');
-					defaultInnerIds = inners.split(',');
-				}
-				// 生成key与value的对象组备用
-				var innerid = '', value = '';
+				var value = '';
 				$.each($liLists, function (index, item) {
-					innerid = $(this).find('a').attr('data-innerid');
 					value = $(this).find('a').text();
-					if (defaultInnerIds.indexOf(innerid) != -1) {
-						defaultValues.push(value);
-						$(this).find('a').html(value + '<i class="glyphicon glyphicon-ok"></i>');
-					}else{
+					if ($(this).find('a').find('i').length > 0) {
 						$(this).find('a').html(value);
-					}
+					} 
 				});
-				// 回显
-				if (defaultValues.length >0) {
-					$head.attr('data-innerid', defaultInnerIds.join(','));
-					$head.attr('data-selectValue', defaultValues.join('、'));
-					var textShow = defaultValues.join('、') + '<i class="fa fa-caret-down"></i>';
-					$head.html(textShow);
-				}else{
-					$head.attr('data-selectValue', '');
-					var textShow = '地区' + '<i class="fa fa-caret-down"></i>';
-					$head.html(textShow);
-				}
-				
-				
-			}
-			
+				$head.attr('data-selectValue', '');
+				var textShow = '全部' + '<i class="fa fa-caret-down"></i>';
+				$head.html(textShow);
+				$head.attr('data-content', '全部');
+				$head.attr('data-innerid', '');														
+			}			
+		});
+		$multiSure.click(function (event) {
+			signleReloadData();
 		});
 	};
 //	enter点击进入
@@ -559,7 +545,7 @@
 	};
 	
 //	点击iSearch按钮
-	$.fn.customInputClickBtn = function(options){
+	$.fn.customSignleInputClickBtn = function (options) {
 		var defaults = {
 			refreshTable:'',//需要刷新的表格
 			callBack:'' //刷新的列表
@@ -628,7 +614,17 @@
 			this.splice(index, 1);
 		}
 	};
-
+	String.prototype.gblen = function () {
+		var len = 0;
+		for (var i = 0; i < this.length; i++) {
+			if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+				len += 2;
+			} else {
+				len++;
+			}
+		}
+		return len;
+	}
 
 })(jQuery);
 

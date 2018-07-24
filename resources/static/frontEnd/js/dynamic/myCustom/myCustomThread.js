@@ -7,6 +7,7 @@ var threadAjaxData1,
     tableItemWebPageCodeArr = [],//当前页面中显示的列表的webpageCode
     ajaxUrl = '';
 $(function () {
+    var loadSuccess = 0
     appIdArray = [];
     chooseSimilarityForFirst();
 //	点击刷新，每60秒刷新
@@ -25,17 +26,43 @@ $(function () {
     $('.clusterFenlei').removeClass('hide');
     $('.screenSearch').removeClass('hide');
     var screenIndex = 0;
+    // $('.screenConditionBox .subpage').each(function () {
+    //     if ($(this).hasClass('hide')) {
+    //         return;
+    //     } else {
+    //         var mlLeft = 125 * screenIndex;
+    //         $(this).css({
+    //             'marginLeft': mlLeft + 'px',
+    //         })
+    //         ++screenIndex;
+    //     }
+    // })
     $('.screenConditionBox .subpage').each(function () {
         if ($(this).hasClass('hide')) {
             return;
         } else {
-            var mlLeft = 125 * screenIndex;
-            $(this).css({
-                'marginLeft': mlLeft + 'px',
-            })
+            if ($(this).prev().hasClass('srceenTimeQuantum')) {
+                if ($(this).prev().hasClass('hide')) {
+                    var mlLeft = 125 * screenIndex;
+                    $(this).css({
+                        'marginLeft': mlLeft + 'px',
+                    })
+                } else {
+                    var mlLeft = 125 * (screenIndex - 1) + 220;
+                    $(this).css({
+                        'marginLeft': mlLeft + 'px',
+                    })
+                }
+            } else {
+                var mlLeft = 125 * screenIndex;
+                $(this).css({
+                    'marginLeft': mlLeft + 'px',
+                })
+            }
             ++screenIndex;
         }
     })
+
 //	时间段
     $().getData({
         boxClassName: '.srceenTimeQuantum',
@@ -175,431 +202,458 @@ $(function () {
 
 //	地区
     var innerid = localStorage.innerId;
-    if (innerid) { //网站 app 微博 微信
-        $.ajax({
-            url: ctx + '/uec/config/front/listUserConfigRegion',//这个就是请求地址对应sAjaxSource
-            data: {'timeCode': timeCode, 'level': 3},
-            type: 'get',
-            dataType: 'json',
-            async: true,
-            success: function (data) {
-                console.log(data);
-                if (data.result == true) {
-                    var obj = data.resultObj;
-                    var content = '';
-
-//    			添加历史记录
-                    var historyCon = JSON.parse(localStorage.getItem('conditions'));
-                    var historyText = '';
-                    var historyId = '';
-                    for (var i = 0; i < historyCon.length; i++) {
-
-                        if (historyCon[i]['name'] == 'clusterMap') {
-                            historyText = historyCon[i]['value'];
-                            historyId = historyCon[i]['id']
-                        }
-                    }
-
-                    if (historyText == '') {
-                        content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-                    } else {
-                        content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-                    }
-
-                    content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-                    $('#clusterMapPro').append(content);
-                    for (var count = 0; obj.length > count; count++) {
-
-                        if (obj[count].parentId == '0') {
-                            var regionSecondItem = [];
-                            var regionFirstName = obj[count].innerid;
-                            for (var plug = 0; plug < obj.length; plug++) {
-                                if (regionFirstName == obj[plug].parentId) {
-                                    regionSecondItem.push(obj[plug]);
-                                }
-                            }
-                            var textCon;
-                            if (regionSecondItem.length == 0) {
-                                textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
-                            } else {
-                                var secondItem = '<div class="prosmore hide">';
-                                secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
-
-                                if (obj[count].innerid == '320000') {
-                                    for (var num = 0; num < regionSecondItem.length; num++) {
-                                        secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-
-                                        var regionThreeItem = [];
-                                        for (var plugThree = 0; plugThree < obj.length; plugThree++) {
-                                            if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
-                                                regionThreeItem.push(obj[plugThree]);
-                                            }
-                                        }
-
-                                        if (regionThreeItem.length == 0) {
-
-                                        } else {
-                                            for (var i = 0; i < regionThreeItem.length; i++) {
-                                                secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>'
-                                            }
-                                        }
-
-                                    }
-                                } else {
-                                    for (var num = 0; num < regionSecondItem.length; num++) {
-                                        secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-                                    }
-                                }
-                                secondItem += '</div>';
-                                textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-                            }
-
-                            $('#clusterMapPro').append(textCon);
-                        }
-                    }
-
-                    var lilen = $('#clusterMapPro').find('li').length;
-                    if (lilen > 16) {
-
-//            		判读能否整除，将不能整除的部门用li补全
-//            		alert(lilen);
-                        var yushu = (lilen - 2) % 14;
-                        if (yushu == 0) {
-
-                        } else {
-                            var yushuBox = '';
-                            for (var i = 0; i < (14 - yushu); i++) {
-                                yushuBox += '<li class="hide zhanwei"></li>';
-                            }
-                            $('#clusterMapPro').append(yushuBox);
-                        }
-
-//            		将第一页的之外的li隐藏
-                        $('#clusterMapPro').find('li').each(function (index) {
-                            if (index > 15) {
-                                $(this).addClass('hide');
-                            }
-                        })
-
-//            		将分页的样式填入
-                        var num = Math.ceil((lilen - 2) / 14);
-                        var fenye = '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm">';
-                        fenye += '<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>';
-                        for (var i = 0; i < num; i++) {
-                            if (i == 0) {
-                                fenye += '<a href="#" class="active">' + (i + 1) + '</a>';
-                            } else {
-                                fenye += '<a href="#">' + (i + 1) + '</a>';
-                            }
-                        }
-                        fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
-
-                        $('#clusterMapPro').append(fenye);
-
-//            		计算二级页的高度
-                        var prosmoreHeight = 17 * 30 + 4;
-
-                    } else {
-                        var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 + 4;
-                    }
-
-                    $().screenConditionFun({
-                        className: '.clusterMap',
-                        idName: '#clusterMapPro',
-                    });
-
-
-//        		var prosmoreHeight = $('.clusterMap').find('li').length * 30 +4;
-                    $('.clusterMap').find('.prosmore').css({
-                        'height': prosmoreHeight + 'px'
-                    })
-                }
+//     if (innerid) { //网站 app 微博 微信
+//         $.ajax({
+//             url: ctx + '/uec/config/front/listUserConfigRegion',//这个就是请求地址对应sAjaxSource
+//             data: {'timeCode': timeCode, 'level': 3},
+//             type: 'get',
+//             dataType: 'json',
+//             async: true,
+//             success: function (data) {
+//                 console.log(data);
+//                 if (data.result == true) {
+//                     var obj = data.resultObj;
+//                     var content = '';
+//
+// //    			添加历史记录
+//                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
+//                     var historyText = '';
+//                     var historyId = '';
+//                     for (var i = 0; i < historyCon.length; i++) {
+//
+//                         if (historyCon[i]['name'] == 'clusterMap') {
+//                             historyText = historyCon[i]['value'];
+//                             historyId = historyCon[i]['id']
+//                         }
+//                     }
+//
+//                     if (historyText == '') {
+//                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
+//                     } else {
+//                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
+//                     }
+//
+//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
+//                     $('#clusterMapPro').append(content);
+//                     for (var count = 0; obj.length > count; count++) {
+//
+//                         if (obj[count].parentId == '0') {
+//                             var regionSecondItem = [];
+//                             var regionFirstName = obj[count].innerid;
+//                             for (var plug = 0; plug < obj.length; plug++) {
+//                                 if (regionFirstName == obj[plug].parentId) {
+//                                     regionSecondItem.push(obj[plug]);
+//                                 }
+//                             }
+//                             var textCon;
+//                             if (regionSecondItem.length == 0) {
+//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
+//                             } else {
+//                                 var secondItem = '<div class="prosmore hide">';
+//                                 secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
+//
+//                                 if (obj[count].innerid == '320000') {
+//                                     for (var num = 0; num < regionSecondItem.length; num++) {
+//                                         secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
+//
+//                                         var regionThreeItem = [];
+//                                         for (var plugThree = 0; plugThree < obj.length; plugThree++) {
+//                                             if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
+//                                                 regionThreeItem.push(obj[plugThree]);
+//                                             }
+//                                         }
+//
+//                                         if (regionThreeItem.length == 0) {
+//
+//                                         } else {
+//                                             for (var i = 0; i < regionThreeItem.length; i++) {
+//                                                 secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>'
+//                                             }
+//                                         }
+//
+//                                     }
+//                                 } else {
+//                                     for (var num = 0; num < regionSecondItem.length; num++) {
+//                                         secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
+//                                     }
+//                                 }
+//                                 secondItem += '</div>';
+//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
+//                             }
+//
+//                             $('#clusterMapPro').append(textCon);
+//                         }
+//                     }
+//
+//                     var lilen = $('#clusterMapPro').find('li').length;
+//                     if (lilen > 16) {
+//
+// //            		判读能否整除，将不能整除的部门用li补全
+// //            		alert(lilen);
+//                         var yushu = (lilen - 2) % 14;
+//                         if (yushu == 0) {
+//
+//                         } else {
+//                             var yushuBox = '';
+//                             for (var i = 0; i < (14 - yushu); i++) {
+//                                 yushuBox += '<li class="hide zhanwei"></li>';
+//                             }
+//                             $('#clusterMapPro').append(yushuBox);
+//                         }
+//
+// //            		将第一页的之外的li隐藏
+//                         $('#clusterMapPro').find('li').each(function (index) {
+//                             if (index > 15) {
+//                                 $(this).addClass('hide');
+//                             }
+//                         })
+//
+// //            		将分页的样式填入
+//                         var num = Math.ceil((lilen - 2) / 14);
+//                         var fenye = '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm">';
+//                         fenye += '<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>';
+//                         for (var i = 0; i < num; i++) {
+//                             if (i == 0) {
+//                                 fenye += '<a href="#" class="active">' + (i + 1) + '</a>';
+//                             } else {
+//                                 fenye += '<a href="#">' + (i + 1) + '</a>';
+//                             }
+//                         }
+//                         fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
+//
+//                         $('#clusterMapPro').append(fenye);
+//
+// //            		计算二级页的高度
+//                         var prosmoreHeight = 17 * 30 + 4;
+//
+//                     } else {
+//                         var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 + 4;
+//                     }
+//
+//                     $().screenConditionFun({
+//                         className: '.clusterMap',
+//                         idName: '#clusterMapPro',
+//                     });
+//
+//
+// //        		var prosmoreHeight = $('.clusterMap').find('li').length * 30 +4;
+//                     $('.clusterMap').find('.prosmore').css({
+//                         'height': prosmoreHeight + 'px'
+//                     })
+//                 }
+//             }
+//         })
+//     } else {
+//         $.ajax({
+//             url: ctx + '/custom/front/listuserregion',//这个就是请求地址对应sAjaxSource
+//             data: {'timeCode': timeCode, 'level': 3},
+//             type: 'get',
+//             dataType: 'json',
+//             async: true,
+//             success: function (data) {
+//                 console.log(data);
+//                 if (data.result == true) {
+//                     var obj = data.resultObj;
+//                     var content = '';
+//
+// //    			添加历史记录
+//                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
+//                     var historyText = '';
+//                     var historyId = '';
+//                     for (var i = 0; i < historyCon.length; i++) {
+//
+//                         if (historyCon[i]['name'] == 'clusterMap') {
+//                             historyText = historyCon[i]['value'];
+//                             historyId = historyCon[i]['id']
+//                         }
+//                     }
+//
+//                     if (historyText == '') {
+//                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
+//                     } else {
+//                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
+//                     }
+//
+//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
+//                     $('#clusterMapPro').append(content);
+//                     for (var count = 0; obj.length > count; count++) {
+//
+//                         if (obj[count].parentId == '0') {
+//                             var regionSecondItem = [];
+//                             var regionFirstName = obj[count].innerid;
+//                             for (var plug = 0; plug < obj.length; plug++) {
+//                                 if (regionFirstName == obj[plug].parentId) {
+//                                     regionSecondItem.push(obj[plug]);
+//                                 }
+//                             }
+//                             var textCon;
+//                             if (regionSecondItem.length == 0) {
+//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
+//                             } else {
+//                                 var secondItem = '<div class="prosmore hide">';
+//                                 secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
+//
+//                                 if (obj[count].innerid == '320000') {
+//                                     for (var num = 0; num < regionSecondItem.length; num++) {
+//                                         secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
+//
+//                                         var regionThreeItem = [];
+//                                         for (var plugThree = 0; plugThree < obj.length; plugThree++) {
+//                                             if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
+//                                                 regionThreeItem.push(obj[plugThree]);
+//                                             }
+//                                         }
+//
+//                                         if (regionThreeItem.length == 0) {
+//
+//                                         } else {
+//                                             for (var i = 0; i < regionThreeItem.length; i++) {
+//                                                 secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>'
+//                                             }
+//                                         }
+//
+//                                     }
+//                                 } else {
+//                                     for (var num = 0; num < regionSecondItem.length; num++) {
+//                                         secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
+//                                     }
+//                                 }
+//                                 secondItem += '</div>';
+//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
+//                             }
+//
+//                             $('#clusterMapPro').append(textCon);
+//                         }
+//                     }
+//
+//                     var lilen = $('#clusterMapPro').find('li').length;
+//                     if (lilen > 16) {
+//
+// //            		判读能否整除，将不能整除的部门用li补全
+// //            		alert(lilen);
+//                         var yushu = (lilen - 2) % 14;
+//                         if (yushu == 0) {
+//
+//                         } else {
+//                             var yushuBox = '';
+//                             for (var i = 0; i < (14 - yushu); i++) {
+//                                 yushuBox += '<li class="hide zhanwei"></li>';
+//                             }
+//                             $('#clusterMapPro').append(yushuBox);
+//                         }
+//
+// //            		将第一页的之外的li隐藏
+//                         $('#clusterMapPro').find('li').each(function (index) {
+//                             if (index > 15) {
+//                                 $(this).addClass('hide');
+//                             }
+//                         })
+//
+// //            		将分页的样式填入
+//                         var num = Math.ceil((lilen - 2) / 14);
+//                         var fenye = '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm">';
+//                         fenye += '<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>';
+//                         for (var i = 0; i < num; i++) {
+//                             if (i == 0) {
+//                                 fenye += '<a href="#" class="active">' + (i + 1) + '</a>';
+//                             } else {
+//                                 fenye += '<a href="#">' + (i + 1) + '</a>';
+//                             }
+//                         }
+//                         fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
+//
+//                         $('#clusterMapPro').append(fenye);
+//
+// //            		计算二级页的高度
+//                         var prosmoreHeight = 17 * 30 + 4;
+//
+//                     } else {
+//                         var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 + 4;
+//                     }
+//
+//                     $().screenConditionFun({
+//                         className: '.clusterMap',
+//                         idName: '#clusterMapPro',
+//                     });
+//
+//
+// //        		var prosmoreHeight = $('.clusterMap').find('li').length * 30 +4;
+//                     $('.clusterMap').find('.prosmore').css({
+//                         'height': prosmoreHeight + 'px'
+//                     })
+//                 }
+//             }
+//         })
+//     }
+    $().getData({
+        getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
+        getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+        boxClassName: '.clusterMap',
+        ulClassName: '#clusterMapPro',
+        level: 2,
+        multiSelect: true,
+        callback: function () {
+            loadSuccess++
+            if (loadSuccess == 2) {
+                loadTable()
             }
-        })
-    } else {
-        $.ajax({
-            url: ctx + '/custom/front/listuserregion',//这个就是请求地址对应sAjaxSource
-            data: {'timeCode': timeCode, 'level': 3},
-            type: 'get',
-            dataType: 'json',
-            async: true,
-            success: function (data) {
-                console.log(data);
-                if (data.result == true) {
-                    var obj = data.resultObj;
-                    var content = '';
-
-//    			添加历史记录
-                    var historyCon = JSON.parse(localStorage.getItem('conditions'));
-                    var historyText = '';
-                    var historyId = '';
-                    for (var i = 0; i < historyCon.length; i++) {
-
-                        if (historyCon[i]['name'] == 'clusterMap') {
-                            historyText = historyCon[i]['value'];
-                            historyId = historyCon[i]['id']
-                        }
-                    }
-
-                    if (historyText == '') {
-                        content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-                    } else {
-                        content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-                    }
-
-                    content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-                    $('#clusterMapPro').append(content);
-                    for (var count = 0; obj.length > count; count++) {
-
-                        if (obj[count].parentId == '0') {
-                            var regionSecondItem = [];
-                            var regionFirstName = obj[count].innerid;
-                            for (var plug = 0; plug < obj.length; plug++) {
-                                if (regionFirstName == obj[plug].parentId) {
-                                    regionSecondItem.push(obj[plug]);
-                                }
-                            }
-                            var textCon;
-                            if (regionSecondItem.length == 0) {
-                                textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
-                            } else {
-                                var secondItem = '<div class="prosmore hide">';
-                                secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
-
-                                if (obj[count].innerid == '320000') {
-                                    for (var num = 0; num < regionSecondItem.length; num++) {
-                                        secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-
-                                        var regionThreeItem = [];
-                                        for (var plugThree = 0; plugThree < obj.length; plugThree++) {
-                                            if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
-                                                regionThreeItem.push(obj[plugThree]);
-                                            }
-                                        }
-
-                                        if (regionThreeItem.length == 0) {
-
-                                        } else {
-                                            for (var i = 0; i < regionThreeItem.length; i++) {
-                                                secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>'
-                                            }
-                                        }
-
-                                    }
-                                } else {
-                                    for (var num = 0; num < regionSecondItem.length; num++) {
-                                        secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-                                    }
-                                }
-                                secondItem += '</div>';
-                                textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-                            }
-
-                            $('#clusterMapPro').append(textCon);
-                        }
-                    }
-
-                    var lilen = $('#clusterMapPro').find('li').length;
-                    if (lilen > 16) {
-
-//            		判读能否整除，将不能整除的部门用li补全
-//            		alert(lilen);
-                        var yushu = (lilen - 2) % 14;
-                        if (yushu == 0) {
-
-                        } else {
-                            var yushuBox = '';
-                            for (var i = 0; i < (14 - yushu); i++) {
-                                yushuBox += '<li class="hide zhanwei"></li>';
-                            }
-                            $('#clusterMapPro').append(yushuBox);
-                        }
-
-//            		将第一页的之外的li隐藏
-                        $('#clusterMapPro').find('li').each(function (index) {
-                            if (index > 15) {
-                                $(this).addClass('hide');
-                            }
-                        })
-
-//            		将分页的样式填入
-                        var num = Math.ceil((lilen - 2) / 14);
-                        var fenye = '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm">';
-                        fenye += '<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>';
-                        for (var i = 0; i < num; i++) {
-                            if (i == 0) {
-                                fenye += '<a href="#" class="active">' + (i + 1) + '</a>';
-                            } else {
-                                fenye += '<a href="#">' + (i + 1) + '</a>';
-                            }
-                        }
-                        fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
-
-                        $('#clusterMapPro').append(fenye);
-
-//            		计算二级页的高度
-                        var prosmoreHeight = 17 * 30 + 4;
-
-                    } else {
-                        var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 + 4;
-                    }
-
-                    $().screenConditionFun({
-                        className: '.clusterMap',
-                        idName: '#clusterMapPro',
-                    });
-
-
-//        		var prosmoreHeight = $('.clusterMap').find('li').length * 30 +4;
-                    $('.clusterMap').find('.prosmore').css({
-                        'height': prosmoreHeight + 'px'
-                    })
-                }
-            }
-        })
-    }
-
+        }
+    })
 
     //	分类
     var innerid = localStorage.innerId;
-    if (innerid) { //网站 app 微博 微信
-        $.ajax({
-            url: ctx + '/uec/config/front/listUserConfigClassification',//这个就是请求地址对应sAjaxSource
-            data: {'level': 2},
-            type: 'get',
-            dataType: 'json',
-            async: true,
-            success: function (data) {
-                if (data.result == true) {
-                    var obj = data.resultObj;
-                    var content = '';
-                    var historyCon = JSON.parse(localStorage.getItem('conditions'));
-                    var historyText = '';
-                    var historyId = '';
-                    for (var i = 0; i < historyCon.length; i++) {
-                        if (historyCon[i]['name'] == 'clusterFenlei') {
-                            historyText = historyCon[i]['value'];
-                            historyId = historyCon[i]['id']
-                        }
-                    }
-
-                    if (historyText == '') {
-                        content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-                    } else {
-                        content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-                    }
-
-                    content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-
-                    $('#clusterFenleiPro').append(content);
-                    for (var count = 0; obj.length > count; count++) {
-
-                        if (obj[count].parentId == '0') {
-                            var regionSecondItem = [];
-                            var regionFirstName = obj[count].innerid;
-                            for (var plug = 0; plug < obj.length; plug++) {
-                                if (regionFirstName == obj[plug].parentId) {
-                                    regionSecondItem.push(obj[plug]);
-                                }
-                            }
-                            var textCon;
-                            if (regionSecondItem.length == 0) {
-                                textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
-                            } else {
-                                var secondItem = '<div class="prosmore hide">';
-                                for (var num = 0; num < regionSecondItem.length; num++) {
-                                    secondItem += '<span><em><a href="javascript:void(0);" data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>'
-                                }
-                                secondItem += '</div>';
-                                textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-                            }
-                            $('#clusterFenleiPro').append(textCon);
-                        }
-                    }
-//        		$('#clusterFenleiPro').append(content);
-                    $().screenConditionFun({
-                        className: '.clusterFenlei',
-                        idName: '#clusterFenleiPro',
-                    });
-
-                    var prosmoreHeight = $('.clusterFenlei').find('li').length * 30 + 4;
-                    $('.clusterFenlei').find('.prosmore').css({
-                        'height': prosmoreHeight + 'px'
-                    })
-                }
+    $().getData({
+        getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+        getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
+        boxClassName: '.clusterFenlei',
+        ulClassName: '#clusterFenleiPro',
+        level: 2,
+        multiSelect: true,
+        callback: function () {
+            loadSuccess++
+            if (loadSuccess == 2) {
+                loadTable()
             }
-        })
-    } else {
-        $.ajax({
-            url: ctx + '/custom/front/listuserclassifications',//这个就是请求地址对应sAjaxSource
-            data: {'timeCode': timeCode},
-            type: 'get',
-            dataType: 'json',
-            async: true,
-            success: function (data) {
-                console.log(data);
-                if (data.result == true) {
-                    var obj = data.resultObj;
-                    var content = '';
-//    			添加历史记录
-                    var historyCon = JSON.parse(localStorage.getItem('conditions'));
-                    var historyText = '';
-                    var historyId = '';
-                    for (var i = 0; i < historyCon.length; i++) {
-
-                        if (historyCon[i]['name'] == 'clusterFenlei') {
-                            historyText = historyCon[i]['value'];
-                            historyId = historyCon[i]['id']
-                        }
-                    }
-
-                    if (historyText == '') {
-                        content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-                    } else {
-                        content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-                    }
-
-                    content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-
-                    $('#clusterFenleiPro').append(content);
-                    for (var count = 0; obj.length > count; count++) {
-
-                        if (obj[count].parentId == '0') {
-                            var regionSecondItem = [];
-                            var regionFirstName = obj[count].labelId;
-                            for (var plug = 0; plug < obj.length; plug++) {
-                                if (regionFirstName == obj[plug].parentId) {
-                                    regionSecondItem.push(obj[plug]);
-                                }
-                            }
-                            var textCon;
-                            if (regionSecondItem.length == 0) {
-                                textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].labelId + '" href="javascript:void(0);">' + obj[count].name;
-                            } else {
-                                var secondItem = '<div class="prosmore hide">';
-                                for (var num = 0; num < regionSecondItem.length; num++) {
-                                    secondItem += '<span><em><a href="javascript:void(0);" data-innerid="' + regionSecondItem[num].labelId + '">' + regionSecondItem[num].name + '</a></em></span>'
-                                }
-                                secondItem += '</div>';
-                                textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].labelId + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-                            }
-                            $('#clusterFenleiPro').append(textCon);
-                        }
-                    }
-//        		$('#clusterFenleiPro').append(content);
-                    $().screenConditionFun({
-                        className: '.clusterFenlei',
-                        idName: '#clusterFenleiPro',
-                    });
-
-                    var prosmoreHeight = $('.clusterFenlei').find('li').length * 30 + 4;
-                    $('.clusterFenlei').find('.prosmore').css({
-                        'height': prosmoreHeight + 'px'
-                    })
-                }
-            }
-        })
-    }
+        }
+    })
+//     if (innerid) { //网站 app 微博 微信
+//         $.ajax({
+//             url: ctx + '/uec/config/front/listUserConfigClassification',//这个就是请求地址对应sAjaxSource
+//             data: {'level': 2},
+//             type: 'get',
+//             dataType: 'json',
+//             async: true,
+//             success: function (data) {
+//                 if (data.result == true) {
+//                     var obj = data.resultObj;
+//                     var content = '';
+//                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
+//                     var historyText = '';
+//                     var historyId = '';
+//                     for (var i = 0; i < historyCon.length; i++) {
+//                         if (historyCon[i]['name'] == 'clusterFenlei') {
+//                             historyText = historyCon[i]['value'];
+//                             historyId = historyCon[i]['id']
+//                         }
+//                     }
+//
+//                     if (historyText == '') {
+//                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
+//                     } else {
+//                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
+//                     }
+//
+//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
+//
+//                     $('#clusterFenleiPro').append(content);
+//                     for (var count = 0; obj.length > count; count++) {
+//
+//                         if (obj[count].parentId == '0') {
+//                             var regionSecondItem = [];
+//                             var regionFirstName = obj[count].innerid;
+//                             for (var plug = 0; plug < obj.length; plug++) {
+//                                 if (regionFirstName == obj[plug].parentId) {
+//                                     regionSecondItem.push(obj[plug]);
+//                                 }
+//                             }
+//                             var textCon;
+//                             if (regionSecondItem.length == 0) {
+//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
+//                             } else {
+//                                 var secondItem = '<div class="prosmore hide">';
+//                                 for (var num = 0; num < regionSecondItem.length; num++) {
+//                                     secondItem += '<span><em><a href="javascript:void(0);" data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>'
+//                                 }
+//                                 secondItem += '</div>';
+//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
+//                             }
+//                             $('#clusterFenleiPro').append(textCon);
+//                         }
+//                     }
+// //        		$('#clusterFenleiPro').append(content);
+//                     $().screenConditionFun({
+//                         className: '.clusterFenlei',
+//                         idName: '#clusterFenleiPro',
+//                     });
+//
+//                     var prosmoreHeight = $('.clusterFenlei').find('li').length * 30 + 4;
+//                     $('.clusterFenlei').find('.prosmore').css({
+//                         'height': prosmoreHeight + 'px'
+//                     })
+//                 }
+//             }
+//         })
+//     } else {
+//         $.ajax({
+//             url: ctx + '/custom/front/listuserclassifications',//这个就是请求地址对应sAjaxSource
+//             data: {'timeCode': timeCode},
+//             type: 'get',
+//             dataType: 'json',
+//             async: true,
+//             success: function (data) {
+//                 console.log(data);
+//                 if (data.result == true) {
+//                     var obj = data.resultObj;
+//                     var content = '';
+// //    			添加历史记录
+//                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
+//                     var historyText = '';
+//                     var historyId = '';
+//                     for (var i = 0; i < historyCon.length; i++) {
+//
+//                         if (historyCon[i]['name'] == 'clusterFenlei') {
+//                             historyText = historyCon[i]['value'];
+//                             historyId = historyCon[i]['id']
+//                         }
+//                     }
+//
+//                     if (historyText == '') {
+//                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
+//                     } else {
+//                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
+//                     }
+//
+//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
+//
+//                     $('#clusterFenleiPro').append(content);
+//                     for (var count = 0; obj.length > count; count++) {
+//
+//                         if (obj[count].parentId == '0') {
+//                             var regionSecondItem = [];
+//                             var regionFirstName = obj[count].labelId;
+//                             for (var plug = 0; plug < obj.length; plug++) {
+//                                 if (regionFirstName == obj[plug].parentId) {
+//                                     regionSecondItem.push(obj[plug]);
+//                                 }
+//                             }
+//                             var textCon;
+//                             if (regionSecondItem.length == 0) {
+//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].labelId + '" href="javascript:void(0);">' + obj[count].name;
+//                             } else {
+//                                 var secondItem = '<div class="prosmore hide">';
+//                                 for (var num = 0; num < regionSecondItem.length; num++) {
+//                                     secondItem += '<span><em><a href="javascript:void(0);" data-innerid="' + regionSecondItem[num].labelId + '">' + regionSecondItem[num].name + '</a></em></span>'
+//                                 }
+//                                 secondItem += '</div>';
+//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].labelId + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
+//                             }
+//                             $('#clusterFenleiPro').append(textCon);
+//                         }
+//                     }
+// //        		$('#clusterFenleiPro').append(content);
+//                     $().screenConditionFun({
+//                         className: '.clusterFenlei',
+//                         idName: '#clusterFenleiPro',
+//                     });
+//
+//                     var prosmoreHeight = $('.clusterFenlei').find('li').length * 30 + 4;
+//                     $('.clusterFenlei').find('.prosmore').css({
+//                         'height': prosmoreHeight + 'px'
+//                     })
+//                 }
+//             }
+//         })
+//     }
 
 
 //	显示线索的标题
@@ -813,27 +867,27 @@ $(function () {
         })
     })
     var innerid = localStorage.innerId;
-    if (!innerid) {
-        //表格进行数据传值建
-        threadAjaxData1 = $().threadAjaxData({
-            'requestUrl': ctx + '/custom/front/getMyCustomThread',
-            'getPassValue': getParamsTable
-        });
-    } else {
-        ///getMyCustomSiteAndApp
-        var newsType = localStorage.customType;
-        if (newsType == "weChat") {
-            ajaxUrl = ctx + '/custom/front/getMyCustomWechat';
-        } else if (newsType == "weiBo") {
-            ajaxUrl = ctx + '/custom/front/getMyCustomMicroblog';
-        } else {
-            ajaxUrl = ctx + '/custom/front/getMyCustomSiteAndApp';
-        }
-        threadAjaxData1 = $().threadAjaxData({
-            'requestUrl': ajaxUrl,
-            'getPassValue': getParamsTableForPage
-        });
-    }
+    // if (!innerid) {
+    //     //表格进行数据传值建
+    //     threadAjaxData1 = $().threadAjaxData({
+    //         'requestUrl': ctx + '/custom/front/getMyCustomThread',
+    //         'getPassValue': getParamsTable
+    //     });
+    // } else {
+    //     ///getMyCustomSiteAndApp
+    //     var newsType = localStorage.customType;
+    //     if (newsType == "weChat") {
+    //         ajaxUrl = ctx + '/custom/front/getMyCustomWechat';
+    //     } else if (newsType == "weiBo") {
+    //         ajaxUrl = ctx + '/custom/front/getMyCustomMicroblog';
+    //     } else {
+    //         ajaxUrl = ctx + '/custom/front/getMyCustomSiteAndApp';
+    //     }
+    //     threadAjaxData1 = $().threadAjaxData({
+    //         'requestUrl': ajaxUrl,
+    //         'getPassValue': getParamsTableForPage
+    //     });
+    // }
 
 
 //	获得ajax返回的获取
@@ -1865,4 +1919,29 @@ function getParamsTableForWechatOrWeibo(aoData) {
     )
 
     return aoData;
+}
+
+function loadTable() {
+    var innerid = localStorage.innerId;
+    if (!innerid) {
+        //表格进行数据传值建
+        threadAjaxData1 = $().threadAjaxData({
+            'requestUrl': ctx + '/custom/front/getMyCustomThread',
+            'getPassValue': getParamsTable
+        });
+    } else {
+        ///getMyCustomSiteAndApp
+        var newsType = localStorage.customType;
+        if (newsType == "weChat") {
+            ajaxUrl = ctx + '/custom/front/getMyCustomWechat';
+        } else if (newsType == "weiBo") {
+            ajaxUrl = ctx + '/custom/front/getMyCustomMicroblog';
+        } else {
+            ajaxUrl = ctx + '/custom/front/getMyCustomSiteAndApp';
+        }
+        threadAjaxData1 = $().threadAjaxData({
+            'requestUrl': ajaxUrl,
+            'getPassValue': getParamsTableForPage
+        });
+    }
 }

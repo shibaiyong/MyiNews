@@ -11,6 +11,12 @@
     <script type="text/javascript" src="../../../static/common/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/common/plugins/jedate/jedate_6.0.js}" ></script>
     <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/Cander/calendar.min.css"  th:href="@{/common/plugins/dataTables/jquery.dataTables.css}"/>
     <script type="text/javascript" src="../../../static/common/plugins/dataTables/jquery.dataTables.js" th:src="@{/common/plugins/dataTables/jquery.dataTables.js}" ></script>
+    <!-- bootstrap-multiselect JS -->
+    <script type="text/javascript" src="../../../static/backEnd/plugins/bootstrap-multiselect/js/multiselect.min.js" th:src="@{/backEnd/plugins/bootstrap-multiselect/js/multiselect.min.js}" ></script>
+    <!-- iCheck JS -->
+    <script type="text/javascript" src="../../../static/backEnd/js/static/user/iCheck/icheck.min.js" th:src="@{/backEnd/js/static/user/iCheck/icheck.min.js}" ></script>
+    <!-- iCheck CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../static/backEnd/js/static/user/iCheck/flat/blue.css" th:href="@{/backEnd/js/static/user/iCheck/flat/blue.css}" />
 </head>
 <body>
 <div class="drop_wrapper">
@@ -50,24 +56,43 @@
         <button type="submit" class="btn btn-default searchbtn">iSearch</button>
     </form>
 </div>
-<table id="topNewTable" class="display">
-    <thead>
-    <tr>
-        <th>排位</th>
-        <th>发布时间</th>
-        <th>文章标题</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="box-tools" style="display: inline-block">
+    <button type="button" class="btn btn-primary" id="delAll">批量删除</button>
+</div>
+<div class="box-body no-padding">
+    <div class="table-responsive mailbox-messages">
+        <table id="topNewTable" class="display table table-hover tenantTable">
+            <thead>
+            <tr>
+                <th style="width: 5%; text-align: center">
+                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
+                </th>
+                <th>排位</th>
+                <th>发布时间</th>
+                <th>文章标题</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    </tbody>
-</table>
+            </tbody>
+    </table>
+    </div>
+</div>
 </body>
 </html>
 
 <script>
     $(document).ready( function () {
+        //定义checkbox的样式
+        $('.mailbox-messages input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+
+        $('.mailbox-messages input[type="checkbox"]').click(function() {
+            $(this).attr("checked", true);
+        });
         //修改默认配置。
         $.extend($.fn.dataTable.defaults, {
             searching: false,
@@ -77,17 +102,18 @@
             serverSide: true,//标示从服务器获取数据
             sAjaxSource : ctx+'/cluster/back/newsDiscover',//服务器请求
             fnServerData : retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
-            'iDisplayLength' : 20,
+            iDisplayLength : 20,
             fnServerParams:function(aoData){
                 aoData = getSearchData(aoData);
             },
             rowCallback: function (row, data, index) {
-
                 var localDate = new Date(data.createDatetime).formatDate("yyyy-MM-dd hh:mm:ss");
-                $('td:eq(1)', row).html( '<input type="text" value="'+localDate+'" class="form-control jedate" data-clusterCode="'+data.clusterCode+'" data-title="'+data.title+'"/>');
-                $('td:eq(2)', row).html( '<input type="text" value="'+data.title+'" class="form-control title" data-clusterCode="'+data.clusterCode+'" data-date="'+localDate+'"/>' );
+                $('td:eq(0)', row).html( '<input type="checkbox" value="'+ data.clusterCode +'" class="delete-list"/>');
+                $('td:eq(2)', row).html( '<input type="text" value="'+localDate+'" class="form-control jedate" data-clusterCode="'+data.clusterCode+'" data-title="'+data.title+'"/>');
+                $('td:eq(3)', row).html( '<input type="text" value="'+data.title+'" class="form-control title" data-clusterCode="'+data.clusterCode+'" data-date="'+localDate+'"/>' );
             },
             columns: [
+                {data: 'allNewsNum', bSortable: false},
                 {data: "weight", bSortable: false},
                 {data: "releaseDatetime"},
                 {data: "title"},
@@ -240,6 +266,7 @@
             }
         });
 
+
         //获取 地区，分类，和全部的下拉列表
 
         reqRegions('.drop_item_regions');
@@ -370,5 +397,59 @@
             console.log(aoData)
             return aoData;
         }
-    })
+
+        //批量删除
+        $("#topNewTable .checkbox-toggle").click(function(){
+            var clicks = $(this).data('clicks');
+            if (clicks) {
+                //Uncheck all checkboxes
+                $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+                $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+            } else {
+                //Check all checkboxes
+                $(".mailbox-messages input[type='checkbox']").iCheck("check");
+                $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+            }
+            $(this).data("clicks", !clicks);
+        });
+        $("#delAll").click(function(){
+            var len = $("input[type=checkbox]:checked").length;
+            if (len == 0){
+                alert('请选择勾选要删除的热点');
+            }else {
+                if(confirm("确定要删除已勾选的热点？")){
+                    var hotFindList = [];
+                    $('.mailbox-messages input[type="checkbox"]').each(function(){
+                        if($(this).is(":checked")){
+                            hotFindList.push($(this).attr("value"));
+                        }
+                    });
+                    console.log(hotFindList);
+                    $.ajax({
+                        url : ctx+"/cluster/back/deleteClusters",
+                        data :JSON.stringify(hotFindList),
+                        type : 'post',
+                        contentType:"application/json; charset=utf-8",
+                        dataType:"json",
+                        success : function(data) {
+                            if(data.result){
+                                alert(data.resultObj);
+                            }else{
+                                alert(data.errorMsg);
+                            }
+                            dataTable.ajax.reload();
+                        },
+                        error:function(msg){
+                            //alert(msg.resultObj);
+                        }
+                    });
+                }
+            }
+
+        })
+
+
+
+    });
+
 </script>

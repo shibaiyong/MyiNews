@@ -214,7 +214,7 @@
 }
 /*通过样式处理选中状态*/
 .accordion li .tabSelectted{
-    background-color: #dd2f39;
+    background-color: #F44336;
     color: #ffffff;
 }
 .accordion li .tabSelectted i{

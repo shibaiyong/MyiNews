@@ -24,7 +24,7 @@
             oLanguage: {
                 "sZeroRecords" : "没有可以显示的数据",
                 "sProcessing" : "正在获取数据，请稍后...",
-                "sInfoEmpty": "没有数据",
+
                 "sInfo" : totalCount
             },
             scrollX: scrollCon,
@@ -43,6 +43,12 @@
                 //摘要,长度超过150截取
                 var summary = '';
                 var isearchVal = $('.customAddInput').val();
+
+                var checkCon = '<span data-webpageCode="'+data.webpageCode+'" class="check-box check-child"><i class="fa fa-check"></i></span>';
+                $('td:eq(0)', row).html(checkCon);
+
+
+
                 if (null != data.cusSummary) {
                     if (data.cusSummary.length > 150) {
                         summary = data.cusSummary.substr(0, 150) + '...';
@@ -113,16 +119,17 @@
                     var titleCon = '<a href="' + linkUrl + '" target="_blank" class="beyondEllipsis"  data-id="' + data.webpageCode + '">' + data.title + '</a>'
 
                 }
+
                 if (null != data.isSticked && 1 == data.isSticked) {
-                    $('td:eq(1)', row).html(titleCon).addClass('titleRightClick').addClass('stickTopContent');
+                    $('td:eq(2)', row).html(titleCon).addClass('titleRightClick').addClass('stickTopContent');
                 }
-                $('td:eq(1)', row).html(titleCon).addClass('titleRightClick');
+                $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
 
 //		    	   相似相关、浏览量
                 var sameNum = '<span class="sameNum' + index + '"></span>';
                 var relevantNum = '<span class="relevantNum' + index + '"></span>';
 
-                $('td:eq(4)', row).html(relevantNum + '/' + sameNum);
+                $('td:eq(5)', row).html(relevantNum + '/' + sameNum);
 
 
                 //负面指数样式：>40% 绿色   <40%红色
@@ -135,12 +142,12 @@
                 var operationCon = '<span style="margin-right: 10px;"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span> <span><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></span>';
                 /*var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span>';*/
                 //$('td:eq(9)', row).html(operationCon).addClass('inewsOperation').attr('data-id',data.webpageCode);
-                $('td:eq(6)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
+                $('td:eq(7)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
             },
 
 //		       服务器传过来的值
             columns: [//显示的列
-
+                {data: 'webpageCode', "bSortable": false,'width': '44px'},
                 {
                     data: 'releaseDatetime', "bSortable": false,
                     render: function (data, type, row) {

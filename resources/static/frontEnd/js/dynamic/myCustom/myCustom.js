@@ -176,9 +176,8 @@ function getCustomData(rootUrl, requestUrl, type, callback) {
                 $('.link').eq(0).find("i")[0].style.visibility = "visible"
                 $('#myaccordion>li>.submenu>li').click(function (event) {
                     $('.mdynews').css('border', 'none');
-                    this.style.borderLeft = '5px red solid'
+                    this.style.borderLeft = '5px #F44336 solid'
                     var target = event.target || event.srcElement;
-
                     var ifAll = target.parentElement.parentElement.innerHTML.indexOf("<span>新闻线索</span>") != -1
                     var ifWeb = target.parentElement.parentElement.innerHTML.indexOf("<span>网站</span>") != -1
                     var ifApp = target.parentElement.parentElement.innerHTML.indexOf("<span>APP</span>") != -1
@@ -202,7 +201,7 @@ function getCustomData(rootUrl, requestUrl, type, callback) {
                     $('#myCustomContent').loadPage(ctx + '/custom/front/gotoMyCustomThread');
                 })
                 $('#myaccordion>li:first>.link>i').click();
-                $('.mdynews:first').css('borderLeft', '5px red solid');
+                $('.mdynews:first').css('borderLeft', '5px #f44336 solid');
                 // $('.mdynews:first').css("color", '#ffffff');
                 localStorage.customgroup = $('.submenu:first li:first').attr('data-customgroup');
                 $('#myCustomContent').loadPage(ctx + '/custom/front/gotoMyCustomThread');//默认加载。
@@ -282,7 +281,7 @@ function getWechatList() {
                         $('.submenu').eq(3)[0].innerHTML = content;
                         $('.submenu').eq(3).find('li').click(function () {
                             $('.mdynews').css('border', 'none');
-                            this.style.borderLeft = '5px red solid'
+                            this.style.borderLeft = '5px #f44336 solid'
                             var customType = "weChat";
                             localStorage.customType = customType;
                             localStorage.customgroup = '';
@@ -326,7 +325,7 @@ function getWeiboList() {
                     $('.submenu').eq(4)[0].innerHTML = content;
                     $('.submenu').eq(4).find('li').click(function () {
                         $('.mdynews').css('border', 'none');
-                        this.style.borderLeft = '5px red solid'
+                        this.style.borderLeft = '5px #f44336 solid'
                         localStorage.customgroup = '';
                         var customType = "weiBo"
                         localStorage.customType = customType;
@@ -369,7 +368,7 @@ function getWebSourcesData(getAjaxUrl) {
                 $('.submenu').eq(1).html(contentweb);
                 $('.submenu').eq(1).find('li').click(function () {
                     $('.mdynews').css('border', 'none');
-                    this.style.borderLeft = '5px red solid'
+                    this.style.borderLeft = '5px #f44336 solid'
                     localStorage.customgroup = '';
                     var innerId = $(this).attr('data-innerid');
                     localStorage.innerId = innerId;
@@ -412,7 +411,7 @@ function getAppSourcesData(getAjaxUrl) {
 
                 $('.submenu').eq(2).find('li').click(function () {
                     $('.mdynews').css('border', 'none');
-                    this.style.borderLeft = '5px red solid'
+                    this.style.borderLeft = '5px #f44336 solid'
                     localStorage.customgroup = '';
                     var innerId = $(this).attr('data-innerid');
                     var customType = "app"

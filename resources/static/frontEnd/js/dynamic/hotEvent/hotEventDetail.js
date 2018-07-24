@@ -394,7 +394,6 @@ function firstnewsProcess(res,ele){
     var summary=data.cusSummary;
     var time = data.releaseDatetime;
     var keywords = data.cusKeyWords;
-    console.log(keywords);
     var keywordsDom='';
     var source = data.sourceCrawlDetail;
     if(!summary||summary=='null'){

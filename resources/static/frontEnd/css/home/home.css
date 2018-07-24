@@ -38,7 +38,7 @@
 }
 
 .popover{
-	min-width: 300px;
+	/*min-width: 300px;*/
 }
 .rank .lTitle a{
 	display: inline-block;
@@ -588,7 +588,7 @@ table th, table td{
 .otherWebCon .list-group-item{
 	padding: 4px 15px;
 }
-.pros{
+/* .pros{
 	width:90px !important;
 }
 .prosul{
@@ -600,7 +600,7 @@ table th, table td{
 .pros h2{
 	width:90px !important;
 	padding-left:8px !important;
-}
+} */
 
 .successlunbo .change li img.defaultImg{
 	width:100px;
@@ -678,4 +678,8 @@ table th, table td{
 	position:fixed;
 	top:0;left:0;
 	z-index:900;
+}
+.clusterScreen {
+	position: relative;
+	z-index: 1001;
 }

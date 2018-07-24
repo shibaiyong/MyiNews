@@ -1,27 +1,26 @@
-$(function(){
-//	$('.table-operation-status a').each(function(index){
-//		$(this).click(function(){
-//			if($(this).hasClass('active')){
-//				$(this).removeClass('active');
-//				if(index == 2){
-//					$(this).find('i').attr('class','fa fa-heart-o');
-//				};
-//				if(index == 3){
-//					$(this).find('i').attr('class','fa fa-file-text-o');
-//				}
-//			}else{
-//				$(this).addClass('active');
-//				if(index == 2){
-//					$(this).find('i').attr('class','fa fa-heart');
-//				};
-//				if(index == 3){
-//					$(this).find('i').attr('class','fa fa-file-text');
-//				}
-//			}
-//			
-//		})
-//	});
-});
+// $(function(){
+// 	$('.table-operation-status a').each(function(index){
+// 		$(this).click(function(){
+// 			if($(this).hasClass('active')){
+// 				$(this).removeClass('active');
+// 				if(index == 2){
+// 					$(this).find('i').attr('class','fa fa-heart-o');
+// 				};
+// 				if(index == 3){
+// 					$(this).find('i').attr('class','fa fa-file-text-o');
+// 				}
+// 			}else{
+// 				$(this).addClass('active');
+// 				if(index == 2){
+// 					$(this).find('i').attr('class','fa fa-heart');
+// 				};
+// 				if(index == 3){
+// 					$(this).find('i').attr('class','fa fa-file-text');
+// 				}
+// 			}			
+// 		})
+// 	});
+// });
 
 
 (function($){
@@ -154,5 +153,51 @@ $(function(){
 		}
 		
 	}
-	
+	//默认的地区
+	$.fn.tenantConfigArea = function (options) {
+		var defaults = {
+			getAjaxUrl: '', //请求路径
+			dataParam: {}, //传递参数
+			isShow: false, //是否显示本地区，本省及全国按钮
+			callback: ''
+		};
+		var options = $.extend(defaults, options);
+		var $this = $(this);
+
+		$.ajax({
+			url: options.getAjaxUrl, //这个就是请求地址对应sAjaxSource
+			data: options.dataParam,
+			type: 'get',
+			dataType: 'json',
+			async: true,
+			success: function (data) {
+				if (data.result) {
+					var obj = data.resultObj || [];
+					if( obj.length == 0){
+						$('.country').text('全国');
+						$('.country').attr('data-innerid', '');
+						$('.country').addClass('areaActive');
+					} else if (obj.length > 0) {
+						for(var k=0; k<obj.length; k++){
+							if (obj[k].parentId == 0) {
+								$('.provinceArea').text(obj[k].name);
+								$('.provinceArea').attr('data-innerid', obj[k].innerid);
+								$('.provinceArea').addClass('areaActive');
+							}else{
+								$('.cityArea').text(obj[k].name);
+								$('.cityArea').attr('data-innerid', obj[k].innerid);
+								$('.cityArea').addClass('areaActive');
+							}
+						}
+						$('.country').text('全国');
+						$('.country').attr('data-innerid', '');
+						$('.country').addClass('areaActive');
+					}					
+					if (typeof (options.callback) == 'function') {
+						options.callback(data);
+					}
+				}
+			}
+		});
+	};
 })(jQuery);

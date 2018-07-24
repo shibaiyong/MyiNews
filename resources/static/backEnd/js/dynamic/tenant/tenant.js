@@ -55,7 +55,7 @@ $(function(){
                                 var Data = data.resultObj;
                                 if (Data == ''){
                                     if (sc == '全' || sc == '全部'){
-                                        content += '<option value="999999999">全部</option>';
+                                        content += '<option value="999999">全部</option>';
                                     }else{
                                         content += '<option disabled="disabled">暂无相关地区 请重新输入</option>';
                                     }
@@ -160,7 +160,6 @@ function addTenant(){
     var tenantSecret = $("#tenantSecret").val().trim();
     var tenantArea = $('#tenantArea').val().trim();
     var zybrbh = $("#zybrbh").val().trim();
-    modelClose();
     if(null == tenantId || '' == tenantId || undefined == tenantId){
         if(tenantName==""||tenantName==undefined){
             alert("租户名称不能为空！");
@@ -173,7 +172,8 @@ function addTenant(){
         }else if(zybrbh==""||zybrbh==undefined){
             alert("请从下拉列表中选择所属地区！");
         }else{
-            var data = {"name": tenantName, "company": companyName, "tenantMark": tenantMark,"region":tenantArea};
+            modelClose();
+            var data = {"name": tenantName, "company": companyName, "tenantMark": tenantMark,"region":tenantArea,"regionId":zybrbh};
             $.ajax({
                 url: ctx + "/tenant/back/create",
                 data: data,
@@ -203,13 +203,15 @@ function addTenant(){
         }else if(zybrbh==""||zybrbh==undefined){
             alert("请从下拉列表中选择所属地区！");
         }else {
+            modelClose();
             var data = {
                 "tenantId": tenantId,
                 "name": tenantName,
                 "company": companyName,
                 "tenantMark": tenantMark,
                 "tenantSecret": tenantSecret,
-                "region":tenantArea
+                "region":tenantArea,
+                "regionId":zybrbh
             };
             $.ajax({
                 url: ctx + "/tenant/back/update",
@@ -261,37 +263,39 @@ function deleteTenant(id){
 }
 //批量删除
 function batchDelete(){
-   var checkNum=$("div .checked").length;
-   // if(checkNum==0){
-   //     alert("请勾选要删除的租户！");
-   //     return;
-   // }
-   if(confirm("确定要删除已勾选的租户？")){
-           var checkedList = [];
-           $('.mailbox-messages input[type="checkbox"]').each(function(){
-               if($(this).is(":checked")){
-                   checkedList.push($(this).attr("value"));
-               }
-           });
-       console.log(checkedList);
-       $.ajax({
-           url : ctx+"/tenant/back/batchDelete",
-           data :{"checkedList":checkedList},
-           type : 'post',
-           dataType : 'json',
-           success : function(data) {
-               if(data.result){
-                   alert(data.resultObj);
-               }else{
-                   alert(data.errorMsg);
-               }
-               table.ajax.reload();
-           },
-           error:function(msg){
-               //alert(msg.resultObj);
-           }
-       });
-  }
+    var len = $("input[type=checkbox]:checked").length;
+    if (len == 0){
+        alert('请勾选要删除的用户')
+    }else {
+        if(confirm("确定要删除已勾选的租户？")){
+            var checkedList = [];
+            $('.mailbox-messages input[type="checkbox"]').each(function(){
+                if($(this).is(":checked")){
+                    checkedList.push($(this).attr("value"));
+                }
+            });
+            console.log(checkedList);
+            $.ajax({
+                url : ctx+"/tenant/back/batchDelete",
+                data :JSON.stringify(checkedList),
+                type : 'post',
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success : function(data) {
+                    if(data.result){
+                        alert(data.resultObj);
+                    }else{
+                        alert(data.errorMsg);
+                    }
+                    table.ajax.reload();
+                },
+                error:function(msg){
+                    //alert(msg.resultObj);
+                }
+            });
+        }
+    }
+
 }
 
 //修改租户信息
@@ -316,6 +320,8 @@ function toUpdate(id){
                 $("#companyName").val(data.company);
                 $('#tenantMark').val(data.tenantMark);
                 $('#tenantSecret').val(data.tenantSecret);
+                $('#tenantArea').val(data.region);
+                $("#zybrbh").val(data.regionId);
                 // listOrgs();
                 $("#tenantModal").find("div .form-group").eq(3).removeClass("hide");
                 $("#tenantModal").modal('show');

@@ -187,7 +187,23 @@ em,i,s{font-style:normal;}
 	color: #fff;
 	cursor: pointer;
 }
-.subpage .srceenMapShow {
+.subpage .srceenMapShow,
+.subpage .classificationShow {
 	padding-right: 18px;
 	box-sizing: border-box;
+}
+/* 二级分类选中状态 */
+.prosul li .prosmore .secondSelected {
+	background-color: #d03322;
+	color: #fff;
+}
+.prosul li a .fa-caret-right {
+	margin-left: 8px;
+}
+/* 复写弹窗样式 */
+.screenConditionBox .pros>.popover {
+	/* max-width: 200px; */
+	min-width: 120px;
+	border-radius: 6px;
+	/* background-color: #fff; */
 }

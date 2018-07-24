@@ -51,6 +51,7 @@
 
 	<!-- Self JS -->
 	<script type="text/javascript" src="../../../static/frontEnd/js/static/home/home.js"  th:src="@{/frontEnd/js/dynamic/home/showScreen.js}"></script>
+	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/screenClassification.js" th:src="@{/frontEnd/js/dynamic/common/screenClassification.js}"></script>
 	<script type="text/javascript" src="../../../static/frontEnd/js/static/home/home.js"  th:src="@{/frontEnd/js/dynamic/home/home.js}"></script>
 
 	<style>
@@ -616,9 +617,52 @@
 
 												<div class="latestNewsCont">
 													<div class='latestNewsContSort'>
-														<div class="screenConditionBox">
+														<div class="screenConditionBox threadSrceenBox">
+															<div class="pros subpage threadSrceenMap ">
+																<h2 class="srceenMapShow" data-innerId='' data-inter='false'>地区
+																	<i class="fa fa-caret-down"></i>
+																</h2>
+																<ul class="prosul clearfix" id="threadSrceenMapPro" th:remove="body">
+																	<li class="">
+																		<a class="ti" href="#">北京
+																			<i class='fa fa-caret-right'></i>
+																		</a>
+																		<div class="prosmore hide">
+																			<span>
+																				<em>
+																					<a href="#">东城</a>
+																				</em>
+																			</span>
+																			<span>
+																				<em>
+																					<a href="#">西城</a>
+																				</em>
+																			</span>
+																			<span>
+																				<em>
+																					<a href="#">朝阳</a>
+																				</em>
+																			</span>
+																			<span>
+																				<em>
+																					<a href="#">丰台</a>
+																				</em>
+																			</span>
+																			
+																		</div>
+																	</li>
+																	<li class="">
+																		<a class="ti" href="#">天津</a>
+																	</li>
+																	<li class="">
+																		<a class="ti" href="#">上海</a>
+																	</li>
+																</ul>
+															</div>
 															<div class="pros subpage threadSrceenClassification ">
-																<h2 data-innerId='' data-inter='false'>分类<i class="fa fa-caret-down"></i></h2>
+																<h2 class="classificationShow" data-innerId='' data-inter='false'>分类
+																	<i class="fa fa-caret-down"></i>
+																</h2>
 																<ul class="prosul clearfix" id="threadSrceenClassificationPro" th:remove="body">
 																	<li class="">
 																		<a class="ti" href="#">经济<i class='fa fa-caret-right'></i></a>
@@ -638,6 +682,7 @@
 																	</li>
 																</ul>
 															</div>
+
 														</div>
 													</div>
 													<div class="rank newest">

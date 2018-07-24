@@ -35,7 +35,7 @@ $(function(){
 	})
 	
 //	地区
-	$().getData({
+	$().getSignleData({
 		getAjaxUserConfigUrl: ctx+'/config/front/listUserConfigRegion',  //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径(查全部省级数据)
 		boxClassName:'.srceenMap',
@@ -45,7 +45,7 @@ $(function(){
 	})
 	
 //	分类
-	$().getData({
+	$().getSignleData({
 		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
 		boxClassName:'.srceenClassification',
@@ -54,7 +54,7 @@ $(function(){
 		multiSelect: true,
 	})
 //	热点发现中-微博微信
-	$().getData({
+	$().getSignleData({
 		getAjaxUrl:ctx+'/config/front/listUserConfigCarrier',  //请求路径
 		boxClassName:'.srceenMediaAlone',
 		ulClassName:'#srceenMediaAlonePro',
@@ -154,25 +154,31 @@ $(function(){
 		}
 	})
 	
-//	点击地区刷新列表（多选）
-	$('#srceenMapPro').click(function (event) {
-		var event = event || window.event;
-		var className = event.target.className;
-		if (className == 'multiSure') {
-			tableCluster.ajax.reload();
-			return false;
-		}		
-	})
+// //	点击地区刷新列表（多选）
+// 	$('#srceenMapPro').click(function (event) {
+// 		var event = event || window.event;
+// 		var className = event.target.className;
+// 		if (className == 'multiSure') {
+// 			tableCluster.ajax.reload();
+// 			return false;
+// 		}		
+// 	})
 
-//	点击分类刷新列表
-	$('#srceenClassificationPro').click(function (event) {
-		var event = event || window.event;
-		var className = event.target.className;
-		if (className == 'multiSure') {
-			tableCluster.ajax.reload();
-			return false;
-		}
-	})
+// //	点击分类刷新列表
+// 	$('#srceenClassificationPro').click(function (event) {
+// 		var event = event || window.event;
+// 		var className = event.target.className;
+// 		if (className == 'multiSure') {
+// 			tableCluster.ajax.reload();
+// 			return false;
+// 		}
+// 	})
+	//	地区(多选)、分类(多选)
+	window.signleReloadData = function () {
+		tableCluster.ajax.reload();
+		return false;
+	};
+
 //	点击标签刷新列表
 	$('#srceenTagPro').click(function(){
 		tableCluster.ajax.reload();
@@ -224,7 +230,7 @@ $(function(){
 		return false;
 	})
 	//	iSearch点击查询
-	$('.customAddBtn').customInputClickBtn({
+	$('.customAddBtn').customSignleInputClickBtn({
 		'refreshTable':function(){
 			tableCluster.ajax.reload();
 		}

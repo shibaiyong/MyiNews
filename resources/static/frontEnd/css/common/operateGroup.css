@@ -6,10 +6,10 @@
 	display:inline-block;
 	padding:4px 8px;
 	border:1px solid #ccc;
-	border-right:0px;
+	/* border-right:0px; */
 }
 .table-operation .table-operation-status a:last-child{
-	border-right:1px solid #ccc;
+	/* border-right:1px solid #ccc; */
 }
 
 .table-operation-status a.active{
@@ -17,7 +17,7 @@
 }
 
 .table-operation-status{
-	border-right:1px solid #ccc;
+	/* border-right:1px solid #ccc; */
 }
 
 .heatSort{
@@ -30,4 +30,22 @@
 .heatSort.active{
 	background:#F44336;
 	color:#fff;
+}
+.tenantArea{
+	display: inline-block;
+	padding: 4px 8px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+.table-operation .table-operation-status .citySelected, 
+.table-operation .table-operation-status .provinceSelected,
+.table-operation .table-operation-status .countrySelected
+{
+	color:#F44336;
+}
+.unareausable{
+	background-color: rgb(153, 153, 153);
+}
+.unclick {
+	pointer-events: none;
 }

@@ -36,13 +36,21 @@ $(function(){
 		if($('body').width()<768){
 			scrollCon = true;
 		}
-		
+        var domString = "<'row'<'col-sm-6'l><'col-sm-6'f>>" +"<'row'<'col-sm-12'tr>>" +"<'row'<'col-sm-4 col-xs-4'i><'col-sm-8 col-xs-8'p>>";
+        var totalCount = "当前第 _START_ - _END_ 条　共计 _TOTAL_ 条";
 		var tableCluster = $('.searchesTable').DataTable({
+            dom:domString,
+            oLanguage: {
+                "sZeroRecords" : "没有可以显示的数据",
+                "sProcessing" : "正在获取数据，请稍后...",
+
+                "sInfo" : totalCount
+            },
 			   scrollX: scrollCon,
 		       serverSide: true,//标示从服务器获取数据
 		       sAjaxSource :options.requestUrl,//服务器请求
 		       fnServerData : retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
-		       fnServerParams : function ( aoData ) {
+			    fnServerParams : function ( aoData ) {
 //		       	给服务器传的值
 		       		aoData = options.getPassValue(aoData);
 		       },

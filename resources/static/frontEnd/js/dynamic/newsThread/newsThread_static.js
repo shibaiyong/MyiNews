@@ -165,58 +165,196 @@ $(function(){
 //	时间段
 	selectTime();
 	
-//	地区
-	$().getData({
-		getAjaxUrl:ctx+'/config/front/listUserConfigRegion',  //请求路径
-		boxClassName:'.srceenMap',
-		ulClassName:'#srceenMapPro',
-		level:3,
-	})
+	//	地区
+	var isUserable = sessionStorage.getItem('srceenMapUserable');
+	if (isUserable == 'usable') {
+		getArea();
+	} else {
+		$('.srceenMap').attr('disabled', true);
+		$('.srceenMap').addClass('unclick').addClass('unareausable');
+	}
 	
 //	分类
 	$().getData({
-		getAjaxUrl:ctx+'/config/front/listUserConfigClassification',  //请求路径
-		boxClassName:'.srceenClassification',
-		ulClassName:'#srceenClassificationPro',
+		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
+		boxClassName: '.srceenClassification',
+		ulClassName: '#srceenClassificationPro',
+		level: 2,
+		multiSelect: true,
 	})
-	
+	//	本地，本省，全国
+	$().tenantConfigArea({
+		getAjaxUrl: ctx + '/tenant/back/listTenantRegion', //请求路径
+		isShow: true,
+		callback: areaStatus,
+	})
 //	时间段
 	$().getData({
 		boxClassName:'.srceenTimeQuantum',
 		ulClassName:'#srceenTimeQuantumPro',
 	})
 
-//	 相似合并、展示条数的样式
-	$('.changeState').click(function(){
-		$('.dataShowTable').attr('data-once','true');
-		if($(this).hasClass('activeBg')){
+	// 本地区
+	$('.cityArea').click(function () {
+		if ($(this).hasClass('citySelected')) {
+			$(this).removeClass('citySelected');
+			sessionStorage.setItem('areaThreadSelected', '');
+			// 地区选项可用标识
+			sessionStorage.setItem('srceenMapUserable', 'usable');
+			$('.srceenMap').removeAttr('disabled');
+			$('.srceenMap').removeClass('unclick').removeClass('unareausable');
+			$('.srceenMap').find('ul').empty();
+			getArea();
+		} else {
+			$('.tenantArea').removeClass('citySelected').removeClass('provinceSelected').removeClass('countrySelected');
+			$(this).addClass('citySelected');
+			sessionStorage.setItem('areaThreadSelected', 'citySelected');
+			// 地区选项不可用标识
+			sessionStorage.setItem('srceenMapUserable', 'unusable');
+			$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
+			$('.srceenMap').find('h2').find('i').addClass('hide');
+			$('.srceenMap').find('h2').text('地区');
+			$('.srceenMap').attr('disabled', true);
+			$('.srceenMap').addClass('unclick').addClass('unareausable');
+		}
+		if ($('.tableListCon').val() == '0') {
+			threadAjaxData1.ajax.reload();
+		} else if ($('.tableListCon').val() == '1') {
+			thumbnailTable.ajax.reload();
+		} else if ($('.tableListCon').val() == '2') {
+			sudokuTable.ajax.reload();
+		}
+		return false;
+	});
+	// 本省
+	$('.provinceArea').click(function () {
+		if ($(this).hasClass('provinceSelected')) {
+			$(this).removeClass('provinceSelected');
+			sessionStorage.setItem('areaThreadSelected', '');
+			// 地区选项可用标识
+			sessionStorage.setItem('srceenMapUserable', 'usable');
+			$('.srceenMap').removeAttr('disabled');
+			$('.srceenMap').removeClass('unclick').removeClass('unareausable');
+			$('.srceenMap').find('ul').empty();
+			getArea();
+		} else {
+			$('.tenantArea').removeClass('citySelected').removeClass('provinceSelected').removeClass('countrySelected');
+			$(this).addClass('provinceSelected');
+			sessionStorage.setItem('areaThreadSelected', 'provinceSelected');
+			// 地区选项不可用标识
+			sessionStorage.setItem('srceenMapUserable', 'unusable');
+			$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
+			$('.srceenMap').find('h2').find('i').addClass('hide');
+			$('.srceenMap').find('h2').text('地区');
+			$('.srceenMap').attr('disabled', true);
+			$('.srceenMap').addClass('unclick').addClass('unareausable');
+		}
+		if ($('.tableListCon').val() == '0') {
+			threadAjaxData1.ajax.reload();
+		} else if ($('.tableListCon').val() == '1') {
+			thumbnailTable.ajax.reload();
+		} else if ($('.tableListCon').val() == '2') {
+			sudokuTable.ajax.reload();
+		}
+		return false;
+	});
+	// 全国
+	$('.country').click(function () {
+		if ($(this).hasClass('countrySelected')) {
+			$(this).removeClass('countrySelected');
+			sessionStorage.setItem('areaThreadSelected', '');
+			// 地区选项可用标识
+			sessionStorage.setItem('srceenMapUserable', 'usable');
+			$('.srceenMap').removeAttr('disabled');
+			$('.srceenMap').removeClass('unclick').removeClass('unareausable');
+			$('.srceenMap').find('ul').empty();
+			getArea();
+		} else {
+			$('.tenantArea').removeClass('citySelected').removeClass('provinceSelected').removeClass('countrySelected');
+			$(this).addClass('countrySelected');
+			sessionStorage.setItem('areaThreadSelected', 'countrySelected');
+			// 地区选项不可用标识
+			sessionStorage.setItem('srceenMapUserable', 'unusable');
+			$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
+			$('.srceenMap').find('h2').find('i').addClass('hide');
+			$('.srceenMap').find('h2').text('地区');
+			$('.srceenMap').attr('disabled', true);
+			$('.srceenMap').addClass('unclick').addClass('unareausable');
+		}
+		if ($('.tableListCon').val() == '0') {
+			threadAjaxData1.ajax.reload();
+		} else if ($('.tableListCon').val() == '1') {
+			thumbnailTable.ajax.reload();
+		} else if ($('.tableListCon').val() == '2') {
+			sudokuTable.ajax.reload();
+		}
+		return false;
+	});
+	// 处理本市，全省，全国的选中状态
+	function areaStatus() {
+		// 处理本地，本省和全国
+		var areaThreadSelected = sessionStorage.getItem('areaThreadSelected');
+		if ($('.cityArea').hasClass('areaActive')) {
+			$('.cityArea').removeClass('hide');
+			if (areaThreadSelected != '' && areaThreadSelected != 'undefined' && areaThreadSelected == 'citySelected') {
+				$('.cityArea').addClass('citySelected');
+			}
+		}
+		if ($('.provinceArea').hasClass('areaActive')) {
+			$('.provinceArea').removeClass('hide');
+			if (areaThreadSelected != '' && areaThreadSelected != 'undefined' && areaThreadSelected == 'provinceSelected') {
+				$('.provinceArea').addClass('provinceSelected');
+			}
+		}
+		if ($('.country').hasClass('areaActive')) {
+			$('.country').removeClass('hide');
+			if (areaThreadSelected != '' && areaThreadSelected != 'undefined' && areaThreadSelected == 'countrySelected') {
+				$('.country').addClass('countrySelected');
+			}
+		}
+	}
+	// 获取地区
+	function getArea() {
+		$().getData({
+			getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
+			getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+			boxClassName: '.srceenMap',
+			ulClassName: '#srceenMapPro',
+			level: 2,
+			multiSelect: true,
+		})
+	}
+	
+	//	 相似合并、展示条数的样式
+	$('.changeState').click(function () {
+		$('.dataShowTable').attr('data-once', 'true');
+		if ($(this).hasClass('activeBg')) {
 			$(this).removeClass('activeBg');
-		}else{
+		} else {
 			$(this).addClass('activeBg');
 		}
-		
-		if($('.tableListCon').val() == 0){
+
+		if ($('.tableListCon').val() == 0) {
 			threadAjaxData1.ajax.reload();
-		}else if($('.tableListCon').val() == 1){
+		} else if ($('.tableListCon').val() == 1) {
 			thumbnailTable.ajax.reload();
-		}else if($('.tableListCon').val() == 2){
+		} else if ($('.tableListCon').val() == 2) {
 			sudokuTable.ajax.reload();
 		}
 	})
-	$('.showBranches').each(function(){
-		$(this).click(function(){
+	$('.showBranches').each(function () {
+		$(this).click(function () {
 			$(this).addClass('active').siblings('.showBranches').removeClass('active');
 			var displayLength = $(this).find('a').text();
 			$('.tableListLength').val(displayLength);
-			if($('.tableListCon').val() == 0){
+			if ($('.tableListCon').val() == 0) {
 				threadAjaxData1.ajax.reload();
-				threadAjaxData1.page.len( displayLength ).draw();
+				threadAjaxData1.page.len(displayLength).draw();
 			}
 		})
 	});
-	
-	
-	
+
 	getWebSourcesData(ctx+'/custom/front/listUserWebsite');
 	
 //	切换列表、缩略图、九宫格的展示方式
@@ -405,15 +543,17 @@ $(function(){
 		})
 	})
 	
+	// 延时1000执行，待用户定制的参数渲染之后再执行此方法
+	setTimeout(function () {
+		//表格进行数据传值
+		threadAjaxData1 = $().threadAjaxData({
+			'requestUrl': ctx + '/latest/front/pageLatestNews',
+			'getPassValue': getParamsTable
+		});
+	}, 2000);
 	
-	/**
-	 * 对列表进行操作
-	 */
-	//表格进行数据传值
-	threadAjaxData1 = $().threadAjaxData({
-		'requestUrl':ctx+'/latest/front/pageLatestNews',
-		'getPassValue':getParamsTable
-	});
+
+	
 //	获得ajax返回的获取
 	$('.dataConBoxTable').on('xhr.dt', function ( e, settings, json, xhr ) {
 		$('.sortCountButton a').find('span').text(json.iTotalRecords);
@@ -644,9 +784,7 @@ $(function(){
 		highlightList = json.highlightList
     });
 	
-	$('.dataConThumbnailTable').on('draw.dt',function() {
-		
-		
+	$('.dataConThumbnailTable').on('draw.dt',function() {				
 		/*缩略图详情省略*/
     	$('.dataConThumbnailTable').find('.mediaConSummary').each(function(){
     		if($(this).height()>=63){
@@ -833,8 +971,7 @@ $(function(){
 		
 	});
 	
-	$('.dataConSudokuTable').on('draw.dt',function() {
-		
+	$('.dataConSudokuTable').on('draw.dt',function() {	
     	$('.dataConSudokuTable').find('.sudokuSummary').each(function(){
     		if($(this).height()>=132){
     		    $(this).css({
@@ -871,32 +1008,50 @@ $(function(){
 		}
 	})
 	
-//	点击地区刷新列表
-	$('#srceenMapPro').click(function(){
-		
-		console.log($('.tableListCon').val());
-		if($('.tableListCon').val() == '0'){
+//	点击地区(多选)
+// 	$('#srceenMapPro').click(function (event) {		
+// 		var event = event || window.event;
+// 		var className = event.target.className;
+// 		if (className == 'multiSure') {
+// 			if ($('.tableListCon').val() == '0') {
+// 				threadAjaxData1.ajax.reload();
+// 			} else if ($('.tableListCon').val() == '1') {
+// 				thumbnailTable.ajax.reload();
+// 			} else if ($('.tableListCon').val() == '2') {
+// 				sudokuTable.ajax.reload();
+// 			}
+// 			return false;
+// 		}
+// 	})
+// //	点击分类(多选)
+// 	$('#srceenClassificationPro').click(function (event) {
+// 		var event = event || window.event;
+// 		var className = event.target.className;
+// 		if (className == 'multiSure') {
+// 			if ($('.tableListCon').val() == 0) {
+// 				threadAjaxData1.ajax.reload();
+// 			} else if ($('.tableListCon').val() == 1) {
+// 				thumbnailTable.ajax.reload();
+// 			} else if ($('.tableListCon').val() == 2) {
+// 				sudokuTable.ajax.reload();
+// 			}
+// 			return false;
+// 		}		
+// 	})
+
+	//	地区(多选)、分类(多选)
+	window.reloadData = function () {
+		// 操作此按钮时刷新缓存
+		sessionStorage.setItem('cache', '1');
+		if ($('.tableListCon').val() == 0) {
 			threadAjaxData1.ajax.reload();
-		}else if($('.tableListCon').val() == '1'){
+		} else if ($('.tableListCon').val() == 1) {
 			thumbnailTable.ajax.reload();
-		}else if($('.tableListCon').val() == '2'){
+		} else if ($('.tableListCon').val() == 2) {
 			sudokuTable.ajax.reload();
 		}
-		
 		return false;
-	})
-//	点击分类刷新列表
-	$('#srceenClassificationPro').click(function(){
-		
-		if($('.tableListCon').val() == 0){
-			threadAjaxData1.ajax.reload();
-		}else if($('.tableListCon').val() == 1){
-			thumbnailTable.ajax.reload();
-		}else if($('.tableListCon').val() == 2){
-			sudokuTable.ajax.reload();
-		}
-		return false;
-	})
+	};
 //	点击时间段刷新列表
 	$('#srceenTimeQuantumPro').click(function(){
 		

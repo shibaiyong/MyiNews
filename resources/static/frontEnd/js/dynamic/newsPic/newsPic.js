@@ -66,16 +66,22 @@ $(function(){
 	})
 //	地区
 	$().getData({
-		getAjaxUrl:ctx+'/config/front/listUserConfigRegion',  //请求路径
-		boxClassName:'.srceenMap',
-		ulClassName:'#srceenMapPro',
+		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
+		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+		boxClassName: '.srceenMap',
+		ulClassName: '#srceenMapPro',
+		level: 2,
+		multiSelect: true,
 	})
 	
 //	分类
 	$().getData({
-		getAjaxUrl:ctx+'/config/front/listUserConfigClassification',  //请求路径
-		boxClassName:'.srceenClassification',
-		ulClassName:'#srceenClassificationPro',
+		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
+		boxClassName: '.srceenClassification',
+		ulClassName: '#srceenClassificationPro',
+		level: 2,
+		multiSelect: true,
 	})
 	
 //	全选功能
@@ -159,176 +165,204 @@ $(function(){
 		})
 	})
 	
-	//表格进行数据传值
-	getImgAjaxData1 = $().getImgAjaxData({
-		'requestUrl':ctx+'/latest/front/pageLatestNews',
-		'getPassValue':getParamsTable
-	});
+	
 	
 //	获得ajax返回的获取
 	$('.imgConBoxTable').on('xhr.dt', function ( e, settings, json, xhr ) {
 		highlightList = json.highlightList
     });
-	
-	getImgAjaxData1.on('draw.dt',function() {
-		
-		$('.imgConBoxTable').itemCheck({   //给每一条新闻增加单击的事件
-			'itemFun':function($this,statusItem){
-				if(statusItem){
-//					console.log($this[0].attributes[0].nodeValue);
-					batchCheckWebPageCode.push($this[0].attributes[0].nodeValue);
-				}else{
-					for(var i = 0;batchCheckWebPageCode.length>i;i++){
-						var webpageCodeItem = $this[0].attributes[0].nodeValue;
-						if(webpageCodeItem == batchCheckWebPageCode[i]){
-							batchCheckWebPageCode.splice(i,1);
+	// 延时1000执行，待用户定制的参数渲染之后再执行此方法
+	setTimeout(function () {
+		afterAjaxExecute();
+	}, 2000);
+
+	function afterAjaxExecute() {
+		//表格进行数据传值
+		getImgAjaxData1 = $().getImgAjaxData({
+			'requestUrl': ctx + '/latest/front/pageLatestNews',
+			'getPassValue': getParamsTable
+		});
+		getImgAjaxData1.on('draw.dt', function () {
+
+			$('.imgConBoxTable').itemCheck({ //给每一条新闻增加单击的事件
+				'itemFun': function ($this, statusItem) {
+					if (statusItem) {
+						//					console.log($this[0].attributes[0].nodeValue);
+						batchCheckWebPageCode.push($this[0].attributes[0].nodeValue);
+					} else {
+						for (var i = 0; batchCheckWebPageCode.length > i; i++) {
+							var webpageCodeItem = $this[0].attributes[0].nodeValue;
+							if (webpageCodeItem == batchCheckWebPageCode[i]) {
+								batchCheckWebPageCode.splice(i, 1);
+							}
 						}
 					}
 				}
-			}
-		});
-		
+			});
 
-		
-//		浏览量获取
-		var textArr = getImgAjaxData1.column(0).nodes().data();
-		tableItemWebPageCodeArr = [];
-		if(textArr.length > 0){
-			for(var count = 0;textArr.length>count;count++){
-				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
-			}
-//			浏览量
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getBrowseNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.imgConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
+
+
+			//		浏览量获取
+			var textArr = getImgAjaxData1.column(0).nodes().data();
+			tableItemWebPageCodeArr = [];
+			if (textArr.length > 0) {
+				for (var count = 0; textArr.length > count; count++) {
+					tableItemWebPageCodeArr.push(textArr[count].webpageCode);
 				}
-			});
-			
-//			操作-收藏
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getUserFavorites',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.imgConBoxTable tbody').find('.collect').each(function(index){
-						if(data[index] == true){
-							$(this).addClass('active');
-							$(this).find('i').attr('class','fa fa-heart');
-						}else{
-							
+				//			浏览量
+				$().adraticAjaxData({
+					'dataUrl': ctx + '/latest/front/getBrowseNum',
+					'dataParam': {
+						'webpageCode': tableItemWebPageCodeArr.join(',')
+					},
+					'callback': function (data) {
+						$('.imgConBoxTable tbody').find('[class*="browseNum"]').each(function (index) {
+							$(this).text(data[index]);
+						})
+					}
+				});
+
+				//			操作-收藏
+				$().adraticAjaxData({
+					'dataUrl': ctx + '/latest/front/getUserFavorites',
+					'dataParam': {
+						'webpageCode': tableItemWebPageCodeArr.join(',')
+					},
+					'callback': function (data) {
+						$('.imgConBoxTable tbody').find('.collect').each(function (index) {
+							if (data[index] == true) {
+								$(this).addClass('active');
+								$(this).find('i').attr('class', 'fa fa-heart');
+							} else {
+
+							}
+						})
+					}
+				});
+				//			操作-建稿
+
+				$('.jiangao').each(function (index) {
+					$(this).releaseBuild({
+						'webpageCode': tableItemWebPageCodeArr[index],
+						'buildingCon': function (_$this) {
+							_$this.find('i').addClass('hide');
+							_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
+						},
+						'buildedCon': function (_$this) {
+							_$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
+							$("[data-toggle='tooltip']").tooltip();
+							getImgAjaxData1.ajax.reload();
 						}
 					})
+				});
+				//			建、采
+				$().adraticAjaxData({
+					'dataUrl': ctx + '/latest/front/getDraftType',
+					'dataParam': {
+						'webpageCode': tableItemWebPageCodeArr.join(',')
+					},
+					'callback': function (data, con) {
+						$('.imgConBoxTable tbody').find('.titleRightClick').each(function (index) {
+							if (data[index].length > 0) {
+								if (data[index][0] == 1) {
+									$(this).find('a').css({
+										'width': '87%'
+									});
+									$(this).append('<span class="label-status label-jian">【建】</span>');
+								} else if (data[index][0] == 2) {
+									$(this).find('a').css({
+										'width': '87%'
+									});
+									$(this).append('<span class="label-status label-cai">【采】</span>');
+								} else {}
+							}
+
+						})
+					}
+				});
+			}
+
+			//		datatables翻页时查询页面中是否有选中的新闻
+			for (var i = 0; tableItemWebPageCodeArr.length > i; i++) {
+				for (var j = 0; batchCheckWebPageCode.length > j; j++) {
+					if (tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]) {
+						$('.imgConBoxTable').find('.check-child').eq(i).addClass('checked');
+					}
 				}
+			}
+
+
+			collect();
+
+			//		设置图片的宽高
+			var tableWidth = $('.imgConBoxTable').find('tbody tr').width() - 16;
+			var tableHeight = tableWidth / 16 * 9
+			$('.imgConBoxTable').find('.site-piclist_pic').css({
+				'width': tableWidth + 'px',
+				'height': tableHeight + 'px',
+				'lineHeight': tableHeight + 'px'
 			});
-//			操作-建稿
-			
-			$('.jiangao').each(function(index){
-				$(this).releaseBuild({
-					'webpageCode':tableItemWebPageCodeArr[index],
-					'buildingCon':function(_$this){
-						_$this.find('i').addClass('hide');
-        				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
-        			},
-        			'buildedCon':function(_$this){
-        				_$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
-        				$("[data-toggle='tooltip']").tooltip();
-        				getImgAjaxData1.ajax.reload();
-        			}
-				})
+			$('.imgConBoxTable').find('.site-piclist_info').css({
+				'width': tableWidth + 'px',
 			});
-//			建、采
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getDraftType',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data,con){
-					$('.imgConBoxTable tbody').find('.titleRightClick').each(function(index){
-						if(data[index].length > 0){
-							if(data[index][0] == 1){
-								$(this).find('a').css({
-									'width':'87%'
-								});
-								$(this).append('<span class="label-status label-jian">【建】</span>');
-							}else if(data[index][0] == 2){
-								$(this).find('a').css({
-									'width':'87%'
-								});
-								$(this).append('<span class="label-status label-cai">【采】</span>');
-							}else{}
-						}
-						
+			$('.imgConBoxTable').find('.site-piclist_pic img').css({
+				'maxHeight': tableHeight + 'px',
+			});
+			$('.table-operation-status').find('a:first').removeAttr('style').find('span').removeClass('checked');
+			$("[data-toggle='tooltip']").tooltip();
+			//		鼠标划入图片放大
+			//		$(".site-piclist_pic").imgEnlarge();
+
+
+
+			//		搜索词高亮显示
+			var highTitleArr = [];
+			if (highlightList != null) {
+				for (var log = 0; textArr.length > log; log++) {
+					highTitleArr.push({
+						'webpageCode': textArr[log].webpageCode,
+						'title': textArr[log].title
 					})
 				}
-			});
-		}
-		
-//		datatables翻页时查询页面中是否有选中的新闻
-		for(var i = 0;tableItemWebPageCodeArr.length>i;i++){
-			for(var j = 0;batchCheckWebPageCode.length>j;j++){
-				if(tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]){
-					$('.imgConBoxTable').find('.check-child').eq(i).addClass('checked');
+
+				for (var i = 0; highlightList.length > i; i++) {
+					for (var j = 0; highTitleArr.length > j; j++) {
+						highTitleArr[j].title = highTitleArr[j].title.replace(highlightList[i], '<span class="red">' + highlightList[i] + '</span>');
+						$('.imgConBoxTable').find('p.titleRightClick').find('a[data-id=' + highTitleArr[j].webpageCode + ']').html(highTitleArr[j].title)
+					}
 				}
 			}
-		}
-		
-		
-		collect();
-		
-//		设置图片的宽高
-		var tableWidth = $('.imgConBoxTable').find('tbody tr').width()-16;
-		var tableHeight = tableWidth / 16 * 9
-		$('.imgConBoxTable').find('.site-piclist_pic').css({
-			'width':tableWidth + 'px',
-			'height':tableHeight + 'px',
-			'lineHeight':tableHeight + 'px'
-		});
-		$('.imgConBoxTable').find('.site-piclist_info').css({
-			'width':tableWidth + 'px',
-		});
-		$('.imgConBoxTable').find('.site-piclist_pic img').css({
-			'maxHeight':tableHeight + 'px',
-		});
-		$('.table-operation-status').find('a:first').removeAttr('style').find('span').removeClass('checked');
-		$("[data-toggle='tooltip']").tooltip();
-//		鼠标划入图片放大
-//		$(".site-piclist_pic").imgEnlarge();
-		
-		
-		
-//		搜索词高亮显示
-		var highTitleArr = [];
-		if(highlightList != null){
-			for(var log = 0;textArr.length>log;log++){
-				highTitleArr.push({
-					'webpageCode':textArr[log].webpageCode,
-					'title':textArr[log].title
-				})
-			}
-			
-			for(var i = 0;highlightList.length>i;i++){
-				for(var j = 0;highTitleArr.length>j;j++){
-					highTitleArr[j].title = highTitleArr[j].title.replace(highlightList[i],'<span class="red">'+highlightList[i]+'</span>');
-					$('.imgConBoxTable').find('p.titleRightClick').find('a[data-id='+highTitleArr[j].webpageCode+']').html(highTitleArr[j].title)
-				}
-			}
-		}
-		
-	});
+
+		});			
+	}	
 	
 	$('#srceenSourcesPro').click(function(){
 		getImgAjaxData1.ajax.reload();
 		return false;
 	})
-	$('#srceenMapPro').click(function(){
+	// // 地区多选
+	// $('#srceenMapPro').click(function(event){		
+	// 	var event = event || window.event;
+	// 	var className = event.target.className;
+	// 	if (className == 'multiSure') {
+	// 		getImgAjaxData1.ajax.reload();
+	// 		return false;
+	// 	}
+	// })
+	// // 分类多选
+	// $('#srceenClassificationPro').click(function (event) {
+	// 	var event = event || window.event;
+	// 	var className = event.target.className;
+	// 	if (className == 'multiSure') {
+	// 		getImgAjaxData1.ajax.reload();
+	// 		return false;
+	// 	}
+	// })
+	//	地区(多选)、分类(多选)
+	window.reloadData = function () {
 		getImgAjaxData1.ajax.reload();
 		return false;
-	})
-	$('#srceenClassificationPro').click(function(){
-		getImgAjaxData1.ajax.reload();
-		return false;
-	})
+	};
 	$('#srceenTimeQuantumPro').click(function(){
 		var ds = $(this).prev('h2').text();
 		if(ds == '自定义'){

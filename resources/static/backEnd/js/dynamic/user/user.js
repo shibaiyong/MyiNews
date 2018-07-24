@@ -186,34 +186,38 @@ function deleteUser(id){
 
 //批量删除
 function batchDelete(){
-    var checkNum=$("div .checked").length;
-    if(confirm("确定要删除已勾选的用户？")){
-        var checkedList = [];
-        $('.mailbox-messages input[type="checkbox"]').each(function(){
-            if ($(this).is(":checked")){
-                checkedList.push($(this).attr("value"));
-            }
-        });
-        // console.log(checkedList);
-        $.ajax({
-            url : ctx+"/user/back/deleteUsers",
-            data :JSON.stringify(checkedList),
-            type : 'post',
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success : function(data) {
-                if(data.result){
-                    alert(data.resultObj);
-                }else{
-                    alert(data.errorMsg);
+    var len = $("input[type=checkbox]:checked").length;
+    if (len == 0){
+    	alert('请勾选要删除的用户')
+	} else {
+        if(confirm("确定要删除已勾选的用户？")){
+            var checkedList = [];
+            $('.mailbox-messages input[type="checkbox"]').each(function(){
+                if ($(this).is(":checked")){
+                    checkedList.push($(this).attr("value"));
                 }
-                table.ajax.reload();
-            },
-            error:function(msg){
-                alert(msg.resultObj);
-            }
-        });
-    }
+            });
+            // console.log(checkedList);
+            $.ajax({
+                url : ctx+"/user/back/deleteUsers",
+                data :JSON.stringify(checkedList),
+                type : 'post',
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success : function(data) {
+                    if(data.result){
+                        alert(data.resultObj);
+                    }else{
+                        alert(data.errorMsg);
+                    }
+                    table.ajax.reload();
+                },
+                error:function(msg){
+                    alert(msg.resultObj);
+                }
+            });
+        }
+	}
 }
 
 /*

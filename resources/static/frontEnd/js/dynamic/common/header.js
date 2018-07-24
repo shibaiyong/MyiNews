@@ -205,7 +205,7 @@ function getStickTopVal(){
         async : true,
         success : function(data) {
         	console.log(data);
-        	if(data.resultObj.length > 0){
+        	if (data.resultObj && data.resultObj.length > 0) {
         		var stickNews = data.resultObj;
         		var content = '<div class="smarticker2"><ul>';
         		
