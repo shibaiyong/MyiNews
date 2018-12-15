@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.NewsRelationNewEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.NewsRelationNewEntity">
+    <id column="webpagecode" jdbcType="VARCHAR" property="webpagecode" />
+    <id column="relation_type" jdbcType="TINYINT" property="relationType" />
+    <result column="relation_codes" jdbcType="VARCHAR" property="relationCodes" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="createdatetime" jdbcType="TIMESTAMP" property="createdatetime" />
+    <result column="updatedatetime" jdbcType="TIMESTAMP" property="updatedatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    webpagecode, relation_type, relation_codes, number, createdatetime, updatedatetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.uec.web.model.NewsRelationNewEntityKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news_relation_new
+    where webpagecode = #{webpagecode,jdbcType=VARCHAR}
+      and relation_type = #{relationType,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.uec.web.model.NewsRelationNewEntityKey">
+    delete from news_relation_new
+    where webpagecode = #{webpagecode,jdbcType=VARCHAR}
+      and relation_type = #{relationType,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.NewsRelationNewEntity">
+    insert into news_relation_new (webpagecode, relation_type, relation_codes, 
+      number, createdatetime, updatedatetime
+      )
+    values (#{webpagecode,jdbcType=VARCHAR}, #{relationType,jdbcType=TINYINT}, #{relationCodes,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{createdatetime,jdbcType=TIMESTAMP}, #{updatedatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.NewsRelationNewEntity">
+    insert into news_relation_new
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webpagecode != null">
+        webpagecode,
+      </if>
+      <if test="relationType != null">
+        relation_type,
+      </if>
+      <if test="relationCodes != null">
+        relation_codes,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="createdatetime != null">
+        createdatetime,
+      </if>
+      <if test="updatedatetime != null">
+        updatedatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webpagecode != null">
+        #{webpagecode,jdbcType=VARCHAR},
+      </if>
+      <if test="relationType != null">
+        #{relationType,jdbcType=TINYINT},
+      </if>
+      <if test="relationCodes != null">
+        #{relationCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createdatetime != null">
+        #{createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedatetime != null">
+        #{updatedatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.NewsRelationNewEntity">
+    update news_relation_new
+    <set>
+      <if test="relationCodes != null">
+        relation_codes = #{relationCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createdatetime != null">
+        createdatetime = #{createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedatetime != null">
+        updatedatetime = #{updatedatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where webpagecode = #{webpagecode,jdbcType=VARCHAR}
+      and relation_type = #{relationType,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.NewsRelationNewEntity">
+    update news_relation_new
+    set relation_codes = #{relationCodes,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      createdatetime = #{createdatetime,jdbcType=TIMESTAMP},
+      updatedatetime = #{updatedatetime,jdbcType=TIMESTAMP}
+    where webpagecode = #{webpagecode,jdbcType=VARCHAR}
+      and relation_type = #{relationType,jdbcType=TINYINT}
+  </update>
+
+
+  <select id="listRelatedNews" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from news_relation_new
+    where webpagecode = #{webpagecode,jdbcType=VARCHAR}
+    and relation_type = 2
+  </select>
+
+</mapper>

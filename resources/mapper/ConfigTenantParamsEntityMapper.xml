@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.ConfigTenantParamsEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.ConfigTenantParamsEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="param_id" jdbcType="INTEGER" property="paramId" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
+    <result column="param_type" jdbcType="INTEGER" property="paramType" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="display_name" jdbcType="VARCHAR" property="displayName" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="value" jdbcType="LONGVARCHAR" property="value" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    innerid, param_id, tenant_id, param_name, param_type, number, status, display_name, 
+    user_id, value
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.uec.web.model.ConfigTenantParamsEntity">
+    select 
+    <include refid="Base_Column_List" />
+
+    from config_tenant_params
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from config_tenant_params
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.ConfigTenantParamsEntity">
+    insert into config_tenant_params (innerid, param_id, tenant_id, 
+      param_name, param_type, number, 
+      status, display_name, user_id, 
+      value)
+    values (#{innerid,jdbcType=INTEGER}, #{paramId,jdbcType=INTEGER}, #{tenantId,jdbcType=INTEGER}, 
+      #{paramName,jdbcType=VARCHAR}, #{paramType,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{displayName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{value,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.ConfigTenantParamsEntity">
+    insert into config_tenant_params
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="paramId != null">
+        param_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="paramName != null">
+        param_name,
+      </if>
+      <if test="paramType != null">
+        param_type,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="displayName != null">
+        display_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="paramId != null">
+        #{paramId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="paramName != null">
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        #{paramType,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.ConfigTenantParamsEntity">
+    update config_tenant_params
+    <set>
+      <if test="paramId != null">
+        param_id = #{paramId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="paramName != null">
+        param_name = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        param_type = #{paramType,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="displayName != null">
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+
+        value = #{value,jdbcType=LONGVARCHAR},
+
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.model.ConfigTenantParamsEntity">
+    update config_tenant_params
+    set param_id = #{paramId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      param_name = #{paramName,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      value = #{value,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.ConfigTenantParamsEntity">
+    update config_tenant_params
+    set param_id = #{paramId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      param_name = #{paramName,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="findByTenantIdAndType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from config_tenant_params a
+    where a.tenant_id = #{0} and a.param_type= #{1} and a.user_id = 0 order by a.number asc
+  </select>
+
+  <select id="findByUserIdAndType" resultMap="BaseResultMap">
+    select * from config_tenant_params a
+    where a.user_id = #{0} and a.param_type=  #{1} order by a.number asc
+  </select>
+
+  <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="innerid" >
+    insert into config_tenant_params (
+    param_id, tenant_id, param_name, param_type, number, status, display_name,
+    user_id, value
+    )
+    values
+    <foreach collection="list" item="item" index="index"
+             separator=",">
+      (#{item.paramId},#{item.tenantId},
+      #{item.paramName},#{item.paramType},
+      #{item.number},#{item.status},
+      #{item.displayName},#{item.userId},
+      #{item.value})
+    </foreach>
+  </insert>
+
+</mapper>

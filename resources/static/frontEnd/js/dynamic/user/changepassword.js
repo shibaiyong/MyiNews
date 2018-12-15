@@ -13,7 +13,7 @@ $(function(){
 	var validatepsw = $('#validatepsw');
 	 
 	var formerpswFlag = 1;
-	
+    var ctx = $('#context').val();
 	
 	$('#formerpsw').blur(function(){
 		if(formerpsw.val().trim() == '' || formerpsw.val().trim() == 'undefined' || formerpsw.val().trim() == null){

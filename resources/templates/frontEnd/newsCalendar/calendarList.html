@@ -50,7 +50,7 @@
 										<th style="width:45px" class="center">相似</th>
 										<th style="width:45px" class="center">相关</th>
 										<th style="width: 60px" class='center'>QG指数</th>
-										<th style="width:50px" class='center'>浏览量</th>
+										<!-- <th style="width:50px" class='center'>浏览量</th> -->
 										<th style="width: 40px;" class='center'>操&nbsp;作</th>
 									</tr>
 								</thead>
@@ -250,5 +250,24 @@
 	</div>
 	<!-- 尾部内容 -->
 	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+	<!-- Modal -->
+<div class="modal fade" id="cannotSkipDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-body">
+							<p style="text-align:center;margin-bottom:0px"></p>
+
+							<div style="margin-top:10px;text-align:right">
+									<button type="button" class="btn btn-red btn-sm confirm-myCustom" data-dismiss="modal">确定
+									</button>
+									<button type="button" class="btn btn-default cancel-myCustom" data-dismiss="modal">
+											取消
+									</button>
+							</div>
+					</div>
+			</div>
+	</div>
+</div>
+<!-- Modal End-->
 </body>
 </html>

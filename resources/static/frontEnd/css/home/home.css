@@ -40,9 +40,12 @@
 .popover{
 	/*min-width: 300px;*/
 }
+.latestNewsCont .popover{
+	min-width: 300px;
+}
 .rank .lTitle a{
 	display: inline-block;
-	width: 100%
+	width: 100%;
 }
 /* 今日已采集数据统计 */
 #dataCount{

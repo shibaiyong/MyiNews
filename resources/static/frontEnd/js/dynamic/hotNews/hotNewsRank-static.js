@@ -495,7 +495,7 @@ function loadHotRanking(){
     listClassify=$('.moduleClassify h2').text(); //模块分类
     console.log(listClassify);
     var label=0;
-    if(listClassify=='分类'){
+    if(listClassify=='全部分类'){
         label=111;
     }
     if(listClassify=='综合'){
@@ -561,7 +561,7 @@ function loadHotRankingItem(start, size, timeDate) {
     listClassify=$('.moduleClassify h2').text(); //模块分类
    // console.log(listClassify);
     var label=0;
-    if(listClassify=='分类'){
+    if (listClassify == '全部分类') {
         label=111;
     }
     if(listClassify=='综合'){
@@ -620,6 +620,7 @@ function loadHotRankingItem(start, size, timeDate) {
                        //console.log(hotList);
                         var summary = '';
                         content += '<li class="list-style-item titleRightClick">';
+                        var releaseDatetime = '';
                         if (hotList.releaseDatetime != null && hotList.releaseDatetime != '' &&
                             hotList.releaseDatetime != 'null') {
                             releaseDatetime = '/' + hotList.releaseDatetime;

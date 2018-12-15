@@ -18,10 +18,26 @@
 		
 	<!-- 引用公共js -->
 	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
-	
 	<!-- 引用dataTables -->
 	<object style="display:none;" th:include="frontEnd/common/common_dataTables :: common_dataTables"></object>
-
+	<style>
+		.videoContainer{
+			width:282px;
+			height:158px;
+			margin:10px auto;
+		}
+		.newsDetailVedio{
+			width:282px;
+			height:158px;
+			background:black;
+			text-align: center;
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.videoContainer.hide{
+			display: none;
+		}
+	</style>
 </head>
 <body>
 	<input type="hidden" value="" class="taskId"/>
@@ -102,33 +118,28 @@
 
 							</div>
 
-							<div class="newsDetailSummary hide">
+							<div class="newsDetailSummary">
 								<div class="summaryCon" th:remove="body">
 									<p>新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。</p>
 									<p ></p>
 								</div>
 							</div>
-							
-							
+
+							<div class="videoContainer hide">
+
+							</div>
+
 							<div class="newsDetailText">
 								<div id="newsContent" th:remove="body">
 								
 									<div id="uec_img_group_0"></div>
 									<script type='text/javascript'>var uec_inews_img_group={'length':1,uec_img_group_0:{"pic":[{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2EHS54T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2EHS64T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU6S4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU704T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU734T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU764T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7A4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7D4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7J4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7N4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU7T4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU804T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU864T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU8I4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU8T4T8E0001NOS.jpg","desc":""},{"url":"https://obs.myhwclouds.com/obs-inews-01/image/2018/01/11/news.163.com/latest/D7S2KU914T8E0001NOS.jpg","desc":""}]}}</script>
-<!-- 									<div class="left_zw" style="position:relative"> -->
-<!-- 									<p style="text-align: center;"><strong></strong><strong>中共中央政治局常务委员会召开会议</strong></p> -->
-<!-- 									<p style="text-align: center;"><strong>听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报</strong></p> -->
-<!-- 									<p style="text-align: center;"><strong>听取中央书记处工作报告</strong></p> -->
-<!-- 									<p style="text-align: center;"><strong>中共中央总书记习近平主持会议</strong></p> -->
-<!-- 									<p>新华社北京1月10日电 中共中央政治局常务委员会1月10日全天召开会议，听取全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组工作汇报，听取中央书记处工作报告。中共中央总书记<span class='Wikipedia'>习近平</span>主持会议并发表重要讲话。</p> -->
-<!-- 									<p>会议强调，办好中国的事情，关键在党。中国特色社会主义最本质的特征是中国共产党领导，中国特色社会主义制度的最大优势是中国共产党领导。坚持党的领导首先是坚持党中央集中统一领导。坚持党中央集中统一领导，是全面从严治党、严肃党内政治生活、加强党内监督的重要目的，也是一条根本的政治规矩。要深入学习贯彻党的十八届六中全会精神，严格执行《关于新形势下党内政治生活的若干准则》、《中国共产党党内监督条例》，牢固树立政治意识、大局意识、核心意识、看齐意识，坚持以党的旗帜为旗帜、以党的方向为方向、以党的意志为意志，切实把党中央重大决策部署落实到各项工作中去。</p> -->
-<!-- 									<p>会议认为，过去的一年，全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组坚持党中央集中统一领导，维护党中央权威，落实全面从严治党责任，规范党内政治生活制度，强化政治领导责任，扎实开展“两学一做”学习教育。坚持围绕中心、服务大局，在贯彻落实党中央重大决策部署上凝神聚焦发力，为推进党和国家各项事业发展、实现“十三五”良好开局作出了积极贡献。</p> -->
-<!-- 									<p>会议认为，过去的一年，中央书记处认真贯彻党中央决策部署，协助党中央抓全面从严治党，指导群团工作尤其是群团改革，推动一批党内法规文件制定和实施，配合办好一系列重要会议和重大纪念活动，各项工作取得了新成绩。</p> -->
-<!-- 									<p>会议强调，今年我们将召开党的十九大，也是实施“十三五”规划的重要一年、推进供给侧结构性改革的深化之年。全国人大常委会、国务院、全国政协、最高人民法院、最高人民检察院党组要坚决维护党中央权威，在思想上政治上行动上始终同以习近平同志为核心的党中央保持高度一致，抓好党中央重大决策部署落地生根，确保党中央令行禁止。要扎实做好党中央部署的各项工作，紧紧围绕大局履职尽责，坚持稳中求进工作总基调，着力防范和化解各种风险，促进经济平稳健康发展和社会和谐稳定。要落实全面从严治党责任，严肃党内政治生活，自觉接受党内监督和各方面监督，加强党组自身建设，不断提高党的建设水平。</p> -->
-<!-- 									<p>会议强调，中央书记处要带头讲政治，坚持正确政治方向，服务大局出谋划策，突出重点抓好落实，不断提高运用科学理论解决实际问题的能力，完成好党中央交办的各项任务。<div id="function_code_page"></div> -->
-<!-- 									</p></div> -->
+
 								</div>
 							</div>
+
+							<div id="inewsCarousel" th:include="frontEnd/common/carousel :: carousel"></div>
+
 							<div class="newsDetailBottom clearfix hide">
 								<div class="bottomBox clearfix">
 									<!--<p class="newsID" th:remove="body">-->
@@ -960,9 +971,28 @@
 			</div>
 		</div>	
 	</div>
+	<!-- Modal -->
+<div class="modal fade" id="cannotSkipDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p style="text-align:center;margin-bottom:0px"></p>
+
+                <div style="margin-top:10px;text-align:right">
+                    <button type="button" class="btn btn-red btn-sm confirm-myCustom" data-dismiss="modal">确定
+                    </button>
+                    <button type="button" class="btn btn-default cancel-myCustom" data-dismiss="modal">
+                        取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End-->
 	<!-- 尾部内容 -->
 	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer><!-- 引入公用的插件 注：必须放在最开始的位置 -->
-	<script type="text/javascript" src="../../../static/frontEnd/js/static/common/common.js" th:remove="all"></script>
+
 	
 	
 	<!-- weibo CSS -->

@@ -568,10 +568,12 @@ $(function(){
 		
 //		相似相关获取
 		var textArr = hotNewsList.column(2).nodes().data();
-		tableItemWebPageCodeArr =[];
+        tableItemWebPageCodeArr =[];
+        var releaseDateTimeArr = [];	
 		if(textArr.length > 0){
 			for(var count = 0;textArr.length>count;count++){
-				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+                tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+                releaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
 			//相似
 			$().adraticAjaxData({
@@ -654,7 +656,8 @@ $(function(){
 //			操作-建稿
 			$('.inewsOperation').each(function(index){
 				$(this).find('span').eq(1).releaseBuild({
-					'webpageCode':tableItemWebPageCodeArr[index],
+                    'webpageCode':tableItemWebPageCodeArr[index],
+                    'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.find('i').addClass('hide');
         				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');

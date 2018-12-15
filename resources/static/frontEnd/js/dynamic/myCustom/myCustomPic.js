@@ -473,11 +473,12 @@ $(function(){
 //		浏览量获取
 		var textArr = getImgAjaxData1.column(0).nodes().data();
 		tableItemWebPageCodeArr =[];
-		
+		var releaseDateTimeArr = [];	
 		if(textArr.length > 0){
 			var textArrCon =[];
 			for(var count = 0;textArr.length>count;count++){
 				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+				releaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
 			
 //			浏览量
@@ -511,6 +512,7 @@ $(function(){
 			$('.jiangao').each(function(index){
 				$(this).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.find('i').addClass('hide');
         				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');

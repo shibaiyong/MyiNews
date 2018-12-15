@@ -119,16 +119,16 @@ $(function () {
             }
 
             //title
-            var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + data.webpageCode + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
+            var titleCon = '<a href="' + ctx + '/latest/front/news/calendar/detail/' + data.webpageCode + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
             $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
 
 //    	   相似相关、浏览量
             var sameNum = '(<span class="sameNum' + index + '"></span>)';
             var relevantNum = '(<span class="relevantNum' + index + '"></span>)';
-            var browseNum = '<span class="browseNum' + index + '"></span>';
+            // var browseNum = '<span class="browseNum' + index + '"></span>';
             $('td:eq(4)', row).html(sameNum);
             $('td:eq(5)', row).html(relevantNum);
-            $('td:eq(7)', row).html(browseNum);
+            // $('td:eq(7)', row).html(browseNum);
 
             //负面指数样式：0-40% 红色  41%-60% 灰色  61%-100% 绿色
             var negative = '';
@@ -139,7 +139,7 @@ $(function () {
             //操作
             //var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span>';
             var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span> <span><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></span>';
-            $('td:eq(8)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
+            $('td:eq(7)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
 
         },
 
@@ -170,15 +170,10 @@ $(function () {
                 }
             },
             {data: 'title', "bSortable": false},
-            {
-                data: 'newsType', "bSortable": false,
+            {data: 'status', "bSortable": false,
                 render: function (data, type, row) {
-                    if (data.newsType != null && data.newsType != '') {
-                        if (data.newsType.label != null && data.newsType.label != null) {
-                            return data.newsType.label
-                        } else {
-                            return '-'
-                        }
+                    if (data != null && data != '') {
+                        return '-'
                     } else {
                         return '-'
                     }
@@ -221,19 +216,19 @@ $(function () {
                     }
                 }
             },
-            {
-                data: 'statEntity', "bSortable": false,
-                render: function (data, type, row) {
-                    if (data != null && data != '') {
-                        if (data.browseNum != null && data.browseNum != '') {
-                            return data.browseNum
-                        }
-                        return '-'
-                    } else {
-                        return '-'
-                    }
-                }
-            },
+            // {
+            //     data: 'statEntity', "bSortable": false,
+            //     render: function (data, type, row) {
+            //         if (data != null && data != '') {
+            //             if (data.browseNum != null && data.browseNum != '') {
+            //                 return data.browseNum
+            //             }
+            //             return '-'
+            //         } else {
+            //             return '-'
+            //         }
+            //     }
+            // },
             {data: 'webpageCode', "bSortable": false}
         ],
 
@@ -270,10 +265,12 @@ $(function () {
 //		相似相关获取
         var textArr = calendarTable.column(2).nodes().data();
         tableItemWebPageCodeArr = [];
+        var releaseDateTimeArr = [];
         if (textArr.length > 0) {
             var textArrCon = [];
             for (var count = 0; textArr.length > count; count++) {
                 tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+                releaseDateTimeArr.push(textArr[count].releaseDatetime);
             }
             //相似
             $().adraticAjaxData({
@@ -322,15 +319,15 @@ $(function () {
                 }
             });
 //		浏览量
-            $().adraticAjaxData({
-                'dataUrl': ctx + '/latest/front/getBrowseNum',
-                'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
-                'callback': function (data) {
-                    $('.searchesTable tbody').find('[class*="browseNum"]').each(function (index) {
-                        $(this).text(data[index]);
-                    })
-                }
-            });
+            // $().adraticAjaxData({
+            //     'dataUrl': ctx + '/latest/front/getBrowseNum',
+            //     'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
+            //     'callback': function (data) {
+            //         $('.searchesTable tbody').find('[class*="browseNum"]').each(function (index) {
+            //             $(this).text(data[index]);
+            //         })
+            //     }
+            // });
 
 //			操作-收藏
             $().adraticAjaxData({
@@ -351,6 +348,7 @@ $(function () {
             $('.inewsOperation').each(function (index) {
                 $(this).find('span').eq(1).releaseBuild({
                     'webpageCode': tableItemWebPageCodeArr[index],
+                    'releaseDatetime': releaseDateTimeArr[index],
                     'buildingCon': function (_$this) {
                         _$this.find('i').addClass('hide');
                         _$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');

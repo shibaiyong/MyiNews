@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.event.dao.EventCustomEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.event.model.EventCustomEntity">
+    <id column="event_code" jdbcType="VARCHAR" property="eventCode" />
+    <result column="event_name" jdbcType="VARCHAR" property="eventName" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="start_datetime" jdbcType="TIMESTAMP" property="startDatetime" />
+    <result column="end_datetime" jdbcType="TIMESTAMP" property="endDatetime" />
+    <result column="must_keywords" jdbcType="VARCHAR" property="mustKeywords" />
+    <result column="one_keywords" jdbcType="VARCHAR" property="oneKeywords" />
+    <result column="no_keywords" jdbcType="VARCHAR" property="noKeywords" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.event.model.EventCustomEntity">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    event_code, event_name, create_datetime, start_datetime, end_datetime, must_keywords, 
+    one_keywords, no_keywords, user_id, tenant_id, pic_path, is_deleted
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from event_custom
+    where event_code = #{eventCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from event_custom
+    where event_code = #{eventCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.event.model.EventCustomEntity">
+    insert into event_custom (event_code, event_name, create_datetime, 
+      start_datetime, end_datetime, must_keywords, 
+      one_keywords, no_keywords, user_id, 
+      tenant_id, pic_path, is_deleted, 
+      description)
+    values (#{eventCode,jdbcType=VARCHAR}, #{eventName,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{startDatetime,jdbcType=TIMESTAMP}, #{endDatetime,jdbcType=TIMESTAMP}, #{mustKeywords,jdbcType=VARCHAR}, 
+      #{oneKeywords,jdbcType=VARCHAR}, #{noKeywords,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{tenantId,jdbcType=INTEGER}, #{picPath,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.event.model.EventCustomEntity">
+    insert into event_custom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventCode != null">
+        event_code,
+      </if>
+      <if test="eventName != null">
+        event_name,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="startDatetime != null">
+        start_datetime,
+      </if>
+      <if test="endDatetime != null">
+        end_datetime,
+      </if>
+      <if test="mustKeywords != null">
+        must_keywords,
+      </if>
+      <if test="oneKeywords != null">
+        one_keywords,
+      </if>
+      <if test="noKeywords != null">
+        no_keywords,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="picPath != null">
+        pic_path,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventCode != null">
+        #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="eventName != null">
+        #{eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDatetime != null">
+        #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null">
+        #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mustKeywords != null">
+        #{mustKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="oneKeywords != null">
+        #{oneKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="noKeywords != null">
+        #{noKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.event.model.EventCustomEntity">
+    update event_custom
+    <set>
+      <if test="eventName != null">
+        event_name = #{eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDatetime != null">
+        start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null">
+        end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mustKeywords != null">
+        must_keywords = #{mustKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="oneKeywords != null">
+        one_keywords = #{oneKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="noKeywords != null">
+        no_keywords = #{noKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="picPath != null">
+        pic_path = #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where event_code = #{eventCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.event.model.EventCustomEntity">
+    update event_custom
+    set event_name = #{eventName,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      must_keywords = #{mustKeywords,jdbcType=VARCHAR},
+      one_keywords = #{oneKeywords,jdbcType=VARCHAR},
+      no_keywords = #{noKeywords,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where event_code = #{eventCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.event.model.EventCustomEntity">
+    update event_custom
+    set event_name = #{eventName,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      must_keywords = #{mustKeywords,jdbcType=VARCHAR},
+      one_keywords = #{oneKeywords,jdbcType=VARCHAR},
+      no_keywords = #{noKeywords,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=INTEGER}
+    where event_code = #{eventCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

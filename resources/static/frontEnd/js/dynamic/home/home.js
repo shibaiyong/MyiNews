@@ -12,128 +12,114 @@ $(function(e) {
 		}
 	})
 	
-	// 热点发现: 地区（多选）
-	$().getSignleData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
-		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
-		boxClassName: '.srceenMap',
-		ulClassName: '#srceenMapPro',
-		level: 1,
-		multiSelect: true,
-	})	
-	// 热点发现: 分类（多选）
-	$().getSignleData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
-		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
-		boxClassName: '.srceenClassification',
-		ulClassName: '#srceenClassificationPro',
-		level: 1,
-		multiSelect: true,
-	})
+	// 热点发现: 地区
+	// $().getSignleData({
+	// 	getAjaxUserConfigUrl: ctx + '/tenant/back/listTenantRegion', //请求路径(用户配置的数据)
+	// 	getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+	// 	boxClassName: '.srceenMap',
+	// 	ulClassName: '#srceenMapPro',
+	// 	level: 1,
+	// 	multiSelect: true,
+	// 	conditionValue: 'map',
+	// })
+	// 热点发现: 分类
+	// $().getSignleData({
+	// 	getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
+	// 	getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
+	// 	boxClassName: '.srceenClassification',
+	// 	ulClassName: '#srceenClassificationPro',
+	// 	level: 1,
+	// 	multiSelect: true,
+	// 	conditionValue: 'classification',
+	// })
 	// 首页-热点发现时间
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/getClusterFre',  //请求路径
-		boxClassName:'.srceenClusterFre',
-		ulClassName:'#srceenClusterFrePro',
-		inter:false
-	})
+	// $().getSignleData({
+	// 	getAjaxUrl:ctx+'/common/dic/front/getClusterFre',  //请求路径
+	// 	boxClassName:'.srceenClusterFre',
+	// 	ulClassName:'#srceenClusterFrePro',
+	// 	inter:false
+	// })
 
-	//首页-新闻线索: 地区（多选）
-	$().getData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
-		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
-		boxClassName: '.threadSrceenMap',
-		ulClassName: '#threadSrceenMapPro',
-		level: 2,
-		multiSelect: true,
-	})
-	// 首页-新闻线索分类（多选）
-	$().getData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
-		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
-		boxClassName:'.threadSrceenClassification',
-		ulClassName:'#threadSrceenClassificationPro',
-		level: 2,
-		multiSelect: true,
-	})
+	//首页-新闻线索: 地区
+	// $().getData({
+	// 	getAjaxUserConfigUrl: ctx + '/config/front/listUserRegionNew', //请求路径(用户配置的数据)
+	// 	getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+	// 	boxClassName: '.threadSrceenMap',
+	// 	ulClassName: '#threadSrceenMapPro',
+	// 	level: 3,
+	// 	multiSelect: true,
+	// 	conditionValue: 'map',
+	// })
+	// 首页-新闻线索分类
+	// $().getData({
+	// 	getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
+	// 	getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
+	// 	boxClassName:'.threadSrceenClassification',
+	// 	ulClassName:'#threadSrceenClassificationPro',
+	// 	level: 2,
+	// 	multiSelect: true,
+	// 	conditionValue: 'classification',
+	// })
 //	首页-网站排行-新闻
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/listWebs',  //请求路径
-		boxClassName:'.srceenWeb',
-		ulClassName:'#srceenWebPro',
-		inter:false
-	})
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/listWebs',  //请求路径
-		boxClassName:'.srceenWeb2',
-		ulClassName:'#srceenWeb2Pro',
-		inter:false
-	})
+// 	$().getSignleData({
+// 		getAjaxUrl:ctx+'/common/dic/front/listWebs',  //请求路径
+// 		boxClassName:'.srceenWeb',
+// 		ulClassName:'#srceenWebPro',
+// 		inter:false
+// 	})
+// 	$().getSignleData({
+// 		getAjaxUrl:ctx+'/common/dic/front/listWebs',  //请求路径
+// 		boxClassName:'.srceenWeb2',
+// 		ulClassName:'#srceenWeb2Pro',
+// 		inter:false
+// 	})
 //	首页-网站排行-点击榜
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
-		boxClassName:'.srceenList1',
-		ulClassName:'#srceenList1Pro',
-		inter:false
-	})
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
-		boxClassName:'.srceenList2',
-		ulClassName:'#srceenList2Pro',
-		inter:false
-	})
+// 	$().getSignleData({
+// 		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
+// 		boxClassName:'.srceenList1',
+// 		ulClassName:'#srceenList1Pro',
+// 		inter:false
+// 	})
+// 	$().getSignleData({
+// 		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
+// 		boxClassName:'.srceenList2',
+// 		ulClassName:'#srceenList2Pro',
+// 		inter:false
+// 	})
 //	首页-网站排行-时间
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
-		boxClassName:'.srceenListPeriod1',
-		ulClassName:'#srceenListPeriod1Pro',
-		inter:false
-	})
-	$().getSignleData({
-		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
-		boxClassName:'.srceenListPeriod2',
-		ulClassName:'#srceenListPeriod2Pro',
-		inter:false
-	})
+// 	$().getSignleData({
+// 		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
+// 		boxClassName:'.srceenListPeriod1',
+// 		ulClassName:'#srceenListPeriod1Pro',
+// 		inter:false
+// 	})
+// 	$().getSignleData({
+// 		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
+// 		boxClassName:'.srceenListPeriod2',
+// 		ulClassName:'#srceenListPeriod2Pro',
+// 		inter:false
+// 	})
 	
 	// 今日数据采集
 	dataStatistics();
 	
 	headLinesData(); //媒体头条
-	
-	//点击新闻线索-地区刷新列表
-	// $('#threadSrceenMapPro').click(function (event) {
-	// 	var threadObj = {};
-	// 	threadObj.classificationVal = $('.srceenClassification h2').attr('data-innerid');
-	// 	threadObj.regions = $('.threadSrceenMap h2').attr('data-innerid');
-	// 	var event = event || window.event;
-	// 	var className = event.target.className;
-	// 	if (className == 'multiSure') {
-	// 		newsClue(threadObj);
-	// 		return false;
-	// 	}		
-	// })
-	// //点击新闻线索-分类刷新列表
-	// $('#threadSrceenClassificationPro').click(function (event) {
-	// 	var threadObj = {};
-	// 	threadObj.classificationVal = $('.srceenClassification h2').attr('data-innerid');
-	// 	threadObj.regions = $('.threadSrceenMap h2').attr('data-innerid');
-	// 	var event = event || window.event;
-	// 	var className = event.target.className;
-	// 	if (className == 'multiSure') {
-	// 		newsClue(threadObj);
-	// 		return false;
-	// 	}
-	// })
 
+    //热点发现
+    getClusterData();
+
+    //新闻线索
+    newsClue();
+	
 	//新闻线索：地区(多选)、分类(多选)
-	window.reloadData = function () {
-		var threadObj = {};
-		threadObj.classificationVal = $('.srceenClassification h2').attr('data-innerid');
-		threadObj.regions = $('.threadSrceenMap h2').attr('data-innerid');
-		newsClue(threadObj);
-		return false;
-	};
+	// window.reloadData = function () {
+	// 	var threadObj = {};
+	// 	threadObj.classificationVal = $('.threadSrceenClassification h2').attr('data-innerid');
+	// 	threadObj.regions = $('.threadSrceenMap h2').attr('data-innerid');
+	// 	newsClue(threadObj);
+	// 	return false;
+	// };
+
 	// 热点发现(样式)
     $('.clusterScreen').find('.srceenMap').removeClass('hide');
     $('.clusterScreen').find('.srceenClassification').removeClass('hide');
@@ -166,37 +152,20 @@ $(function(e) {
 	})
 	
 	// 延时1000执行，待用户定制的参数渲染之后再执行此方法
-	setTimeout(function () {
-		getClusterData(clusterParam()); //热点发现
-		//	新闻线索
-		var threadObj = {};
-		threadObj.classificationVal = $('.srceenClassification h2').attr('data-innerid');
-		threadObj.regions = $('.threadSrceenMap h2').attr('data-innerid');
-		newsClue(threadObj);
-	}, 3000);
- 	//	点击热点发现-地区刷新列表
-	// $('#srceenMapPro').click(function (event) {
-	// 	var event = event || window.event;
-	// 	var className = event.target.className;
-	// 	if (className == 'multiSure') {
-	// 		getClusterData(clusterParam());
-	// 		return false;
-	// 	}
-	// })
-	// //点击热点发现-分类刷新列表
-	// $('#srceenClassificationPro').click(function (event) { 
-	// 	var event = event || window.event;
-	// 	var className = event.target.className;
-	// 	if (className == 'multiSure') {
-	// 		getClusterData(clusterParam());
-	// 		return false;
-	// 	}
-	// })
+	// setTimeout(function () {
+	// 	getClusterData(clusterParam()); //热点发现
+	// 	//	新闻线索
+	// 	var threadObj = {};
+	// 	threadObj.classificationVal = $('.srceenClassification h2').attr('data-innerid');
+	// 	threadObj.regions = $('.threadSrceenMap h2').attr('data-innerid');
+	// 	newsClue(threadObj);
+	// }, 3000);
+
 	//热点发现：地区(多选)、分类(多选)
-	window.signleReloadData = function () {
-		getClusterData(clusterParam());
-		return false;
-	};
+	// window.signleReloadData = function () {
+	// 	getClusterData(clusterParam());
+	// 	return false;
+	// };
 	
 //	网站新闻排行1
 	var screenIndex1 = 0;
@@ -212,7 +181,7 @@ $(function(e) {
 		}
 	})
 	
-	hotNewsRanking1(hotNewsRankingParams1()); //网站新闻排行1数据获取
+	// hotNewsRanking1(hotNewsRankingParams1()); //网站新闻排行1数据获取
 	
     $('#srceenWebPro').click(function(){ //	点击热点发现-分类刷新列表
     	hotNewsRanking1(hotNewsRankingParams1());
@@ -304,23 +273,32 @@ function headLinesData(){
         dataType : 'json',
         async : true,
         success : function(data) {
-        	console.log(data);
 	       if(data.result){
 	    	   var obj = data.resultObj;
-	    	   
+	    	   var title = '-';
 	    	   for(var i=0;i<obj.length;i++){
 //	    		   获取图片的新闻信息
-	    		   if(obj[i].picPath != null){
-	    			   dataVal.imgCon.push({
-	    				   'id':obj[i].newsId,'webpageCode':obj[i].webpageCode,'title':obj[i].title.replace(/\\"/g,"&quot;"),'sourceCrawl':obj[i].sourceCrawlDetail.website.displayName,'imgPath':obj[i].picPath
-	    			   })
+	    		   if(obj[i].picPath != null && obj[i].picPath != 'null'){
+					   if (obj[i].title != null && obj[i].title != '' && obj[i].title != 'null' && obj[i].releaseDatetime != null && obj[i].sourceCrawl != null ) {
+                           title = obj[i].title.replace(/\\"/g, "&quot;");
+                           dataVal.imgCon.push({
+                               'id': obj[i].newsId,
+                               'webpageCode': obj[i].webpageCode,
+                               'title': title,
+                               'sourceCrawl': obj[i].sourceCrawl,
+                               'imgPath': obj[i].picPath,
+                               'releaseDetailTime': obj[i].releaseDatetime
+                           })
+                       }
 				   }
 				   obj[i].releaseDetailTime = obj[i].releaseDatetime;
-				   obj[i].releaseDatetime = new Date(obj[i].releaseDatetime).formatDate('yyyy-MM-dd');					   			   
+				   obj[i].releaseDatetime = new Date(obj[i].releaseDatetime).formatDate('yyyy-MM-dd');
 //	    		   获取所有新闻的信息
-	    		   dataVal.listCon.push({
-	    			   'id': obj[i].newsId, 'webpageCode': obj[i].webpageCode, 'title': obj[i].title.replace(/\\"/g, "&quot;"), 'sourceCrawl': obj[i].sourceCrawlDetail.website.displayName, 'releaseDatetime': obj[i].releaseDatetime, 'cusSummary': obj[i].cusSummary, 'releaseDetailTime': obj[i].releaseDetailTime
-	    		   })
+				   if(obj[i].releaseDatetime != null && obj[i].title != null && obj[i].releaseDetailTime != null){
+                       dataVal.listCon.push({
+                           'id': obj[i].newsId, 'webpageCode': obj[i].webpageCode, 'title': obj[i].title.replace(/\\"/g, "&quot;"), 'sourceCrawl': obj[i].sourceCrawl, 'releaseDatetime': obj[i].releaseDatetime, 'releaseDetailTime': obj[i].releaseDetailTime
+                       })
+				   }
 	    	   }
 	    	   
 	    	   if(dataVal.imgCon.length == 0){ //判读是否有图片展示
@@ -342,8 +320,12 @@ function headLinesData(){
 		var imgContent = '<div class="succesny"><div class="control"><ul class="change"></ul></div><div class="thumbWrap"><div class="thumbCont" ><ul>';
 		for(var i = 0;dataVal.imgCon.length>i;i++){
 			var imgObj = dataVal.imgCon[i];
+			var linkUrl = imgObj.webpageCode;
+			if(imgObj.releaseDetailTime && imgObj.releaseDetailTime != '' && imgObj.releaseDetailTime != 'null' && imgObj.releaseDetailTime != 'undefined'){
+                linkUrl = imgObj.webpageCode + '/' + imgObj.releaseDetailTime;
+			}
 			imgContent += '<li ><div>';
-			imgContent += '<img class="defaultImg" data-webpageCode="'+imgObj.webpageCode+'" src="'+context+'/frontEnd/image/home/default-white.png" url="'+ctx+'/latest/front/news/detail/'+imgObj.webpageCode+'"  bigImg="'+ctx+'/frontEnd/image/home/default-white.png"  alt="'+imgObj.title+'" text="'+imgObj.sourceCrawl+'"/>';
+			imgContent += '<img class="defaultImg" data-webpageCode="'+imgObj.webpageCode+'" src="'+imgObj.imgPath+'" url="'+ctx+'/latest/front/news/detail/'+linkUrl+'"  bigImg="'+ctx+'/frontEnd/image/home/default-white.png"  alt="'+imgObj.title+'" text="'+imgObj.sourceCrawl+'"/>';
 			imgContent += '</div></li>';
 		}
 		imgContent += '</ul></div></div></div>';
@@ -372,16 +354,9 @@ function headLinesData(){
 				urlSuffix = listObj.webpageCode + '/' + releaseTime;
 			}
 			listContent += '<li class="list-group-item"><span class="listMun"><i class="fa fa-angle-double-right"></i></span>';
-			
-			if(listObj.cusSummary == null){
-				listContent += '<a href="' + ctx + '/latest/front/news/detail/' + urlSuffix + '" target="_blank"  class="listCon beyondEllipsis">';
-			}else{
-				if(listObj.cusSummary.length>300){
-					listObj.cusSummary = listObj.cusSummary.substring(0, 150)+'...';
-				}
-				listContent += '<a href="' + ctx + '/latest/front/news/detail/' + urlSuffix + '" target="_blank" tabindex="0" data-content="' + listObj.cusSummary + '" data-container=".headLinesConHover"  data-placement="right" data-toggle="popover"  class="listCon beyondEllipsis">';
-			}
-			
+
+			listContent += '<a href="' + ctx + '/latest/front/news/detail/' + urlSuffix + '" target="_blank"  class="listCon beyondEllipsis">';
+
 	    	listContent += '<span  class="listSou">'+listObj.sourceCrawl+'</span> |&nbsp;';
 			listContent += '<span >'+listObj.title+'</span></a>';
 			listContent += '<span class="listTit">['+listObj.releaseDatetime+']&nbsp;</span></li>';
@@ -466,21 +441,23 @@ function getImageUrl(imageUrl,code,lenSun){
 }
 
 //新闻线索
-function newsClue(obj) {
+function newsClue() {
     $.ajax({
         type: "get",
         async: true,
-        url: ctx + "/newsClue",
+        url: ctx + "/newsClueV2",
         data: {
-			classification: obj.classification,
-			regions: obj.regions
+			classifications: '',
+			regions: '',
+			showSimilar: false,
         },
         dataType: "json",
         success: function(data) {
-        	console.log(data);
         	if(data.result == true){
         		 var newsClueList = "";
-        		var obj = data.resultObj;
+        		var obj = data.resultObj.data;
+        		var shiRegion = data.resultObj.dicCommonShow;
+        		$('.latestNewsCont .srceenMapShow').text(shiRegion.name);
         		if(obj.length == 0){
         			newsClueList = '<tr><td style="text-align:center" colspan="3">搜索结果为空！</td></tr>';
         		}else{
@@ -506,7 +483,7 @@ function newsClue(obj) {
 							newsClueList += '<td class="lTitle"><a href="' + ctx + '/latest/front/news/detail/' + urlSuffix + '" target="_blank">' + obj[i].title + '</a></td>';
 						}
 						
-						if(obj[i].sourceCrawl == null){
+						if(obj[i].sourceCrawl == null || obj[i].sourceCrawl == ''){
 							newsClueList += '<td class="lTotal">-</td>';
 						}else{
 							newsClueList += '<td class="lTotal"><a href="javascript:void(0)">'+obj[i].sourceCrawl+'</a></td>';
@@ -530,33 +507,34 @@ function newsClue(obj) {
 }
 
 //热点发现
-function getClusterData(clusterParam){
+function getClusterData(){
 	$.ajax({
         type: "get",
         async: true,
         // 同步执行
-        url: ctx + "/clusterRanking",
-        data: clusterParam,
+        url: ctx + "/clusterRankingV2",
         dataType: "json",
         success: function(data) {
-        	console.log(data);
-        	
         	if(data.result == true){
         		var clusterRankingList = '';
-        		var obj = data.resultObj;
+        		var obj = data.resultObj.details;
+                var shiRegion = data.resultObj.dicCommonShow;
+                $('.hotListContInews .srceenMap .srceenMapShow').text(shiRegion.name);
         		if(obj.length == 0){
         			clusterRankingList = '<tr><td style="text-align:center" colspan="3">搜索结果为空！</td></tr>';
         		}else{
 
         			for(var i = 0;i< obj.length && i <10;i++){
                         var allnewsnum = obj[i].allNewsNum;
+                        var time = obj[i].createDatetime;
+                        var startTime = new Date(time).getTime();
                         if(!allnewsnum ||allnewsnum == 'null'){
                             allnewsnum =parseInt(Math.random()*20+80);
 						}
                     	if(i < 3){
-                    		clusterRankingList += '<tr><td class="number"><em class="red">'+(i+1)+'</em></td><td class="lTitle linkClustering"><a href="'+ctx+'/cluster/front/detail/'+obj[i].clusterCode+'" target="_blank" tabindex="0" data-toggle="popover" data-original-title="" title="">'+obj[i].title+'</a></td><td style="text-align: center;width:80px;">'+allnewsnum+'</td><td class="lTotal" style="text-align: center;width:80px;font-size:14px;">'+obj[i].weight+'</td></tr>';
+                    		clusterRankingList += '<tr><td class="number"><em class="red">'+(i+1)+'</em></td><td class="lTitle linkClustering"><a href="'+ctx+'/cluster/front/detail/'+obj[i].clusterCode+'?startTime='+startTime+'" target="_blank" tabindex="0" data-toggle="popover" data-original-title="" title="">'+obj[i].title+'</a></td><td style="text-align: center;width:80px;">'+allnewsnum+'</td><td class="lTotal" style="text-align: center;width:80px;font-size:14px;">'+obj[i].weight+'</td></tr>';
                     	}else{
-                    		clusterRankingList += '<tr><td class="number"><em class="hui">'+(i+1)+'</em></td><td class="lTitle linkClustering"><a href="'+ctx+'/cluster/front/detail/'+obj[i].clusterCode+'" target="_blank" tabindex="0" data-toggle="popover" data-original-title="" title="">'+obj[i].title+'</a></td><td style="text-align: center;width:80px;">'+allnewsnum+'</td><td class="lTotal" style="text-align: center;width:80px;font-size:14px;">'+obj[i].weight+'</td></tr>';
+                    		clusterRankingList += '<tr><td class="number"><em class="hui">'+(i+1)+'</em></td><td class="lTitle linkClustering"><a href="'+ctx+'/cluster/front/detail/'+obj[i].clusterCode+'?startTime='+startTime+'" target="_blank" tabindex="0" data-toggle="popover" data-original-title="" title="">'+obj[i].title+'</a></td><td style="text-align: center;width:80px;">'+allnewsnum+'</td><td class="lTotal" style="text-align: center;width:80px;font-size:14px;">'+obj[i].weight+'</td></tr>';
                     	}
         			}
         		}
@@ -577,101 +555,101 @@ function clusterParam(){
 }
 
 //网站新闻排行1
-function hotNewsRanking1(hotNewsRankingParams1) {
-	$.ajax({
-        type: "get",
-        async: true,
-        url: ctx + "/hotNewsRanking",
-        data: hotNewsRankingParams1,
-        dataType: "json",
-        success: function(data) {
-        	console.log(data);
-        	if(data.result == true){
-        		var obj = data.resultObj;
-        		var hotRankingList = "";
-        		if(obj.length == 0){
-        			console.log("hotRanking---0---"+ obj.length);
-        			hotRankingList = '<tr><td style="text-align:center" colspan="3">搜索结果为空！</td></tr>';
-        		}else{
-                    console.log("hotRanking---1---"+ obj.length);
-        			for(var i = 0; i < obj.length; i++){
-    	            	var news = obj[i];
-    	                var webpageCode = news.webpageCode;
-						var releaseDatetime = news.releaseDatetime;
-						var urlSuffix = news.webpageCode;
-						// 处理releaseDatetime为null或'null'及''的情况
-						if (releaseDatetime != 'null' && releaseDatetime != null || releaseDatetime != '') {
-							urlSuffix = webpageCode + '/' + releaseDatetime;
-						}
-//    	                根据选择的不同，显示的数据也不一致
-    	                var participateNumStr;
-    	                if($('.srceenWeb h2').attr('data-innerid') == '44'){
-    	                	participateNumStr = news.participateNum;
-    	                }else{
-    	                	if($('.srceenList1 h2').attr('data-innerid') == '75'){
-    	                		participateNumStr = news.clickingNum;
-    	                	}else if($('.srceenList1 h2').attr('data-innerid') == '76'){
-    	                		participateNumStr = news.participateNum;
-    	                	}
-    	                }
-    	                if(participateNumStr == null){
-    	                	participateNumStr = '-'
-    	                }else{
-    	                	if(participateNumStr > 10000){
-        	                	participateNumStr = Math.floor(participateNumStr/10000) +'万';
-        	                }
-    	                }
-//    	                标题
-    	                var title = news.title;
-    	                var summary = news.cusSummary;
-    	                
-    	                if(i < 3){
-    	                	if(summary == null){
-    	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="red">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
-    	                	}else{
-    	                		if(summary.length > 150){
-    	    	                	summary = summary.substr(0,150)+' ...';
-    	    	                }
-    	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="red">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank"  tabindex="0" data-toggle="popover" data-placement="left" data-content="' + summary + '">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
-    	                	}
-    	                }else{
-    	                	if(summary == null){
-    	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="hui">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
-    	                	}else{
-    	                		if(summary.length > 150){
-    	    	                	summary = summary.substr(0,150)+' ...';
-    	    	                }
-    	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="hui">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank" tabindex="0" data-toggle="popover" data-placement="left" data-content="' + summary + '">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
-    	                	}
-    	                }
-    	            }
-        		}
-                $(".rank_cont.m-top").find('tbody.hotnewsRanking1').html(hotRankingList);
-                $("[data-toggle='popover']").popover({
-                    trigger: 'hover',
-                    html: true,
-                });
-        	}
-        },
-        error: function(errorMsg) {
-        	console.log("热点排行1请求数据失败啦!");
-        }
-	});
-}
+// function hotNewsRanking1(hotNewsRankingParams1) {
+// 	$.ajax({
+//         type: "get",
+//         async: true,
+//         url: ctx + "/hotNewsRanking",
+//         data: hotNewsRankingParams1,
+//         dataType: "json",
+//         success: function(data) {
+//         	console.log(data);
+//         	if(data.result == true){
+//         		var obj = data.resultObj;
+//         		var hotRankingList = "";
+//         		if(obj.length == 0){
+//         			console.log("hotRanking---0---"+ obj.length);
+//         			hotRankingList = '<tr><td style="text-align:center" colspan="3">搜索结果为空！</td></tr>';
+//         		}else{
+//                     console.log("hotRanking---1---"+ obj.length);
+//         			for(var i = 0; i < obj.length; i++){
+//     	            	var news = obj[i];
+//     	                var webpageCode = news.webpageCode;
+// 						var releaseDatetime = news.releaseDatetime;
+// 						var urlSuffix = news.webpageCode;
+// 						// 处理releaseDatetime为null或'null'及''的情况
+// 						if (releaseDatetime != 'null' && releaseDatetime != null || releaseDatetime != '') {
+// 							urlSuffix = webpageCode + '/' + releaseDatetime;
+// 						}
+// //    	                根据选择的不同，显示的数据也不一致
+//     	                var participateNumStr;
+//     	                if($('.srceenWeb h2').attr('data-innerid') == '44'){
+//     	                	participateNumStr = news.participateNum;
+//     	                }else{
+//     	                	if($('.srceenList1 h2').attr('data-innerid') == '75'){
+//     	                		participateNumStr = news.clickingNum;
+//     	                	}else if($('.srceenList1 h2').attr('data-innerid') == '76'){
+//     	                		participateNumStr = news.participateNum;
+//     	                	}
+//     	                }
+//     	                if(participateNumStr == null){
+//     	                	participateNumStr = '-'
+//     	                }else{
+//     	                	if(participateNumStr > 10000){
+//         	                	participateNumStr = Math.floor(participateNumStr/10000) +'万';
+//         	                }
+//     	                }
+// //    	                标题
+//     	                var title = news.title;
+//     	                var summary = news.cusSummary;
+//
+//     	                if(i < 3){
+//     	                	if(summary == null){
+//     	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="red">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
+//     	                	}else{
+//     	                		if(summary.length > 150){
+//     	    	                	summary = summary.substr(0,150)+' ...';
+//     	    	                }
+//     	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="red">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank"  tabindex="0" data-toggle="popover" data-placement="left" data-content="' + summary + '">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
+//     	                	}
+//     	                }else{
+//     	                	if(summary == null){
+//     	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="hui">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
+//     	                	}else{
+//     	                		if(summary.length > 150){
+//     	    	                	summary = summary.substr(0,150)+' ...';
+//     	    	                }
+//     	                		hotRankingList = hotRankingList + '<tr><td class="number"><em class="hui">' + (i + 1) + '</em></td><td class="lTitle"><a href="' + ctx + '/hot/front/hot/detail/' + urlSuffix + '" target="_blank" tabindex="0" data-toggle="popover" data-placement="left" data-content="' + summary + '">' + title + '</a></td><td class="lTotal">[' + participateNumStr + ']</td></tr></tr>';
+//     	                	}
+//     	                }
+//     	            }
+//         		}
+//                 $(".rank_cont.m-top").find('tbody.hotnewsRanking1').html(hotRankingList);
+//                 $("[data-toggle='popover']").popover({
+//                     trigger: 'hover',
+//                     html: true,
+//                 });
+//         	}
+//         },
+//         error: function(errorMsg) {
+//         	console.log("热点排行1请求数据失败啦!");
+//         }
+// 	});
+// }
 //网站新闻排行-参数
-function hotNewsRankingParams1(){
-	var webSource = $('.srceenWeb h2').attr('data-innerid');
-	var type = $('.srceenList1 h2').attr('data-innerid');
-	var cycle = $('.srceenListPeriod1 h2').attr('data-innerid');
-	
-	var hotNewsParams = {
-		webSource:webSource,
-		type:type,
-		cycle:cycle,
-	}
-	
-	return hotNewsParams;
-}
+// function hotNewsRankingParams1(){
+// 	var webSource = $('.srceenWeb h2').attr('data-innerid');
+// 	var type = $('.srceenList1 h2').attr('data-innerid');
+// 	var cycle = $('.srceenListPeriod1 h2').attr('data-innerid');
+//
+// 	var hotNewsParams = {
+// 		webSource:webSource,
+// 		type:type,
+// 		cycle:cycle,
+// 	}
+//
+// 	return hotNewsParams;
+// }
 
 //网站新闻排行2
 //
@@ -774,7 +752,7 @@ function showCalendar() {
     //     eventCanderW = $('.homeHistoryTom').height();
     // }
 	var date = new Date();
-	$('#eventCander span').text(date.formatDate('yyyy-MM-dd'))
+	$('#eventCander span').text(date.formatDate('yyyy-MM-dd'));
     getHistoryToday(date);
     // $('#eventCander').calendar({
     //     width: eventCanderW,
@@ -816,13 +794,13 @@ function getHistoryToday(date) {
 //                    console.log(news);
 					var releaseDatetime = news.releaseDatetime;
                     title = news.title;
-					time = new Date(news.releaseDatetime).formatDate('yyyy');
+                    time = new Date(news.releaseDatetime).formatDate('yyyy');
 					var urlSuffix = news.webpageCode;
 					// 处理releaseDatetime为null或'null'及''的情况
 					if (releaseDatetime != 'null' && releaseDatetime != null || releaseDatetime != '') {
 						urlSuffix = news.webpageCode + '/' + releaseDatetime;
 					}
-                    url = ctx + '/latest/front/news/detail/' + urlSuffix;
+                    url = ctx + '/latest/front/news/calendar/detail/' + news.webpageCode;
                     type = "事件";
                     datas += '<tr><td class="number">' + time + '</td><td class="lTitle"><a href="' + url + '" target="_blank" tabindex="0" data-content="'+title+'" data-container=".homeHistoryTomTableHover"  data-placement="left" data-toggle="popover">' + title + '</a></td><td >' + type + '</td></tr>';
                 }

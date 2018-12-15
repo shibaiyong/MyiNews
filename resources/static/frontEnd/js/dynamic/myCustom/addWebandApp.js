@@ -52,6 +52,9 @@ $('.addSources').typeahead({
                             type: 'success',
                         });
                         getWebSourcesData(ctx+'/custom/front/listUserWebsite');
+                        //更新网站和App列表
+                        updateWebSourcesData(ctx + '/custom/front/listUserSiteByType');
+                        updateAppSourcesData(ctx + '/custom/front/listUserSiteByType');
                     }else if(obj == 'fail'){
                         $().toastmessage('showToast', {
                             text: '添加来源失败！',
@@ -105,6 +108,7 @@ function getWebSourcesData(getAjaxUrl){
                         contentweb += '<a href="javascript:;" data-innerid="'+obj[count].innerid+'" class="sourcesBox"><span class="contentWidth" data-innerid="'+obj[count].innerid+'">'+obj[count].name+'</span><span class="blodFont">&#10005;</span></a>';
                     }
                 }
+
                 $('.hasAddWeb').html(contentweb);
                 $('.hasAddApp').html(contentapp);
                 //  侧边栏-来源删除的样式
@@ -119,7 +123,6 @@ function getWebSourcesData(getAjaxUrl){
                         success : function(data) {
                             if(data.result == true){
                                 var obj = data.resultObj;
-
                                 if(obj == '成功'){
                                     $().toastmessage('showToast', {
                                         //提示信息的内容
@@ -131,6 +134,9 @@ function getWebSourcesData(getAjaxUrl){
                                         //显示的状态。共notice, warning, error, success4种状态
                                         type: 'success',
                                     });
+                                   //更新网站和App列表
+                                   updateWebSourcesData(ctx + '/custom/front/listUserSiteByType');
+                                   updateAppSourcesData(ctx + '/custom/front/listUserSiteByType');
 
                                     $('.sourcesBox').each(function(index){
                                         if($(this).attr('data-innerid') == innerid){
@@ -174,5 +180,93 @@ function addTip(){
     $('.dropdown-menu .dropdown-item').mouseenter(function(){
         var title = $(this).text();
         $(this).attr('title',title);
+    })
+}
+
+// 更新左侧网站列表
+function updateWebSourcesData(getAjaxUrl) {
+    $.ajax({
+        url: getAjaxUrl, //这个就是请求地址对应sAjaxSource
+        type: 'get',
+        dataType: 'json',
+        data: {
+            type: 1
+        },
+        async: true,
+        success: function (data) {
+            console.log(data);
+            if (data.result == true) {
+                var obj = data.resultObj;
+                var contentapp = '';
+                var contentweb = '';
+                for (var i = 0; obj.length > i; i++) {
+                    webIdsList.push(obj[i].innerid);
+                    contentweb += "<li class='mdynews' data-innerid=" + obj[i].innerid + ">" + obj[i].name + "</li>"
+                }
+                if (contentweb != "") {
+                    $('.link').eq(1).find("i")[0].style.visibility = "visible"
+                }else{
+                    $('.link').eq(1).find("i")[0].style.visibility = "hidden"
+                }
+            }
+            setTimeout(function () {
+                $('.submenu').eq(1).html(contentweb);
+                $('.submenu').eq(1).find('li').click(function () {
+                    $('.mdynews').css('border', 'none');
+                    this.style.borderLeft = '5px #f44336 solid'
+                    localStorage.customgroup = '';
+                    var innerId = $(this).attr('data-innerid');
+                    localStorage.innerId = innerId;
+                    var customType = "web"
+                    localStorage.customType = customType;
+                    $('#myCustomContent').loadPage(ctx + '/custom/front/gotoMyCustomThread');
+                })
+            }, 500)
+        }
+    })
+}
+// 更新左侧app列表
+function updateAppSourcesData(getAjaxUrl) {
+    $.ajax({
+        url: getAjaxUrl, //这个就是请求地址对应sAjaxSource
+        type: 'get',
+        dataType: 'json',
+        data: {
+            type: 4
+        },
+        async: true,
+        success: function (data) {
+            console.log(data);
+            if (data.result == true) {
+                var obj = data.resultObj;
+                var contentapp = '';
+                var contentweb = '';
+                for (var i = 0; obj.length > i; i++) {
+                    appIdsList.push(obj[i].innerid);
+                    contentapp += "<li class='mdynews' data-innerid=" + obj[i].innerid + ">" + obj[i].name + "</li>"
+                }
+
+                if (contentapp != "") {
+                    $('.link').eq(2).find("i")[0].style.visibility = "visible"
+                }else{
+                    $('.link').eq(2).find("i")[0].style.visibility = "hidden"
+                }
+            }
+            setTimeout(function () {
+
+                $('.submenu').eq(2).html(contentapp);
+
+                $('.submenu').eq(2).find('li').click(function () {
+                    $('.mdynews').css('border', 'none');
+                    this.style.borderLeft = '5px #f44336 solid'
+                    localStorage.customgroup = '';
+                    var innerId = $(this).attr('data-innerid');
+                    var customType = "app"
+                    localStorage.customType = customType;
+                    localStorage.innerId = innerId;
+                    $('#myCustomContent').loadPage(ctx + '/custom/front/gotoMyCustomThread');
+                })
+            }, 500)
+        }
     })
 }

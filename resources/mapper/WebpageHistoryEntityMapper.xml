@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.calendar.dao.WebpageHistoryEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.calendar.model.WebpageHistoryEntity">
+    <id column="webpage_code" jdbcType="VARCHAR" property="webpageCode" />
+    <result column="news_id" jdbcType="VARCHAR" property="newsId" />
+    <result column="webpage_url" jdbcType="VARCHAR" property="webpageUrl" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="short_title" jdbcType="VARCHAR" property="shortTitle" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="web_summary" jdbcType="VARCHAR" property="webSummary" />
+    <result column="source_report" jdbcType="VARCHAR" property="sourceReport" />
+    <result column="source_crawl" jdbcType="INTEGER" property="sourceCrawl" />
+    <result column="region" jdbcType="INTEGER" property="region" />
+    <result column="classification" jdbcType="VARCHAR" property="classification" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="crawl_datetime" jdbcType="TIMESTAMP" property="crawlDatetime" />
+    <result column="release_datetime_str" jdbcType="VARCHAR" property="releaseDatetimeStr" />
+    <result column="release_datetime" jdbcType="TIMESTAMP" property="releaseDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    <result column="original_id" jdbcType="VARCHAR" property="originalId" />
+    <result column="original_parent_id" jdbcType="VARCHAR" property="originalParentId" />
+    <result column="original_relation_id" jdbcType="VARCHAR" property="originalRelationId" />
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath" />
+    <result column="video_pic_path" jdbcType="VARCHAR" property="videoPicPath" />
+    <result column="news_crawl_type" jdbcType="INTEGER" property="newsCrawlType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.calendar.model.WebpageHistoryEntityWithBLOBs">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="no_tag_content" jdbcType="LONGVARCHAR" property="noTagContent" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    webpage_code, news_id, webpage_url, task_id, title, short_title, keywords, web_summary, 
+    source_report, source_crawl, region, classification, status, author, crawl_datetime, 
+    release_datetime_str, release_datetime, update_datetime, is_deleted, original_id, 
+    original_parent_id, original_relation_id, pic_path, video_pic_path, news_crawl_type
+  </sql>
+  <sql id="Blob_Column_List">
+    content, no_tag_content, description
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_webpage_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from news_webpage_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_webpage_history
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from news_webpage_history
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityExample">
+    delete from news_webpage_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityWithBLOBs">
+    insert into news_webpage_history (webpage_code, news_id, webpage_url, 
+      task_id, title, short_title, 
+      keywords, web_summary, source_report, 
+      source_crawl, region, classification, 
+      status, author, crawl_datetime, 
+      release_datetime_str, release_datetime, 
+      update_datetime, is_deleted, original_id, 
+      original_parent_id, original_relation_id, pic_path, 
+      video_pic_path, news_crawl_type, content, 
+      no_tag_content, description)
+    values (#{webpageCode,jdbcType=VARCHAR}, #{newsId,jdbcType=VARCHAR}, #{webpageUrl,jdbcType=VARCHAR}, 
+      #{taskId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{shortTitle,jdbcType=VARCHAR}, 
+      #{keywords,jdbcType=VARCHAR}, #{webSummary,jdbcType=VARCHAR}, #{sourceReport,jdbcType=VARCHAR}, 
+      #{sourceCrawl,jdbcType=INTEGER}, #{region,jdbcType=INTEGER}, #{classification,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{crawlDatetime,jdbcType=TIMESTAMP}, 
+      #{releaseDatetimeStr,jdbcType=VARCHAR}, #{releaseDatetime,jdbcType=TIMESTAMP}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=INTEGER}, #{originalId,jdbcType=VARCHAR}, 
+      #{originalParentId,jdbcType=VARCHAR}, #{originalRelationId,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR}, 
+      #{videoPicPath,jdbcType=VARCHAR}, #{newsCrawlType,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, 
+      #{noTagContent,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityWithBLOBs">
+    insert into news_webpage_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webpageCode != null">
+        webpage_code,
+      </if>
+      <if test="newsId != null">
+        news_id,
+      </if>
+      <if test="webpageUrl != null">
+        webpage_url,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="shortTitle != null">
+        short_title,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+      <if test="webSummary != null">
+        web_summary,
+      </if>
+      <if test="sourceReport != null">
+        source_report,
+      </if>
+      <if test="sourceCrawl != null">
+        source_crawl,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="classification != null">
+        classification,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="crawlDatetime != null">
+        crawl_datetime,
+      </if>
+      <if test="releaseDatetimeStr != null">
+        release_datetime_str,
+      </if>
+      <if test="releaseDatetime != null">
+        release_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="originalId != null">
+        original_id,
+      </if>
+      <if test="originalParentId != null">
+        original_parent_id,
+      </if>
+      <if test="originalRelationId != null">
+        original_relation_id,
+      </if>
+      <if test="picPath != null">
+        pic_path,
+      </if>
+      <if test="videoPicPath != null">
+        video_pic_path,
+      </if>
+      <if test="newsCrawlType != null">
+        news_crawl_type,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="noTagContent != null">
+        no_tag_content,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webpageCode != null">
+        #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="newsId != null">
+        #{newsId,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageUrl != null">
+        #{webpageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null">
+        #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="webSummary != null">
+        #{webSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceReport != null">
+        #{sourceReport,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCrawl != null">
+        #{sourceCrawl,jdbcType=INTEGER},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=INTEGER},
+      </if>
+      <if test="classification != null">
+        #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlDatetime != null">
+        #{crawlDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseDatetimeStr != null">
+        #{releaseDatetimeStr,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDatetime != null">
+        #{releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="originalId != null">
+        #{originalId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalParentId != null">
+        #{originalParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalRelationId != null">
+        #{originalRelationId,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPicPath != null">
+        #{videoPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="newsCrawlType != null">
+        #{newsCrawlType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noTagContent != null">
+        #{noTagContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityExample" resultType="java.lang.Long">
+    select count(*) from news_webpage_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update news_webpage_history
+    <set>
+      <if test="record.webpageCode != null">
+        webpage_code = #{record.webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsId != null">
+        news_id = #{record.newsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webpageUrl != null">
+        webpage_url = #{record.webpageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortTitle != null">
+        short_title = #{record.shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null">
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webSummary != null">
+        web_summary = #{record.webSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceReport != null">
+        source_report = #{record.sourceReport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceCrawl != null">
+        source_crawl = #{record.sourceCrawl,jdbcType=INTEGER},
+      </if>
+      <if test="record.region != null">
+        region = #{record.region,jdbcType=INTEGER},
+      </if>
+      <if test="record.classification != null">
+        classification = #{record.classification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crawlDatetime != null">
+        crawl_datetime = #{record.crawlDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.releaseDatetimeStr != null">
+        release_datetime_str = #{record.releaseDatetimeStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseDatetime != null">
+        release_datetime = #{record.releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDatetime != null">
+        update_datetime = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.originalId != null">
+        original_id = #{record.originalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalParentId != null">
+        original_parent_id = #{record.originalParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalRelationId != null">
+        original_relation_id = #{record.originalRelationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picPath != null">
+        pic_path = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoPicPath != null">
+        video_pic_path = #{record.videoPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsCrawlType != null">
+        news_crawl_type = #{record.newsCrawlType,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.noTagContent != null">
+        no_tag_content = #{record.noTagContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update news_webpage_history
+    set webpage_code = #{record.webpageCode,jdbcType=VARCHAR},
+      news_id = #{record.newsId,jdbcType=VARCHAR},
+      webpage_url = #{record.webpageUrl,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      short_title = #{record.shortTitle,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      web_summary = #{record.webSummary,jdbcType=VARCHAR},
+      source_report = #{record.sourceReport,jdbcType=VARCHAR},
+      source_crawl = #{record.sourceCrawl,jdbcType=INTEGER},
+      region = #{record.region,jdbcType=INTEGER},
+      classification = #{record.classification,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      crawl_datetime = #{record.crawlDatetime,jdbcType=TIMESTAMP},
+      release_datetime_str = #{record.releaseDatetimeStr,jdbcType=VARCHAR},
+      release_datetime = #{record.releaseDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=INTEGER},
+      original_id = #{record.originalId,jdbcType=VARCHAR},
+      original_parent_id = #{record.originalParentId,jdbcType=VARCHAR},
+      original_relation_id = #{record.originalRelationId,jdbcType=VARCHAR},
+      pic_path = #{record.picPath,jdbcType=VARCHAR},
+      video_pic_path = #{record.videoPicPath,jdbcType=VARCHAR},
+      news_crawl_type = #{record.newsCrawlType,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      no_tag_content = #{record.noTagContent,jdbcType=LONGVARCHAR},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update news_webpage_history
+    set webpage_code = #{record.webpageCode,jdbcType=VARCHAR},
+      news_id = #{record.newsId,jdbcType=VARCHAR},
+      webpage_url = #{record.webpageUrl,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      short_title = #{record.shortTitle,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      web_summary = #{record.webSummary,jdbcType=VARCHAR},
+      source_report = #{record.sourceReport,jdbcType=VARCHAR},
+      source_crawl = #{record.sourceCrawl,jdbcType=INTEGER},
+      region = #{record.region,jdbcType=INTEGER},
+      classification = #{record.classification,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      author = #{record.author,jdbcType=VARCHAR},
+      crawl_datetime = #{record.crawlDatetime,jdbcType=TIMESTAMP},
+      release_datetime_str = #{record.releaseDatetimeStr,jdbcType=VARCHAR},
+      release_datetime = #{record.releaseDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=INTEGER},
+      original_id = #{record.originalId,jdbcType=VARCHAR},
+      original_parent_id = #{record.originalParentId,jdbcType=VARCHAR},
+      original_relation_id = #{record.originalRelationId,jdbcType=VARCHAR},
+      pic_path = #{record.picPath,jdbcType=VARCHAR},
+      video_pic_path = #{record.videoPicPath,jdbcType=VARCHAR},
+      news_crawl_type = #{record.newsCrawlType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityWithBLOBs">
+    update news_webpage_history
+    <set>
+      <if test="newsId != null">
+        news_id = #{newsId,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageUrl != null">
+        webpage_url = #{webpageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null">
+        short_title = #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="webSummary != null">
+        web_summary = #{webSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceReport != null">
+        source_report = #{sourceReport,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCrawl != null">
+        source_crawl = #{sourceCrawl,jdbcType=INTEGER},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=INTEGER},
+      </if>
+      <if test="classification != null">
+        classification = #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="crawlDatetime != null">
+        crawl_datetime = #{crawlDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseDatetimeStr != null">
+        release_datetime_str = #{releaseDatetimeStr,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDatetime != null">
+        release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="originalId != null">
+        original_id = #{originalId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalParentId != null">
+        original_parent_id = #{originalParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalRelationId != null">
+        original_relation_id = #{originalRelationId,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        pic_path = #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPicPath != null">
+        video_pic_path = #{videoPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="newsCrawlType != null">
+        news_crawl_type = #{newsCrawlType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noTagContent != null">
+        no_tag_content = #{noTagContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.calendar.model.WebpageHistoryEntityWithBLOBs">
+    update news_webpage_history
+    set news_id = #{newsId,jdbcType=VARCHAR},
+      webpage_url = #{webpageUrl,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      web_summary = #{webSummary,jdbcType=VARCHAR},
+      source_report = #{sourceReport,jdbcType=VARCHAR},
+      source_crawl = #{sourceCrawl,jdbcType=INTEGER},
+      region = #{region,jdbcType=INTEGER},
+      classification = #{classification,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      crawl_datetime = #{crawlDatetime,jdbcType=TIMESTAMP},
+      release_datetime_str = #{releaseDatetimeStr,jdbcType=VARCHAR},
+      release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      original_id = #{originalId,jdbcType=VARCHAR},
+      original_parent_id = #{originalParentId,jdbcType=VARCHAR},
+      original_relation_id = #{originalRelationId,jdbcType=VARCHAR},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      video_pic_path = #{videoPicPath,jdbcType=VARCHAR},
+      news_crawl_type = #{newsCrawlType,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+      no_tag_content = #{noTagContent,jdbcType=LONGVARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.calendar.model.WebpageHistoryEntity">
+    update news_webpage_history
+    set news_id = #{newsId,jdbcType=VARCHAR},
+      webpage_url = #{webpageUrl,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      web_summary = #{webSummary,jdbcType=VARCHAR},
+      source_report = #{sourceReport,jdbcType=VARCHAR},
+      source_crawl = #{sourceCrawl,jdbcType=INTEGER},
+      region = #{region,jdbcType=INTEGER},
+      classification = #{classification,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      crawl_datetime = #{crawlDatetime,jdbcType=TIMESTAMP},
+      release_datetime_str = #{releaseDatetimeStr,jdbcType=VARCHAR},
+      release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      original_id = #{originalId,jdbcType=VARCHAR},
+      original_parent_id = #{originalParentId,jdbcType=VARCHAR},
+      original_relation_id = #{originalRelationId,jdbcType=VARCHAR},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      video_pic_path = #{videoPicPath,jdbcType=VARCHAR},
+      news_crawl_type = #{newsCrawlType,jdbcType=INTEGER}
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

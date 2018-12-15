@@ -35,7 +35,6 @@
 		.relativeReport p.latestReport,.relativeReport p.firstReport{
 			margin-left: 30px;
 			line-height: 22px;
-			max-height: 44px;
 			overflow:hidden;
 		}
 		.relativeReport .keyInfo{
@@ -70,7 +69,7 @@
 <body>
 	<input type="hidden" id="clusterCode"  th:value="${clusterCode}"/>
 	<input type="hidden" id="queryStr"  th:value="${queryStr}"/>
-	
+	 <input type="hidden" th:value="${startTime}" class="startTime"/>
 	<!-- 头部内容 -->
 	<div id="header" th:include="frontEnd/common/header :: header" ></div>
 	<!-- 主体内容 -->

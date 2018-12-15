@@ -74,6 +74,10 @@ function screenPie(id,ajaxUrl){
 	pieChart.showLoading();
 	
 	var option = {
+		// tooltip: {
+		// 	trigger: 'item',
+		// 	formatter: "{a} <br/>{b} : {c} <br/>{d}%"
+		// },
 	    series : [
 	        {
 	            name: '访问来源',
@@ -84,6 +88,9 @@ function screenPie(id,ajaxUrl){
 	            selectedOffset:5,
 	            avoidLabelOverlap:false,//关闭避免标签重叠
 	            label:{
+					show: false,
+					showContent: false,
+					triggerOn: 'click',
 	            	formatter: function(params, ticket, callback) {
 	                    return '{black|' + params.name + '}\n{blue|' + params.value + '篇}\n{blue|'+params.percent+'%}';
 	                },

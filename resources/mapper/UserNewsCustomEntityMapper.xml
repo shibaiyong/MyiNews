@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.UserNewsCustomEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.UserNewsCustomEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="custom_group" jdbcType="TIMESTAMP" property="customGroup" />
+    <result column="news_type" jdbcType="INTEGER" property="newsType" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="classification" jdbcType="VARCHAR" property="classification" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="web_label" jdbcType="VARCHAR" property="webLabel" />
+    <result column="time_cycle" jdbcType="INTEGER" property="timeCycle" />
+    <result column="time_range" jdbcType="INTEGER" property="timeRange" />
+    <result column="websites" jdbcType="VARCHAR" property="websites" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="start_datetime" jdbcType="TIMESTAMP" property="startDatetime" />
+    <result column="end_datetime" jdbcType="TIMESTAMP" property="endDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    <result column="last_cluser_datetime" jdbcType="TIMESTAMP" property="lastCluserDatetime" />
+    <result column="carrier" jdbcType="VARCHAR" property="carrier" />
+    <result column="classify_flag" jdbcType="INTEGER" property="classifyFlag" />
+    <result column="source_flag" jdbcType="INTEGER" property="sourceFlag" />
+    <result column="region_flag" jdbcType="INTEGER" property="regionFlag" />
+    <result column="carrier_flag" jdbcType="INTEGER" property="carrierFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    innerid, user_id, tenant_id, custom_group, news_type, name, classification, source, 
+    region, web_label, time_cycle, time_range, websites, keywords, create_datetime, start_datetime, 
+    end_datetime, update_datetime, is_deleted, last_cluser_datetime, carrier, classify_flag, 
+    source_flag, region_flag, carrier_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.uec.web.model.UserNewsCustomEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_news_custom
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_news_custom
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_news_custom
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uec.web.model.UserNewsCustomEntityExample">
+    delete from user_news_custom
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.UserNewsCustomEntity">
+    insert into user_news_custom (innerid, user_id, tenant_id, 
+      custom_group, news_type, name, 
+      classification, source, region, 
+      web_label, time_cycle, time_range, 
+      websites, keywords, create_datetime, 
+      start_datetime, end_datetime, update_datetime, 
+      is_deleted, last_cluser_datetime, carrier, 
+      classify_flag, source_flag, region_flag, 
+      carrier_flag)
+    values (#{innerid,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{tenantId,jdbcType=INTEGER}, 
+      #{customGroup,jdbcType=TIMESTAMP}, #{newsType,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{classification,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{webLabel,jdbcType=VARCHAR}, #{timeCycle,jdbcType=INTEGER}, #{timeRange,jdbcType=INTEGER}, 
+      #{websites,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{startDatetime,jdbcType=TIMESTAMP}, #{endDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=INTEGER}, #{lastCluserDatetime,jdbcType=TIMESTAMP}, #{carrier,jdbcType=VARCHAR}, 
+      #{classifyFlag,jdbcType=INTEGER}, #{sourceFlag,jdbcType=INTEGER}, #{regionFlag,jdbcType=INTEGER}, 
+      #{carrierFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.UserNewsCustomEntity">
+    insert into user_news_custom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="customGroup != null">
+        custom_group,
+      </if>
+      <if test="newsType != null">
+        news_type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="classification != null">
+        classification,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="webLabel != null">
+        web_label,
+      </if>
+      <if test="timeCycle != null">
+        time_cycle,
+      </if>
+      <if test="timeRange != null">
+        time_range,
+      </if>
+      <if test="websites != null">
+        websites,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="startDatetime != null">
+        start_datetime,
+      </if>
+      <if test="endDatetime != null">
+        end_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="lastCluserDatetime != null">
+        last_cluser_datetime,
+      </if>
+      <if test="carrier != null">
+        carrier,
+      </if>
+      <if test="classifyFlag != null">
+        classify_flag,
+      </if>
+      <if test="sourceFlag != null">
+        source_flag,
+      </if>
+      <if test="regionFlag != null">
+        region_flag,
+      </if>
+      <if test="carrierFlag != null">
+        carrier_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="customGroup != null">
+        #{customGroup,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsType != null">
+        #{newsType,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="webLabel != null">
+        #{webLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="timeCycle != null">
+        #{timeCycle,jdbcType=INTEGER},
+      </if>
+      <if test="timeRange != null">
+        #{timeRange,jdbcType=INTEGER},
+      </if>
+      <if test="websites != null">
+        #{websites,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDatetime != null">
+        #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null">
+        #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="lastCluserDatetime != null">
+        #{lastCluserDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carrier != null">
+        #{carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyFlag != null">
+        #{classifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sourceFlag != null">
+        #{sourceFlag,jdbcType=INTEGER},
+      </if>
+      <if test="regionFlag != null">
+        #{regionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="carrierFlag != null">
+        #{carrierFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uec.web.model.UserNewsCustomEntityExample" resultType="java.lang.Long">
+    select count(*) from user_news_custom
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_news_custom
+    <set>
+      <if test="record.innerid != null">
+        innerid = #{record.innerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantId != null">
+        tenant_id = #{record.tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customGroup != null">
+        custom_group = #{record.customGroup,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.newsType != null">
+        news_type = #{record.newsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classification != null">
+        classification = #{record.classification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.region != null">
+        region = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLabel != null">
+        web_label = #{record.webLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeCycle != null">
+        time_cycle = #{record.timeCycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeRange != null">
+        time_range = #{record.timeRange,jdbcType=INTEGER},
+      </if>
+      <if test="record.websites != null">
+        websites = #{record.websites,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null">
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDatetime != null">
+        create_datetime = #{record.createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startDatetime != null">
+        start_datetime = #{record.startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDatetime != null">
+        end_datetime = #{record.endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDatetime != null">
+        update_datetime = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastCluserDatetime != null">
+        last_cluser_datetime = #{record.lastCluserDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.carrier != null">
+        carrier = #{record.carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classifyFlag != null">
+        classify_flag = #{record.classifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceFlag != null">
+        source_flag = #{record.sourceFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.regionFlag != null">
+        region_flag = #{record.regionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.carrierFlag != null">
+        carrier_flag = #{record.carrierFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_news_custom
+    set innerid = #{record.innerid,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      tenant_id = #{record.tenantId,jdbcType=INTEGER},
+      custom_group = #{record.customGroup,jdbcType=TIMESTAMP},
+      news_type = #{record.newsType,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      classification = #{record.classification,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      region = #{record.region,jdbcType=VARCHAR},
+      web_label = #{record.webLabel,jdbcType=VARCHAR},
+      time_cycle = #{record.timeCycle,jdbcType=INTEGER},
+      time_range = #{record.timeRange,jdbcType=INTEGER},
+      websites = #{record.websites,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      create_datetime = #{record.createDatetime,jdbcType=TIMESTAMP},
+      start_datetime = #{record.startDatetime,jdbcType=TIMESTAMP},
+      end_datetime = #{record.endDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{record.updateDatetime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=INTEGER},
+      last_cluser_datetime = #{record.lastCluserDatetime,jdbcType=TIMESTAMP},
+      carrier = #{record.carrier,jdbcType=VARCHAR},
+      classify_flag = #{record.classifyFlag,jdbcType=INTEGER},
+      source_flag = #{record.sourceFlag,jdbcType=INTEGER},
+      region_flag = #{record.regionFlag,jdbcType=INTEGER},
+      carrier_flag = #{record.carrierFlag,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.UserNewsCustomEntity">
+    update user_news_custom
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="customGroup != null">
+        custom_group = #{customGroup,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsType != null">
+        news_type = #{newsType,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        classification = #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="webLabel != null">
+        web_label = #{webLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="timeCycle != null">
+        time_cycle = #{timeCycle,jdbcType=INTEGER},
+      </if>
+      <if test="timeRange != null">
+        time_range = #{timeRange,jdbcType=INTEGER},
+      </if>
+      <if test="websites != null">
+        websites = #{websites,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startDatetime != null">
+        start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDatetime != null">
+        end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="lastCluserDatetime != null">
+        last_cluser_datetime = #{lastCluserDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carrier != null">
+        carrier = #{carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyFlag != null">
+        classify_flag = #{classifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sourceFlag != null">
+        source_flag = #{sourceFlag,jdbcType=INTEGER},
+      </if>
+      <if test="regionFlag != null">
+        region_flag = #{regionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="carrierFlag != null">
+        carrier_flag = #{carrierFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.UserNewsCustomEntity">
+    update user_news_custom
+    set user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      custom_group = #{customGroup,jdbcType=TIMESTAMP},
+      news_type = #{newsType,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      classification = #{classification,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      web_label = #{webLabel,jdbcType=VARCHAR},
+      time_cycle = #{timeCycle,jdbcType=INTEGER},
+      time_range = #{timeRange,jdbcType=INTEGER},
+      websites = #{websites,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      start_datetime = #{startDatetime,jdbcType=TIMESTAMP},
+      end_datetime = #{endDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      last_cluser_datetime = #{lastCluserDatetime,jdbcType=TIMESTAMP},
+      carrier = #{carrier,jdbcType=VARCHAR},
+      classify_flag = #{classifyFlag,jdbcType=INTEGER},
+      source_flag = #{sourceFlag,jdbcType=INTEGER},
+      region_flag = #{regionFlag,jdbcType=INTEGER},
+      carrier_flag = #{carrierFlag,jdbcType=INTEGER}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

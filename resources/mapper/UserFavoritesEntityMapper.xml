@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.UserFavoritesEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.UserFavoritesEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="release_datetime" jdbcType="TIMESTAMP" property="releaseDatetime" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="source" jdbcType="INTEGER" property="source" />
+    <result column="corpus_type" jdbcType="VARCHAR" property="corpusType" />
+    <result column="news_url" jdbcType="VARCHAR" property="newsUrl" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.model.UserFavoritesEntity">
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, user_id, tenant_id, release_datetime, create_datetime, title, source, corpus_type, 
+    news_url, code
+  </sql>
+  <sql id="Blob_Column_List">
+    summary
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_favorites
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_favorites
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" parameterType="com.uec.web.model.UserFavoritesEntity">
+    insert into user_favorites ( user_id, tenant_id,
+      release_datetime, create_datetime, title, 
+      source, corpus_type, news_url, 
+      code, summary)
+    values ( #{userId,jdbcType=INTEGER}, #{tenantId,jdbcType=INTEGER},
+      #{releaseDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, 
+      #{source,jdbcType=INTEGER}, #{corpusType,jdbcType=VARCHAR}, #{newsUrl,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{summary,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.UserFavoritesEntity">
+    insert into user_favorites
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="releaseDatetime != null">
+        release_datetime,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="corpusType != null">
+        corpus_type,
+      </if>
+      <if test="newsUrl != null">
+        news_url,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="releaseDatetime != null">
+        #{releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="corpusType != null">
+        #{corpusType,jdbcType=VARCHAR},
+      </if>
+      <if test="newsUrl != null">
+        #{newsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.UserFavoritesEntity">
+    update user_favorites
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="releaseDatetime != null">
+        release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="corpusType != null">
+        corpus_type = #{corpusType,jdbcType=VARCHAR},
+      </if>
+      <if test="newsUrl != null">
+        news_url = #{newsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.model.UserFavoritesEntity">
+    update user_favorites
+    set user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      source = #{source,jdbcType=INTEGER},
+      corpus_type = #{corpusType,jdbcType=VARCHAR},
+      news_url = #{newsUrl,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.UserFavoritesEntity">
+    update user_favorites
+    set user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      source = #{source,jdbcType=INTEGER},
+      corpus_type = #{corpusType,jdbcType=VARCHAR},
+      news_url = #{newsUrl,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+
+  <select id="listWebpageCodeByUserId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select code from user_favorites
+    where user_id = #{userId,jdbcType=INTEGER}
+    order by create_datetime DESC
+  </select>
+
+</mapper>

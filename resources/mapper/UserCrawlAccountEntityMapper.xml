@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.dao.UserCrawlAccountEntityMapper">
+    <resultMap id="BaseResultMap" type="com.uec.web.model.UserCrawlAccountEntity">
+        <id column="innerId" jdbcType="INTEGER" property="innerid"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="crawl_type" jdbcType="INTEGER" property="crawlType"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="domain" jdbcType="VARCHAR" property="domain"/>
+        <result column="crawl_datetime" jdbcType="TIMESTAMP" property="crawlDatetime"/>
+        <result column="estimated_datetime" jdbcType="TIMESTAMP" property="estimatedDatetime"/>
+        <result column="analysis_status" jdbcType="INTEGER" property="analysisStatus"/>
+        <result column="account_status" jdbcType="INTEGER" property="accountStatus"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="tenant_id" jdbcType="INTEGER" property="tenantId"/>
+        <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    innerId, code, crawl_type, url, name, domain, crawl_datetime, estimated_datetime, 
+    analysis_status, account_status, is_deleted, user_id, tenant_id, create_datetime, 
+    update_datetime
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_crawl_account
+        where innerId = #{innerid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_crawl_account
+    where innerId = #{innerid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.uec.web.model.UserCrawlAccountEntity">
+    insert into user_crawl_account (innerId, code, crawl_type, 
+      url, name, domain, 
+      crawl_datetime, estimated_datetime, analysis_status, 
+      account_status, is_deleted, user_id, 
+      tenant_id, create_datetime, update_datetime
+      )
+    values (#{innerid,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{crawlType,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
+      #{crawlDatetime,jdbcType=TIMESTAMP}, #{estimatedDatetime,jdbcType=TIMESTAMP}, #{analysisStatus,jdbcType=INTEGER}, 
+      #{accountStatus,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{tenantId,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.uec.web.model.UserCrawlAccountEntity">
+        insert into user_crawl_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="innerid != null">
+                innerId,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="crawlType != null">
+                crawl_type,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="domain != null">
+                domain,
+            </if>
+            <if test="crawlDatetime != null">
+                crawl_datetime,
+            </if>
+            <if test="estimatedDatetime != null">
+                estimated_datetime,
+            </if>
+            <if test="analysisStatus != null">
+                analysis_status,
+            </if>
+            <if test="accountStatus != null">
+                account_status,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="createDatetime != null">
+                create_datetime,
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="innerid != null">
+                #{innerid,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="crawlType != null">
+                #{crawlType,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="domain != null">
+                #{domain,jdbcType=VARCHAR},
+            </if>
+            <if test="crawlDatetime != null">
+                #{crawlDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="estimatedDatetime != null">
+                #{estimatedDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="analysisStatus != null">
+                #{analysisStatus,jdbcType=INTEGER},
+            </if>
+            <if test="accountStatus != null">
+                #{accountStatus,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=INTEGER},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.UserCrawlAccountEntity">
+        update user_crawl_account
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="crawlType != null">
+                crawl_type = #{crawlType,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="domain != null">
+                domain = #{domain,jdbcType=VARCHAR},
+            </if>
+            <if test="crawlDatetime != null">
+                crawl_datetime = #{crawlDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="estimatedDatetime != null">
+                estimated_datetime = #{estimatedDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="analysisStatus != null">
+                analysis_status = #{analysisStatus,jdbcType=INTEGER},
+            </if>
+            <if test="accountStatus != null">
+                account_status = #{accountStatus,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=INTEGER},
+            </if>
+            <if test="createDatetime != null">
+                create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where innerId = #{innerid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.uec.web.model.UserCrawlAccountEntity">
+    update user_crawl_account
+    set code = #{code,jdbcType=VARCHAR},
+      crawl_type = #{crawlType,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=VARCHAR},
+      crawl_datetime = #{crawlDatetime,jdbcType=TIMESTAMP},
+      estimated_datetime = #{estimatedDatetime,jdbcType=TIMESTAMP},
+      analysis_status = #{analysisStatus,jdbcType=INTEGER},
+      account_status = #{accountStatus,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+    where innerid = #{innerId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+</mapper>

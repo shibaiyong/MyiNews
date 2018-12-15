@@ -1,3 +1,17 @@
+$(function(){
+    $().showHeader({
+        callback:function(){
+            $('#example-navbar-collapse').find('ul.navbar-nav').find('li').each(function(){
+                if($(this).attr('data-mark') == 'nav.home'){
+                    $(this).addClass('active');
+                }
+            });
+        }
+    })
+})
+
+
+
 function textAreaControl() {
 	
 	var content = $("#txt-analysis").val();

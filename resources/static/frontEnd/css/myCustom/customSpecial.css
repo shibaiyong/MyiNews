@@ -80,3 +80,7 @@
     border-radius: 5px;
     border: #dddddd 1px solid;
 }
+
+.dropdown-menu {
+    width: auto;
+}

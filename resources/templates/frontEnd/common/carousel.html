@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh" th:fragment="carousel">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/common/plugins/swiper/swiper-4.4.2.css"  th:href="@{/common/plugins/swiper/swiper-4.2.0.min.css}"/>
+    <script type="text/javascript" src="../../../static/common/plugins/swiper/swiper-4.2.0.min.js"  th:src="@{/common/plugins/swiper/swiper-4.4.2.js}"></script>
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/myCustomThread.js" th:src="@{/frontEnd/js/dynamic/common/carousel.js}"></script>
+    <style>
+        .swiper-container.gallery-thumbs{
+            height:118px;
+        }
+        .swiper-container.gallery-thumbs .swiper-slide{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            opacity: 0.5;
+        }
+        .swiper-container.gallery-top {
+            height:300px;
+        }
+        .swiper-container.gallery-top .swiper-slide {
+            text-align: center;
+            background:black;
+            padding:10px 0;
+            box-sizing: border-box;
+        }
+        .swiper-container.gallery-top .swiper-slide img{
+            max-height: 100%;
+        }
+        .swiper-container.gallery-thumbs .swiper-slide-thumb-active{
+            opacity:1;
+        }
+        /*http://localhost:8080/v1/common/plugins/Carousel/images/arrows_01.png*/
+         .swiper-container.gallery-top .swiper-button-prev{
+             background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAAEEm3GKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAbtJREFUeNpiZGBgaGDAAZgY8AAUyVWrVjkgizEhS4SFhd0BMv9hSAIlDgAVqCCLMZLtIIAAwqmTiRQvYHX+AVxOdyDfcoAAwutRsgIAF2DBJghzPNAj14DUK6rYRD8/AQQQyTYx0dxZ1NMAjRsxojQgpcI3BDUgxfoR5CyJUwMs8QM12mCTx+okpBwjMhwjDiCAyErmdMkWw8cSaEoVIFY/SXGCXHIjFYJvsGUJgiUptQyna5zQJbjIyifQKvcCkPmJmCAbzYwkAYAAonlwMQ35YBq1YOhawAXF5DWKiSkEgWXTPWjh941qPkAvYakaRMiGE+t6oi0g13CiLEAz/AG0TvhGtSBC7tsBLVMAUnzEpiCigwjNEiVos5iLqpFMriUkJVNkS2hd4cBc/o3qOZlYg0dL01ELqAcAAowu7dRh0UQd9cSoJ0Y9Mbw9wQStuKlqLws9XI7WJgXNbPwC4i9A/IOByCGeAasn8PUzoJ75AsV/Bl1MEHD8PWgMUC0mWIay46nqiYFy/LAqYqmasQcqRmhSOtHbM8OiiKVLf2JIV3Y4ChImqMMHVxFLAqCq40dbsaOeGPXEMPYEACKrxOlj1xxQAAAAAElFTkSuQmCC");
+         }
+        .swiper-container.gallery-top .swiper-button-next{
+            background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAAEEm3GKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAalJREFUeNpiZGBgaGDAAZgY8ABkSaZVq1Y54JL8FxYWdgdZAbpOFaCCAzABRrIdBBBAOHUyETQOp/NBLsPqdJAgUc7GaTlAAOH1KFkBgAuw4BAXA3pCC+ZLqthEPz8BBBDJNjHR3FlU0SCGnhQJaXiDLf3i0wDKjkdwacKmAZRFbUhJJiK4FA+XiAMIILKSOV2yxZC2BKROAF/6pzROQBaIwAo95CKeFhFPtmV0iRMWWvqA1OACWcQHtMiAFMNHMyNZACCAaB5cTEM+mEYtGDoWcEExTQpALmgBqERqwUdWEJFa8xFjwTdQCxHo8nvkWEKsD8i2hJQgAlnyCWjJA1IsIcUCLmglpECLuholJZGSmphoaThZyZTUfEBshcOFFNFUz8lkGTxaXI9aQD0AEKA9M1YBIIRhKBzlcPD/P/dQoUNxPGtKS4askmexCQjpqSUqKiEIQYjcEI8GM/RyxNF8m+pT7/qg+Nt9onJC1Hy35k+LXETY2Uk0W3ERMN6JHQJzq3ZAYUqsWMk8gZsrFv6wxemMcis2ZdjtMEufKuXDhppniyUEIQpDDGrKl+mH/sZkAAAAAElFTkSuQmCC");
+        }
+        .swiper-button-prev, .swiper-button-next{
+            width:49px;
+            height:49px;
+            background-size:49px 49px;
+        }
+    </style>
+</head>
+<body>
+<div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+
+    </div>
+
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+<div class="swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+
+    </div>
+</div>
+</body>
+</html>

@@ -6,6 +6,8 @@ var threadAjaxData1,
     batchCheckWebPageCode = [], //被选择的新闻的webpageCode
     tableItemWebPageCodeArr = [],//当前页面中显示的列表的webpageCode
     ajaxUrl = '';
+    realpage = 0;
+    totalpage = 0;
 $(function () {
     var loadSuccess = 0
     appIdArray = [];
@@ -17,7 +19,7 @@ $(function () {
     });
 //跳转收藏
     $('.collectButton').click(function () {
-        window.location.href = ctx + '/gotouser?skip=collect'
+        window.location.href = ctx + '/gotocollection'
     })
     /*$('.srceenTimeQuantum').removeClass('hide');*/
     $('.clusterSources').removeClass('hide');
@@ -70,142 +72,12 @@ $(function () {
     })
 
     var timeCode = localStorage.customgroup;
-
-//	来源
-    $.ajax({
-        url: ctx + '/custom/front/listusersource',//这个就是请求地址对应sAjaxSource
-        data: {'timeCode': timeCode},
-        type: 'get',
-        dataType: 'json',
-        async: true,
-        success: function (data) {
-            console.log(data);
-            if (data.result == true) {
-                var obj = data.resultObj;
-                var content = '';
-
-//    			添加历史记录
-                var historyCon = JSON.parse(localStorage.getItem('conditions'));
-                var historyText = '';
-                var historyId = '';
-                for (var i = 0; i < historyCon.length; i++) {
-
-                    if (historyCon[i]['name'] == 'clusterSources') {
-                        historyText = historyCon[i]['value'];
-                        historyId = historyCon[i]['id']
-                    }
-                }
-                if (historyText == '') {
-                    content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-                } else {
-                    content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-                }
-                if (obj.length >= 5) {
-                    content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-                } else {
-                    content += '<li class=""><a class="ti" href="javascript:void(0);">所有定制</a></li>';
-                }
-                for (var i = 0; obj.length > i; i++) {
-                    content += '<li class=""><a class="ti" href="#" data-innerid="' + obj[i].labelId + '">' + obj[i].name + '</a></li>';
-                }
-                var customType = localStorage.customType
-                if (customType == "") {
-                    $('#clusterSourcesPro').append(content);
-                } else {
-                    $('.clusterSources').each(function (a) {
-                        this.style.background = "#999999"
-                    })
-                    $('.clusterSources>h2>i').each(function () {
-                        this.style.display = 'none'
-                    })
-                }
-                $().screenConditionFun({
-                    className: '.clusterSources',
-                    idName: '#clusterSourcesPro',
-                });
-
-                var prosmoreHeight = $('.clusterSources').find('li').length * 30 + 4;
-                $('.clusterSources').find('.prosmore').css({
-                    'height': prosmoreHeight + 'px'
-                })
-            }
-        }
-    })
-//	载体
-    $.ajax({
-        url: ctx + '/custom/front/listusercarrier',//这个就是请求地址对应sAjaxSource
-        data: {'timeCode': timeCode},
-        type: 'get',
-        dataType: 'json',
-        async: true,
-        success: function (data) {
-            console.log(data);
-            if (data.result == true) {
-                var obj = data.resultObj;
-                var content = '';
-//    			添加历史记录
-                var historyCon = JSON.parse(localStorage.getItem('conditions'));
-                var historyText = '';
-                var historyId = '';
-                for (var i = 0; i < historyCon.length; i++) {
-
-                    if (historyCon[i]['name'] == 'clusterCarrier') {
-                        historyText = historyCon[i]['value'];
-                        historyId = historyCon[i]['id']
-                    }
-                }
-                if (historyText == '') {
-                    content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-                } else {
-                    content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-                }
-                content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-                for (var i = 0; obj.length > i; i++) {
-                    content += '<li class=""><a class="ti" href="#" data-innerid="' + obj[i].labelId + '">' + obj[i].name + '</a></li>';
-                }
-                var customType = localStorage.customType
-                if (customType == "") {
-                    $('#clusterCarrierPro').append(content);
-                } else {
-                    $('.clusterCarrier').each(function (a) {
-                        this.style.background = "#999999"
-                    })
-                    $('.clusterCarrier>h2').each(function () {
-                        if (customType == "web") {
-                            this.innerHTML = "网页"
-                        }
-                        if (customType == "weChat") {
-                            this.innerHTML = "微信"
-                        }
-                        if (customType == "weiBo") {
-                            this.innerHTML = "微博"
-                        }
-                        if (customType == "app") {
-                            this.innerHTML = "App"
-                        }
-                    })
-                    $('.clusterCarrier>h2>i').each(function () {
-                        this.style.display = 'none'
-                    })
-                }
-                $().screenConditionFun({
-                    className: '.clusterCarrier',
-                    idName: '#clusterCarrierPro',
-                });
-                var prosmoreHeight = $('.clusterCarrier').find('li').length * 30 + 4;
-                $('.clusterCarrier').find('.prosmore').css({
-                    'height': prosmoreHeight + 'px'
-                })
-            }
-        }
-    })
-
-//	地区
-    var innerid = localStorage.innerId;
-//     if (innerid) { //网站 app 微博 微信
+//     sourceAndcarrier(timeCode);
+//     function sourceAndcarrier(timeCode) {
+//         //	来源
 //         $.ajax({
-//             url: ctx + '/uec/config/front/listUserConfigRegion',//这个就是请求地址对应sAjaxSource
-//             data: {'timeCode': timeCode, 'level': 3},
+//             url: ctx + '/custom/front/listusersource',//这个就是请求地址对应sAjaxSource
+//             data: {'timeCode': timeCode},
 //             type: 'get',
 //             dataType: 'json',
 //             async: true,
@@ -214,378 +86,57 @@ $(function () {
 //                 if (data.result == true) {
 //                     var obj = data.resultObj;
 //                     var content = '';
-//
-// //    			添加历史记录
-//                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
-//                     var historyText = '';
-//                     var historyId = '';
-//                     for (var i = 0; i < historyCon.length; i++) {
-//
-//                         if (historyCon[i]['name'] == 'clusterMap') {
-//                             historyText = historyCon[i]['value'];
-//                             historyId = historyCon[i]['id']
-//                         }
-//                     }
-//
-//                     if (historyText == '') {
-//                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-//                     } else {
-//                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-//                     }
-//
-//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-//                     $('#clusterMapPro').append(content);
-//                     for (var count = 0; obj.length > count; count++) {
-//
-//                         if (obj[count].parentId == '0') {
-//                             var regionSecondItem = [];
-//                             var regionFirstName = obj[count].innerid;
-//                             for (var plug = 0; plug < obj.length; plug++) {
-//                                 if (regionFirstName == obj[plug].parentId) {
-//                                     regionSecondItem.push(obj[plug]);
-//                                 }
-//                             }
-//                             var textCon;
-//                             if (regionSecondItem.length == 0) {
-//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
-//                             } else {
-//                                 var secondItem = '<div class="prosmore hide">';
-//                                 secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
-//
-//                                 if (obj[count].innerid == '320000') {
-//                                     for (var num = 0; num < regionSecondItem.length; num++) {
-//                                         secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-//
-//                                         var regionThreeItem = [];
-//                                         for (var plugThree = 0; plugThree < obj.length; plugThree++) {
-//                                             if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
-//                                                 regionThreeItem.push(obj[plugThree]);
-//                                             }
-//                                         }
-//
-//                                         if (regionThreeItem.length == 0) {
-//
-//                                         } else {
-//                                             for (var i = 0; i < regionThreeItem.length; i++) {
-//                                                 secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>'
-//                                             }
-//                                         }
-//
-//                                     }
-//                                 } else {
-//                                     for (var num = 0; num < regionSecondItem.length; num++) {
-//                                         secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-//                                     }
-//                                 }
-//                                 secondItem += '</div>';
-//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-//                             }
-//
-//                             $('#clusterMapPro').append(textCon);
-//                         }
-//                     }
-//
-//                     var lilen = $('#clusterMapPro').find('li').length;
-//                     if (lilen > 16) {
-//
-// //            		判读能否整除，将不能整除的部门用li补全
-// //            		alert(lilen);
-//                         var yushu = (lilen - 2) % 14;
-//                         if (yushu == 0) {
-//
-//                         } else {
-//                             var yushuBox = '';
-//                             for (var i = 0; i < (14 - yushu); i++) {
-//                                 yushuBox += '<li class="hide zhanwei"></li>';
-//                             }
-//                             $('#clusterMapPro').append(yushuBox);
-//                         }
-//
-// //            		将第一页的之外的li隐藏
-//                         $('#clusterMapPro').find('li').each(function (index) {
-//                             if (index > 15) {
-//                                 $(this).addClass('hide');
-//                             }
-//                         })
-//
-// //            		将分页的样式填入
-//                         var num = Math.ceil((lilen - 2) / 14);
-//                         var fenye = '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm">';
-//                         fenye += '<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>';
-//                         for (var i = 0; i < num; i++) {
-//                             if (i == 0) {
-//                                 fenye += '<a href="#" class="active">' + (i + 1) + '</a>';
-//                             } else {
-//                                 fenye += '<a href="#">' + (i + 1) + '</a>';
-//                             }
-//                         }
-//                         fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
-//
-//                         $('#clusterMapPro').append(fenye);
-//
-// //            		计算二级页的高度
-//                         var prosmoreHeight = 17 * 30 + 4;
-//
-//                     } else {
-//                         var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 + 4;
-//                     }
-//
-//                     $().screenConditionFun({
-//                         className: '.clusterMap',
-//                         idName: '#clusterMapPro',
-//                     });
-//
-//
-// //        		var prosmoreHeight = $('.clusterMap').find('li').length * 30 +4;
-//                     $('.clusterMap').find('.prosmore').css({
-//                         'height': prosmoreHeight + 'px'
-//                     })
-//                 }
-//             }
-//         })
-//     } else {
-//         $.ajax({
-//             url: ctx + '/custom/front/listuserregion',//这个就是请求地址对应sAjaxSource
-//             data: {'timeCode': timeCode, 'level': 3},
-//             type: 'get',
-//             dataType: 'json',
-//             async: true,
-//             success: function (data) {
-//                 console.log(data);
-//                 if (data.result == true) {
-//                     var obj = data.resultObj;
-//                     var content = '';
-//
-// //    			添加历史记录
-//                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
-//                     var historyText = '';
-//                     var historyId = '';
-//                     for (var i = 0; i < historyCon.length; i++) {
-//
-//                         if (historyCon[i]['name'] == 'clusterMap') {
-//                             historyText = historyCon[i]['value'];
-//                             historyId = historyCon[i]['id']
-//                         }
-//                     }
-//
-//                     if (historyText == '') {
-//                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
-//                     } else {
-//                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
-//                     }
-//
-//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-//                     $('#clusterMapPro').append(content);
-//                     for (var count = 0; obj.length > count; count++) {
-//
-//                         if (obj[count].parentId == '0') {
-//                             var regionSecondItem = [];
-//                             var regionFirstName = obj[count].innerid;
-//                             for (var plug = 0; plug < obj.length; plug++) {
-//                                 if (regionFirstName == obj[plug].parentId) {
-//                                     regionSecondItem.push(obj[plug]);
-//                                 }
-//                             }
-//                             var textCon;
-//                             if (regionSecondItem.length == 0) {
-//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
-//                             } else {
-//                                 var secondItem = '<div class="prosmore hide">';
-//                                 secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
-//
-//                                 if (obj[count].innerid == '320000') {
-//                                     for (var num = 0; num < regionSecondItem.length; num++) {
-//                                         secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-//
-//                                         var regionThreeItem = [];
-//                                         for (var plugThree = 0; plugThree < obj.length; plugThree++) {
-//                                             if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
-//                                                 regionThreeItem.push(obj[plugThree]);
-//                                             }
-//                                         }
-//
-//                                         if (regionThreeItem.length == 0) {
-//
-//                                         } else {
-//                                             for (var i = 0; i < regionThreeItem.length; i++) {
-//                                                 secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>'
-//                                             }
-//                                         }
-//
-//                                     }
-//                                 } else {
-//                                     for (var num = 0; num < regionSecondItem.length; num++) {
-//                                         secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-//                                     }
-//                                 }
-//                                 secondItem += '</div>';
-//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-//                             }
-//
-//                             $('#clusterMapPro').append(textCon);
-//                         }
-//                     }
-//
-//                     var lilen = $('#clusterMapPro').find('li').length;
-//                     if (lilen > 16) {
-//
-// //            		判读能否整除，将不能整除的部门用li补全
-// //            		alert(lilen);
-//                         var yushu = (lilen - 2) % 14;
-//                         if (yushu == 0) {
-//
-//                         } else {
-//                             var yushuBox = '';
-//                             for (var i = 0; i < (14 - yushu); i++) {
-//                                 yushuBox += '<li class="hide zhanwei"></li>';
-//                             }
-//                             $('#clusterMapPro').append(yushuBox);
-//                         }
-//
-// //            		将第一页的之外的li隐藏
-//                         $('#clusterMapPro').find('li').each(function (index) {
-//                             if (index > 15) {
-//                                 $(this).addClass('hide');
-//                             }
-//                         })
-//
-// //            		将分页的样式填入
-//                         var num = Math.ceil((lilen - 2) / 14);
-//                         var fenye = '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm">';
-//                         fenye += '<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>';
-//                         for (var i = 0; i < num; i++) {
-//                             if (i == 0) {
-//                                 fenye += '<a href="#" class="active">' + (i + 1) + '</a>';
-//                             } else {
-//                                 fenye += '<a href="#">' + (i + 1) + '</a>';
-//                             }
-//                         }
-//                         fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
-//
-//                         $('#clusterMapPro').append(fenye);
-//
-// //            		计算二级页的高度
-//                         var prosmoreHeight = 17 * 30 + 4;
-//
-//                     } else {
-//                         var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 + 4;
-//                     }
-//
-//                     $().screenConditionFun({
-//                         className: '.clusterMap',
-//                         idName: '#clusterMapPro',
-//                     });
-//
-//
-// //        		var prosmoreHeight = $('.clusterMap').find('li').length * 30 +4;
-//                     $('.clusterMap').find('.prosmore').css({
-//                         'height': prosmoreHeight + 'px'
-//                     })
-//                 }
-//             }
-//         })
-//     }
-    $().getData({
-        getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
-        getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
-        boxClassName: '.clusterMap',
-        ulClassName: '#clusterMapPro',
-        level: 2,
-        multiSelect: true,
-        callback: function () {
-            loadSuccess++
-            if (loadSuccess == 2) {
-                loadTable()
-            }
-        }
-    })
 
-    //	分类
-    var innerid = localStorage.innerId;
-    $().getData({
-        getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
-        getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
-        boxClassName: '.clusterFenlei',
-        ulClassName: '#clusterFenleiPro',
-        level: 2,
-        multiSelect: true,
-        callback: function () {
-            loadSuccess++
-            if (loadSuccess == 2) {
-                loadTable()
-            }
-        }
-    })
-//     if (innerid) { //网站 app 微博 微信
-//         $.ajax({
-//             url: ctx + '/uec/config/front/listUserConfigClassification',//这个就是请求地址对应sAjaxSource
-//             data: {'level': 2},
-//             type: 'get',
-//             dataType: 'json',
-//             async: true,
-//             success: function (data) {
-//                 if (data.result == true) {
-//                     var obj = data.resultObj;
-//                     var content = '';
+// //    			添加历史记录
 //                     var historyCon = JSON.parse(localStorage.getItem('conditions'));
 //                     var historyText = '';
 //                     var historyId = '';
 //                     for (var i = 0; i < historyCon.length; i++) {
-//                         if (historyCon[i]['name'] == 'clusterFenlei') {
+
+//                         if (historyCon[i]['name'] == 'clusterSources') {
 //                             historyText = historyCon[i]['value'];
 //                             historyId = historyCon[i]['id']
 //                         }
 //                     }
-//
 //                     if (historyText == '') {
 //                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
 //                     } else {
 //                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
 //                     }
-//
-//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-//
-//                     $('#clusterFenleiPro').append(content);
-//                     for (var count = 0; obj.length > count; count++) {
-//
-//                         if (obj[count].parentId == '0') {
-//                             var regionSecondItem = [];
-//                             var regionFirstName = obj[count].innerid;
-//                             for (var plug = 0; plug < obj.length; plug++) {
-//                                 if (regionFirstName == obj[plug].parentId) {
-//                                     regionSecondItem.push(obj[plug]);
-//                                 }
-//                             }
-//                             var textCon;
-//                             if (regionSecondItem.length == 0) {
-//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name;
-//                             } else {
-//                                 var secondItem = '<div class="prosmore hide">';
-//                                 for (var num = 0; num < regionSecondItem.length; num++) {
-//                                     secondItem += '<span><em><a href="javascript:void(0);" data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>'
-//                                 }
-//                                 secondItem += '</div>';
-//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-//                             }
-//                             $('#clusterFenleiPro').append(textCon);
-//                         }
+//                     if (obj.length >= 5) {
+//                         content += '<li class=""><a class="ti" href="javascript:void(0);">全部来源</a></li>';
+//                     } else {
+//                         content += '<li class=""><a class="ti" href="javascript:void(0);">所有定制</a></li>';
 //                     }
-// //        		$('#clusterFenleiPro').append(content);
-//                     $().screenConditionFun({
-//                         className: '.clusterFenlei',
-//                         idName: '#clusterFenleiPro',
+//                     for (var i = 0; obj.length > i; i++) {
+//                         content += '<li class=""><a class="ti" href="#" data-innerid="' + obj[i].labelId + '">' + obj[i].name + '</a></li>';
+//                     }
+//                     var customType = localStorage.customType
+//                     if (customType == "") {
+//                         $('#clusterSourcesPro').append(content);
+//                     } else {
+//                         $('.clusterSources').each(function (a) {
+//                             this.style.background = "#999999"
+//                         })
+//                         $('.clusterSources>h2>i').each(function () {
+//                             this.style.display = 'none'
+//                         })
+//                     }
+//                     screenConditionHandler({
+//                         className: '.clusterSources',
+//                         idName: '#clusterSourcesPro',
 //                     });
-//
-//                     var prosmoreHeight = $('.clusterFenlei').find('li').length * 30 + 4;
-//                     $('.clusterFenlei').find('.prosmore').css({
+
+//                     var prosmoreHeight = $('.clusterSources').find('li').length * 30 + 4;
+//                     $('.clusterSources').find('.prosmore').css({
 //                         'height': prosmoreHeight + 'px'
 //                     })
 //                 }
 //             }
 //         })
-//     } else {
+//         //	载体
 //         $.ajax({
-//             url: ctx + '/custom/front/listuserclassifications',//这个就是请求地址对应sAjaxSource
+//             url: ctx + '/custom/front/listusercarrier',//这个就是请求地址对应sAjaxSource
 //             data: {'timeCode': timeCode},
 //             type: 'get',
 //             dataType: 'json',
@@ -600,60 +151,115 @@ $(function () {
 //                     var historyText = '';
 //                     var historyId = '';
 //                     for (var i = 0; i < historyCon.length; i++) {
-//
-//                         if (historyCon[i]['name'] == 'clusterFenlei') {
+
+//                         if (historyCon[i]['name'] == 'clusterCarrier') {
 //                             historyText = historyCon[i]['value'];
 //                             historyId = historyCon[i]['id']
 //                         }
 //                     }
-//
 //                     if (historyText == '') {
 //                         content += '<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>';//添加历史记录
 //                     } else {
 //                         content += '<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>';//添加历史记录
 //                     }
-//
-//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>';
-//
-//                     $('#clusterFenleiPro').append(content);
-//                     for (var count = 0; obj.length > count; count++) {
-//
-//                         if (obj[count].parentId == '0') {
-//                             var regionSecondItem = [];
-//                             var regionFirstName = obj[count].labelId;
-//                             for (var plug = 0; plug < obj.length; plug++) {
-//                                 if (regionFirstName == obj[plug].parentId) {
-//                                     regionSecondItem.push(obj[plug]);
-//                                 }
-//                             }
-//                             var textCon;
-//                             if (regionSecondItem.length == 0) {
-//                                 textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].labelId + '" href="javascript:void(0);">' + obj[count].name;
-//                             } else {
-//                                 var secondItem = '<div class="prosmore hide">';
-//                                 for (var num = 0; num < regionSecondItem.length; num++) {
-//                                     secondItem += '<span><em><a href="javascript:void(0);" data-innerid="' + regionSecondItem[num].labelId + '">' + regionSecondItem[num].name + '</a></em></span>'
-//                                 }
-//                                 secondItem += '</div>';
-//                                 textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].labelId + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-//                             }
-//                             $('#clusterFenleiPro').append(textCon);
-//                         }
+//                     content += '<li class=""><a class="ti" href="javascript:void(0);">全部载体</a></li>';
+//                     for (var i = 0; obj.length > i; i++) {
+//                         content += '<li class=""><a class="ti" href="#" data-innerid="' + obj[i].labelId + '">' + obj[i].name + '</a></li>';
 //                     }
-// //        		$('#clusterFenleiPro').append(content);
-//                     $().screenConditionFun({
-//                         className: '.clusterFenlei',
-//                         idName: '#clusterFenleiPro',
+//                     var customType = localStorage.customType
+//                     if (customType == "") {
+//                         $('#clusterCarrierPro').append(content);
+//                     } else {
+//                         $('.clusterCarrier').each(function (a) {
+//                             this.style.background = "#999999"
+//                         })
+//                         $('.clusterCarrier>h2').each(function () {
+//                             if (customType == "web") {
+//                                 this.innerHTML = "网页"
+//                             }
+//                             if (customType == "weChat") {
+//                                 this.innerHTML = "微信"
+//                             }
+//                             if (customType == "weiBo") {
+//                                 this.innerHTML = "微博"
+//                             }
+//                             if (customType == "app") {
+//                                 this.innerHTML = "App"
+//                             }
+//                         })
+//                         $('.clusterCarrier>h2>i').each(function () {
+//                             this.style.display = 'none'
+//                         })
+//                     }
+//                     screenConditionHandler({
+//                         className: '.clusterCarrier',
+//                         idName: '#clusterCarrierPro',
 //                     });
-//
-//                     var prosmoreHeight = $('.clusterFenlei').find('li').length * 30 + 4;
-//                     $('.clusterFenlei').find('.prosmore').css({
+//                     var prosmoreHeight = $('.clusterCarrier').find('li').length * 30 + 4;
+//                     $('.clusterCarrier').find('.prosmore').css({
 //                         'height': prosmoreHeight + 'px'
 //                     })
 //                 }
 //             }
 //         })
 //     }
+
+
+
+//	地区
+    var innerid = localStorage.innerId;
+    $().getData({
+        getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
+        getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+        boxClassName: '.clusterMap',
+        ulClassName: '#clusterMapPro',
+        level: 3,
+        multiSelect: true,
+        conditionValue: 'map',
+        callback: function () {
+            loadSuccess++
+            if (loadSuccess == 2) {
+                loadTable()
+            }
+        }
+    })
+
+    //	分类
+    var innerid = localStorage.innerId;
+    $().getData({
+        // getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+        getAjaxUserConfigUrl:'', //请求路径(用户配置的数据)
+        getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
+        boxClassName: '.clusterFenlei',
+        ulClassName: '#clusterFenleiPro',
+        level: 2,
+        multiSelect: true,
+        conditionValue: 'classification',
+        callback: function () {
+            loadSuccess++
+            if (loadSuccess == 2) {
+                loadTable()
+            }
+        }
+    })
+        // 全部来源
+	$().getSignleData({
+		getAjaxUrl:ctx+'/custom/front/listusersourceNew?timeCode='+timeCode,  //请求路径
+		boxClassName:'.clusterSources',
+		ulClassName:'#clusterSourcesPro',
+		level:1,
+		inter:true,
+		conditionValue: 'mediaAlone',
+	})
+    // 全部载体
+	$().getSignleData({
+		getAjaxUrl:ctx+'/config/front/listUserConfigCarrier',  //请求路径
+		boxClassName:'.clusterCarrier',
+		ulClassName:'#clusterCarrierPro',
+		level:1,
+		inter:true,
+		conditionValue: 'carrierAlone',
+	})
 
 
 //	显示线索的标题
@@ -706,7 +312,7 @@ $(function () {
                     var innerid = localStorage.innerId;
                     if (innerid) { //网站 app 微博 微信
                         thumbnailTable = $().thumbnailAjaxData({
-                            'requestUrl': ctx + '/latest/front/pageLatestNews',
+                            'requestUrl': ajaxUrl,
                             'getPassValue': getParamsTableForPage,
                         })
                     } else {
@@ -742,7 +348,7 @@ $(function () {
                     var innerid = localStorage.innerId;
                     if (innerid) { //网站 app 微博 微信
                         sudokuTable = $().sudokuAjaxData({
-                            'requestUrl': ctx + '/latest/front/pageLatestNews',
+                            'requestUrl': ajaxUrl,
                             'getPassValue': getParamsTableForPage,
                         })
                     } else {
@@ -851,7 +457,6 @@ $(function () {
             dataParam: {'webpageCodeList': batchCheckWebPageCode},  //传递参数
             callback: function (data, tempwindow) {
                 if (data.result) {
-
                     tempwindow.location = data.resultObj;
                     $('span.check-child').removeClass('checked');
                     batchCheckWebPageCode = [];
@@ -867,33 +472,25 @@ $(function () {
         })
     })
     var innerid = localStorage.innerId;
-    // if (!innerid) {
-    //     //表格进行数据传值建
-    //     threadAjaxData1 = $().threadAjaxData({
-    //         'requestUrl': ctx + '/custom/front/getMyCustomThread',
-    //         'getPassValue': getParamsTable
-    //     });
-    // } else {
-    //     ///getMyCustomSiteAndApp
-    //     var newsType = localStorage.customType;
-    //     if (newsType == "weChat") {
-    //         ajaxUrl = ctx + '/custom/front/getMyCustomWechat';
-    //     } else if (newsType == "weiBo") {
-    //         ajaxUrl = ctx + '/custom/front/getMyCustomMicroblog';
-    //     } else {
-    //         ajaxUrl = ctx + '/custom/front/getMyCustomSiteAndApp';
-    //     }
-    //     threadAjaxData1 = $().threadAjaxData({
-    //         'requestUrl': ajaxUrl,
-    //         'getPassValue': getParamsTableForPage
-    //     });
-    // }
-
 
 //	获得ajax返回的获取
     $('.dataConBoxTable').on('xhr.dt', function (e, settings, json, xhr) {
         $('.sortCountButton a').find('span').text(json.iTotalRecords);
         highlightList = json.highlightList
+        totalpage = json.iTotalRecords;
+
+    });
+    $('.dataConThumbnailTable').on('xhr.dt', function (e, settings, json, xhr) {
+        $('.sortCountButton a').find('span').text(json.iTotalRecords);
+        highlightList = json.highlightList
+        totalpage = json.iTotalRecords;
+
+    });
+    $('.dataConSudokuTable').on('xhr.dt', function (e, settings, json, xhr) {
+        $('.sortCountButton a').find('span').text(json.iTotalRecords);
+        highlightList = json.highlightList
+        totalpage = json.iTotalRecords;
+
     });
 
     $('.dataConBoxTable').on('draw.dt', function () {
@@ -913,66 +510,76 @@ $(function () {
             }
         });
 
+        //替换总页数
+        var pagination = $('#DataTables_Table_0_info').text();
+        if( totalpage > 10000){
+            pagination = pagination.replace('10,000',totalpage)
+            $('#DataTables_Table_0_info').text(pagination);
+        }
+
+
 //		相似相关获取
         var textArr = threadAjaxData1.column(5).nodes().data();
         tableItemWebPageCodeArr = [];
+        var otherReleaseDateTimeArr = [];	
         if (textArr.length > 0) {
             for (var count = 0; textArr.length > count; count++) {
                 tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+                otherReleaseDateTimeArr.push(textArr[count].releaseDatetime);
             }
             //相似
-            $().adraticAjaxData({
-                'dataUrl': ctx + '/latest/front/getSameNewsNum',
-                'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
-                'callback': function (data) {
-                    $('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function (index) {
-                        $(this).text(data[index]);
-                    })
-                }
-            });
+            // $().adraticAjaxData({
+            //     'dataUrl': ctx + '/latest/front/getSameNewsNum',
+            //     'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
+            //     'callback': function (data) {
+            //         $('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function (index) {
+            //             $(this).text(data[index]);
+            //         })
+            //     }
+            // });
 
 //			相关
-            $().adraticAjaxData({
-                'dataUrl': ctx + '/latest/front/getRelevantNewsNum',
-                'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
-                'callback': function (data) {
-                    $('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function (index) {
-                        $(this).text(data[index]);
-                    })
-                }
-            });
+//             $().adraticAjaxData({
+//                 'dataUrl': ctx + '/latest/front/getRelevantNewsNum',
+//                 'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
+//                 'callback': function (data) {
+//                     $('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function (index) {
+//                         $(this).text(data[index]);
+//                     })
+//                 }
+//             });
 
 //			负面指数
-            $().adraticAjaxData({
-                'dataUrl': ctx + '/latest/front/getsentimentindex',
-                'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
-                'callback': function (data) {
-                    console.log(data);
-                    $('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function (index) {
-                        if (data[index].negative != null && data[index].negative != '') {
-                            var colorStyle = ''
-                            // if(data[index].negative > 60){
-                            // 	colorStyle = 'red'
-                            // }else
-                            if (data[index].negative > 40) {
-                                colorStyle = 'gray'
-                            } else {
-                                colorStyle = 'green'
-                            }
-                            var negative = data[index].negative;
-                            if (negative > 40) {
-                                $(this).text('-' + negative.toFixed(2));
-                            } else {
-                                $(this).text((100 - negative).toFixed(2));
-                            }
-                            //$(this).text(data[index].negative);
-                            $(this).addClass(colorStyle);
-                        } else {
-                            $(this).text('-');
-                        }
-                    })
-                }
-            });
+//             $().adraticAjaxData({
+//                 'dataUrl': ctx + '/latest/front/getsentimentindex',
+//                 'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
+//                 'callback': function (data) {
+//                     console.log(data);
+//                     $('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function (index) {
+//                         if (data[index].negative != null && data[index].negative != '') {
+//                             var colorStyle = ''
+//                             // if(data[index].negative > 60){
+//                             // 	colorStyle = 'red'
+//                             // }else
+//                             if (data[index].negative > 40) {
+//                                 colorStyle = 'gray'
+//                             } else {
+//                                 colorStyle = 'green'
+//                             }
+//                             var negative = data[index].negative;
+//                             if (negative > 40) {
+//                                 $(this).text('-' + negative.toFixed(2));
+//                             } else {
+//                                 $(this).text((100 - negative).toFixed(2));
+//                             }
+//                             //$(this).text(data[index].negative);
+//                             $(this).addClass(colorStyle);
+//                         } else {
+//                             $(this).text('-');
+//                         }
+//                     })
+//                 }
+//             });
 //		浏览量
             $().adraticAjaxData({
                 'dataUrl': ctx + '/latest/front/getBrowseNum',
@@ -1003,6 +610,7 @@ $(function () {
             $('.inewsOperation').each(function (index) {
                 $(this).find('span').eq(1).releaseBuild({
                     'webpageCode': tableItemWebPageCodeArr[index],
+                    'releaseDatetime': otherReleaseDateTimeArr[index],
                     'buildingCon': function (_$this) {
                         _$this.find('i').addClass('hide');
                         _$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
@@ -1130,13 +738,11 @@ $(function () {
 
     });
 
-
 //	获得ajax返回的获取
     $('.dataConThumbnailTable').on('xhr.dt', function (e, settings, json, xhr) {
         highlightList = json.highlightList;
     });
     $('.dataConThumbnailTable').on('draw.dt', function () {
-
         /*缩略图详情省略*/
         $('.dataConThumbnailTable').find('.mediaConSummary').each(function () {
             if ($(this).height() >= 63) {
@@ -1148,7 +754,12 @@ $(function () {
                 });
             }
         });
-
+        //替换总页数
+        var pagination = $('#DataTables_Table_1_info').text();
+        if( totalpage > 10000){
+            pagination = pagination.replace('10,000',totalpage)
+            $('#DataTables_Table_1_info').text(pagination);
+        }
 
         $('.dataConThumbnailTable').itemCheck({   //给每一条新闻增加单击的事件
             'itemFun': function ($this, statusItem) {
@@ -1168,33 +779,35 @@ $(function () {
 
         var thumbnailArr = thumbnailTable.column(1).nodes().data();
         tableItemWebPageCodeArr = [];
+        var releaseDateTimeArr = [];	
         if (thumbnailArr.length > 0) {
             for (var count = 0; thumbnailArr.length > count; count++) {
                 tableItemWebPageCodeArr.push(thumbnailArr[count].webpageCode);
+                releaseDateTimeArr.push(thumbnailArr[count].releaseDatetime);
             }
 
             //相似
-            $().adraticAjaxData({
-                'dataUrl': ctx + '/latest/front/getSameNewsNum',
-                'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
-                'callback': function (data) {
-                    $('.dataConThumbnailTable tbody').find('[class*="sameNum"]').each(function (index) {
-                        $(this).text(data[index]);
-                    })
-                }
-            });
+            // $().adraticAjaxData({
+            //     'dataUrl': ctx + '/latest/front/getSameNewsNum',
+            //     'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
+            //     'callback': function (data) {
+            //         $('.dataConThumbnailTable tbody').find('[class*="sameNum"]').each(function (index) {
+            //             $(this).text(data[index]);
+            //         })
+            //     }
+            // });
 
 //			相关
-            $().adraticAjaxData({
-                'dataUrl': ctx + '/latest/front/getRelevantNewsNum',
-                'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
-                'callback': function (data) {
-                    $('.dataConThumbnailTable tbody').find('[class*="relevantNum"]').each(function (index) {
-                        $(this).text(data[index]);
-                    })
-                }
-            });
-//		浏览量
+//             $().adraticAjaxData({
+//                 'dataUrl': ctx + '/latest/front/getRelevantNewsNum',
+//                 'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
+//                 'callback': function (data) {
+//                     $('.dataConThumbnailTable tbody').find('[class*="relevantNum"]').each(function (index) {
+//                         $(this).text(data[index]);
+//                     })
+//                 }
+//             });
+            // 浏览量
             $().adraticAjaxData({
                 'dataUrl': ctx + '/latest/front/getBrowseNum',
                 'dataParam': {'webpageCode': tableItemWebPageCodeArr.join(',')},
@@ -1221,11 +834,11 @@ $(function () {
                 }
             });
 
-//			操作-建稿
-
+            // 操作-建稿
             $('.mediaOperation').each(function (index) {
                 $(this).find('a').eq(2).releaseBuild({
                     'webpageCode': tableItemWebPageCodeArr[index],
+                    'releaseDatetime': releaseDateTimeArr[index],
                     'buildingCon': function (_$this) {
                         _$this.html('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>&nbsp;建稿中...');
                     },
@@ -1326,7 +939,6 @@ $(function () {
     });
 
     $('.dataConSudokuTable').on('draw.dt', function () {
-
         $('.dataConSudokuTable').find('.sudokuSummary').each(function () {
             if ($(this).height() >= 132) {
                 $(this).css({
@@ -1337,6 +949,13 @@ $(function () {
                 });
             }
         });
+
+        //替换总页数
+        var pagination = $('#DataTables_Table_2_info').text();
+        if( totalpage > 10000){
+            pagination = pagination.replace('10,000',totalpage)
+            $('#DataTables_Table_2_info').text(pagination);
+        }
 
     })
 
@@ -1364,9 +983,9 @@ $(function () {
 
     })
 
-//	点击地区刷新列表
-    $('#clusterMapPro').click(function () {
 
+    // 地区多选,分类多选
+    window.reloadData = function () {
         console.log($('.tableListCon').val());
         if ($('.tableListCon').val() == '0') {
             threadAjaxData1.ajax.reload();
@@ -1375,60 +994,51 @@ $(function () {
         } else if ($('.tableListCon').val() == '2') {
             sudokuTable.ajax.reload();
         }
-
         return false;
-    })
-
-//	点击分类刷新列表
-    $('#clusterFenleiPro').click(function () {
-        var customType = localStorage.customType
-        if (customType == "") {
-
-            if ($('.tableListCon').val() == 0) {
-                threadAjaxData1.ajax.reload();
-            } else if ($('.tableListCon').val() == 1) {
-                thumbnailTable.ajax.reload();
-            } else if ($('.tableListCon').val() == 2) {
-                sudokuTable.ajax.reload();
-            }
+    };
+    // 两套逻辑同时引入后，加以区分
+    window.signleReloadData = function () {
+        console.log($('.tableListCon').val());
+        if ($('.tableListCon').val() == '0') {
+            threadAjaxData1.ajax.reload();
+        } else if ($('.tableListCon').val() == '1') {
+            thumbnailTable.ajax.reload();
+        } else if ($('.tableListCon').val() == '2') {
+            sudokuTable.ajax.reload();
         }
         return false;
-    })
+    };
+     
 
-//	点击来源刷新列表
-
+    //	点击来源刷新列表
     $('#clusterSourcesPro').click(function () {
-        var customType = localStorage.customType
-        if (customType == "") {
-
-            if ($('.tableListCon').val() == 0) {
-                threadAjaxData1.ajax.reload();
-            } else if ($('.tableListCon').val() == 1) {
-                thumbnailTable.ajax.reload();
-            } else if ($('.tableListCon').val() == 2) {
-                sudokuTable.ajax.reload();
-            }
-        }
-        return false;
+        // var customType = localStorage.customType
+        // if (customType == "") {
+        //     if ($('.tableListCon').val() == 0) {
+        //         threadAjaxData1.ajax.reload();
+        //     } else if ($('.tableListCon').val() == 1) {
+        //         thumbnailTable.ajax.reload();
+        //     } else if ($('.tableListCon').val() == 2) {
+        //         sudokuTable.ajax.reload();
+        //     }
+        // }
+        // return false;
     })
 
     //	点击载体刷新列表
-
     $('#clusterCarrierPro').click(function () {
-
-        if ($('.tableListCon').val() == 0) {
-            threadAjaxData1.ajax.reload();
-        } else if ($('.tableListCon').val() == 1) {
-            thumbnailTable.ajax.reload();
-        } else if ($('.tableListCon').val() == 2) {
-            sudokuTable.ajax.reload();
-        }
-        return false;
+        // if ($('.tableListCon').val() == 0) {
+        //     threadAjaxData1.ajax.reload();
+        // } else if ($('.tableListCon').val() == 1) {
+        //     thumbnailTable.ajax.reload();
+        // } else if ($('.tableListCon').val() == 2) {
+        //     sudokuTable.ajax.reload();
+        // }
+        // return false;
     })
 
-    //	点击时间段刷新列表
+    // 点击时间段刷新列表
     $('#srceenTimeQuantumPro').click(function () {
-
         if ($('.tableListCon').val() == 0) {
             threadAjaxData1.ajax.reload();
         } else if ($('.tableListCon').val() == 1) {
@@ -1438,7 +1048,7 @@ $(function () {
         }
         return false;
     })
-//	 相似合并
+    // 相似合并
     $('.changeState').click(function () {
         $('.dataShowTable').attr('data-once', 'true');
         if ($(this).hasClass('activeBg')) {
@@ -1455,7 +1065,7 @@ $(function () {
             sudokuTable.ajax.reload();
         }
     })
-//	展示条数的样式
+    // 展示条数的样式
     $('.showBranches').each(function () {
         $(this).click(function () {
             $(this).addClass('active').siblings('.showBranches').removeClass('active');
@@ -1469,7 +1079,7 @@ $(function () {
     });
 
 
-//	iSearch点击查询
+    // iSearch点击查询
     $('.customAddBtn').customInputClickBtn({
         'refreshTable': function () {
             if ($('.tableListCon').val() == 0) {
@@ -1485,7 +1095,7 @@ $(function () {
         }
     })
 
-    //	iSearch加载本地数据
+    // iSearch加载本地数据
     customAddVal = JSON.parse(localStorage.getItem('isearch'));
     $(".customAddInput").parseLocalArrayData({
         'dataSources': customAddVal,
@@ -1500,11 +1110,9 @@ $(function () {
         }
     });
 
-
-//	删除
+    // 删除
     $('.deleteCustom').click(function () {
         $('#deleteAll').modal();
-
         $('.determine').click(function () { //模态框点击确定
             $('#deleteAll').modal('hide');
             $.ajax({
@@ -1527,8 +1135,7 @@ $(function () {
         })
     })
 
-
-//	编辑定制页
+    // 编辑定制页
     $('.editCustom').click(function () {
         $('#myCustomContent').loadPage(ctx + '/custom/front/gotoAddMyCustom');
     })
@@ -1554,7 +1161,6 @@ $(function () {
             $(".closeInput")[0].style.visibility = "hidden"
         }
     }
-
 })
 
 /**
@@ -1635,9 +1241,7 @@ function getParamsTable(aoData) {
     return aoData;
 }
 
-
 function getParamsTableForPage(aoData) {
-
 //	地区
     var regions = [];
     var regionsId = $('.clusterMap h2').attr('data-innerid');
@@ -1668,46 +1272,44 @@ function getParamsTableForPage(aoData) {
     var innerId = localStorage.innerId
     var customType = localStorage.customType
     var sourcesOrg = [];
-    var sourcesCrawl = [];
+    var websiteIds = [];
     var sourceCode = [];
     if (innerId == "loadTotalListWeb") {
         sourcesOrg.push("");
         for (var i = 0; i < webIdsList.length; i++) {
-            sourcesCrawl.push(webIdsList[i]);
+            websiteIds.push(webIdsList[i]);
         }
     } else if (innerId == "loadTotalListApp") {
         sourcesOrg.push("");
         for (var i = 0; i < appIdsList.length; i++) {
-            sourcesCrawl.push(appIdsList[i]);
+            websiteIds.push(appIdsList[i]);
         }
     } else if (innerId == "loadTotalListWeChat") {
         sourcesOrg.push("");
-        sourcesCrawl.push("");
+        websiteIds.push("");
         for (var i = 0; i < wechatIdsList.length; i++) {
             sourceCode.push(wechatIdsList[i]);
         }
     } else if (innerId == "loadTotalListWeiBo") {
         sourcesOrg.push("");
-        sourcesCrawl.push("");
+        websiteIds.push("");
         for (var i = 0; i < weibodsList.length; i++) {
             sourceCode.push(weibodsList[i]);
         }
     } else if (localStorage.customType == "weChat" || localStorage.customType == "weiBo") {
         sourceCode.push(localStorage.innerId);
     } else {
-        sourcesCrawl.push(localStorage.innerId);
+        websiteIds.push(localStorage.innerId);
 
     }
-
-//	是否相似
+    // 是否相似
     var showSimilar = '';
     if ($('.changeState').hasClass('activeBg')) {
         showSimilar = new Boolean(false);
     } else {
         showSimilar = new Boolean(true);
     }
-
-//	含图片、含视频
+    // 含图片、含视频
     var mediaStatus = '';
     $('.changeStateBtn').each(function (index) {
         if ($(this).hasClass('active')) {
@@ -1730,9 +1332,9 @@ function getParamsTableForPage(aoData) {
             {'name': 'showSimilar', 'value': showSimilar},
             {'name': 'mediaStatus', 'value': mediaStatus},
             {'name': 'queryStr', 'value': queryStr},
-            {'name': 'sourcesCrawl', 'value': sourcesCrawl},
+            // {'name': 'websiteIds', 'value': websiteIds},
             {'name': 'timeCode', 'value': ""},
-            {'name': 'sourceCode', 'value': sourceCode}
+            {'name': 'websiteIds','value': sourceCode}
         )
     } else if (localStorage.customType == "weiBo") {
         aoData.push(
@@ -1743,19 +1345,19 @@ function getParamsTableForPage(aoData) {
             {'name': 'mediaStatus', 'value': mediaStatus},
             {'name': 'queryStr', 'value': queryStr},
             {'name': 'timeCode', 'value': ""},
-            {'name': 'sourceCode', 'value': sourceCode}
+            {'name': 'websiteIds','value': sourceCode}
         )
     } else {
         aoData.push(
             {'name': 'regions', 'value': regions},
             {'name': 'classifications', 'value': classifications},
             {'name': 'sourcesOrg', 'value': sourcesOrg},
-            {'name': 'sourcesCrawl', 'value': sourcesCrawl},
+            {'name': 'websiteIds', 'value': websiteIds},
             {'name': 'showSimilar', 'value': showSimilar},
             {'name': 'mediaStatus', 'value': mediaStatus},
             {'name': 'queryStr', 'value': queryStr},
-            {'name': 'isSticked', 'value': 1},
-            {'name': 'showClue', 'value': true}
+            {'name': 'isSticked', 'value': 0},
+            {'name': 'showClue', 'value': false}
         )
     }
 
@@ -1764,7 +1366,6 @@ function getParamsTableForPage(aoData) {
 }
 
 /*每隔60秒刷险一次列表*/
-
 function refreshButton() {
     var init;
     var flage1 = false
@@ -1821,13 +1422,12 @@ function showRefreshNum(num) {
         document.removeEventListener("mousemove", mousrFun)
     }
     document.addEventListener("mousemove", mousrFun)
-
 }
 
 function chooseSimilarityForFirst() {
     var strcookie = document.cookie;//获取cookie字符串
     var arrcookie = strcookie.split("; ");//分割
-//遍历匹配
+    // 遍历匹配
     var username = "";
     for (var i = 0; i < arrcookie.length; i++) {
         var arr = arrcookie[i].split("=");
@@ -1860,30 +1460,29 @@ function chooseSimilarityForFirst() {
 }
 
 function getParamsTableForWechatOrWeibo(aoData) {
-//	线索的timeCode
+    // 线索的timeCode
     var timeCode = '';
     $('.accordion li').each(function () {
         if ($(this).hasClass('open')) {
             timeCode = $(this).find('.link').attr('data-customgroup');
         }
     })
-//	地区
+    // 地区
     var regions = [];
     var regionsId = $('.srceenMap h2').attr('data-innerid');
     regions.push(regionsId);
 
-//	分类
+    // 分类
     var classifications = [];
     var classificationsId = $('.srceenClassification h2').attr('data-innerid');
     classifications.push(classificationsId);
 
-//	来源
+    // 来源
     var sourcesOrg = [];
     var sourcesOrgId = $('.srceenSources h2').attr('data-innerid');
     sourcesOrg.push(sourcesOrgId);
 
-
-//	是否相似
+    // 是否相似
     var showSimilar = '';
     if ($('.changeState').hasClass('activeBg')) {
         showSimilar = new Boolean(false);
@@ -1891,7 +1490,7 @@ function getParamsTableForWechatOrWeibo(aoData) {
         showSimilar = new Boolean(true);
     }
 
-//	含图片、含视频
+    // 含图片、含视频
     var mediaStatus = '';
     $('.changeStateBtn').each(function (index) {
         if ($(this).hasClass('active')) {
@@ -1903,11 +1502,10 @@ function getParamsTableForWechatOrWeibo(aoData) {
         }
     })
 
-//	查询iSearch
+    // 查询iSearch
     var queryStr = [];
     var queryStrVal = $.trim($('.customAddInput').val());
     queryStr.push(queryStrVal);
-
     aoData.push(
         {'name': 'regions', 'value': regions},
         {'name': 'classifications', 'value': classifications},
@@ -1917,7 +1515,6 @@ function getParamsTableForWechatOrWeibo(aoData) {
         {'name': 'queryStr', 'value': queryStr},
         {'name': 'timeCode', 'value': timeCode}
     )
-
     return aoData;
 }
 

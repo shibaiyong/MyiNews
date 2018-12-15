@@ -66,12 +66,13 @@ $(function(){
 		    	   
 		    	   $('td:eq(0)', row).html(orderCon);
 		    	   
-		    	   var isearchVal = $('.customAddInput').val();
+						 var isearchVal = $('.customAddInput').val();
+						 var startTime = new Date( data.createDatetime).getTime();
 		    	   //title
 		    	   if(isearchVal != ''){
-		    		   var titleCon = '<a href="'+ctx+'/cluster/front/detail/'+data.clusterCode+'?queryStr='+isearchVal+'" target="_blank"  class="beyondEllipsis"  data-id="'+data.clusterCode+'">'+data.title+'</a>'
+		    		   var titleCon = '<a href="' + ctx + '/cluster/front/detail/' + data.clusterCode + '?queryStr='+isearchVal+'&startTime='+startTime+'"  target="_blank"  class="beyondEllipsis"  data-id="' + data.clusterCode + '">' + data.title + '</a>'
 		    	   }else{
-		    		   var titleCon = '<a href="'+ctx+'/cluster/front/detail/'+data.clusterCode+'" target="_blank"  class="beyondEllipsis"  data-id="'+data.clusterCode+'">'+data.title+'</a>'
+		    		   var titleCon = '<a href="' + ctx + '/cluster/front/detail/' + data.clusterCode + '?startTime='+startTime+'" target="_blank"  class="beyondEllipsis"  data-id="' + data.clusterCode + '">' + data.title + '</a>'
 		    	   }
 		    	  
 		    	   $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
@@ -83,35 +84,36 @@ $(function(){
 		    	   var negative = '';
 		    	   var colorStyle = '';
 		    	   if(data.sentiment != null && data.sentiment != ''){
-		    		   negative = data.sentiment.negative;
+		    		   negative = data.sentiment.negative * 100;
 		    		   // if(data.sentiment.negative > 60){
 		    			//    colorStyle = 'red';
 		    		   // }else
-		    		   	if(data.sentiment.negative > 40){
-		    			   colorStyle = 'gray';
-		    		   }else{
+		    		   	if(negative > 50){
 		    			   colorStyle = 'green';
+		    		   }else{
+		    			   colorStyle = 'gray';
 		    		   }
 
 		    	   }else{
 		    		   negative = '-';
-		    	   }
-					//2018-3-23 QG指数显示修改
-                   if(negative>40){
-                       $('td:eq(6)', row).html('-'+negative.toFixed(2)).addClass(colorStyle);
-                   }else{
-                       $('td:eq(6)', row).html((100-negative).toFixed(2)).addClass(colorStyle);
-                   }
-		    	  // $('td:eq(6)', row).html(negative).addClass(colorStyle);
+						 }
+						 
+						//2018-3-23 QG指数显示修改
+						// if(negative>40){
+						// 		$('td:eq(6)', row).html(negative.toFixed(2)).addClass(colorStyle);
+						// }else{
+						// 		$('td:eq(6)', row).html(negative.toFixed(2)).addClass(colorStyle);
+						// }
+		    	  $('td:eq(6)', row).html(negative.toFixed(2)).addClass(colorStyle);
 		    	   
 //		    	   浏览量
-		    	   var pageView = '<span class="browseNum'+index+'"></span>';
-		    	   $('td:eq(7)', row).html(pageView);
+// 		    	   var pageView = '<span class="browseNum'+index+'"></span>';
+// 		    	   $('td:eq(7)', row).html(pageView);
 		    		  
 		    	   
 //		    	   24小时趋势图
-		    	   var tendencyChart = '<div id="trend-polyline-charts'+index+'" style="width:100%;height:50px"></div>';
-		    	   $('td:eq(8)', row).html(tendencyChart);
+// 		    	   var tendencyChart = '<div id="trend-polyline-charts'+index+'" style="width:100%;height:50px"></div>';
+// 		    	   $('td:eq(8)', row).html(tendencyChart);
 		    	   
 //		    	   我的定制中将下次更新时间返回
 		    	   
@@ -119,7 +121,7 @@ $(function(){
 		       
 //		       服务器传过来的值
 		       columns: [//显示的列
-		           {data: 'clusterCode', "bSortable": false,'width':'35px'},
+		           {data: 'clusterCode', "bSortable": false,'width':'46px'},
 		           {data: 'createDatetime', "bSortable": false,
 		        	   render:function(data, type, row){
 		             		if(null != data && "" != data){
@@ -142,12 +144,12 @@ $(function(){
 		             			return '-';
 		             		}
 		               },
-		               'width':'85px'
+		               'width':'88px'
 		           },
 		           { data: 'title', "bSortable": false},
-		           { data: 'weight', "bSortable": false,'width':'40px'},
-		           { data: 'currentTrend', "bSortable": false,'width':'60px'},
-		           { data: 'allNewsNum', "bSortable": false,'width':'60px'},
+		           { data: 'weight', "bSortable": false,'width':'64px'},
+		           { data: 'currentTrend', "bSortable": false,'width':'64px'},
+		           { data: 'allNewsNum', "bSortable": false,'width':'64px'},
 		           { data: 'sentiment', "bSortable": false,
 		        	   render:function(data,type,row){
 		        		   if(data != null && data != ''){
@@ -157,19 +159,15 @@ $(function(){
 		        			   return '-';
 		        		   }
 		        	   },
-		        	   'width':'60px'
+		        	   'width':'64px'
 		           },
 		           { data: 'browseNum',"bSortable": false,
-		        	   render:function(data,type,row){
-		        		   if(data != null && data != ''){
-		        			   return data;
-		        		   }else{
-		        			   return '-'
-		        		   }
-		        	   },
-		        	   'width':'60px'
-		           },
-		           { data: 'clusterCode',"bSortable": false,'width':'150px'}
+				   render:function(data,type,row){
+		           		return '';
+				   },
+		        	   'width':'38px'
+		           }
+		           // { data: 'clusterCode',"bSortable": false,'width':'150px'}
 		       ],
 		       
 		       "aaSorting": [[1, ""]],
@@ -199,57 +197,57 @@ $(function(){
 	 */
 	
 //	从后台获得趋势图的数据
-	$.fn.getTendencyData = function(options){
-		var defaults = {
-				count:0,
-				modalName:'',
-				dataUrl:'',
-				dataParam:{}
-		};
-		var options = $.extend(defaults,options);
-		
-		$.ajax({
-            url : options.dataUrl,//这个就是请求地址对应sAjaxSource
-            data:options.dataParam,
-            type : 'get',
-            dataType : 'json',
-            async : true,
-            success : function(data) {
-            	console.log(data);
-            	if(data.result == true){
-            		
-            		var obj = data.resultObj.trendMap;
-            		
-            		var tendencyDataItem = {
-                			time:[],
-                			data:[]
-                	}
-            		
-            		for( var key in obj ){
-            			tendencyDataItem.time.push(key);
-            			tendencyDataItem.data.push(obj[key]);
-            		}
-            		$().showTrendChart({
-            			idName:options.modalName,
-            			chartTime:tendencyDataItem.time,
-            			chartData:tendencyDataItem.data
-            		})
-            		
-            		var treadName = 'trend' + options.count;
-            		
-            		var currentTrend = '';
- 		    	    if(data.resultObj.trendValue == 0){
- 		    		   currentTrend = '-';
- 		    	    }else if(data.resultObj.trendValue > 0){
- 		    		   currentTrend = data.resultObj.trendValue+'%&nbsp;<i class="colorUp fa fa-long-arrow-up"></i>';
- 		    	    }else{
- 		    		   currentTrend = data.resultObj.trendValue+'%&nbsp;<i class="colorDown fa fa-long-arrow-down"></i>';
- 		    	    }
-            		$('.'+treadName).html(currentTrend);
-            	}
-            }
-		})
-	};
+// 	$.fn.getTendencyData = function(options){
+// 		var defaults = {
+// 				count:0,
+// 				modalName:'',
+// 				dataUrl:'',
+// 				dataParam:{}
+// 		};
+// 		var options = $.extend(defaults,options);
+//
+// 		$.ajax({
+//             url : options.dataUrl,//这个就是请求地址对应sAjaxSource
+//             data:options.dataParam,
+//             type : 'get',
+//             dataType : 'json',
+//             async : true,
+//             success : function(data) {
+//             	console.log(data);
+//             	if(data.result == true){
+//
+//             		var obj = data.resultObj.trendMap;
+//
+//             		var tendencyDataItem = {
+//                 			time:[],
+//                 			data:[]
+//                 	}
+//
+//             		for( var key in obj ){
+//             			tendencyDataItem.time.push(key);
+//             			tendencyDataItem.data.push(obj[key]);
+//             		}
+//             		$().showTrendChart({
+//             			idName:options.modalName,
+//             			chartTime:tendencyDataItem.time,
+//             			chartData:tendencyDataItem.data
+//             		})
+//
+//             		var treadName = 'trend' + options.count;
+//
+//             		var currentTrend = '';
+//  		    	    if(data.resultObj.trendValue == 0){
+//  		    		   currentTrend = '-';
+//  		    	    }else if(data.resultObj.trendValue > 0){
+//  		    		   currentTrend = data.resultObj.trendValue+'%&nbsp;<i class="colorUp fa fa-long-arrow-up"></i>';
+//  		    	    }else{
+//  		    		   currentTrend = data.resultObj.trendValue+'%&nbsp;<i class="colorDown fa fa-long-arrow-down"></i>';
+//  		    	    }
+//             		$('.'+treadName).html(currentTrend);
+//             	}
+//             }
+// 		})
+// 	};
 	
 //	展示24小时趋势图
 	$.fn.showTrendChart = function(options){
@@ -321,37 +319,37 @@ $(function(){
 	/**
 	 * 浏览量二次查询
 	 */
-	$.fn.adraticAjaxData = function(options){
-		var defaults = {
-				modalName:'', //所在元素的className
-				dataUrl:'',  //请求路径
-				dataParam:{},  //传递参数
-				rowIndex:'', //定义是table第几行
-				columnIndex:'',//定义是table第几列
-				callback:''
-		};
-		var options = $.extend(defaults,options);
-		
-		$.ajax({
-            url : options.dataUrl,//这个就是请求地址对应sAjaxSource
-            data:options.dataParam,
-            type : 'get',
-            dataType : 'json',
-            async : true,
-            success : function(data,index) {
-            	if(data.result == true){
-            		
-            		if(options.callback != ''){
-            			options.callback(data.resultObj);
-            		}else{
-            			if(options.modalName != '' && options.modalName != 'null'){
-                			$(options.modalName).html(data.resultObj);
-                		}
-            		}
-            	}
-            }
-		})
-	};
+	// $.fn.adraticAjaxData = function(options){
+	// 	var defaults = {
+	// 			modalName:'', //所在元素的className
+	// 			dataUrl:'',  //请求路径
+	// 			dataParam:{},  //传递参数
+	// 			rowIndex:'', //定义是table第几行
+	// 			columnIndex:'',//定义是table第几列
+	// 			callback:''
+	// 	};
+	// 	var options = $.extend(defaults,options);
+	//
+	// 	$.ajax({
+     //        url : options.dataUrl,//这个就是请求地址对应sAjaxSource
+     //        data:options.dataParam,
+     //        type : 'get',
+     //        dataType : 'json',
+     //        async : true,
+     //        success : function(data,index) {
+     //        	if(data.result == true){
+     //
+     //        		if(options.callback != ''){
+     //        			options.callback(data.resultObj);
+     //        		}else{
+     //        			if(options.modalName != '' && options.modalName != 'null'){
+     //            			$(options.modalName).html(data.resultObj);
+     //            		}
+     //        		}
+     //        	}
+     //        }
+	// 	})
+	// };
 	
 })(jQuery);
 

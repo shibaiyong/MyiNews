@@ -672,6 +672,10 @@ function navBack(){
                 var obj = data.resultObj;
                 var content = '';
                 var precontent= '';
+                // 进行数据过滤，将热点排行过滤掉(暂无移除此频道)
+                obj = obj.filter(function (item, index) {
+                    return item.paramName != 'nav.hot';
+                });
 //        		预览回显
                 for(var i = 0;i<obj.length;i++){
                     if(obj[i].status == '0'){//0:选中状态

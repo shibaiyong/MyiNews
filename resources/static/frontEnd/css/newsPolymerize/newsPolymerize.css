@@ -51,3 +51,44 @@
 .gray{
 	color:green;
 }
+.rankListConBox{
+	margin-top: 8px;
+}
+
+/* 地区条件样式 */
+/* .linkLastNewsDataTable {
+	position: relative;
+}
+.operateGroupWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.operateHeight {
+	height: 30px;
+	overflow: hidden;
+}
+.showMore {
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+}
+.moreSelect {
+	color: #fff;
+	background-color: #F44336;
+}
+.tenantArea {
+	margin-bottom: 8px;
+	margin-right: 6px;
+} */
+
+/* 覆写样式 */
+/* #threadContent {
+	margin-top: 0;
+}
+#threadContent .dataShowTable {
+	margin-top: 0;
+} */

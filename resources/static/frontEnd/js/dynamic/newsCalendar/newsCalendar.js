@@ -34,7 +34,6 @@ $(function () {
           eventLimitClick:function(cellInfo, jsEvent){
         	  
         	  var time = new Date(cellInfo.date._d).formatDate('yyyy-MM-dd');
-        	  console.log(time);
         	  var dataUrl = ctx+'/calendar/front/goto/calender/list?datetime='+time;
         	  window.open(dataUrl);
           },
@@ -51,20 +50,19 @@ $(function () {
           },
           //Random default events
           events: function(start, end,timezone, callback) {
+              $('.loading-zhe').show();
         	  $("#calendar").fullCalendar('removeEvents');//清空上次加载的日程
-        	  
         	  var time = new Date($('#calendar').fullCalendar('getDate'));
     		  var timenow = time.formatDate("yyyy-MM").toString();
-        	  
         		$.ajax({
   		        	type : "get",
   					url : ctx+"/calendar/front/getCalendar?datetime=" + timenow,
   					async:true,
   		            dataType: 'json',
   		            success: function(data) {
-  		            	console.log(data);
   		                var datas = [];
   		                if(data.result){
+                            $('.loading-zhe').hide();
   		                	var map = data.resultObj;
   		                	var newsList = map.news; //新闻列表
   		                	var subjectList = map.event; //专题列表
@@ -82,9 +80,9 @@ $(function () {
 	  						//新闻
 	  						for (var i = 0; null!=newsList && i < newsList.length; i++) {
   	  							var news = newsList[i];
-								var time = new Date(news.crawlDatetime);
+
 								var releaseDatetime = '';
-								date = time.formatDate('yyyy-MM-dd');
+								date = new Date(news.crawlDatetime).formatDate('yyyy-MM-dd');
 								// if (news.releaseDatetime != null && news.releaseDatetime != '') {
 								//   releaseDatetime = '/' + news.releaseDatetime;
 								// }
@@ -94,16 +92,17 @@ $(function () {
   	  							}else{
   	  								textColor='#333333'
   	  							}
-  	  							var year = new Date(news.releaseDatetime).formatDate('yyyy');
+  	  							var year =new Date(news.releaseDatetime).formatDate('yyyy');
   	  							if("1000"==year){
   	  								if(null != news.releaseDatetimeStr&&'' != news.releaseDatetimeStr){
   	  									year = news.releaseDatetimeStr.split('-')[0];
   	  								}
   	  							}
+  	  							console.log(year);
 								title =  "["+year+"]"+news.title;
 								
 								
-  	  							url = ctx + '/latest/front/news/detail/' + news.webpageCode + releaseDatetime;
+  	  							url = ctx + '/latest/front/news/calendar/detail/' + news.webpageCode + releaseDatetime;
   	  							color = background[0];
   	  							datas.push({
   	  		                        title: title,
@@ -117,9 +116,8 @@ $(function () {
   		                	//专题
   		                	for (var i = 0; null!=subjectList && i < subjectList.length; i++) {
   	  							var subject = subjectList[i];
-  	  							var time = new Date(subject.createDatetime);
-  	  							date = time.formatDate('yyyy-MM-dd');
-  	  							var year = new Date(news.occurDatetime).formatDate('yyyy');
+  	  							date = subject.createDatetime.toString().substring(0, 10);
+  	  							var year = news.occurDatetime.toString().substring(0, 4);
   	  							title =  "["+year+"]"+subject.title;
   	  							url = ctx+'/event/front/gotoEventDetail/'+ subject.eventCode;
   	  							color = background[subject.level];

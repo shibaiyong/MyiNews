@@ -87,6 +87,7 @@
 //<![CDATA[
 	$(function(){
 		var links = $('#links').val();
+		var ctx = '';
 		if(null != links && '' != links && undefined != links){
 	        links = eval("(" + links + ")");
 	    }
@@ -95,9 +96,15 @@
 			return;
 		}
 		links.forEach(function(item){
+			if(item["value"].indexOf('http') != -1){
+				ctx = '';
+			}else{
+				ctx = $('#ctx').val();
+			}
 			linkLi += '<li>'
-					+ '<a target="_blank" href="'+item["value"]+'">'+item["name"]+'</a>'
-					+ '</li>'
+					+ '<a target="_blank" href="'+ctx+item["value"]+'">'+item["name"]+'</a>'
+					+ '</li>';
+
 		});
 		$("#linkShow").empty();
 		$("#linkShow").html(linkLi);

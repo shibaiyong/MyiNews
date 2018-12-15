@@ -1,8 +1,10 @@
 var innerid;
 var queryStr;
+var startTime;
 var highlightList = [];
 var table;
-
+var query = window.location.search;
+var keywordarr = getUrlPramas(query);
 /**
  * 时间对象的格式化，只要是时间对象，都可以调用该方法
  * @param format 传入值,日期格式，比如"yyyy-MM-dd hh:mm:ss"
@@ -45,7 +47,6 @@ var overflowhidden = function(id, rows, str){
     var text = document.getElementById(id);
     var style = window.getComputedStyle ? window.getComputedStyle(text, "") : text.currentStyle;
     var lineHeight = style["line-height"];   //获取到line-height样式设置的值 必须要有
-    console.log(lineHeight);
     var at = rows*parseInt(lineHeight);      //计算包含文本的div应该有的高度
     var tempstr = str;                       //获取到所有文本
     text.innerHTML = tempstr;                //将所有文本写入html中
@@ -70,6 +71,20 @@ var overflowhidden = function(id, rows, str){
     }
 }
 
+function getUrlPramas( queryStr ){
+    if( queryStr.indexOf( 'queryStr' ) >-1 ){
+		var query = queryStr.split('&')[0];
+    	var keyword = query.split('=')[1].split('%20');
+        var decodeKeyWord = [];
+        for(var i = 0; i < keyword.length; i++){
+            decodeKeyWord[i] = decodeURI( keyword[i] );
+        }
+        return decodeKeyWord;
+    }
+
+    return [];
+}
+
 $(function(){
 	/*头部导航高亮*/
 	/* 头部导航高亮 */
@@ -82,6 +97,7 @@ $(function(){
 	}
 	innerid = $('#clusterCode').val();
 	queryStr = $("#queryStr").val();
+    startTime = $(".startTime").val();
 	var scrollCon = '';
 	if($('body').width()<768){
 		scrollCon = true;
@@ -96,11 +112,13 @@ $(function(){
 			if(queryStr != ''){
 				aoData.push(
 					{"name":"clusterCode","value":innerid},
-					{"name":"queryStr","value":queryStr}
+					{"name":"queryStr","value":queryStr},
+                    {"name":"startTime","value":startTime}
 				)
 			}else{
 				aoData.push(
-						{"name":"clusterCode","value":innerid}
+						{"name":"clusterCode","value":innerid},
+                        {"name":"startTime","value":startTime}
 					)
 			}
         },
@@ -135,12 +153,10 @@ $(function(){
         },
         columns: [//显示的列
               { data: 'title', "bSortable": false },
-              { data: 'sourceCrawlDetail', "bSortable": false,
+              { data: 'sourceCrawl', "bSortable": false,
             	  render:function(data,type,row){
             		  if(data != null && data != ''){
-            			  
-            			  var name = data.website.displayName;
-            			  return name;
+            			  return data;
             		  }else{
             			  return '-';
             		  }
@@ -217,10 +233,12 @@ $(function(){
 //获取最新、首发报道
 function fetchlatestNews(ele,url){
     var clusterCode = $('#clusterCode').val().trim();
+    startTime = $(".startTime").val();
     var options = {
         ele:ele,
         data:{
-            clusterCode:clusterCode
+            clusterCode:clusterCode,
+    		startTime:startTime
         },
         callback:latestnewsProcess
     }
@@ -229,10 +247,12 @@ function fetchlatestNews(ele,url){
 }
 function fetchfirstNews(ele,url){
     var clusterCode = $('#clusterCode').val().trim();
+    startTime = $(".startTime").val();
     var options = {
         ele:ele,
         data:{
-            clusterCode:clusterCode
+            clusterCode:clusterCode,
+            startTime:startTime
         },
         callback:firstnewsProcess
     }
@@ -247,9 +267,14 @@ function latestnewsProcess(res,ele){
     var data = res.resultObj;
     var summary=data.cusSummary;
     var time = data.releaseDatetime;
+    var title = data.title;
     var keywords = data.cusKeyWords;
+
     var keywordsDom='';
     var source = data.sourceCrawlDetail;
+    if(!title|| title=='null'){
+        title='-';
+    }
     if(!summary||summary=='null'){
         summary='暂无摘要';
     }
@@ -271,7 +296,7 @@ function latestnewsProcess(res,ele){
         source = data.sourceCrawlDetail.currentWebsite.displayName;
     }
     var str='<div class="reportBox">'+
-        '<div class="newstitle"><h4>'+data.title+'</h4></div>'+
+        '<div class="newstitle"><h4><a target="_blank" href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'">'+title+'</a></h4></div>'+
         '<div class="relativeReportCon">'+
         '<p class="latestReport" id="overflowLatest">'+summary+'</p>'+
         '<div class="keyInfo">'+
@@ -298,11 +323,15 @@ function firstnewsProcess(res,ele){
     var data = res.resultObj;
     var summary=data.cusSummary;
     var time = data.releaseDatetime;
+    var title = data.title;
     var keywords = data.cusKeyWords;
     var keywordsDom='';
     var source = data.sourceCrawlDetail;
     if(!summary||summary=='null'){
         summary='暂无摘要';
+    }
+    if(!title||title=='null'){
+        title='-';
     }
     if(!time||time=='null'){
         time='无';
@@ -323,7 +352,7 @@ function firstnewsProcess(res,ele){
         source = data.sourceCrawlDetail.currentWebsite.displayName;
     }
     var str='<div class="reportBox">'+
-        '<div class="newstitle"><h4>'+data.title+'</h4></div>'+
+        '<div class="newstitle"><h4><a target="_blank" href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'">'+title+'</a></h4></div>'+
         '<div class="relativeReportCon">'+
         '<p class="latestReport" id="overflowFirst">'+summary+'</p>'+
         '<div class="keyInfo">'+
@@ -350,7 +379,11 @@ function closeDeclare(){
 //聚类新闻标题内容
 function titleAjaxData(){
 	var clusterCode = $('#clusterCode').val();
-	var dataParam = {'clusterCode':clusterCode};
+    startTime = $(".startTime").val();
+	var dataParam = {
+		'clusterCode':clusterCode,
+        'startTime':startTime
+	};
 	if(queryStr != ''){
 		dataParam.queryStr=queryStr;
 	}
@@ -361,23 +394,50 @@ function titleAjaxData(){
         dataType : 'json',
         async : true,
         success : function(data) {
-        	console.log(data);
         	if(data.result == true){
         		var obj = data.resultObj;
         		var clusterCon = {
         				'title':obj.title,
-        				'cusSummary':obj.webpage.cusSummary,
+        				'cusSummary':'',
         				'time':'',
         				'source':'',
         				'keyWord':'',
-        		}
-        		
+        		};
+
+        		if(obj.webpage.cusSummary && obj.webpage.cusSummary != '' && obj.webpage.cusSummary != 'null'){
+                    // if( keywordarr.length > 0 ){
+                     //    for(var i = 0; i < keywordarr.length; i++ ){
+                     //        var reg = new RegExp( keywordarr[i],'g' );
+                     //        var str = obj.webpage.cusSummary.replace(reg,'<span class="red">'+ keywordarr[i] +'</span>')
+                     //    }
+                     //    clusterCon.cusSummary = str;
+                    // }else{
+                     //    clusterCon.cusSummary = obj.webpage.cusSummary;
+					// }
+                    clusterCon.cusSummary = obj.webpage.cusSummary;
+				}else{
+                    clusterCon.cusSummary = '无';
+				}
+
+                if(obj.title && obj.title != '' && obj.title != 'null'){
+        			var titleStr = obj.title;
+                    if( keywordarr.length > 0 ){
+                        for(var i = 0; i < keywordarr.length; i++ ){
+                            var reg = new RegExp( keywordarr[i],'g' );
+                            titleStr = titleStr.replace(reg,'<span class="red">'+ keywordarr[i] +'</span>')
+                        }
+                        clusterCon.title = titleStr;
+                    }
+                }
+
         		if(obj.webpage.sourceCrawlDetail != null && obj.webpage.sourceCrawlDetail != ''){
         			clusterCon.source = obj.webpage.sourceCrawlDetail.website.displayName
         		}else{
         			clusterCon.source = '-'
         		}
-        		
+        		if(clusterCon.source == null || clusterCon.source == 'null'){
+                    clusterCon.source = '-';
+				}
         		$('.nucleusReportTitle span').html(obj.keywords);
         		$(document).attr("title",obj.keywords+'_iNews-智慧新闻');
         		
@@ -393,7 +453,7 @@ function titleAjaxData(){
         		
         		var content = '';
         		content += '<div class="nucleusReportItem ">';
-        		content += '<p class="itemTitle"><a target="_blank" href="'+ctx+'/latest/front/news/detail/'+obj.webpage.webpageCode+'">'+clusterCon.title+'</a></p>';
+        		content += '<p class="itemTitle"><a target="_blank" href="'+ctx+'/latest/front/news/detail/'+obj.webpage.webpageCode+'/'+obj.webpage.releaseDatetime+'">'+clusterCon.title+'</a></p>';
         		content += '<div class="itemDigest"><div class="summaryCon">';
         		content += '<p><span>[摘要]</span>'+clusterCon.cusSummary+'</p>';
         		content += '<p></p></div></div><div class="itemInfo">';
@@ -522,7 +582,8 @@ function countReport(data){
 				},
 		    },
 		    toolbox : {
-		    	show: true,
+				show: true,
+				right: 20,
 				feature : {
 					magicType : {
 						show : true,
@@ -586,6 +647,7 @@ function countReport(data){
 	dateChart.setOption(dateOption);
 }
 /*媒体提及率数据*/
+var mediaList = [];
 function reportCountMediaData(innerid){
 	$.ajax({
 		type : "get",
@@ -596,7 +658,38 @@ function reportCountMediaData(innerid){
 		},
 		dataType : "json", //返回数据形式为json
 		success : function(data) {
-			reportCountMedia(data);
+			// var name = data.mediaReport;
+			// var value = data.count;
+            // var count=0;
+            // var container={};
+            // for(var i=0;i<name.length;i++){
+             //    count=0;
+             //    for(var j=0;j<name.length;j++){
+             //        if(name[i]==name[j]){
+             //            if(i>j){
+             //                break;
+             //            }else{
+             //                count += value[i];
+             //                container[name[i]] = count;
+             //            }
+             //        }
+             //    }
+            // }
+            // var newNameArr = Object.keys(container);
+            // var newValueArr = [];
+            // for(var j = 0; j < newNameArr.length; j++){
+            	// newValueArr.push(container[newNameArr[i]])
+			// }
+			// var newData = {
+             //    'mediaReport':newNameArr,
+			// 	'count':newValueArr
+			// }
+			//reportCountMedia(newData);
+			//console.log(data);
+			if( data.idList && data.idList.length ){
+                mediaList = data.idList;
+			}
+            reportCountMedia( data );
 		},
 		error : function(errorMsg) {
 			console.log("媒体提及率图表请求数据失败啦!");
@@ -605,6 +698,7 @@ function reportCountMediaData(innerid){
 }
 /*媒体提及率*/
 function reportCountMedia(data){
+	console.log(data);
 	var mediaChart = echarts.init(document.getElementById('mediaMention'));
 	var mediaOption = {
 		color : [ '#d9534f' ],
@@ -666,10 +760,12 @@ function reportCountMedia(data){
 	};
 	mediaChart.setOption(mediaOption);
 	mediaChart.on('click',function(params){
-		console.log(params);
+		//console.log(params);
 		var clusterCode = $('#clusterCode').val();//clusterid
-		window.open(ctx+'/latest/front/mediaList/'+params.name+'/'+clusterCode);
-		
+		var dataIndex = params.dataIndex;
+
+		var id = mediaList[dataIndex];
+		window.open(ctx+'/latest/front/mediaList/'+id+'/'+clusterCode);
 	});
 }
 

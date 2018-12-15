@@ -28,12 +28,16 @@ $(function () {
 });
 
 function rendererList(listData) {
-    if(!listData||listData.length==0){
+    if (!listData) {
         return
+    }else if(listData.length == 0){
+        document.getElementById("specialList").innerHTML = "";
+        return;
     }
+
     var html = ""
     for (var i = 0; i < listData.length; i++) {
-        var time = new Date(listData[i].createDatetime).toString()
+        var time = new Date(listData[i].occurDatetime).toString()
         html += "<div class=\"list-item\">\n" +
             "            <div style=\"width: 13%\">" + (i + 1) + "</div>\n" +
             "            <div style=\"width: 40%;cursor: pointer\" class='specialUrl' data-group-index='" + i + "'>" + listData[i].eventName + "</div>\n" +
@@ -44,7 +48,7 @@ function rendererList(listData) {
             "            </div>\n" +
             "        </div>"
     }
-    document.getElementById("specialList").innerHTML = html
+    document.getElementById("specialList").innerHTML = html;
     $('.deleteSpecial').click(function (event) {
         var index = this.getAttribute("data-group-index")
         deleteEvent(listData[index].eventCode)
@@ -55,7 +59,11 @@ function rendererList(listData) {
     }); //http://localhost:8080/ns/uec/event/front/detail/85e3ca93db47692ef88aa5259802cc2c
     $('.specialUrl').click(function (event) {
         var index = this.getAttribute("data-group-index")
-        open(ctx + "/event/front/detail/"+listData[index].eventCode)
+        if (listData[index].newsNum && listData[index].newsNum > 0) {
+            open(ctx + "/event/front/detail/" + listData[index].eventCode)
+        } else {
+            alert("对不起，该专题暂无新闻")
+        }
     });
 }
 
@@ -135,14 +143,14 @@ function save() {
                         "keywords": keywords,
                         "description": description,
                         "picPath": picPath,
-                        "isSystemCreate":1,
+                        "isSystemCreate": 1,
                         "occurrenceDate": occurrenceTime,
                         // "classification": classification,
                         // "level": level
                     };
                 } else {
                     param = {
-                        "isSystemCreate":1,
+                        "isSystemCreate": 1,
                         "eventName": name,
                         "keywords": keywords,
                         "description": description,
@@ -155,7 +163,7 @@ function save() {
                 $.ajax({
                     type: "POST",
                     //提交的网址
-                    url: ctx + "/event/back/saveOrUpdate",
+                    url: ctx + "/event/front/saveOrUpdate",
                     //提交的数据
                     data: param,
                     async: false,
@@ -189,7 +197,7 @@ function save() {
     } else {
         if (null != eventCode && "" != eventCode && undefined != eventCode) {
             param = {
-                "isSystemCreate":1,
+                "isSystemCreate": 1,
                 "eventCode": eventCode,
                 "eventName": name,
                 "keywords": keywords,
@@ -200,7 +208,7 @@ function save() {
             };
         } else {
             param = {
-                "isSystemCreate":1,
+                "isSystemCreate": 1,
                 "eventName": name,
                 "keywords": keywords,
                 "description": description,
@@ -212,7 +220,7 @@ function save() {
         $.ajax({
             type: "POST",
             //提交的网址
-            url: ctx + "/event/back/saveOrUpdate",
+            url: ctx + "/event/front/saveOrUpdate",
             //提交的数据
             data: param,
             //返回数据的格式
@@ -249,9 +257,10 @@ function deleteEvent(id) {
         $.ajax({
             type: "POST",
             //提交的网址
-            url: ctx + "/event/back/delete/" + id,
+            url: ctx + "/event/front/delete/" + id,
             //提交的数据
             //返回数据的格式
+            datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
             datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
             //在请求之前调用的函数
             beforeSend: function () {

@@ -34,7 +34,11 @@
     <script src="../../static/assets/js/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.js}"></script>
 	<!-- Self JS -->
 	<script type="text/javascript"	src="../../../static/frontEnd/js/static/latestNews/latestNews_static.js"	th:src="@{/frontEnd/js/dynamic/latestNews/latestNews_static.js}"></script>
-
+	<style>
+		.table-operation .table-operation-status a:nth-child(1),.table-operation .table-operation-status a:nth-child(3){
+			display: none;
+		}
+	</style>
 </head>
 <body>
 <!-- 	处于哪种展示方式：0 列表  1 缩略图  2 九宫格 -->
@@ -144,9 +148,11 @@
 								</table>
 							</div>
 							<div class="linkLastNewsDataTable" >
-								<div id="operateGroup"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
-				
-								<div id="threadContent" th:include="frontEnd/common/threadContent :: threadContent"></div>
+									<div class="operateGroupWrapper">
+										<div id="operateGroup" class="operateGroup" th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+										<div class="showMore hide">更多</div>
+									</div>				
+								<div id="threadContent" th:include="frontEnd/common/threadContentForlatestNew :: threadContent"></div>
 							</div>
 						</div>
 					</div>

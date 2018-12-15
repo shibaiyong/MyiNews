@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.NewsStatEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.NewsStatEntity">
+    <id column="webpage_code" jdbcType="VARCHAR" property="webpageCode" />
+    <result column="reposts_num" jdbcType="INTEGER" property="repostsNum" />
+    <result column="comments_num" jdbcType="INTEGER" property="commentsNum" />
+    <result column="participate_num" jdbcType="INTEGER" property="participateNum" />
+    <result column="vote" jdbcType="INTEGER" property="vote" />
+    <result column="against" jdbcType="INTEGER" property="against" />
+    <result column="browse_num" jdbcType="INTEGER" property="browseNum" />
+    <result column="favorite_num" jdbcType="INTEGER" property="favoriteNum" />
+    <result column="same_num" jdbcType="INTEGER" property="sameNum" />
+    <result column="relevant_num" jdbcType="INTEGER" property="relevantNum" />
+    <result column="is_core_news" jdbcType="INTEGER" property="isCoreNews" />
+    <result column="core_news_code" jdbcType="VARCHAR" property="coreNewsCode" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="media_status" jdbcType="VARCHAR" property="mediaStatus" />
+    <result column="nlp_regions" jdbcType="VARCHAR" property="nlpRegions" />
+    <result column="original_score" jdbcType="REAL" property="originalScore" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    webpage_code, reposts_num, comments_num, participate_num, vote, against, browse_num, 
+    favorite_num, same_num, relevant_num, is_core_news, core_news_code, status, create_datetime, 
+    update_datetime, media_status, nlp_regions, original_score
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news_stat
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from news_stat
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.NewsStatEntity">
+    insert into news_stat (webpage_code, reposts_num, comments_num, 
+      participate_num, vote, against, 
+      browse_num, favorite_num, same_num, 
+      relevant_num, is_core_news, core_news_code, 
+      status, create_datetime, update_datetime, 
+      media_status, nlp_regions, original_score
+      )
+    values (#{webpageCode,jdbcType=VARCHAR}, #{repostsNum,jdbcType=INTEGER}, #{commentsNum,jdbcType=INTEGER}, 
+      #{participateNum,jdbcType=INTEGER}, #{vote,jdbcType=INTEGER}, #{against,jdbcType=INTEGER}, 
+      #{browseNum,jdbcType=INTEGER}, #{favoriteNum,jdbcType=INTEGER}, #{sameNum,jdbcType=INTEGER}, 
+      #{relevantNum,jdbcType=INTEGER}, #{isCoreNews,jdbcType=INTEGER}, #{coreNewsCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{mediaStatus,jdbcType=VARCHAR}, #{nlpRegions,jdbcType=VARCHAR}, #{originalScore,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.NewsStatEntity">
+    insert into news_stat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webpageCode != null">
+        webpage_code,
+      </if>
+      <if test="repostsNum != null">
+        reposts_num,
+      </if>
+      <if test="commentsNum != null">
+        comments_num,
+      </if>
+      <if test="participateNum != null">
+        participate_num,
+      </if>
+      <if test="vote != null">
+        vote,
+      </if>
+      <if test="against != null">
+        against,
+      </if>
+      <if test="browseNum != null">
+        browse_num,
+      </if>
+      <if test="favoriteNum != null">
+        favorite_num,
+      </if>
+      <if test="sameNum != null">
+        same_num,
+      </if>
+      <if test="relevantNum != null">
+        relevant_num,
+      </if>
+      <if test="isCoreNews != null">
+        is_core_news,
+      </if>
+      <if test="coreNewsCode != null">
+        core_news_code,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="mediaStatus != null">
+        media_status,
+      </if>
+      <if test="nlpRegions != null">
+        nlp_regions,
+      </if>
+      <if test="originalScore != null">
+        original_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webpageCode != null">
+        #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="repostsNum != null">
+        #{repostsNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentsNum != null">
+        #{commentsNum,jdbcType=INTEGER},
+      </if>
+      <if test="participateNum != null">
+        #{participateNum,jdbcType=INTEGER},
+      </if>
+      <if test="vote != null">
+        #{vote,jdbcType=INTEGER},
+      </if>
+      <if test="against != null">
+        #{against,jdbcType=INTEGER},
+      </if>
+      <if test="browseNum != null">
+        #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteNum != null">
+        #{favoriteNum,jdbcType=INTEGER},
+      </if>
+      <if test="sameNum != null">
+        #{sameNum,jdbcType=INTEGER},
+      </if>
+      <if test="relevantNum != null">
+        #{relevantNum,jdbcType=INTEGER},
+      </if>
+      <if test="isCoreNews != null">
+        #{isCoreNews,jdbcType=INTEGER},
+      </if>
+      <if test="coreNewsCode != null">
+        #{coreNewsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mediaStatus != null">
+        #{mediaStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nlpRegions != null">
+        #{nlpRegions,jdbcType=VARCHAR},
+      </if>
+      <if test="originalScore != null">
+        #{originalScore,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.NewsStatEntity">
+    update news_stat
+    <set>
+      <if test="repostsNum != null">
+        reposts_num = #{repostsNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentsNum != null">
+        comments_num = #{commentsNum,jdbcType=INTEGER},
+      </if>
+      <if test="participateNum != null">
+        participate_num = #{participateNum,jdbcType=INTEGER},
+      </if>
+      <if test="vote != null">
+        vote = #{vote,jdbcType=INTEGER},
+      </if>
+      <if test="against != null">
+        against = #{against,jdbcType=INTEGER},
+      </if>
+      <if test="browseNum != null">
+        browse_num = #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="favoriteNum != null">
+        favorite_num = #{favoriteNum,jdbcType=INTEGER},
+      </if>
+      <if test="sameNum != null">
+        same_num = #{sameNum,jdbcType=INTEGER},
+      </if>
+      <if test="relevantNum != null">
+        relevant_num = #{relevantNum,jdbcType=INTEGER},
+      </if>
+      <if test="isCoreNews != null">
+        is_core_news = #{isCoreNews,jdbcType=INTEGER},
+      </if>
+      <if test="coreNewsCode != null">
+        core_news_code = #{coreNewsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mediaStatus != null">
+        media_status = #{mediaStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nlpRegions != null">
+        nlp_regions = #{nlpRegions,jdbcType=VARCHAR},
+      </if>
+      <if test="originalScore != null">
+        original_score = #{originalScore,jdbcType=REAL},
+      </if>
+    </set>
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.NewsStatEntity">
+    update news_stat
+    set reposts_num = #{repostsNum,jdbcType=INTEGER},
+      comments_num = #{commentsNum,jdbcType=INTEGER},
+      participate_num = #{participateNum,jdbcType=INTEGER},
+      vote = #{vote,jdbcType=INTEGER},
+      against = #{against,jdbcType=INTEGER},
+      browse_num = #{browseNum,jdbcType=INTEGER},
+      favorite_num = #{favoriteNum,jdbcType=INTEGER},
+      same_num = #{sameNum,jdbcType=INTEGER},
+      relevant_num = #{relevantNum,jdbcType=INTEGER},
+      is_core_news = #{isCoreNews,jdbcType=INTEGER},
+      core_news_code = #{coreNewsCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      media_status = #{mediaStatus,jdbcType=VARCHAR},
+      nlp_regions = #{nlpRegions,jdbcType=VARCHAR},
+      original_score = #{originalScore,jdbcType=REAL}
+    where webpage_code = #{webpageCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

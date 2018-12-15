@@ -1,0 +1,207 @@
+.hoteventscontainer {
+    margin-top:10px;
+    overflow: hidden;
+    padding-bottom:32px;
+}
+.hoteventscontainer ul{
+    padding:16px;
+    box-sizing: border-box;
+    width:310px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.14);
+    border-radius: 4px;
+    float: left;
+    margin-left:30px;
+}
+.hoteventscontainer ul:nth-child(3n+1){
+    margin-left:4px;
+}
+.hoteventscontainer ul:nth-child(n+4){
+    margin-top:30px;
+}
+.hoteventscontainer ul li.title a{
+    width:100%;
+    display: inline-block;
+    font-size: 18px;
+    color: #333333;
+    font-weight:bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.time{
+    line-height: 20px;
+    font-size: 14px;
+    color: #999999;
+    padding:4px 0px;
+}
+.showimg{
+    padding-bottom: 6px;
+    height: 156px;
+    text-align: center;
+}
+.showimg a{
+    display: table-cell;
+    width:278px;
+    height: 156px;
+    text-align: center;
+    overflow:hidden;
+    vertical-align: middle;
+}
+.showimg a img{
+    max-width: 100%;
+    max-height:100%;
+}
+.description a{
+    line-height: 22px;
+    font-size: 14px;
+    color: #666;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.hoteventscontainer .eventTrack{
+    background:white;
+    color:#666666;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    width:104px;
+
+}
+.hoteventscontainer .eventTrack img{
+    margin-right:6px;
+}
+.hoteventscontainer .opt{
+    padding-top:16px;
+    border-top:1px solid #F2F2F2;
+}
+.hoteventscontainer .opt div{
+    display: inline-block;
+    width:49%;
+}
+.hoteventscontainer .opt div.edit{
+    text-align: left;
+}
+
+.hoteventscontainer .opt div.delete{
+    text-align: right;
+}
+
+.red {
+    color: red;
+}
+
+.jian{
+    float: left;
+    height: 34px;
+    width: 8px;
+    background:url(../../image/myCustomize/jian.png) no-repeat center center;
+}
+.toast-container{
+    width:340px;
+}
+.toast-position-top-center{
+    margin-left:-170px;
+}
+/*表单弹出框样式*/
+@media screen and (min-width: 768px){
+    .modal .col-sm-2.control-label {
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+
+    .modal .modal-dialog {
+        margin-top: 10%;
+    }
+
+    .modal .modal-footer {
+        text-align: center;
+    }
+
+    .modal .modal-footer .btn {
+        width: 72px;
+        height: 32px;
+        border: 1px solid #FF6601;
+        color: white;
+        background: #FF6601;
+        border-radius: 4px;
+    }
+
+    .modal .modal-footer .btn.btn-default {
+        border: 1px solid #FF6601;
+        background: white;
+        color: #FF6601;
+    }
+
+    .modal .modal-dialog .keywordlabel {
+        margin-bottom: 8px;
+    }
+}
+
+.modal .confirm-dialog {
+    height: 188px;
+    width: 460px;
+    border-radius: 8px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-top: -94px;
+    margin-left: -230px;
+    background: white;
+}
+
+
+
+/*编辑和删除的提示框*/
+.modal .confirm-dialog .title {
+    position: absolute;
+    left: 16px;
+    top: 24px;
+    font-size: 16px;
+    color: #666666;
+    font-weight: bold;
+}
+
+.modal .confirm-dialog .hint {
+    height: 46px;
+    font-weight: bold;
+    padding-top: 8px;
+    line-height: 38px;
+    font-size: 16px;
+    color: #666666;
+    padding-left: 16px;
+    border-bottom: #e4e4e4 1px solid;
+}
+
+.modal .confirm-dialog .content {
+    height: 142px;
+    width: 100%;
+    position: relative;
+}
+
+.modal .confirm-dialog .confirm {
+    background: #FF6601;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px 22px;
+    position: absolute;
+    right: 120px;
+    bottom: 16px;
+    cursor: pointer;
+}
+
+.modal .confirm-dialog .cancel {
+    cursor: pointer;
+    position: absolute;
+    right: 32px;
+    bottom: 16px;
+    background: white;
+    color: #FF6601;
+    box-sizing: border-box;
+    border: 1px solid #FF6601;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px 22px;
+}
+

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.cluster.dao.ClusterAnalysisEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="analysis_name" jdbcType="VARCHAR" property="analysisName" />
+    <result column="cluster_code" jdbcType="VARCHAR" property="clusterCode" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="task_type" jdbcType="VARCHAR" property="taskType" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    <result column="analysis_value" jdbcType="LONGVARCHAR" property="analysisValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, analysis_name, cluster_code, create_datetime, task_type, task_id
+  </sql>
+  <sql id="Blob_Column_List">
+    analysis_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cluster_analysis
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cluster_analysis
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    insert into cluster_analysis (innerid, analysis_name, cluster_code, 
+      create_datetime, task_type, task_id, 
+      analysis_value)
+    values (#{innerid,jdbcType=INTEGER}, #{analysisName,jdbcType=VARCHAR}, #{clusterCode,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{taskType,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, 
+      #{analysisValue,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    insert into cluster_analysis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="analysisName != null">
+        analysis_name,
+      </if>
+      <if test="clusterCode != null">
+        cluster_code,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="taskType != null">
+        task_type,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="analysisValue != null">
+        analysis_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="analysisName != null">
+        #{analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterCode != null">
+        #{clusterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisValue != null">
+        #{analysisValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    update cluster_analysis
+    <set>
+      <if test="analysisName != null">
+        analysis_name = #{analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterCode != null">
+        cluster_code = #{clusterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskType != null">
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisValue != null">
+        analysis_value = #{analysisValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    update cluster_analysis
+    set analysis_name = #{analysisName,jdbcType=VARCHAR},
+      cluster_code = #{clusterCode,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      analysis_value = #{analysisValue,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.cluster.model.ClusterAnalysisEntity">
+    update cluster_analysis
+    set analysis_name = #{analysisName,jdbcType=VARCHAR},
+      cluster_code = #{clusterCode,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

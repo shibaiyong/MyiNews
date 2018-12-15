@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.NewsRelationEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.NewsRelationEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="relation_type" jdbcType="INTEGER" property="relationType" />
+    <result column="webpage_code1" jdbcType="VARCHAR" property="webpageCode1" />
+    <result column="webpage_code2" jdbcType="VARCHAR" property="webpageCode2" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, relation_type, webpage_code1, webpage_code2, weight, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news_relation
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news_relation
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.NewsRelationEntity">
+    insert into news_relation (innerid, relation_type, webpage_code1, 
+      webpage_code2, weight, create_datetime
+      )
+    values (#{innerid,jdbcType=INTEGER}, #{relationType,jdbcType=INTEGER}, #{webpageCode1,jdbcType=VARCHAR}, 
+      #{webpageCode2,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.NewsRelationEntity">
+    insert into news_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="relationType != null">
+        relation_type,
+      </if>
+      <if test="webpageCode1 != null">
+        webpage_code1,
+      </if>
+      <if test="webpageCode2 != null">
+        webpage_code2,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="relationType != null">
+        #{relationType,jdbcType=INTEGER},
+      </if>
+      <if test="webpageCode1 != null">
+        #{webpageCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageCode2 != null">
+        #{webpageCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.NewsRelationEntity">
+    update news_relation
+    <set>
+      <if test="relationType != null">
+        relation_type = #{relationType,jdbcType=INTEGER},
+      </if>
+      <if test="webpageCode1 != null">
+        webpage_code1 = #{webpageCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageCode2 != null">
+        webpage_code2 = #{webpageCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.NewsRelationEntity">
+    update news_relation
+    set relation_type = #{relationType,jdbcType=INTEGER},
+      webpage_code1 = #{webpageCode1,jdbcType=VARCHAR},
+      webpage_code2 = #{webpageCode2,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

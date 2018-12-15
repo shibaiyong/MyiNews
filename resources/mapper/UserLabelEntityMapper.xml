@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.UserLabelEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.UserLabelEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="label_type" jdbcType="INTEGER" property="labelType" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="fix_labels" jdbcType="LONGVARCHAR" property="fixLabels" />
+    <result column="dynamic_labels" jdbcType="LONGVARCHAR" property="dynamicLabels" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    innerid, user_id, tenant_id, label_type, create_datetime, update_datetime, fix_labels, dynamic_labels
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_label
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_label
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="innerid" useGeneratedKeys="true" parameterType="com.uec.web.model.UserLabelEntity">
+    insert into user_label (innerid, user_id, tenant_id, 
+      label_type, create_datetime, update_datetime, 
+      fix_labels, dynamic_labels)
+    values (#{innerid,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{tenantId,jdbcType=INTEGER}, 
+      #{labelType,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{fixLabels,jdbcType=LONGVARCHAR}, #{dynamicLabels,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective"  parameterType="com.uec.web.model.UserLabelEntity">
+    insert into user_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="labelType != null">
+        label_type,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="fixLabels != null">
+        fix_labels,
+      </if>
+      <if test="dynamicLabels != null">
+        dynamic_labels,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="labelType != null">
+        #{labelType,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fixLabels != null">
+        #{fixLabels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dynamicLabels != null">
+        #{dynamicLabels,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.UserLabelEntity">
+    update user_label
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="labelType != null">
+        label_type = #{labelType,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fixLabels != null">
+        fix_labels = #{fixLabels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dynamicLabels != null">
+        dynamic_labels = #{dynamicLabels,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.model.UserLabelEntity">
+    update user_label
+    set user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      label_type = #{labelType,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      fix_labels = #{fixLabels,jdbcType=LONGVARCHAR},
+      dynamic_labels = #{dynamicLabels,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.UserLabelEntity">
+    update user_label
+    set user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      label_type = #{labelType,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

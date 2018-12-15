@@ -76,7 +76,7 @@ $(function(){
         			content += '<li class=""><a class="ti" href="#" data-innerid="'+obj[i].labelId+'">'+obj[i].name+'</a></li>';
         		}
         		$('#clusterSourcesPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterSources',
     				idName:'#clusterSourcesPro',
     			});
@@ -120,7 +120,7 @@ $(function(){
         			content += '<li class=""><a class="ti" href="#" data-innerid="'+obj[i].labelId+'">'+obj[i].name+'</a></li>';
         		}
         		$('#clusterCarrierPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterCarrier',
     				idName:'#clusterCarrierPro',
     			});
@@ -261,7 +261,7 @@ $(function(){
             		var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 +4;
             	}
         		
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterMap',
     				idName:'#clusterMapPro',
     			});
@@ -336,7 +336,7 @@ $(function(){
         		}
         		
 //        		$('#clusterFenleiPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterFenlei',
     				idName:'#clusterFenleiPro',
     			});
@@ -573,9 +573,11 @@ $(function(){
 //		相似相关获取
 		var textArr = threadAjaxData1.column(5).nodes().data();
 		tableItemWebPageCodeArr =[];
+		var releaseDateTimeArr = [];	
 		if(textArr.length > 0){
 			for(var count = 0;textArr.length>count;count++){
 				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+				releaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
 			//相似
 			$().adraticAjaxData({
@@ -654,6 +656,7 @@ $(function(){
 			$('.inewsOperation').each(function(index){
 				$(this).find('span').eq(1).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.find('i').addClass('hide');
         				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
@@ -796,9 +799,11 @@ $(function(){
 		});
 		var thumbnailArr = thumbnailTable.column(1).nodes().data();
 		tableItemWebPageCodeArr =[];
+		var otherReleaseDateTimeArr = []; 
 		if(thumbnailArr.length > 0){
 			for(var count = 0;thumbnailArr.length>count;count++){
 				tableItemWebPageCodeArr.push(thumbnailArr[count].webpageCode);
+				otherReleaseDateTimeArr.push(thumbnailArr[count].releaseDatetime);
 			}
 			
 			//相似
@@ -854,6 +859,7 @@ $(function(){
 			$('.mediaOperation').each(function(index){
 				$(this).find('a').eq(2).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': otherReleaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.html('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>&nbsp;建稿中...');
         			},

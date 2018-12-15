@@ -160,7 +160,7 @@
 													</button>
 													<ul class="dropdown-menu" role="menu" >
 														<li><a href="#">全部来源</a></li>
-														<li th:each="source:${sourceList}"><a href="#"><span  th:text="${source.name}" th:value="${source.labelId}">新闻门户</span>(<span class="red" th:id="${source.labelId}">12</span>)</a></li>
+														<li th:each="source:${sourceList}"><a href="#"><span  th:text="${source.name}" th:value="${source.labelId}">新闻门户</span>(<span class="red" th:id="${source.labelId}">0</span>)</a></li>
 													    <li><a href="#" th:remove="all">传统媒体(<span class="red">21</span>)</a></li>
 													    <li><a href="#" th:remove="all">专业网站(<span class="red">43</span>)</a></li>
 													    <li><a href="#" th:remove="all">社交平台(<span class="red">12</span>)</a></li>
@@ -287,7 +287,7 @@
 													<dl>
 														<dt class="shadowBg contentVD">
 															<h6 class="m-top titleVD">
-																<a href="javascript:void(0)" th:onclick="'loadNewsDetail(\''+${eventNews.webpageCode}+'\')'" th:text="${eventNews.title}">俄举行遇刺大使悼念活动 普京推迟记者会出席</a>
+																<a href="javascript:void(0)" th:onclick="'loadNewsDetail(\''+${eventNews.webpageCode}+'/' +${eventNews.releaseDatetimeMilli}+'\')'" th:text="${eventNews.title}">俄举行遇刺大使悼念活动 普京推迟记者会出席</a>
 <!-- 																<span class="titleVDTag" th:if="${eventNews.isFirstReport eq 1}">（首次报道）</span><span class="titleVDTag" th:if="${eventNews.isBreakReport eq 1}">（爆炸点）</span> -->
 															</h6>
 															<div class="contentTag" th:if="${stat.last}">
@@ -298,7 +298,7 @@
 																<div class="box">
 																	<div class="summaryVD ">
 																		<span>[摘要]</span>
-																		<p th:text="${eventNews.cusSummary}">俄举行遇刺大使悼念活动 普京推迟记者会出席---俄罗斯政府２２日在莫斯科外交部大楼举行遇刺俄驻土耳其大使卡尔洛夫遗体告别仪式，俄总统普京推迟原定于当天举行的年度大型记者会，出席了悼念活动。</p> 
+																		<p th:text="${eventNews.summary}">俄举行遇刺大使悼念活动 普京推迟记者会出席---俄罗斯政府２２日在莫斯科外交部大楼举行遇刺俄驻土耳其大使卡尔洛夫遗体告别仪式，俄总统普京推迟原定于当天举行的年度大型记者会，出席了悼念活动。</p>
 																	</div>
 																	<!-- <div th:utext="${eventNews.content}" class="textVDContent">
 																	　新华社莫斯科１２月２２日电（记者安晓萌）俄罗斯政府２２日在莫斯科外交部大楼举行遇刺俄驻土耳其大使卡尔洛夫遗体告别仪式，俄总统普京推迟原定于当天举行的年度大型记者会，出席了悼念活动。
@@ -317,13 +317,13 @@
 																<div class='bottomVDLeft'>
 																	<!-- <span>23</span> -->
 																	<em>来源：</em>
-																	<span th:text="${null!=eventNews.sourceCrawlDetail?eventNews.sourceCrawlDetail.website.displayName:''}"> 新华社</span>
+																	<span th:text="${null!=eventNews.sourceCrawl?eventNews.sourceCrawl:''}"> 新华社</span>
 																</div>
-																<div class='bottomVDTag' th:if="${null!=eventNews.keywords}" th:remove="all-but-first">
+																<!--<div class='bottomVDTag' th:if="${null!=eventNews.keywords}" th:remove="all-but-first">
 																	<span class="label label-red-bg pull-right" th:each="keyword:${#strings.listSplit(eventNews.keywords,',|，|; ')}" th:text="${keyword}">卡尔洛夫</span>
 																	<span class="label label-red-bg pull-right">莫斯科</span>
 																	<span class="label label-red-bg pull-right">土耳其</span>
-																</div>
+																</div>-->
 <!-- 																<div class='bottomVDTag' th:if="${null!=eventNews.nlpKeyWords}" th:remove="all-but-first"> -->
 <!-- 																	<span class="label label-red-bg pull-right" th:each="keyword:${#strings.listSplit(eventNews.nlpKeyWords,',')}" th:text="${keyword}">卡尔洛夫</span> -->
 <!-- 																	<span class="label label-red-bg pull-right">俄罗斯</span> -->

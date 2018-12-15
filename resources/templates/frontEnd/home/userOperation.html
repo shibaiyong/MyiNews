@@ -277,7 +277,7 @@
 
     $('.finished').click(function(){
         if($(".alreadyCon").children().length>0){
-            window.location.href='/ns';
+            window.location.href = ctx;
         }else{
             $('#probationCommon').modal('show');
         }
@@ -295,4 +295,36 @@
     })
     //默认第一个新闻线索选中；
     $('.addModifyNavsIner li:first a').click();
+
+
+
+    function judgeCustomed(rootUrl, type, data) {
+        $.ajax({
+            url: ctx + '/custom/front/checkStatus',
+            data: data,
+            type: type,
+            dataType: 'json',
+            async: true,
+            success: function (res, index) {
+                console.log(res);
+                if (res.result) {//添加过定制
+                    var obj = res.resultObj;
+                    if (data.type == '1') {
+                        if (false) {
+                            $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoAddBuffet');
+                        } else {
+                            $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoWeChat');
+                        }
+                    } else {
+                        if (false) {
+                            $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoAddBuffet');
+                        } else {
+                            $('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoMicroblogs');
+                        }
+                    }
+                } else {//没有添加过定制
+                }
+            }
+        });
+    }
 </script>

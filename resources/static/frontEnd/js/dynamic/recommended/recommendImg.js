@@ -93,142 +93,9 @@ $(function(){
 			}
 		})
 	})
-	
-	//表格进行数据传值
-	getImgAjaxData1 = $().getImgAjaxData({
-		'requestUrl':ctx+'/recommend/front/news/page',
-		'getPassValue':getPassValue
-	});
-	
-	//从推荐系统获取推荐新闻
-	getRecommendNews(87);
-	
-	getImgAjaxData1.on('draw.dt',function() {
-		
-		$('.imgConBoxTable').itemCheck({   //给每一条新闻增加单击的事件
-			'itemFun':function($this,statusItem){
-				if(statusItem){
-//					console.log($this[0].attributes[0].nodeValue);
-					batchCheckWebPageCode.push($this[0].attributes[0].nodeValue);
-				}else{
-					for(var i = 0;batchCheckWebPageCode.length>i;i++){
-						var webpageCodeItem = $this[0].attributes[0].nodeValue;
-						if(webpageCodeItem == batchCheckWebPageCode[i]){
-							batchCheckWebPageCode.splice(i,1);
-						}
-					}
-				}
-			}
-		});
-		
-//		浏览量获取
-		var textArr = getImgAjaxData1.column(0).nodes().data();
-		 tableItemWebPageCodeArr =[];
-		
-		if(textArr.length > 0){
-			for(var count = 0;textArr.length>count;count++){
-				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
-			}
-			
-//			浏览量
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getBrowseNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.imgConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
-			
-//			收藏
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getUserFavorites',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.imgConBoxTable tbody').find('.collect').each(function(index){
-						if(data[index] == true){
-							$(this).addClass('active');
-							$(this).find('i').attr('class','fa fa-heart');
-						}else{
-							
-						}
-					})
-				}
-			});
-//			操作-建稿
-			
-			$('.jiangao').each(function(index){
-				$(this).releaseBuild({
-					'webpageCode':tableItemWebPageCodeArr[index],
-					'buildingCon':function(_$this){
-						_$this.find('i').addClass('hide');
-        				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
-        			},
-        			'buildedCon':function(_$this){
-        				_$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
-        				$("[data-toggle='tooltip']").tooltip();
-        				getImgAjaxData1.ajax.reload();
-        			}
-				})
-			});
-//			建、采
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getDraftType',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data,con){
-					$('.imgConBoxTable tbody').find('.titleRightClick').each(function(index){
-						if(data[index].length > 0){
-							if(data[index][0] == 1){
-								$(this).find('a').css({
-									'width':'85%'
-								});
-								$(this).append('<span class="label-status label-jian">【建】</span>');
-							}else if(data[index][0] == 2){
-								$(this).find('a').css({
-									'width':'85%'
-								});
-								$(this).append('<span class="label-status label-cai">【采】</span>');
-							}else{}
-						}
-						
-					})
-				}
-			});
-		}
-		
-		
-//		datatables翻页时查询页面中是否有选中的新闻
-		for(var i = 0;tableItemWebPageCodeArr.length>i;i++){
-			for(var j = 0;batchCheckWebPageCode.length>j;j++){
-				if(tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]){
-					$('.imgConBoxTable').find('.check-child').eq(i).addClass('checked');
-				}
-			}
-		}
-		
-		collect();
-		
-//		设置图片的宽高
-		var tableWidth = $('.imgConBoxTable').find('tbody tr').width()-16;
-		var tableHeight = tableWidth / 16 * 9
-		$('.imgConBoxTable').find('.site-piclist_pic').css({
-			'width':tableWidth + 'px',
-			'height':tableHeight + 'px',
-			'lineHeight':tableHeight + 'px'
-		});
-		$('.imgConBoxTable').find('.site-piclist_info').css({
-			'width':tableWidth + 'px',
-		});
-		$('.imgConBoxTable').find('.site-piclist_pic img').css({
-			'maxHeight':tableHeight + 'px',
-		});
-		
-		
-		$("[data-toggle='tooltip']").tooltip();
-//		鼠标划入图片放大
-//		$(".site-piclist_pic").imgEnlarge();
-	});
+    //从推荐系统获取推荐新闻
+    getRecommendNews(87);
+
 	
 	getSourcesData();
 })
@@ -339,7 +206,139 @@ function getRecommendNews(recommendType){
         dataType : 'json',
         success : function(data) {
         	if(data.result == true){
-        		getImgAjaxData1.ajax.reload();
+                //表格进行数据传值
+                getImgAjaxData1 = $().getImgAjaxData({
+                    'requestUrl':ctx+'/recommend/front/news/page',
+                    'getPassValue':getPassValue
+                });
+                getImgAjaxData1.on('draw.dt',function() {
+
+                    $('.imgConBoxTable').itemCheck({   //给每一条新闻增加单击的事件
+                        'itemFun':function($this,statusItem){
+                            if(statusItem){
+//					console.log($this[0].attributes[0].nodeValue);
+                                batchCheckWebPageCode.push($this[0].attributes[0].nodeValue);
+                            }else{
+                                for(var i = 0;batchCheckWebPageCode.length>i;i++){
+                                    var webpageCodeItem = $this[0].attributes[0].nodeValue;
+                                    if(webpageCodeItem == batchCheckWebPageCode[i]){
+                                        batchCheckWebPageCode.splice(i,1);
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+//		浏览量获取
+                    var textArr = getImgAjaxData1.column(0).nodes().data();
+                    tableItemWebPageCodeArr =[];
+					var releaseDateTimeArr = [];
+                    if(textArr.length > 0){
+                        for(var count = 0;textArr.length>count;count++){
+							tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+							releaseDateTimeArr.push(textArr[count].releaseDatetime);
+                        }
+
+//			浏览量
+                        $().adraticAjaxData({
+                            'dataUrl':ctx+'/latest/front/getBrowseNum',
+                            'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+                            'callback':function(data){
+                                $('.imgConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
+                                    $(this).text(data[index]);
+                                })
+                            }
+                        });
+
+//			收藏
+                        $().adraticAjaxData({
+                            'dataUrl':ctx+'/latest/front/getUserFavorites',
+                            'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+                            'callback':function(data){
+                                $('.imgConBoxTable tbody').find('.collect').each(function(index){
+                                    if(data[index] == true){
+                                        $(this).addClass('active');
+                                        $(this).find('i').attr('class','fa fa-heart');
+                                    }else{
+
+                                    }
+                                })
+                            }
+                        });
+//			操作-建稿
+
+                        $('.jiangao').each(function(index){
+                            $(this).releaseBuild({
+								'webpageCode':tableItemWebPageCodeArr[index],
+								'releaseDatetime': releaseDateTimeArr[index],
+                                'buildingCon':function(_$this){
+                                    _$this.find('i').addClass('hide');
+                                    _$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
+                                },
+                                'buildedCon':function(_$this){
+                                    _$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
+                                    $("[data-toggle='tooltip']").tooltip();
+                                    getImgAjaxData1.ajax.reload();
+                                }
+                            })
+                        });
+//			建、采
+                        $().adraticAjaxData({
+                            'dataUrl':ctx+'/latest/front/getDraftType',
+                            'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+                            'callback':function(data,con){
+                                $('.imgConBoxTable tbody').find('.titleRightClick').each(function(index){
+                                    if(data[index].length > 0){
+                                        if(data[index][0] == 1){
+                                            $(this).find('a').css({
+                                                'width':'85%'
+                                            });
+                                            $(this).append('<span class="label-status label-jian">【建】</span>');
+                                        }else if(data[index][0] == 2){
+                                            $(this).find('a').css({
+                                                'width':'85%'
+                                            });
+                                            $(this).append('<span class="label-status label-cai">【采】</span>');
+                                        }else{}
+                                    }
+
+                                })
+                            }
+                        });
+                    }
+
+
+//		datatables翻页时查询页面中是否有选中的新闻
+                    for(var i = 0;tableItemWebPageCodeArr.length>i;i++){
+                        for(var j = 0;batchCheckWebPageCode.length>j;j++){
+                            if(tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]){
+                                $('.imgConBoxTable').find('.check-child').eq(i).addClass('checked');
+                            }
+                        }
+                    }
+
+                    collect();
+
+//		设置图片的宽高
+                    var tableWidth = $('.imgConBoxTable').find('tbody tr').width()-16;
+                    var tableHeight = tableWidth / 16 * 9
+                    $('.imgConBoxTable').find('.site-piclist_pic').css({
+                        'width':tableWidth + 'px',
+                        'height':tableHeight + 'px',
+                        'lineHeight':tableHeight + 'px'
+                    });
+                    $('.imgConBoxTable').find('.site-piclist_info').css({
+                        'width':tableWidth + 'px',
+                    });
+                    $('.imgConBoxTable').find('.site-piclist_pic img').css({
+                        'maxHeight':tableHeight + 'px',
+                    });
+
+
+                    $("[data-toggle='tooltip']").tooltip();
+//		鼠标划入图片放大
+//		$(".site-piclist_pic").imgEnlarge();
+                });
         	}
         }
 	})

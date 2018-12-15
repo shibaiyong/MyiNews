@@ -13,10 +13,11 @@
 				getAjaxUrl:'',  //请求路径
 				boxClassName:'',
 				ulClassName:'',
-				level:2, //是否展示二级菜单
+				level: 1, //是否展示二级菜单
 				inter: true, //是否显示全部字段
 				getAjaxUserConfigUrl: '', //请求用户配置项
 				multiSelect: false, //是否多选，默认为单选
+				conditionValue: '',
 				callback:'' //回调函数
 		};
 		var options = $.extend(defaults,options);
@@ -25,6 +26,7 @@
 				className:options.boxClassName,  
 				idName:options.ulClassName,
 				multiSelect: options.multiSelect,
+				callback: options.callback,
 			});
 		}else{
 			$.ajax({
@@ -37,31 +39,20 @@
 		        	console.log(data);
 		        	if(data.result == true){
 						var obj = data.resultObj || [];						
-						if (options.getAjaxUserConfigUrl != '' && options.multiSelect) {
+						if (options.getAjaxUserConfigUrl != '' ) {
 							// 获取用户定制的地区和分类数据
 							$.ajax({
 								url: options.getAjaxUserConfigUrl, //这个就是请求用户配置的数据
-								data: {
-									'level': options.level
-								},
 								type: 'get',
 								dataType: 'json',
 								async: true,
 								success: function (response) {
-									var selectObj = response.resultObj || [];
-									obj.forEach(function (item, index) {
-										item.isSelected = false;
-										for (var k = 0; k < selectObj.length; k++) {
-											if (item.innerid == selectObj[k].innerid) {
-												item.isSelected = true;
-											}
-										}
-									});
-									conditionsSignleHandler(options, obj);
+									var selectObj = response.resultObj || [];									
+									conditionsSignleHandler(options, obj, selectObj);
 								}
 							});
 						}else{
-							conditionsSignleHandler(options, obj);
+							conditionsSignleHandler(options, obj, []);
 						}	        			
 		        	}		        	
 		        },
@@ -74,112 +65,64 @@
 	};
 	
 	// 将生成下拉列表部分的代码单独取出
-	function conditionsSignleHandler(options, obj) {
-		// 添加历史记录（历史记录暂时移除）
-		// var historyCon = JSON.parse(localStorage.getItem('conditions'));
-		// var historyText = '';
-		// var historyId = '';
-		// for (var i = 0; i < historyCon.length; i++) {
-		// 	if (historyCon[i]['name'] == options.boxClassName.substring('1')) {
-		// 		historyText = historyCon[i]['value'];
-		// 		historyId = historyCon[i]['id']
-		// 	}
-		// }
-
-		// if (historyText == '') {
-		// 	$(options.ulClassName).append('<li class="hide historyBox"><a class="ti" href="javascript:void(0);"><i class="fa fa-history historyIcon"></i><span class="historyFont"></span></a></li>'); //添加历史记录
-		// } else {
-		// 	$(options.ulClassName).append('<li class="historyBox"><a class="ti" href="javascript:void(0);" data-innerid="' + historyId + '"><i class="fa fa-history historyIcon"></i><span class="historyFont">' + historyText + '</span></a></li>'); //添加历史记录
-		// }
-
-		if (options.inter) {
-			$(options.ulClassName).append('<li class=""><a class="ti" href="javascript:void(0);">全部</a></li>');
-		}
-		// 将选中项的内容存起来
-		var selectValues = [], selectinnerIds = [];
-		for (var count = 0; obj.length > count; count++) {
-			if (!obj[count].isSelected) {
-				obj[count].isSelected = false;
-			}
-			if (obj[count].parentId == '0') {
-				var regionSecondItem = [];
-				var regionFirstName = obj[count].innerid;
-				for (var plug = 0; plug < obj.length; plug++) {
-					if (regionFirstName == obj[plug].parentId) {
-						regionSecondItem.push(obj[plug]);
-					}
-				}
-				var textCon;				
-				if (regionSecondItem.length == 0) {
-					textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name ;
-					// 给省份选中状态加勾选效果
-					if (obj[count].isSelected) {
-						textCon += '<i class="glyphicon glyphicon-ok"></i>';
-						selectValues.push(obj[count].name);
-						selectinnerIds.push(obj[count].innerid);
-					}
-					textCon += '</a></li>';
-				} else {
-					var secondItem = '<div class="prosmore hide">';
-					secondItem += '<div class="backshi hide"><a href="javascript:void(0)"></a></div>';
-					if (obj[count].innerid == '320000') {
-						for (var num = 0; num < regionSecondItem.length; num++) {
-							secondItem += '<span class="xianCon"><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-							var regionThreeItem = [];
-							for (var plugThree = 0; plugThree < obj.length; plugThree++) {
-								if (regionSecondItem[num].innerid == obj[plugThree].parentId) {
-									regionThreeItem.push(obj[plugThree]);
-								}
-							}
-							if (regionThreeItem.length == 0) {
-
-							} else {
-								for (var i = 0; i < regionThreeItem.length; i++) {
-									secondItem += '<span class="xianItem hide"><em><a href="javascript:void(0);" data-parentid="' + regionThreeItem[i].parentId + '"   data-innerid="' + regionThreeItem[i].innerid + '">' + regionThreeItem[i].name + '</a></em></span>';
-									// 此此处理二级内容选中的情况
-								}
-							}
-						}
-					} else {
-						for (var num = 0; num < regionSecondItem.length; num++) {
-							secondItem += '<span><em><a href="javascript:void(0);"   data-innerid="' + regionSecondItem[num].innerid + '">' + regionSecondItem[num].name + '</a></em></span>';
-							// 此此处理二级内容选中的情况
-						}
-					}
-					secondItem += '</div>';
-					textCon = '<li class=""><a class="ti" href="javascript:void(0);" data-innerid="' + obj[count].innerid + '">' + obj[count].name + '<i class="fa fa-caret-right"></i></a>' + secondItem + '</li>';
-				}
-				//	var fenye= '<div class="fenleiBox"><nav aria-label="Page navigation"><div class="pagination pagination-sm"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
-				$(options.ulClassName).append(textCon);
+	function conditionsSignleHandler(options, obj, selectObj) {
+		var selectValue = '';
+		var selectInnerId = '';
+		// 一级选中状态，二级选中状态，三级选中状态
+		if (selectObj.length > 0) {
+			var tempObj = selectObj[0];
+			if (tempObj.innerid != 0) {
+				selectInnerId = tempObj.innerid;
 			}
 		}
-		// 如果是多选，将多选标识置为true，默认为false
-		if(options.multiSelect){
-			$(options.boxClassName).find('h2').attr('data-multi', true);
-			
+		obj.forEach(function (item, index) {
+			item.isSelected = false;
+			if (item.innerid == selectInnerId) {
+				item.isSelected = true;
+				selectValue = item.name;
+			}
+		});
+		// 先清空ul，因为存在多次渲染的情况、
+		$(options.ulClassName).empty();
+		var conditionText = '全部';
+		if (options.inter) {		
+			if (options.conditionValue == 'map') {
+				conditionText = '全部地区';
+			} else if (options.conditionValue == 'classification') {
+				conditionText = '全部分类';
+			} else if (options.conditionValue == 'mediaAlone') {
+				conditionText = '全部来源';
+			} else if (options.conditionValue == 'carrierAlone'){
+				conditionText = '全部载体';
+			}
+			$(options.ulClassName).append('<li class=""><a class="ti" href="javascript:void(0);">' + conditionText + '</a></li>');
+			$(options.ulClassName).prev().attr('data-conditionValue', options.conditionValue);
 		}
-		// 将选中的内容保存起来
-		if (selectinnerIds.length > 0) {
-			$(options.boxClassName).find('h2').attr('data-selectValue', selectValues.join('、'));
-			var textShow = selectValues.join('、') + '<i class="fa fa-caret-down"></i>';
+		var textCon = '';
+		for (var count = 0; obj.length > count; count++) {						
+			textCon = '<li class=""><a class="ti" data-innerid="' + obj[count].innerid + '" href="javascript:void(0);">' + obj[count].name + '</a></li>';			
+			$(options.ulClassName).append(textCon);
+		}
+
+		if (selectInnerId != '' && selectValue != '' && (options.boxClassName == '.srceenMap' || options.boxClassName =='.clusterMap')) {
+			$(options.boxClassName).find('h2').attr('data-selectValue', selectValue);
+			var textShow = selectValue + '<i class="fa fa-caret-down"></i>';
 			$(options.boxClassName).find('h2').html(textShow);
-			$(options.boxClassName).find('h2').attr('data-innerId', selectinnerIds.join(','));
-			// 将默认的选中项保存起来，以备取消操作的时候使用
-			$(options.boxClassName).find('h2').attr('data-old', selectinnerIds.join(','));
-
+			$(options.boxClassName).find('h2').attr('data-innerId', selectInnerId);
 			// 鼠标hover效果
-			$(options.boxClassName).find('h2').attr('data-content', selectValues.join('、'));
-			// 重新渲染事件
-			$(options.boxClassName).find('h2').popover({
-				trigger: 'hover', //触发方式
-				placement: 'top', //弹窗显示方向
-				html: true, // 为true的话，data-content里就能放html代码了
-				content: "", //这里可以直接写字符串，也可以 是一个函数，该函数返回一个字符串；
-			});
-		}
+			$(options.boxClassName).find('h2').attr('data-content', selectValue);
+		}else{
+            $(options.boxClassName).find('h2').attr('data-selectValue', selectValue);
+            $(options.boxClassName).find('h2').attr('data-innerId', selectInnerId);
+        }
 
-		
-
+		// 重新渲染事件
+		$(options.boxClassName).find('h2').popover({
+			trigger: 'hover', //触发方式
+			placement: 'top', //弹窗显示方向
+			html: true, // 为true的话，data-content里就能放html代码了
+			content: "", //这里可以直接写字符串，也可以 是一个函数，该函数返回一个字符串；
+		});
 		var lilen = $(options.ulClassName).find('li').length;
 		// 计算二级页的高度
 		var prosmoreHeight = 0;
@@ -219,28 +162,15 @@
 			fenye += '<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></div></nav></div>';
 			$(options.ulClassName).append(fenye);
 			prosmoreHeight = 16 * 30 + 4;
-
-			// 将多选确定按钮加入
-			if(options.multiSelect){
-				var multiButton = '<div class="multiButton"><div class="multiSure">确定</div><div class="multiCancel">清空</div></div>';
-				$(options.ulClassName).append(multiButton);
-				prosmoreHeight = 17 * 30 + 4;
-			} 						
 		} else {
-			prosmoreHeight = $(options.ulClassName).find('li').length * 30 + 4;
-			if (options.multiSelect) {
-				// 加一个空白隐藏的标签
-				$(options.ulClassName).append('<div class="fenleiBox" style="display:none;"><nav aria-label="Page navigation"><div class="pagination pagination-sm"></div></nav></div>');
-				var multiButton = '<div class="multiButton"><div class="multiSure">确定</div><div class="multiCancel">清空</div></div>';
-				$(options.ulClassName).append(multiButton);
-				prosmoreHeight = $(options.ulClassName).find('li').length * 30 + 4 + 30;
-			}
+			prosmoreHeight = $(options.ulClassName).find('li').length * 30 + 4;			
 		}
 
 		$().screenSignleConditionFun({
 			className: options.boxClassName,
 			idName: options.ulClassName,
 			multiSelect: options.multiSelect,
+			callback: options.callback,
 		});
 		$(options.ulClassName).find('.prosmore').css({
 			'height': prosmoreHeight + 'px'
@@ -262,32 +192,34 @@
 			idName:'',
 			fun:'',
 			multiSelect: false,
+			callback: '',
 		};
 		var options = $.extend(defaults,options);		
 		var $subblock = $(options.className),
 			$head = $subblock.find('h2'),
 			$ul = $(options.idName),
 			$lis = $ul.find("li"),
-			$multiCancel = $ul.find('.multiButton').find('.multiCancel'),
-			$multiSure = $ul.find('.multiButton').find('.multiSure'),
 			inter = $head.attr('data-inter');
 				
-		$head.click(function(e){
+		$head.off('click').click(function(e){
+			inter = $head.attr('data-inter');
 			e.stopPropagation();
 			$('.prosul').css({
-				'display':'none'
+				'display': 'none'
 			})
-			if(inter == false){
-				$ul.hide();
-			}else{
+			if (inter == 'false') {
 				$ul.show();
+				$head.attr('data-inter', 'true');
+			} else {
+				$ul.hide();
+				$head.attr('data-inter', 'false');
 			}
-			inter=!inter;
+			// inter=!inter;
 		});
 		
 		$ul.mouseleave(function(){
+			$head.attr('data-inter', 'false');
 			$ul.hide();
-			inter=!inter;
 		})
 		
 		$ul.click(function(event){
@@ -295,8 +227,8 @@
 		});
 		
 		$(document).click(function(){
+			$head.attr('data-inter', 'false');
 			$ul.hide();
-			inter=!inter;
 		});
 
 		$lis.hover(function(){
@@ -320,127 +252,34 @@
 		});
 		
 		$lis.find('a').click(function(){
-			var multi = $head.attr('data-multi');
+			areaSignleStatus($head);
 			var text = $(this).text() + '<i class="fa fa-caret-down"></i>';
 			var innerid = $(this).attr('data-innerid');
-			// 单选的情况
-			if (!multi) {
-				$head.html(text);
-			}		
-			if($(this).text() == '全部'){
+			$head.html(text);
+			
+			var conditionValue = $head.attr('data-conditionValue') || '';
+			var conditionText = '全部';
+			if (conditionValue == 'map') {
+				conditionText = '全部地区';
+			} else if (conditionValue == 'classification') {
+				conditionText = '全部分类';
+			} else if (conditionValue == 'mediaAlone') {
+				conditionText = '全部来源';
+			}	else if (conditionValue == 'carrierAlone') {
+				conditionText = '全部载体';
+			}			
+			// 选择全部
+			if ($(this).text() == conditionText) {
 				$head.attr('data-innerid','');
-				// 多选选择全部时将data-selectValue的内容置为空, 同时将所有选项处于选中状态
-				if (multi) {
-					$head.attr('data-selectValue', '');
-					// 添加一个标识，特殊处理选择全部的情形
-					$head.attr('data-selectAll', true);
-					// 同时将所有一级选项及二级分类处于选中状态
-					var listLi = $(this).parent().siblings();
-					// 删除最后两项元素
-					var $liLists = listLi.slice(0, listLi.length - 2);
-					var value = '';
-					$.each($liLists, function (index, item) {
-						value = $(this).find('a').text() + '<i class="glyphicon glyphicon-ok"></i>';
-						$(this).find('a').html(value);
-					});
-					var textShow = '全部' + '<i class="fa fa-caret-down"></i>';
-					$head.attr('data-content', '全部');
-					$head.attr('data-middle', '全部');
-					$head.html(textShow);
-				}						
+				$head.attr('data-content', conditionText);
 			}else{
 				// 单选的情况
-				if (!multi) {
-					$head.attr('data-innerid', innerid);
-				}else{					
-					// 添加选中的参数
-					var inneridList = [];
-					if ($head.attr('data-innerid').length>0) {
-						var inners = $head.attr('data-innerid');
-						inneridList = inners.split(',');
-					}
-					var listLi = $(this).parent().siblings();
-					var $liLists = listLi.slice(0, listLi.length - 2);
-					var listObj = {};
-					// 生成key与value的对象组备用
-					$.each($liLists, function (index, item) {
-						listObj[$(this).find('a').attr('data-innerid')] = $(this).find('a').text();
-					});
-					// 生成的对象组中未包含自身，需单独加入
-					listObj[$(this).attr('data-innerid')] = $(this).text();
-					// 如果之前已选择全部，此时inneridList应该是含所有的内容
-					if ($head.attr('data-selectAll')) {
-						for (var key in listObj) {
-							// 过滤掉全部对应的key值 
-							if( typeof(key) != 'undefined' && key != 'undefined'){
-								inneridList.push(key);
-							}
-						}
-					}
-					// 将原数组克隆保存
-					var selectInnerIds = inneridList.concat();
-					var selectValues = [];
-					// 处理多选情况下的选中情况
-					if (selectInnerIds.indexOf(innerid) != -1) {
-						selectInnerIds.removeItem(innerid);						
-						// 同时将选中的状态移除
-						$(this).html(listObj[innerid]);
-					}else{
-						selectInnerIds.push(innerid);
-						// 同时将选中状态添加上
-						$(this).html(listObj[innerid] + '<i class="glyphicon glyphicon-ok"></i>');
-					}
-					// 全部都没有的情况
-					if (selectInnerIds.length>0) {
-						$head.attr('data-innerid', selectInnerIds.join(','));
-					}else{
-						$head.attr('data-innerid', '');
-					}
-					
-					// 处理多选情况下的文字显示情况					
-					selectInnerIds.forEach(function (item) {
-						selectValues.push(listObj[item]);
-					})					
-					if (selectValues.length >0) {
-						$head.attr('data-selectValue', selectValues.join('、'));
-						var textShow = selectValues.join('、') + '<i class="fa fa-caret-down"></i>';
-						$head.html(textShow);
-						if (selectValues.length >= 4) {
-							selectValues = selectValues.slice(0, 3);
-							selectValues.push('...');
-						}
-						$head.attr('data-content', selectValues.join('、'));
-					}else{
-						// 特殊情形：选择了全部之后，再点击选单个元素
-						$head.attr('data-selectValue', '');
-						var textShow = '全部' + '<i class="fa fa-caret-down"></i>';
-						$head.html(textShow);
-						$head.attr('data-content', '全部');
-					}
-					
-										
-				}
-								
-//				将选择的东西记录到localstorage中
-				// var localName = $subblock.attr('data-localname');
-				// var searchConditions = JSON.parse(localStorage.getItem('conditions'));
-				// for(var i=0;i<searchConditions.length;i++){
-						
-				// 	if(searchConditions[i]['name'] == localName){
-				// 		searchConditions[i]['value'] = $(this).text();
-				// 		searchConditions[i]['id'] = innerid;
-				// 	}
-				// }
-				// localStorage.setItem('conditions',JSON.stringify(searchConditions));
-//				将选择的东西记录到localstorage中 end
-				
-//				将选项放到history中
-				// $ul.find('.historyBox').removeClass('hide');
-				// $ul.find('.historyFont').html($(this).text()).parents('a').attr('data-innerid',innerid);
-				
+				$head.attr('data-innerid', innerid);
+				$head.attr('data-selectValue', $(this).text());
+				$head.attr('data-content', $(this).text());	
+							
 				if($(this).parents('span').hasClass('xianCon')){
-					var $dom = $(this).parents('.prosmore');
-					
+					var $dom = $(this).parents('.prosmore');					
 					$dom.find('.backshi').removeClass('hide').html('< '+$(this).html());
 					$dom.find('span.xianCon').addClass('hide');
 					$dom.find('span.xianItem').each(function(){
@@ -455,8 +294,10 @@
 					// $head.click();
 				}
 			}
-//			$head.click();
-			inter=!inter;
+			
+			$head.attr('data-inter', 'true');
+			signleReloadData();
+			$head.click();
 		})
 		
 		$lis.find('.backshi').click(function(){
@@ -467,7 +308,7 @@
 		})
 		
 		// 下拉列表中的分页操作
-		$ul.find('.fenleiBox').find('a').click(function(){
+		$ul.find('.fenleiBox').find('a').off("click").click(function () {
 			var aval = $(this).text();
 			$ul.find('.fenleiBox').find('a').removeClass('active');
 			$(this).addClass('active');
@@ -502,31 +343,7 @@
 			// 0表示是全部，第二页及后面的分页仍需要显示
 			$ul.find('li').eq(0).removeClass('hide');
 			// $ul.find('li').eq(1).removeClass('hide');
-		})
-
-		// 取消操作
-		$multiCancel.click(function(event) {			
-			var multi = $head.attr('data-multi');
-			if (multi) {
-				var listLi = $(this).parent().siblings();
-				var $liLists = listLi.slice(0, listLi.length - 1);
-				var value = '';
-				$.each($liLists, function (index, item) {
-					value = $(this).find('a').text();
-					if ($(this).find('a').find('i').length > 0) {
-						$(this).find('a').html(value);
-					} 
-				});
-				$head.attr('data-selectValue', '');
-				var textShow = '全部' + '<i class="fa fa-caret-down"></i>';
-				$head.html(textShow);
-				$head.attr('data-content', '全部');
-				$head.attr('data-innerid', '');														
-			}			
-		});
-		$multiSure.click(function (event) {
-			signleReloadData();
-		});
+		})	
 	};
 //	enter点击进入
 	$.fn.enterPress = function(options){
@@ -624,118 +441,54 @@
 			}
 		}
 		return len;
-	}
+	};
 
 })(jQuery);
 
+// 处理本市，全省，全国的选中状态
+function areaSignleStatus($head) {
+	var $areaSelected = $('.areaSelected');
+	if ($areaSelected != '' && $areaSelected.length > 0) {
+		$head.attr('data-innerid', '');
+	}
+	$('.table-operation-status .tenantArea').removeClass('areaSelected');
+}
+
+// 清空按钮
+function clearSignleScreenMap(options) {
+	var $subblock = $(options.className),
+		$head = $subblock.find('h2'),
+		$ul = $(options.idName);
+	var multi = $head.attr('data-multi');
+	if (multi) {
+		var $liLists = $ul.find("li");
+		var value = '';
+		$.each($liLists, function (index, item) {
+			value = $(this).find('a').text();
+			if ($(this).find('a').find('i').length > 0) {
+				$(this).find('a').html(value);
+			}
+		});
+		$head.attr('data-selectValue', '');
+
+		var conditionValue = $head.attr('data-conditionValue') || '';
+		var conditionText = '全部';
+		if (conditionValue == 'map') {
+			conditionText = '全部地区';
+		} else if (conditionValue == 'classification') {
+			conditionText = '全部分类';
+		} else if (conditionValue == 'mediaAlone') {
+			conditionText = '全部来源';
+		}else if (conditionValue == 'carrierAlone') {
+			conditionText = '全部载体';
+		}	
+		$head.attr('data-content', conditionText);
+		$head.attr('data-innerid', '');
+		var textShow = conditionText + '<i class="fa fa-caret-down"></i>';
+		$head.html(textShow);
+	}
+}
+
 $(function(){
-	
-////	来源
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listSourceOrg',  //请求路径
-//		boxClassName:'.srceenSources',
-//		ulClassName:'#srceenSourcesPro',
-//	})
-////	地区
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRegion',  //请求路径
-//		boxClassName:'.srceenMap',
-//		ulClassName:'#srceenMapPro',
-//		level:1
-//	})
-//	
-////	分类
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listNewsClassification',  //请求路径
-//		boxClassName:'.srceenClassification',
-//		ulClassName:'#srceenClassificationPro',
-//		level:1
-//	})
-////	标签
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listNewsLabel',  //请求路径
-//		boxClassName:'.srceenTag',
-//		ulClassName:'#srceenTagPro',
-//	})
-////	榜单
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
-//		boxClassName:'.srceenList',
-//		ulClassName:'#srceenListPro',
-//		inter:false
-//	})
-////	榜单周期
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
-//		boxClassName:'.srceenListPeriod',
-//		ulClassName:'#srceenListPeriodPro',
-//	})
-////	筛选条数
-//	$().getData({
-//		boxClassName:'.srceenBranches',
-//		ulClassName:'#srceenBranchesPro',
-//	})
-////	首页-热点发现时间
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/getClusterFre',  //请求路径
-//		boxClassName:'.srceenClusterFre',
-//		ulClassName:'#srceenClusterFrePro',
-//		inter:false
-//	})
-////	首页-新闻线索分类
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listNewsClassification',  //请求路径
-//		boxClassName:'.threadSrceenClassification',
-//		ulClassName:'#threadSrceenClassificationPro',
-//	})
-////	首页-网站排行-新闻
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listWebs',  //请求路径
-//		boxClassName:'.srceenWeb',
-//		ulClassName:'#srceenWebPro',
-//		inter:false
-//	})
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listWebs',  //请求路径
-//		boxClassName:'.srceenWeb2',
-//		ulClassName:'#srceenWeb2Pro',
-//		inter:false
-//	})
-////	首页-网站排行-点击榜
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
-//		boxClassName:'.srceenList1',
-//		ulClassName:'#srceenList1Pro',
-//		inter:false
-//	})
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRankingType',  //请求路径
-//		boxClassName:'.srceenList2',
-//		ulClassName:'#srceenList2Pro',
-//		inter:false
-//	})
-////	首页-网站排行-时间
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
-//		boxClassName:'.srceenListPeriod1',
-//		ulClassName:'#srceenListPeriod1Pro',
-//		inter:false
-//	})
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listRankingCycle',  //请求路径
-//		boxClassName:'.srceenListPeriod2',
-//		ulClassName:'#srceenListPeriod2Pro',
-//		inter:false
-//	})
-//	
-////	热点发现中-微博微信
-//	$().getData({
-//		getAjaxUrl:ctx+'/common/dic/front/listcarrier',  //请求路径
-//		boxClassName:'.srceenMediaAlone',
-//		ulClassName:'#srceenMediaAlonePro',
-//		level:1,
-//		inter:false
-//	})
-	
 	$().enterPress();
 });

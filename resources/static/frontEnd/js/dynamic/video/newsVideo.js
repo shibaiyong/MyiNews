@@ -23,6 +23,8 @@ $(function(){
 	$('.srceenMap').removeClass('hide');
 	$('.srceenClassification').removeClass('hide');
 	$('.screenSearch').removeClass('hide');
+	$('.table-operation-status').find('a').eq(0).removeClass('hide');
+	$('.table-operation-status').find('a').eq(2).removeClass('hide');
 	var screenIndex = 0;
 //	$('.screenConditionBox .subpage').each(function(){
 //		if($(this).hasClass('hide')){
@@ -73,15 +75,17 @@ $(function(){
 		getAjaxUrl:ctx+'/config/front/listUserConfigCarrierAndSource',  //请求路径
 		boxClassName:'.srceenSources',
 		ulClassName:'#srceenSourcesPro',
+		conditionValue: 'mediaAlone',
 	})
 //	地区
 	$().getData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
+		getAjaxUserConfigUrl: ctx + '/config/front/listUserRegionNew', //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
 		boxClassName:'.srceenMap',
 		ulClassName:'#srceenMapPro',
-		level: 2,
+		level: 3,
 		multiSelect: true,
+		conditionValue: 'map',
 	})
 	
 //	分类
@@ -92,6 +96,7 @@ $(function(){
 		ulClassName:'#srceenClassificationPro',
 		level: 2,
 		multiSelect: true,
+		conditionValue: 'classification',
 	})
 	
 	//	全选功能
@@ -212,10 +217,11 @@ $(function(){
 			//		浏览量获取
 			var textArr = getVideoAjaxData1.column(0).nodes().data();
 			tableItemWebPageCodeArr = [];
+			var releaseDateTimeArr = [];
 			if (textArr.length > 0) {
 				for (var count = 0; textArr.length > count; count++) {
 					tableItemWebPageCodeArr.push(textArr[count].webpageCode);
-
+					releaseDateTimeArr.push(textArr[count].releaseDatetime);
 				}
 				console.log(tableItemWebPageCodeArr);
 				//			浏览量
@@ -254,6 +260,7 @@ $(function(){
 				$('.jiangao').each(function (index) {
 					$(this).releaseBuild({
 						'webpageCode': tableItemWebPageCodeArr[index],
+						'releaseDatetime': releaseDateTimeArr[index],
 						'buildingCon': function (_$this) {
 							_$this.find('i').addClass('hide');
 							_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
@@ -350,29 +357,13 @@ $(function(){
 		getVideoAjaxData1.ajax.reload();
 		return false;
 	})
-	// 地区多选
-	// $('.multiSure').click(function (event) {
-	// 	var event = event || window.event;
-	// 	var className = event.target.className;
-	// 	if (className == 'multiSure') {
-	// 		getVideoAjaxData1.ajax.reload();
-	// 		return false;
-	// 	}
-	// })
+
 	// 地区多选,分类多选
 	window.reloadData = function() {
 		getVideoAjaxData1.ajax.reload();
 		return false;
 	};
-	// 分类多选
-	// $('#srceenClassificationPro').click(function (event) {
-	// 	var event = event || window.event;
-	// 	var className = event.target.className;
-	// 	if (className == 'multiSure') {
-	// 		getVideoAjaxData1.ajax.reload();
-	// 		return false;
-	// 	}
-	// })
+
 
 	$('#srceenTimeQuantumPro').click(function(){
 		var ds = $(this).prev('h2').text();

@@ -21,7 +21,7 @@ $(function(){
 		}).on("mouseleave", function () {
 			$(".popover").popover("show");
 			$(this).popover("hide");
-		});;
+		});
 	});
 
 	$(".userDropDown").on("mouseenter", function () {
@@ -103,7 +103,42 @@ $(function(){
     
     
     setLoalStorage();
-    
+
+
+    //跳转iMoniter
+    // $('.redirect a').click(function(){
+    // 	$('.imgcontainer').show();
+    //     $('.rowJ').show();
+    // })
+    // $('.redirect').mouseout(function(){
+    //     $('.imgcontainer').show();
+    //     $('.rowJ').show();
+    // })
+    $('.redirect img').click(function(){
+        redirect();
+    })
+
+    function redirect(){
+        $.ajax({
+            url:ctx+'/api/imonitor/token',
+            type:'get',
+            data:{},
+            dataType:'json',
+            success:function( res ){
+                $('.imgcontainer').hide();
+                $('.rowJ').hide();
+                if(res){
+                    $('input[name="token"]').val(res.access_token);
+                    $('input[name="signature"]').val(res.signature);
+                    $('input[name="account"]').val(res.account);
+                    $("#sub").submit();
+                }else{
+                    alert("系统异常，请稍后再试！");
+                }
+            }
+        })
+    }
+
     
 });
 
@@ -215,11 +250,15 @@ function getStickTopVal(){
             		time=time.formatDate('MM-dd hh:mm');
             		if(news.title.length > 25){
             			news.title = news.title.substring(0,25)+'...';
-            		}
+								}
+								var dateTime = news.releaseDatetime;
+								if (dateTime != '' && dateTime != null) {
+									dateTime = '/' + news.releaseDatetime;
+								}
             		if(news.sourceReport != null && news.sourceReport != ''){
-            			content+='<li><a href="'+context+'/latest/front/news/detail/'+news.webpageCode+'" target="_blank" data-innerid="'+news.webpageCode+'"><span class="time">'+time+'</span>'+news.title+' <em>-- '+news.sourceReport+'</em></a></li>'
+            			content += '<li><a href="' + context + '/latest/front/news/detail/' + news.webpageCode + dateTime + '" target="_blank" data-innerid="' + news.webpageCode + '"><span class="time">' + time + '</span>' + news.title + ' <em>-- ' + news.sourceReport + '</em></a></li>'
             		}else{
-            			content+='<li><a href="'+context+'/latest/front/news/detail/'+news.webpageCode+'" target="_blank" data-innerid="'+news.webpageCode+'"><span class="time">'+time+'</span>'+news.title+'</a></li>'
+            			content += '<li><a href="' + context + '/latest/front/news/detail/' + news.webpageCode + dateTime + '" target="_blank" data-innerid="' + news.webpageCode + '"><span class="time">' + time + '</span>' + news.title + '</a></li>'
             		}
             		
             	}

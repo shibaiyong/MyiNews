@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.cluster.dao.ClusterResultEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.cluster.model.ClusterResultEntity">
+    <id column="cluster_code" jdbcType="VARCHAR" property="clusterCode" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="task_type" jdbcType="VARCHAR" property="taskType" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="webpage_code" jdbcType="VARCHAR" property="webpageCode" />
+    <result column="is_enabled" jdbcType="INTEGER" property="isEnabled" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    <result column="core_cluster_code" jdbcType="VARCHAR" property="coreClusterCode" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="current_news_num" jdbcType="INTEGER" property="currentNewsNum" />
+    <result column="all_news_num" jdbcType="INTEGER" property="allNewsNum" />
+    <result column="browse_num" jdbcType="INTEGER" property="browseNum" />
+    <result column="current_trend" jdbcType="INTEGER" property="currentTrend" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cluster_code, task_id, task_type, title, weight, create_datetime, update_datetime, 
+    webpage_code, is_enabled, is_deleted, core_cluster_code, keywords, current_news_num, 
+    all_news_num, browse_num, current_trend, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cluster_result
+    where cluster_code = #{clusterCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cluster_result
+    where cluster_code = #{clusterCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.cluster.model.ClusterResultEntity">
+    insert into cluster_result (cluster_code, task_id, task_type, 
+      title, weight, create_datetime, 
+      update_datetime, webpage_code, is_enabled, 
+      is_deleted, core_cluster_code, keywords, 
+      current_news_num, all_news_num, browse_num, 
+      current_trend, status)
+    values (#{clusterCode,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{webpageCode,jdbcType=VARCHAR}, #{isEnabled,jdbcType=INTEGER}, 
+      #{isDeleted,jdbcType=INTEGER}, #{coreClusterCode,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+      #{currentNewsNum,jdbcType=INTEGER}, #{allNewsNum,jdbcType=INTEGER}, #{browseNum,jdbcType=INTEGER}, 
+      #{currentTrend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.cluster.model.ClusterResultEntity">
+    insert into cluster_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clusterCode != null">
+        cluster_code,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskType != null">
+        task_type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="webpageCode != null">
+        webpage_code,
+      </if>
+      <if test="isEnabled != null">
+        is_enabled,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="coreClusterCode != null">
+        core_cluster_code,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+      <if test="currentNewsNum != null">
+        current_news_num,
+      </if>
+      <if test="allNewsNum != null">
+        all_news_num,
+      </if>
+      <if test="browseNum != null">
+        browse_num,
+      </if>
+      <if test="currentTrend != null">
+        current_trend,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clusterCode != null">
+        #{clusterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webpageCode != null">
+        #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="coreClusterCode != null">
+        #{coreClusterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNewsNum != null">
+        #{currentNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="allNewsNum != null">
+        #{allNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="browseNum != null">
+        #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentTrend != null">
+        #{currentTrend,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.cluster.model.ClusterResultEntity">
+    update cluster_result
+    <set>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webpageCode != null">
+        webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="coreClusterCode != null">
+        core_cluster_code = #{coreClusterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNewsNum != null">
+        current_news_num = #{currentNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="allNewsNum != null">
+        all_news_num = #{allNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="browseNum != null">
+        browse_num = #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentTrend != null">
+        current_trend = #{currentTrend,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cluster_code = #{clusterCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.cluster.model.ClusterResultEntity">
+    update cluster_result
+    set task_id = #{taskId,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      is_enabled = #{isEnabled,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      core_cluster_code = #{coreClusterCode,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      current_news_num = #{currentNewsNum,jdbcType=INTEGER},
+      all_news_num = #{allNewsNum,jdbcType=INTEGER},
+      browse_num = #{browseNum,jdbcType=INTEGER},
+      current_trend = #{currentTrend,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where cluster_code = #{clusterCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

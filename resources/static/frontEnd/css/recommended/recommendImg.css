@@ -14,3 +14,8 @@
 .listTableOperate button.active a{
 	color:#fff;
 }
+
+.sourcechooseButton .dropdown-menu{
+	min-width:105px;
+	margin-top:4px;
+}

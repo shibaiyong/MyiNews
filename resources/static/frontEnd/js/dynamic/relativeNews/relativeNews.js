@@ -24,11 +24,18 @@ $(function(){
 	var sourceCrawl = $(".sourceCrawl").val();
 	var clusterid = $(".clusterid").val();
 	var eventid = $(".eventid").val();
+	var url = '';
+	var pathname = window.location.pathname;
+	if( pathname.indexOf('mediaList')!= -1 ){
+		url = '/cluster/front/page/eventMediaList'
+	}else if( pathname.indexOf('eventMediaList')!= -1  ){
+		url = '/event/front/page/eventMediaList'
+	}
     $('.relativeNewsTable').DataTable({
     	dom:domString,
     	scrollX: scrollCon,
     	serverSide: true,//标示从服务器获取数据
-    	sAjaxSource : ctx+'/latest/front/page/'+relativeType,//服务器请求
+    	sAjaxSource : ctx + url,//服务器请求
     	fnServerData : retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
     	'sPaginationType': "bootstrap",
 		'iDisplayLength' : 20,
@@ -49,12 +56,12 @@ $(function(){
               summary = data.nlpSummary;
             	}
         	}
-        	var title = '<a href="'+ctx+'/latest/front/news/detail/'+ data.webpageCode +'" target="_blank" class="beyondEllipsis" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="'+summary+'">'+data.title+' </a>';
+        	var title = '<a href="'+ctx+'/latest/front/news/detail/'+ data.webpageCode +'/'+data.releaseDatetime+'" target="_blank" class="beyondEllipsis" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="'+summary+'">'+data.title+' </a>';
         	$('.linkLastNewsDataTable').removeAttr('style');
         	$('td:eq(0)', row).html(title);
         	$('td:eq(0)', row).addClass("titleRightClick");
-        	$('td:eq(1)', row).html(data.sourceCrawlDetail.website.displayName);
-        	if(null != data.relevantNum && ""!=data.relevantNum){
+        	$('td:eq(1)', row).html(data.sourceCrawl);
+        	if(null != data.relevantNewsNum && ""!=data.relevantNewsNum){
           		var relevantNews = '<a href="'+ctx+'/latest/front/relevantNewsList/'+data.webpageCode+'" target="_blank">('+data.relevantNum+')</a>';
           		$('td:eq(5)', row).html(relevantNews);
         	}else{
@@ -70,7 +77,7 @@ $(function(){
         columns: [//显示的列
 //                  { data: 'webpageCode', "bSortable": false},
                   { data: 'title', "bSortable": false},
-                  { data: 'sourceCrawlLevelTwo', "bSortable": false},
+                  { data: 'sourceCrawl', "bSortable": false},
                   { data: 'sourceReport', "bSortable": false},
                   { data: 'releaseDatetime', "bSortable": false,
                 	  render:function(data, type, row){
@@ -80,7 +87,7 @@ $(function(){
 	            		}
                 	  }    
                   },
-                  { data: 'relevantNum', "bSortable": false},
+                  { data: 'relevantNewsNum', "bSortable": false},
               ],
       	"aaSorting": [[0, ""]],
       	"columnDefs": [ {
@@ -101,17 +108,13 @@ $(function(){
         footerPutBottom();
     });
     /*相似相关新闻关键词数据*/
-    if(webpageCode !=null && webpageCode != ''){
-        
-        keywords(relativeType,webpageCode);
+        keywords(clusterid,eventid);
         $("[data-toggle='popover']").popover({
     		html:true,
     		trigger:'hover',
     		content:'<div class="sudokuShowCon"><ul class="list-group m-bottom" style="width:256px"><li class="list-group-item">浏览量<a href="javascript:void" class="pull-right ">[2345]</a></li><li class="list-group-item">建稿量<a href="javascript:void" class="pull-right ">[2345]</a></li><li class="list-group-item">采用量<a href="javascript:void" class="pull-right ">[2345]</a></li><li class="list-group-item">相似新闻<a href="javascript:void" class="pull-right ">[2]</a></li></ul></div>'
     	});
         footerPutBottom();
-    }
-
 });
 /*跳转新闻详情页*/
 function loadTopNews(id){
@@ -119,20 +122,24 @@ function loadTopNews(id){
 }
 
 /*相似相关新闻关键词数据*/
-function keywords(relativeType,webpageCode){
+function keywords(clusterid,eventid){
 	$.ajax({
 		type : "get",
-		async : true, //同步执行 
-		url : ctx+"/latest/front/keywords/"+relativeType+"/"+webpageCode,
+		async : true,//同步执行
+		url : ctx+"/latest/front/keywords",
+		data:{
+            'clusterid':clusterid,
+            'eventid':eventid
+		},
 		dataType : "json", //返回数据形式为json
 		success : function(data) {
-			if(null == data || data.length == 0){
+			if(null == data.resultObj || data.resultObj.length == 0){
 				/*隐藏内容为空的区域*/
 				$(".col-md-4").find(".relativeNewsKeys").html("");
 			}else{
 				var content = "";
-				for(var i = 0 ; i < data.length;i++){
-					content += '<a href="javascript:void(0)">'+data[i].keyword+'</a>';
+				for(var i = 0 ; i < data.resultObj.length;i++){
+					content += '<a href="javascript:void(0)">'+data.resultObj[i]+'</a>';
 				}
 				$(".col-md-3").find(".relativeNewsKeys").find(".listLabel").html(content);
 			}

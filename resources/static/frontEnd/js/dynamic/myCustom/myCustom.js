@@ -21,14 +21,11 @@ $(function () {
         }
     })
     ctx = $('#context').val();
-    console.log(ctx)
     $('#ico-refresh,#ico-heart').css('visibility', 'visible');
 
     //获取定制信息
     getCustomStatus(ctx, '/custom/front/customOrNot', 'get');
-
     getCustomData(ctx, '/uec/custom/front/getMyCustomGroup', 'get');
-
     //获取微信列表
     getWechatList();
     //获取微博列表
@@ -53,10 +50,10 @@ $(function () {
     $('.analysis').click(function () {
         $('#myCustomContent').loadPage(ctx + '/custom/front/gotoReviewAnalysis');
     });
-
-    $('.special').click(function () {
-        $('#myCustomContent').loadPage(ctx + '/custom/front/gotoCustomSpecial');
-    });
+    //
+    // $('.special').click(function () {
+    //     $('#myCustomContent').loadPage(ctx + '/custom/front/gotoCustomSpecial');
+    // });
 
     $('.addAndModifyGrounp .addModifyNavsIner li a').click(function () {
         var name = $(this).text();
@@ -84,6 +81,7 @@ $(function () {
         var obj = $(this);
         var parent = obj.parent();
         $("#myaccordion>li>.link").removeClass("tabSelectted");
+        $("#myaccordion>li>.link>i").removeClass("fa-angle-up").addClass("fa-angle-down");
         parent.addClass("tabSelectted");
 
         $('.addAndModifyGrounp').hide();
@@ -101,7 +99,6 @@ $(function () {
             parent.parent().siblings().find('.link').attr('isopen', 'closed');
         }
     });
-
     // 左侧列表切换事件
     $("#myaccordion>li>.link>span").click(function () {
         var obj = $(this);
@@ -123,10 +120,33 @@ $(function () {
             parent.parent().siblings().find('.submenu').hide();
             parent.parent().siblings().find('.link').attr('isopen', 'closed');
         }
+        obj.next().click();
         loadTotalList(spanIndex);
     })
-
+    initEventTrace()
 });
+
+function initEventTrace() {
+    var content = '';
+    content += "<li class='mdynews' data-innerid='hotEvent'>热门事件</li>"
+    content += "<li class='mdynews' data-innerid='customEvent'>定制事件</li>"
+    $('.submenu').eq(5).append(content);
+    $('.link').eq(5).find("i")[0].style.visibility = "visible";
+    $('.submenu').eq(5).find('li').click(function () {
+        console.log(new Date().getTime())
+        $('.mdynews').css('border', 'none');
+        this.style.borderLeft = '5px #f44336 solid'
+        var customType = "eventTrace";
+        localStorage.customType = customType;
+        localStorage.customgroup = '';
+        var innerId = $(this).attr('data-innerid');
+        if(innerId == "hotEvent"){
+            $('#myCustomContent').loadPage(ctx + '/hotEvent/myCustomHotEvent');//加载热门事件。
+        }else {
+            $('#myCustomContent').loadPage(ctx + '/custom/front/gotoCustomEvent');//加载定制事件。
+        }
+    })
+}
 
 function getCustomStatus(rootUrl, requestUrl, type) {
     $.ajax({
@@ -164,17 +184,20 @@ function getCustomData(rootUrl, requestUrl, type, callback) {
             if (res.result) {
                 var str = '';
                 var contentweb = getNewsHtml(data);
-                $('.submenu').html("");
+                $('.submenu').eq(0).append("");
+                $('.submenu').eq(1).append("");
+                $('.submenu').eq(2).append("");
+                $('.submenu').eq(3).append("");
+                $('.submenu').eq(4).append("");
                 for (var i = 0; i < data.length; i++) {
-                    str = str + "<li class='mdynews' data-customGroup=" + data[i].customGroup + ">" + data[i].name + "</li>"
+                    str = str + "<li class='mdynews' data-customGroup=" + new Date(data[i].customGroup).getTime() + ">" + data[i].name + "</li>"
                 }
                 $('.submenu').eq(0).append(str);
-
                 localStorage.newsdata = contentweb;
                 localStorage.customNewsArray = JSON.stringify(data);
                 localStorage.len = len;
                 $('.link').eq(0).find("i")[0].style.visibility = "visible"
-                $('#myaccordion>li>.submenu>li').click(function (event) {
+                $('.submenu').eq(0).find('li').click(function (event) {
                     $('.mdynews').css('border', 'none');
                     this.style.borderLeft = '5px #F44336 solid'
                     var target = event.target || event.srcElement;
@@ -351,7 +374,6 @@ function getWebSourcesData(getAjaxUrl) {
         },
         async: true,
         success: function (data) {
-            console.log(data);
             if (data.result == true) {
                 var obj = data.resultObj;
                 var contentapp = '';
@@ -391,7 +413,6 @@ function getAppSourcesData(getAjaxUrl) {
         },
         async: true,
         success: function (data) {
-            console.log(data);
             if (data.result == true) {
                 var obj = data.resultObj;
                 var contentapp = '';
@@ -409,7 +430,7 @@ function getAppSourcesData(getAjaxUrl) {
 
                 $('.submenu').eq(2).html(contentapp);
 
-                $('.submenu').eq(2).find('li').click(function () {
+                $('.submenu').eq(2).on('click', 'li', function () {
                     $('.mdynews').css('border', 'none');
                     this.style.borderLeft = '5px #f44336 solid'
                     localStorage.customgroup = '';
@@ -442,7 +463,6 @@ function judgeCustomed(rootUrl, type, data) {
         dataType: 'json',
         async: true,
         success: function (res, index) {
-            console.log(res);
             if (res.result) {//添加过定制
                 var obj = res.resultObj;
                 if (data.type == '1') {

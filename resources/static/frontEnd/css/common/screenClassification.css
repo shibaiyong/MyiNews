@@ -162,30 +162,40 @@ em,i,s{font-style:normal;}
 	width:215px;
 }
 .multiButton{
-	padding: 0 10px;
+	border-top: 1px solid #fff;
 	width: 100%;
 	height: auto;
+	background-color: #ca3328;
 	box-sizing: border-box;
 }
 .multiButton .multiSure{
 	float: left;
-	width: 50px;
-	padding-right: 10px;
-	text-align: right;
+	width: 60px;
+	text-align: center;
 	line-height: 30px;
 	font-size: 14px;
 	color: #fff;
 	cursor: pointer;
+	/* border-right: 1px solid #ffff; */
+	/* border: 1px solid #fff; */
+	/* border-radius: 4px; */
 }
 .multiButton .multiCancel {
 	float: right;
-	width: 50px;
-	padding-left: 10px;
+	width: 60px;
 	line-height: 30px;
-	text-align: left;
+	text-align: center;
 	font-size: 14px;
 	color: #fff;
 	cursor: pointer;
+	/* border: 1px solid #fff; */
+	/* border-radius: 4px; */
+}
+.multiButton .multiSure:hover,
+.multiButton .multiCancel:hover{
+	background-color: #ffa200;
+	border-right-color: #ffa200;
+	border-left-color: #ffa200;
 }
 .subpage .srceenMapShow,
 .subpage .classificationShow {
@@ -206,4 +216,27 @@ em,i,s{font-style:normal;}
 	min-width: 120px;
 	border-radius: 6px;
 	/* background-color: #fff; */
+}
+.firstItem a{
+	color: #fff;
+}
+.customAddBtn {
+	cursor: pointer;
+}
+/* .secondMore{
+	position: relative;
+} */
+/* 三级菜单 */
+.prosmore .threeProsmore{
+	padding: 5px 0 15px 15px;
+	position: absolute;
+	z-index: 999;
+	left: 233px;
+	top: 0;
+	background: #FAFAFB;
+	box-shadow: 2px 2px 4px 1px #BCBCBC;
+	/* border-radius: 10px; */
+	border-left: 0 none;
+	width: 219px;
+	height: 400px;
 }

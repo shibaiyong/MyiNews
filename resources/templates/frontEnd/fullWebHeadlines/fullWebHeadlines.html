@@ -527,7 +527,21 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document" style="margin-top:16%;">
+			<div class="modal-content">
+				<div class="modal-body">
+					<p style="text-align:center;margin-bottom:0px">是否要删除这条新闻线索？</p>
 
+					<div style="margin-top:10px;text-align:right">
+						<button type="button" class="btn btn-red btn-sm maxNum" data-dismiss="modal" style="color:white;">确定</button>
+						<!--<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- 尾部内容 -->
 	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
 </body>

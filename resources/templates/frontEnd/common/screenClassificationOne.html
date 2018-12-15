@@ -17,7 +17,7 @@
 
 	<!-- Self CSS -->
 	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/screenClassification.css"  th:href="@{/frontEnd/css/common/screenClassification.css}" />
-	
+
 </head>
 <body>
 	<div class="screenConditionBox">
@@ -51,8 +51,8 @@
 			</ul>
 		</div>
 		<div class="pros subpage srceenMap hide" data-localname="srceenMap">
-			<h2 class="srceenMapShow" data-multi="false" data-innerId='' data-old='' data-toggle=""  data-inter='false'>地区
-				<i class="fa fa-caret-down"></i>
+			<h2 class="srceenMapShow" data-multi="false" data-innerId='' data-old='' data-placement='top' data-toggle="popover"  data-inter='false'>全部地区
+				<!--<i class="fa fa-caret-down"></i>-->
 			</h2>
 			<ul class="prosul clearfix" id="srceenMapPro" th:remove="body">
 				<li class="">
@@ -121,8 +121,8 @@
 		</div>
 		
 		<div class="pros subpage srceenClassification hide" data-localname="srceenClassification">
-			<h2 class="srceenMapShow" data-innerId='' data-inter='false'>分类
-				<i class="fa fa-caret-down"></i>
+			<h2 class="srceenMapShow" data-innerId='' data-inter='false' data-placement="top" data-toggle="popover">全部分类
+				<!--<i class="fa fa-caret-down"></i>-->
 			</h2>
 			<ul class="prosul clearfix" id="srceenClassificationPro" th:remove="body">
 				<li class="">
@@ -227,7 +227,7 @@
 		</div>
 		
 		<div class="pros subpage srceenMediaAlone hide" data-localname="srceenMediaAlone">
-			<h2 data-inter='false' data-innerId=''>全部<i class="fa fa-caret-down"></i></h2>
+			<h2 data-inter='false' data-innerId=''>全部来源<i class="fa fa-caret-down"></i></h2>
 			<ul class="prosul clearfix" id="srceenMediaAlonePro" th:remove="body">
 				<li class="">
 					<a class="ti" href="#">微博</a>

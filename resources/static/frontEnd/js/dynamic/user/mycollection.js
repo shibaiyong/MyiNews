@@ -26,7 +26,7 @@ $(function() {
     }
 
     $('.table-operation-status').find('a').eq(1).removeClass('hide').end().eq(4).removeClass('hide');
-
+    $('.table-operation-status').find('a').eq(0).removeClass('hide');
     selectTime();
     derivation();
     cancelCollectBatch();
@@ -101,21 +101,29 @@ function collectTableCon(){
             var summary = '';
             var isearchVal = $('.customAddInput').val();
             if(null != data.cusSummary){
+                //超出一定长度加省略号
                 if(data.cusSummary.length>150){
                     summary = data.cusSummary.substr(0,150)+'...';
                 }else{
                     summary = data.cusSummary;
                 }
-
-                var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="'+summary+'">'+data.title+'</a>'
             }else{
                 summary = '暂无摘要';
-                var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'" target="_blank" class="beyondEllipsis"  data-id="'+data.webpageCode+'">'+data.title+'</a>'
             }
-            $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
-            var sourceReportHtml='<span style="text-align: left;display: inline-block;">'+data.sourceReport+'</span>'
 
-            $('td:eq(3)', row).html(sourceReportHtml);
+            //判读新闻是否来自新闻日历
+            if(data.isHistory == 1){
+                var titleCon = '<a href="'+ctx + '/latest/front/news/calendar/detail/' + data.webpageCode+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="'+summary+'">'+data.title+'</a>'
+            }else{
+                titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="'+summary+'">'+data.title+'</a>'
+            }
+
+            $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
+            var sourceCrawlHtml = '<span style="text-align: left;display: inline-block;">'+data.sourceCrawl+'</span>';
+            $('td:eq(3)', row).html(sourceCrawlHtml);
+            var sourceReportHtml='<span style="text-align: left;display: inline-block;">'+data.sourceReport+'</span>';
+            $('td:eq(4)', row).html(sourceReportHtml);
+            
             //操作
             var operationCon = '<span><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></span>';
             /*var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span>';*/
@@ -207,11 +215,12 @@ function collectTableCon(){
 
         var textArr = collectTable.column(1).nodes().data();
         tableItemWebPageCodeArr = [];
-
+        var releaseDateTimeArr = [];
         if(textArr.length > 0){
             var textArrCon =[];
             for(var count = 0;textArr.length>count;count++){
                 tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+                releaseDateTimeArr.push(textArr[count].releaseDatetime);
             }
 
 //			操作-建稿
@@ -219,6 +228,7 @@ function collectTableCon(){
             $('.inewsOperation').each(function(index){
                 $(this).find('span').eq(0).releaseBuild({
                     'webpageCode':tableItemWebPageCodeArr[index],
+                    'releaseDatetime': releaseDateTimeArr[index],
                     'buildingCon':function(_$this){
                         _$this.find('i').addClass('hide');
                         _$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');

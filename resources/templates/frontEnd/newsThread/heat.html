@@ -55,7 +55,7 @@
 											<th >标题</th>
 											<th style="width: 85px;">采集来源</th>
 											<th style="width: 85px;">发稿来源</th>
-											<th class="center" style="width: 40px;">热度值</th>
+											<th class="center" style="width: 40px;">热度</th>
 											<th class="center" style="width:60px">QG指数</th>
 											<!--<th class="center" style="width:60px">负面指数</th>-->
 											<th style="width: 55px;">浏览量</th>
@@ -330,5 +330,24 @@
 
 	<!-- 尾部内容 -->
 	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+		<!-- Modal -->
+<div class="modal fade" id="cannotSkipDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-body">
+							<p style="text-align:center;margin-bottom:0px"></p>
+
+							<div style="margin-top:10px;text-align:right">
+									<button type="button" class="btn btn-red btn-sm confirm-myCustom" data-dismiss="modal">确定
+									</button>
+									<button type="button" class="btn btn-default cancel-myCustom" data-dismiss="modal">
+											取消
+									</button>
+							</div>
+					</div>
+			</div>
+	</div>
+</div>
+<!-- Modal End-->
 </body>
 </html>

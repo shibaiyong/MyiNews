@@ -7,9 +7,7 @@ var getImgAjaxData1,
 $(function(){
 	footerPutBottom();
 	
-	/*头部导航高亮*/
-	
-	
+	/*头部导航高亮*/	
 	$().showHeader({
 		callback:function(){
 			$('#example-navbar-collapse').find('ul.navbar-nav').find('li').each(function(){
@@ -51,7 +49,8 @@ $(function(){
 			++screenIndex;
 		}
 	})
-	
+	$('.table-operation-status').find('a').eq(0).removeClass('hide');
+	$('.table-operation-status').find('a').eq(2).removeClass('hide');
 //	时间段
 	$().getData({
 		boxClassName:'.srceenTimeQuantum',
@@ -63,25 +62,29 @@ $(function(){
 		getAjaxUrl:ctx+'/config/front/listUserConfigCarrierAndSource',  //请求路径
 		boxClassName:'.srceenSources',
 		ulClassName:'#srceenSourcesPro',
+		conditionValue: 'mediaAlone',
+		level: 3,
 	})
 //	地区
 	$().getData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
+		getAjaxUserConfigUrl: ctx + '/config/front/listUserRegionNew', //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
 		boxClassName: '.srceenMap',
 		ulClassName: '#srceenMapPro',
-		level: 2,
+		level: 3,
 		multiSelect: true,
+		conditionValue: 'map',
 	})
 	
 //	分类
 	$().getData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+		getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
 		boxClassName: '.srceenClassification',
 		ulClassName: '#srceenClassificationPro',
 		level: 2,
 		multiSelect: true,
+		conditionValue: 'classification',
 	})
 	
 //	全选功能

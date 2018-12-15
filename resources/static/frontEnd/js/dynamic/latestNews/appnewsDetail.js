@@ -49,9 +49,11 @@ $(function(){
 //获得详情
 function getDetail(){
 	var webpageCode = $('.webpageCode').val();
+	var releaseDateTime = $('.releaseDateTime').val();
 	var queryStr = $('.queryStr').val();
 	var dataParam = {
 			'webpageCode':webpageCode,
+			'releaseDatetime':releaseDateTime
 	};
 	
 	$.ajax({

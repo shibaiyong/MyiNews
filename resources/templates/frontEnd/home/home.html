@@ -31,7 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/home/home.css"  th:href="@{/frontEnd/css/home/home.css}"/>
 	
 	<!-- Echarts Js -->
-	<script src="https://cdn.bootcss.com/echarts/4.0.2/echarts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts.min.js" th:href="@{/frontEnd/js/dynamic/common/echarts4_0_2.js}"></script>
 	<script type="text/javascript" src="../../../static/common/plugins/Carousel/js/slides-1.1.1-min.min.js"  th:src="@{/common/plugins/echarts/china.min.js}"></script>
 	<!-- Carousel JS -->
 	<script type="text/javascript" src="../../../static/common/plugins/Carousel/js/slides-1.1.1-min.min.js"  th:src="@{/common/plugins/Carousel/js/slides-1.1.1-min.min.js}"></script>
@@ -46,7 +46,7 @@
 	<script type="text/javascript" src="../../../static/common/plugins/newsdetailcarousel/js/YuxiSlider.jQuery.min.js" th:src="@{/common/plugins/animateNumber/jquery.animateNumber.js}" ></script>
 	<!--swiper-->
 
-	<script type="text/javascript" src="../../../static/common/plugins/swiper/swiper-4.2.0.min.js"  th:src="@{/common/plugins/swiper/swiper-4.2.0.min.js}"></script>
+	<script type="text/javascript" src="../../../static/common/plugins/swiper/swiper-4.2.0.min.js"  th:src="@{/common/plugins/swiper/swiper-4.4.2.js}"></script>
 
 
 	<!-- Self JS -->
@@ -126,6 +126,36 @@
 		.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
 			bottom: 15%;
 		}
+		.messageBox{
+			width:500px;
+			position: fixed;
+			top:50%;
+			left:50%;
+			margin-left:-250px;
+			margin-top: -148px;
+			border:1px solid #ccc;
+			z-index: 9999999999999;
+			background:white;
+			padding:50px 30px;
+			box-sizing: border-box;
+			text-align: center;
+			border-radius: 6px;
+			overflow: hidden;
+			display: none;
+		}
+		.messageBox p{
+			line-height: 30px;
+			font-size:20px;
+		}
+	.latestNewsCont  .screenConditionBox .threadSrceenMap h2.srceenMapShow, .latestNewsCont  .screenConditionBox h2.classificationShow{
+		text-align: center;
+	}
+	.screenConditionBox  .srceenMap h2.srceenMapShow{
+		text-align: center;
+	}
+	.latestNewsCont .pros,.screenConditionBox .pros{
+		width:92px;
+	}
 	</style>
 
 </head>
@@ -505,7 +535,8 @@
 												<span class="f-right">共<span class="red" th:text="${hotEvent.event.newsNum}">178</span>条</span>
 											</p>
 											<p class="HotEventConImg">
-												<a href="../hotEvent/hotEventDetail.html" th:href="'javascript:void(0)'" th:onclick="'javascript:loadEventDetail(\''+${hotEvent.event.eventCode}+'\')'" ><img src='../../../static/frontEnd/image/hotEvent/1.png' th:src="${hotEvent.event.picPath}" /></a>
+												<!--/v1/frontEnd/image/home/defaultImg.png-->
+												<a href="../hotEvent/hotEventDetail.html" th:href="'javascript:void(0)'" th:onclick="'javascript:loadEventDetail(\''+${hotEvent.event.eventCode}+'\')'" ><img src='../../../static/frontEnd/image/home/defaultImg.png' th:src="(${hotEvent.event.picPath}?${hotEvent.event.picPath}:@{/frontEnd/image/home/defaultImg.png})" /></a>
 											</p>
 
 										</div>
@@ -619,8 +650,8 @@
 													<div class='latestNewsContSort'>
 														<div class="screenConditionBox threadSrceenBox">
 															<div class="pros subpage threadSrceenMap ">
-																<h2 class="srceenMapShow" data-innerId='' data-inter='false'>地区
-																	<i class="fa fa-caret-down"></i>
+																<h2 class="srceenMapShow" data-innerId='' data-inter='false'>全部地区
+																	<!--<i class="fa fa-caret-down"></i>-->
 																</h2>
 																<ul class="prosul clearfix" id="threadSrceenMapPro" th:remove="body">
 																	<li class="">
@@ -660,8 +691,8 @@
 																</ul>
 															</div>
 															<div class="pros subpage threadSrceenClassification ">
-																<h2 class="classificationShow" data-innerId='' data-inter='false'>分类
-																	<i class="fa fa-caret-down"></i>
+																<h2 class="classificationShow" data-innerId='' data-inter='false'>全部分类
+																	<!--<i class="fa fa-caret-down"></i>-->
 																</h2>
 																<ul class="prosul clearfix" id="threadSrceenClassificationPro" th:remove="body">
 																	<li class="">
@@ -918,7 +949,7 @@
 
 							<!-- 热点排行 start-->
 							<!-- 网站新闻排行 -->
-							<div class="box p-bottom" id="homeWebRank" style="margin-top:10px;">
+							<div class="box p-bottom" id="homeWebRank" style="margin-top:10px;display:none;">
 								<div class="box-header header-vimeo">
 									<h2 th:text="${null==navMap?'热点排行':navMap.get('nav.hot')}">热点排行</h2>
 								</div>
@@ -1056,7 +1087,7 @@
 	</div>
 	<!-- 尾部内容 -->
 	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
-	<div class="maskLayer" style="z-index:999999999999;display:none;">
+	<div class="maskLayer" style="z-index:9999999999;display:none;">
 		<div class="swiper-container" style="height:100%;">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
@@ -1114,12 +1145,13 @@
 		<button class="btn btn-danger compelet" style="display: none;width:100px;height: 40px;border-radius: 6px;">完成</button>
 
 	</div>
+
+	<div class="messageBox"><p>亲爱的用户，目前系统已经升级新版本，</p><p>短时可能出现不稳定现象，我们将尽快解决！</p></div>
 </body>
 </html>
 <script>
 	 window.onload=function(){
 	     var isnew = $('#isNew').val();//===1
-	     console.log(isnew);
         	if(isnew==1){
 			$(".maskLayer").css('display','block');
 			var swiper = new Swiper('.swiper-container', {
@@ -1172,6 +1204,18 @@
 				}
 			})
 		 }
+		// if(localStorage.getItem('messageShow')){
+         //    $('.messageBox').css('display','none');
+		// }else{
+         //    $('.messageBox').css('display','block');
+         //    setTimeout(function(){
+         //        $('.messageBox').hide();
+         //        localStorage.setItem('messageShow',1)
+         //    },4000)
+		// }
+
+
+
 	 }
 
 </script>

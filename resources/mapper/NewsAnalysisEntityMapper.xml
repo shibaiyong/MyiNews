@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.NewsAnalysisEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.NewsAnalysisEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="analysis_name" jdbcType="VARCHAR" property="analysisName" />
+    <result column="webpage_code" jdbcType="VARCHAR" property="webpageCode" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="api_type" jdbcType="INTEGER" property="apiType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.model.NewsAnalysisEntity">
+    <result column="analysis_value" jdbcType="LONGVARCHAR" property="analysisValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, analysis_name, webpage_code, update_datetime, api_type
+  </sql>
+  <sql id="Blob_Column_List">
+    analysis_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_analysis
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news_analysis
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.NewsAnalysisEntity">
+    insert into news_analysis (innerid, analysis_name, webpage_code, 
+      update_datetime, api_type, analysis_value
+      )
+    values (#{innerid,jdbcType=INTEGER}, #{analysisName,jdbcType=VARCHAR}, #{webpageCode,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{apiType,jdbcType=INTEGER}, #{analysisValue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.NewsAnalysisEntity">
+    insert into news_analysis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="analysisName != null">
+        analysis_name,
+      </if>
+      <if test="webpageCode != null">
+        webpage_code,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="apiType != null">
+        api_type,
+      </if>
+      <if test="analysisValue != null">
+        analysis_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="analysisName != null">
+        #{analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageCode != null">
+        #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apiType != null">
+        #{apiType,jdbcType=INTEGER},
+      </if>
+      <if test="analysisValue != null">
+        #{analysisValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.NewsAnalysisEntity">
+    update news_analysis
+    <set>
+      <if test="analysisName != null">
+        analysis_name = #{analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="webpageCode != null">
+        webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apiType != null">
+        api_type = #{apiType,jdbcType=INTEGER},
+      </if>
+      <if test="analysisValue != null">
+        analysis_value = #{analysisValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.model.NewsAnalysisEntity">
+    update news_analysis
+    set analysis_name = #{analysisName,jdbcType=VARCHAR},
+      webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      api_type = #{apiType,jdbcType=INTEGER},
+      analysis_value = #{analysisValue,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.NewsAnalysisEntity">
+    update news_analysis
+    set analysis_name = #{analysisName,jdbcType=VARCHAR},
+      webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      api_type = #{apiType,jdbcType=INTEGER}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

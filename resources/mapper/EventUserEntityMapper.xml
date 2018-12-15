@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.event.dao.EventUserEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.event.model.EventUserEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="event_code" jdbcType="VARCHAR" property="eventCode" />
+    <result column="event_name" jdbcType="VARCHAR" property="eventName" />
+    <result column="classification" jdbcType="INTEGER" property="classification" />
+    <result column="occur_datetime" jdbcType="TIMESTAMP" property="occurDatetime" />
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.event.model.EventUserEntityWithBLOBs">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="keywords" jdbcType="LONGVARCHAR" property="keywords" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, event_code, event_name, classification, occur_datetime, pic_path, user_id, status,
+    create_date
+  </sql>
+  <sql id="Blob_Column_List">
+    description, keywords
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.uec.web.event.model.EventUserEntityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from event_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.uec.web.event.model.EventUserEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from event_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from event_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  delete from event_user
+  where id = #{id,jdbcType=INTEGER}
+</delete>
+  <delete id="deleteByExample" parameterType="com.uec.web.event.model.EventUserEntityExample">
+    delete from event_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.event.model.EventUserEntityWithBLOBs">
+    insert into event_user (id, event_code, event_name, classification,
+                            occur_datetime, pic_path, user_id,
+                            status, create_date, description,
+                            keywords)
+    values (#{id,jdbcType=INTEGER}, #{eventCode,jdbcType=VARCHAR}, #{eventName,jdbcType=VARCHAR}, #{classification,jdbcType=INTEGER},
+            #{occurDatetime,jdbcType=TIMESTAMP}, #{picPath,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+            #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR},
+            #{keywords,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.event.model.EventUserEntityWithBLOBs">
+    insert into event_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eventCode != null">
+        event_code,
+      </if>
+      <if test="eventName != null">
+        event_name,
+      </if>
+      <if test="classification != null">
+        classification,
+      </if>
+      <if test="occurDatetime != null">
+        occur_datetime,
+      </if>
+      <if test="picPath != null">
+        pic_path,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eventCode != null">
+        #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="eventName != null">
+        #{eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        #{classification,jdbcType=INTEGER},
+      </if>
+      <if test="occurDatetime != null">
+        #{occurDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uec.web.event.model.EventUserEntityExample" resultType="java.lang.Long">
+    select count(*) from event_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update event_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.eventCode != null">
+        event_code = #{record.eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventName != null">
+        event_name = #{record.eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classification != null">
+        classification = #{record.classification,jdbcType=INTEGER},
+      </if>
+      <if test="record.occurDatetime != null">
+        occur_datetime = #{record.occurDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.picPath != null">
+        pic_path = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.keywords != null">
+        keywords = #{record.keywords,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update event_user
+    set id = #{record.id,jdbcType=INTEGER},
+    event_code = #{record.eventCode,jdbcType=VARCHAR},
+    event_name = #{record.eventName,jdbcType=VARCHAR},
+    classification = #{record.classification,jdbcType=INTEGER},
+    occur_datetime = #{record.occurDatetime,jdbcType=TIMESTAMP},
+    pic_path = #{record.picPath,jdbcType=VARCHAR},
+    user_id = #{record.userId,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=INTEGER},
+    create_date = #{record.createDate,jdbcType=TIMESTAMP},
+    description = #{record.description,jdbcType=LONGVARCHAR},
+    keywords = #{record.keywords,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update event_user
+    set id = #{record.id,jdbcType=INTEGER},
+    event_code = #{record.eventCode,jdbcType=VARCHAR},
+    event_name = #{record.eventName,jdbcType=VARCHAR},
+    classification = #{record.classification,jdbcType=INTEGER},
+    occur_datetime = #{record.occurDatetime,jdbcType=TIMESTAMP},
+    pic_path = #{record.picPath,jdbcType=VARCHAR},
+    user_id = #{record.userId,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=INTEGER},
+    create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.event.model.EventUserEntityWithBLOBs">
+    update event_user
+    <set>
+      <if test="eventCode != null">
+        event_code = #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="eventName != null">
+        event_name = #{eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        classification = #{classification,jdbcType=INTEGER},
+      </if>
+      <if test="occurDatetime != null">
+        occur_datetime = #{occurDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picPath != null">
+        pic_path = #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.event.model.EventUserEntityWithBLOBs">
+    update event_user
+    set event_code = #{eventCode,jdbcType=VARCHAR},
+        event_name = #{eventName,jdbcType=VARCHAR},
+        classification = #{classification,jdbcType=INTEGER},
+        occur_datetime = #{occurDatetime,jdbcType=TIMESTAMP},
+        pic_path = #{picPath,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        description = #{description,jdbcType=LONGVARCHAR},
+        keywords = #{keywords,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.event.model.EventUserEntity">
+    update event_user
+    set event_code = #{eventCode,jdbcType=VARCHAR},
+        event_name = #{eventName,jdbcType=VARCHAR},
+        classification = #{classification,jdbcType=INTEGER},
+        occur_datetime = #{occurDatetime,jdbcType=TIMESTAMP},
+        pic_path = #{picPath,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

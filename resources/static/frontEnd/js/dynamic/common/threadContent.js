@@ -19,8 +19,10 @@
         var totalCount = "当前第 _START_ - _END_ 条　共计 _TOTAL_ 条";
         var scrollCon = '';
         var pagingTypeCon = 'full_numbers';
+
         var tableThread = $('.dataConBoxTable').DataTable({
-            dom:domString,
+            bRetrieve: true,
+            dom: domString,
             oLanguage: {
                 "sZeroRecords" : "没有可以显示的数据",
                 "sProcessing" : "正在获取数据，请稍后...",
@@ -38,17 +40,11 @@
             },
 //		       服务器传过来的值
             "rowCallback": function (row, data, index) {
-                console.log(data);
+                //console.log(data);
                 webpageCodes.push(data.webpageCode);
                 //摘要,长度超过150截取
                 var summary = '';
                 var isearchVal = $('.customAddInput').val();
-
-                var checkCon = '<span data-webpageCode="'+data.webpageCode+'" class="check-box check-child"><i class="fa fa-check"></i></span>';
-                $('td:eq(0)', row).html(checkCon);
-
-
-
                 if (null != data.cusSummary) {
                     if (data.cusSummary.length > 150) {
                         summary = data.cusSummary.substr(0, 150) + '...';
@@ -57,97 +53,63 @@
                     }
 //			    	   标题跳转详情，如果是视频跳转原文
                     var linkUrl;
-                    if (data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != '') {
-                        var mediaSta = data.statEntity.mediaStatus;
-                        mediaSta = mediaSta.substring(1, mediaSta.length - 1).split(',');
-                        for (var i = 0; mediaSta.length > i; i++) {
-                            if (mediaSta[i] == 6) {
-                                if (data.webpageUrl != null && data.webpageUrl != '') {
-                                    linkUrl = data.webpageUrl
-                                } else {
-
-                                }
-
-                                break;
-                            } else if (mediaSta[i] == 5) {
-                                if (isearchVal != '' && isearchVal != undefined) {
-                                    linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode +'/'+data.releaseDatetime+'?queryStr=' + isearchVal;
-                                } else {
-                                    linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode+'/'+data.releaseDatetime;
-                                }
-
-                                break;
-                            } else if (mediaSta[i] == 0) {
-                                if (isearchVal != '' && isearchVal != undefined) {
-                                    linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode +'/'+data.releaseDatetime+'?queryStr=' + isearchVal;
-                                } else {
-                                    linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode+'/'+data.releaseDatetime;
-                                }
-                            }
-                        }
+                    if (isearchVal != '' && isearchVal != undefined) {
+                        linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode +'/'+data.releaseDatetime+'?queryStr=' + isearchVal;
+                    } else {
+                        linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode+'/'+data.releaseDatetime;
                     }
+
                     //title
                     var titleCon = '<a href="' + linkUrl + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
                 } else {
                     summary = '暂无摘要';
-//				    	   标题跳转详情，如果是视频跳转原文
+                    //标题跳转详情，如果是视频跳转原文
                     var linkUrl;
-                    if (data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != '') {
-                        var mediaSta = data.statEntity.mediaStatus;
-                        mediaSta = mediaSta.substring(1, mediaSta.length - 1).split(',');
-                        for (var i = 0; mediaSta.length > i; i++) {
-                            if (mediaSta[i] == 6) {
-                                if (data.webpageUrl != null && data.webpageUrl != '') {
-                                    linkUrl = data.webpageUrl
-                                } else {
 
-                                }
-                                break;
-                            } else if (mediaSta[i] == 5) {
-                                linkUrl = ''
-                            } else if (mediaSta[i] == 0) {
-                                if (isearchVal != '' && isearchVal != undefined) {
-                                    linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode +'/'+data.releaseDatetime+'?queryStr=' + isearchVal;
-                                } else {
-                                    linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode+'/'+data.releaseDatetime;
-                                }
-                            }
-                        }
+                    if (isearchVal != '' && isearchVal != undefined) {
+                        linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode +'/'+data.releaseDatetime+'?queryStr=' + isearchVal;
+                    } else {
+                        linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode+'/'+data.releaseDatetime;
                     }
-
                     //title
                     var titleCon = '<a href="' + linkUrl + '" target="_blank" class="beyondEllipsis"  data-id="' + data.webpageCode + '">' + data.title + '</a>'
 
                 }
-
-                if (null != data.isSticked && 1 == data.isSticked) {
-                    $('td:eq(2)', row).html(titleCon).addClass('titleRightClick').addClass('stickTopContent');
+                if(data.title){
+                    $('td:eq(1)', row).html(titleCon).addClass('titleRightClick');
                 }
-                $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
+
 
 //		    	   相似相关、浏览量
-                var sameNum = '<span class="sameNum' + index + '"></span>';
-                var relevantNum = '<span class="relevantNum' + index + '"></span>';
+                var sameNum = '<span class="sameNum' + index + '">'+data.relevantNewsNum+'</span>';
+                var relevantNum = '<span class="relevantNum' + index + '">'+data.sameNewsNum+'</span>';
 
-                $('td:eq(5)', row).html(relevantNum + '/' + sameNum);
-
+                $('td:eq(4)', row).html(sameNum + '/' + relevantNum);
 
                 //负面指数样式：>40% 绿色   <40%红色
-                var negative = '';
-                var negativeCon = '<span class="negativeNum' + index + '"></span>';
+                //负面指数样式：>40% 绿色   <40%红色
+                //负面指数样式：>40% 绿色   <40%红色
+                var negative = (data.sentiment != null && data.sentiment != '')? data.sentiment: 0;
+                //截取到小数点后两位
+                negative = (negative * 100).toFixed(2);
+                var colorStyle = "";
+                if(negative > 50){
+                    colorStyle = 'green';
+                }else {
+                    colorStyle = 'gray';
+                }
+                var negativeCon = '<span class="negativeNum ' +colorStyle+ '">'+ negative +'</span>';
 
                 $('td:eq(5)', row).html(negativeCon);
 
                 //操作
                 var operationCon = '<span style="margin-right: 10px;"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span> <span><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></span>';
-                /*var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span>';*/
-                //$('td:eq(9)', row).html(operationCon).addClass('inewsOperation').attr('data-id',data.webpageCode);
-                $('td:eq(7)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
+                $('td:eq(6)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
             },
 
 //		       服务器传过来的值
             columns: [//显示的列
-                {data: 'webpageCode', "bSortable": false,'width': '44px'},
+
                 {
                     data: 'releaseDatetime', "bSortable": false,
                     render: function (data, type, row) {
@@ -172,22 +134,25 @@
                             return '-';
                         }
                     },
-                    'width': '44px'
+                    'width': '97px'
                 },
-                {data: 'title', "bSortable": false},
+                {data: 'title', "bSortable": false, width:'200px'},
                 {
-                    data: 'sourceCrawlDetail', "bSortable": false,
+                    data: 'sourceCrawl', "bSortable": false,
                     render: function (data, type, row) {
                         if (data != null && data != '') {
-                            if (data.website.displayName != null && data.website.displayName != '') {
-                                return data.website.displayName
+                            if (data!= null && data != '') {
+                                if(data.search('凤凰网') != -1){
+                                    return data.replace('_网页','APP_app');
+                                }
+                                return data;
                             }
                             return '-'
                         } else {
                             return '-'
                         }
                     },
-                    'width': '60px'
+                    'width': '126px'
                 },
                 {
                     data: 'sourceReport', "bSortable": false,
@@ -198,132 +163,107 @@
                             return '-'
                         }
                     },
-                    'width': '60px'
+                    'width': '126px'
                 },
-//		           {data: 'rankWeight', "bSortable": false,'width':'18px'},
                 {
-                    data: 'statEntity', "bSortable": false,
+                    data: 'relevantNewsNum', "bSortable": false,
                     render: function (data, type, row) {
                         if (data != null && data != '') {
-                            if (data.sameNum != null && data.sameNum != '') {
-                                return data.sameNum
-                            }
-                            return '-'
-                        } else {
-                            return '-'
-                        }
-                    },
-                    'width': '40px'
-                },
-                // { data: 'statEntity', "bSortable": false ,
-                //    render:function(data,type,row){
-                // 	   if(data != null && data != ''){
-                // 		   if(data.relevantNum != null && data.relevantNum != ''){
-                // 			   return data.relevantNum
-                // 		   }
-                // 		   return '-'
-                // 	   }else{
-                // 		   return '-'
-                // 	   }
-                //    },
-                //    'width':'43px'
-                // },
-                {
-                    data: 'sentiment', "bSortable": false,
-                    render: function (data, type, row) {
-                        if (data != null && data != '') {
-                            var negative = data.negative;
-                            return negative;
+
+                            return data;
                         } else {
                             return '-';
                         }
                     },
-                    'width': '28px'
+                    'width': '88px'
                 },
-                // { data: 'statEntity',"bSortable": false,
-                //    render:function(data,type,row){
-                // 	   if(data != null && data != ''){
-                // 		   if(data.browseNum != null && data.browseNum != ''){
-                // 			   return data.browseNum
-                // 		   }
-                // 		   return '-'
-                // 	   }else{
-                // 		   return '-'
-                // 	   }
-                //    },
-                //    'width':'55px'
-                // },
-                {data: 'webpageCode', "bSortable": false, 'width': '35px'}
+
+
+                {
+                    data: 'sentiment', "bSortable": false,
+                    render: function (data, type, row) {
+                        if (data != null && data != '') {
+                            var num = (data*100).toFixed(2);
+                            return num;
+                        } else {
+                            return '-';
+                        }
+                    },
+                    'width': '52px'
+                },
+
+                {data: 'webpageCode', "bSortable": false, 'width': '65px'}
             ],
 
             "aaSorting": [[0, ""]]
         });
 
         $('.dataConBoxTable').on('draw.dt', function () {
-            parame.splice(0, 1)
-            console.log(parame)
-            var key = "";
-            var iDisplayStart = -1;
-            for (var item in parame) {
-                key = key + parame[item].value
-                if (parame[item].name == "iDisplayStart") {
-                    iDisplayStart = parame[item].value
+            if( parame && parame.length > 0){
+                parame.splice(0, 1);
+                var key = "";
+                var iDisplayStart = -1;
+                for (var item in parame) {
+                    key = key + parame[item].value
+                    if (parame[item].name == "iDisplayStart") {
+                        iDisplayStart = parame[item].value
+                    }
                 }
-            }
-            if (iDisplayStart == 0 || iDisplayStart == "0") {
-                var lastNewsListId = localStorage.getItem(key);
-                if (lastNewsListId) {
-                    var index = -1;
-                    for (var i = 0; i < webpageCodes.length; i++) {
-                        if (webpageCodes[i] == lastNewsListId) {
-                            index = i;
+                if (iDisplayStart == 0 || iDisplayStart == "0") {
+                    var lastNewsListId = localStorage.getItem(key);
+                    if (lastNewsListId) {
+                        var index = -1;
+                        for (var i = 0; i < webpageCodes.length; i++) {
+                            if (webpageCodes[i] == lastNewsListId) {
+                                index = i;
+                            }
                         }
-                    }
-                    if (index == -1 && webpageCodes.length > 0) {
-                        index = '更新了' + webpageCodes.length + '+条数据';
-//                      showRefreshNum(index)
-                    } else if (index > 0) {
-                        index = '更新了' + index + '条数据';
-//                      showRefreshNum(index)
-                    }
+                        if (index == -1 && webpageCodes.length > 0) {
+                            index = '更新了' + webpageCodes.length + '+条数据';
+                            //                      showRefreshNum(index)
+                        } else if (index > 0) {
+                            index = '更新了' + index + '条数据';
+                            //                      showRefreshNum(index)
+                        }
 
+                    }
+                    if (webpageCodes && webpageCodes[0]) {
+                        localStorage.setItem(key, webpageCodes[0]);
+                    }
                 }
-                if (webpageCodes && webpageCodes[0]) {
-                    localStorage.setItem(key, webpageCodes[0]);
-                }
-            }
-            webpageCodes = [];
-            if ($('body').width() < 768) {
-                $('.dataConBoxTable').css({
-                    'width': '1000px'
-                });
-            }
-//			点击翻页页面自动移动到上方
-            $('.paginate_button').each(function () {
-                $(this).click(function () {
-                    $(this).scrollOffset({
-                        'scrollPos': 115
+                webpageCodes = [];
+                if ($('body').width() < 768) {
+                    $('.dataConBoxTable').css({
+                        'width': '1000px'
                     });
+                }
+                //			点击翻页页面自动移动到上方
+                $('.paginate_button').each(function () {
+                    $(this).click(function () {
+                        $(this).scrollOffset({
+                            'scrollPos': 115
+                        });
+                    })
                 })
-            })
+            }
         })
 
         return tableThread;
     };
-	
-	function showRefreshNum(num) {
-	    $("#refresh-dialog")[0].innerHTML = num;
-	    $("#refresh-dialog").show()
-	    var mousrFun = function () {
-	        setTimeout(function () {
-	            $("#refresh-dialog")[0].style.display = "none"
-	        }, 1000)
-	        document.removeEventListener("mousemove", mousrFun)
-	    }
-	    document.addEventListener("mousemove", mousrFun)
-	
-	}
-	
+
+    function showRefreshNum(num) {
+        $("#refresh-dialog")[0].innerHTML = num;
+        $("#refresh-dialog").show()
+        var mousrFun = function () {
+            setTimeout(function () {
+                $("#refresh-dialog")[0].style.display = "none"
+            }, 1000)
+            document.removeEventListener("mousemove", mousrFun)
+        }
+        document.addEventListener("mousemove", mousrFun)
+
+    }
+
     /**
      * Description：新闻库、新闻线索、为你推荐-线索、我的定制-线索中的缩略图
      */
@@ -380,7 +320,6 @@
             oLanguage: {
                 "sZeroRecords" : "没有可以显示的数据",
                 "sProcessing" : "正在获取数据，请稍后...",
-                "sInfoEmpty": "没有数据",
                 "sInfo" : totalCount
             },
             scrollX: scrollCon,
@@ -416,25 +355,28 @@
                 }
 
                 var linkUrl;
-                if (data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != '') {
-                    var mediaSta = data.statEntity.mediaStatus;
-                    mediaSta = mediaSta.substring(1, mediaSta.length - 1).split(',');
-                    for (var i = 0; mediaSta.length > i; i++) {
-                        if (mediaSta[i] == 6) {
-                            if (data.webpageUrl != null && data.webpageUrl != '') {
-                                linkUrl = data.webpageUrl
-                            } else {
-
-                            }
-                            break;
-                        } else if (mediaSta[i] == 5) {
-                            linkUrl = ''
-                        } else if (mediaSta[i] == 0) {
-                            linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode;
-                        }
-                    }
+                // if (data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != '') {
+                //     var mediaSta = data.statEntity.mediaStatus;
+                //     mediaSta = mediaSta.substring(1, mediaSta.length - 1).split(',');
+                //     for (var i = 0; mediaSta.length > i; i++) {
+                //         if (mediaSta[i] == 6) {
+                //             if (data.webpageUrl != null && data.webpageUrl != '') {
+                //                 linkUrl = data.webpageUrl
+                //             } else {
+                //
+                //             }
+                //             break;
+                //         } else if (mediaSta[i] == 5) {
+                //             linkUrl = ''
+                //         } else if (mediaSta[i] == 0) {
+                linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode;
+                //         }
+                //     }
+                // }
+                var dateTime = data.releaseDatetime;
+                if(dateTime != '' && dateTime != null){
+                    linkUrl = linkUrl + '/' + dateTime;
                 }
-
                 content += '<div class="media">';
                 if (data.picPath == null) {
                     content += '<a class="media-left" href="' + linkUrl + '" target="_blank"> <img src="' + context + '/frontEnd/image/home/defaultImg.png"  class="img-thumbnail defaultImgOrange" data-webpageCode="' + data.webpageCode + '" /></a>';
@@ -447,7 +389,7 @@
                 content += '<h6 class="media-heading titleRightClick"><a href="' + linkUrl + '" target="_blank" data-id="' + data.webpageCode + '">' + data.title + '</a></h6>';
                 content += '<p class="mediaConSummary">' + ajaxData.cusSummary + '</p>';
                 content += '<p class="mediaConBottom">';
-                content += '<em class="browseNum' + index + '">' + data.statEntity.browseNum + '</em> <span>浏览量</span> <i>|</i> <em>' + data.draftNum + '</em> <span>建稿量</span><i>|</i> <em>' + data.adoptNum + '</em> <span>采用量</span>';
+                content += '<em class="browseNum' + index + '"></em> <span>浏览量</span> <i>|</i> <em class="draftNum'+index+'"></em> <span>建稿量</span>';
                 content += '</p><p class="mediaConTag">';
 
                 if (data.newsType != null && data.newsType != '') {
@@ -482,14 +424,15 @@
                 content += '<li class="list-group-item"><a href="javascript:void">' + ajaxData.time + '</a> [发布时间]</li>';
                 content += '<li class="list-group-item"><a href="javascript:void">' + sourceReport + '</a> [发稿来源]</li>';
                 content += '<li class="list-group-item"><a href="javascript:void">' + sourceCrawl + '</a> [采集来源]</li>';
-                content += '<li class="list-group-item"><a href="javascript:void"><span class="sameNum' + index + '"></span></a> [相似新闻]</li>';
-                content += '<li class="list-group-item"><a href="javascript:void"><span class="relevantNum' + index + '"></span></a> [相关新闻]</li>';
+                content += '<li class="list-group-item"><a href="javascript:void"><span class="sameNum' + index + '">'+data.sameNewsNum+'</span></a> [相似新闻]</li>';
+                content += '<li class="list-group-item"><a href="javascript:void"><span class="relevantNum' + index + '">'+data.relevantNewsNum+'</span></a> [相关新闻]</li>';
                 content += '</ul><p class="mediaOperation" data-id="' + data.webpageCode + '">';
                 /*content += '<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a><a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a><a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-file-text-o"></i>建稿</a></p></div></div></div>';*/
-                content += '<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a><a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a></p></div></div></div>';
+                //content += '<a class="btn  btn-sm"><i class="fa fa-print"></i>打印</a><a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a></p></div></div></div>';
+                content += '<a class="btn  btn-sm" href="javascript:void(0)"><i class="fa fa-heart-o"></i>收藏</a></div></div></div>';
                 $('td:eq(1)', row).html(content);
 
-//			    	   首张图片
+                //首张图片
                 if (data.picPath != null && data.picPath != '' && data.picPath != undefined) {
                     getImgUrl(data.picPath, data.webpageCode);
                 }
@@ -573,7 +516,7 @@
             oLanguage: {
                 "sZeroRecords" : "没有可以显示的数据",
                 "sProcessing" : "正在获取数据，请稍后...",
-                "sInfoEmpty": "没有数据",
+
                 "sInfo" : totalCount
             },
             serverSide: true,//标示从服务器获取数据
@@ -619,25 +562,28 @@
                 }
 
                 var linkUrl;
-                if (data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != '') {
-                    var mediaSta = data.statEntity.mediaStatus;
-                    mediaSta = mediaSta.substring(1, mediaSta.length - 1).split(',');
-                    for (var i = 0; mediaSta.length > i; i++) {
-                        if (mediaSta[i] == 6) {
-                            if (data.webpageUrl != null && data.webpageUrl != '') {
-                                linkUrl = data.webpageUrl
-                            } else {
-
-                            }
-                            break;
-                        } else if (mediaSta[i] == 5) {
-                            linkUrl = ''
-                        } else if (mediaSta[i] == 0) {
+                // if (data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != '') {
+                //     var mediaSta = data.statEntity.mediaStatus;
+                //     mediaSta = mediaSta.substring(1, mediaSta.length - 1).split(',');
+                //     for (var i = 0; mediaSta.length > i; i++) {
+                //         if (mediaSta[i] == 6) {
+                //             if (data.webpageUrl != null && data.webpageUrl != '') {
+                //                 linkUrl = data.webpageUrl
+                //             } else {
+                //
+                //             }
+                //             break;
+                //         } else if (mediaSta[i] == 5) {
+                //             linkUrl = ''
+                //         } else if (mediaSta[i] == 0) {
                             linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode;
-                        }
-                    }
+                //         }
+                //     }
+                // }
+                var dateTime = data.releaseDatetime;
+                if(dateTime != '' && dateTime != null){
+                    linkUrl = linkUrl + '/' + dateTime;
                 }
-
                 if (data.picPath == null) {
                     content += '<div class="sudokuImg"><img class="defaultImgOrange" data-webpagecode="' + data.webpageCode + '" src="' + context + '/frontEnd/image/home/defaultImg.png"/></div>';
                 } else {

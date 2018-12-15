@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.recommend.dao.UserRecommendMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.recommend.model.UserRecommend">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="webpage_code" jdbcType="VARCHAR" property="webpageCode" />
+    <result column="release_datetime" jdbcType="TIMESTAMP" property="releaseDatetime" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="relevant_news" jdbcType="INTEGER" property="relevantNews" />
+    <result column="same_news" jdbcType="INTEGER" property="sameNews" />
+    <result column="sentiment" jdbcType="REAL" property="sentiment" />
+    <result column="source_crawl" jdbcType="VARCHAR" property="sourceCrawl" />
+    <result column="source_report" jdbcType="VARCHAR" property="sourceReport" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="is_clue" jdbcType="INTEGER" property="isClue" />
+    <result column="is_image" jdbcType="INTEGER" property="isImage" />
+    <result column="is_vedio" jdbcType="INTEGER" property="isVedio" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.recommend.model.UserRecommend">
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, webpage_code, release_datetime, time, relevant_news, same_news, sentiment, 
+    source_crawl, source_report, title, pic_path, user_id, is_clue, is_image, is_vedio
+  </sql>
+  <sql id="Blob_Column_List">
+    summary
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_recommend
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_recommend
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.recommend.model.UserRecommend">
+    insert into user_recommend (innerid, webpage_code, release_datetime, 
+      time, relevant_news, same_news, 
+      sentiment, source_crawl, source_report, 
+      title, pic_path, user_id, 
+      is_clue, is_image, is_vedio, 
+      summary)
+    values (#{innerid,jdbcType=INTEGER}, #{webpageCode,jdbcType=VARCHAR}, #{releaseDatetime,jdbcType=TIMESTAMP}, 
+      #{time,jdbcType=TIMESTAMP}, #{relevantNews,jdbcType=INTEGER}, #{sameNews,jdbcType=INTEGER}, 
+      #{sentiment,jdbcType=REAL}, #{sourceCrawl,jdbcType=VARCHAR}, #{sourceReport,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{isClue,jdbcType=INTEGER}, #{isImage,jdbcType=INTEGER}, #{isVedio,jdbcType=INTEGER}, 
+      #{summary,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.recommend.model.UserRecommend">
+    insert into user_recommend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="webpageCode != null">
+        webpage_code,
+      </if>
+      <if test="releaseDatetime != null">
+        release_datetime,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="relevantNews != null">
+        relevant_news,
+      </if>
+      <if test="sameNews != null">
+        same_news,
+      </if>
+      <if test="sentiment != null">
+        sentiment,
+      </if>
+      <if test="sourceCrawl != null">
+        source_crawl,
+      </if>
+      <if test="sourceReport != null">
+        source_report,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="picPath != null">
+        pic_path,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="isClue != null">
+        is_clue,
+      </if>
+      <if test="isImage != null">
+        is_image,
+      </if>
+      <if test="isVedio != null">
+        is_vedio,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="webpageCode != null">
+        #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDatetime != null">
+        #{releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="relevantNews != null">
+        #{relevantNews,jdbcType=INTEGER},
+      </if>
+      <if test="sameNews != null">
+        #{sameNews,jdbcType=INTEGER},
+      </if>
+      <if test="sentiment != null">
+        #{sentiment,jdbcType=REAL},
+      </if>
+      <if test="sourceCrawl != null">
+        #{sourceCrawl,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceReport != null">
+        #{sourceReport,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isClue != null">
+        #{isClue,jdbcType=INTEGER},
+      </if>
+      <if test="isImage != null">
+        #{isImage,jdbcType=INTEGER},
+      </if>
+      <if test="isVedio != null">
+        #{isVedio,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.recommend.model.UserRecommend">
+    update user_recommend
+    <set>
+      <if test="webpageCode != null">
+        webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDatetime != null">
+        release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="relevantNews != null">
+        relevant_news = #{relevantNews,jdbcType=INTEGER},
+      </if>
+      <if test="sameNews != null">
+        same_news = #{sameNews,jdbcType=INTEGER},
+      </if>
+      <if test="sentiment != null">
+        sentiment = #{sentiment,jdbcType=REAL},
+      </if>
+      <if test="sourceCrawl != null">
+        source_crawl = #{sourceCrawl,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceReport != null">
+        source_report = #{sourceReport,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        pic_path = #{picPath,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isClue != null">
+        is_clue = #{isClue,jdbcType=INTEGER},
+      </if>
+      <if test="isImage != null">
+        is_image = #{isImage,jdbcType=INTEGER},
+      </if>
+      <if test="isVedio != null">
+        is_vedio = #{isVedio,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.recommend.model.UserRecommend">
+    update user_recommend
+    set webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=TIMESTAMP},
+      relevant_news = #{relevantNews,jdbcType=INTEGER},
+      same_news = #{sameNews,jdbcType=INTEGER},
+      sentiment = #{sentiment,jdbcType=REAL},
+      source_crawl = #{sourceCrawl,jdbcType=VARCHAR},
+      source_report = #{sourceReport,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      is_clue = #{isClue,jdbcType=INTEGER},
+      is_image = #{isImage,jdbcType=INTEGER},
+      is_vedio = #{isVedio,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.recommend.model.UserRecommend">
+    update user_recommend
+    set webpage_code = #{webpageCode,jdbcType=VARCHAR},
+      release_datetime = #{releaseDatetime,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=TIMESTAMP},
+      relevant_news = #{relevantNews,jdbcType=INTEGER},
+      same_news = #{sameNews,jdbcType=INTEGER},
+      sentiment = #{sentiment,jdbcType=REAL},
+      source_crawl = #{sourceCrawl,jdbcType=VARCHAR},
+      source_report = #{sourceReport,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      is_clue = #{isClue,jdbcType=INTEGER},
+      is_image = #{isImage,jdbcType=INTEGER},
+      is_vedio = #{isVedio,jdbcType=INTEGER}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

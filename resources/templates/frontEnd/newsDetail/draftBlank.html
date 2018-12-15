@@ -18,9 +18,10 @@
 	<object style="display:none;" th:include="frontEnd/common/common_js :: common_js"></object>
 	<script>
 		$(function(){
-        var webpageCode = $(" #webpageCode ").val();
+			var webpageCode = $(" #webpageCode ").val();
+			var releaseDatetime = $(" #releaseDatetime ").val();
 		$.ajax({
-			url : ctx + "/latest/front/draft/release?webpageCode="+webpageCode,//这个就是请求地址对应sAjaxSource
+			url : ctx + "/latest/front/draft/release?webpageCode="+webpageCode+'&releaseDatetime='+releaseDatetime,//这个就是请求地址对应sAjaxSource
 			type : 'get',
 			dataType : 'json',
 			success : function(data) {
@@ -78,6 +79,7 @@
 </head>
 <body >
 	<input id="webpageCode" type="hidden" th:value="${webpageCode}"/>
+	<input id="releaseDatetime" type="hidden" th:value="${releaseDatetime}"/>
 </body>
 <script>
 	

@@ -70,6 +70,7 @@
 .rankListConBox .thumbnail{
 	margin-bottom: 5px;
 	border:0px;
+	height: 127px;
 }
 .rankListConBox .thumbnail:hover{
 	box-shadow: 1px 2px 8px #ccc; 
@@ -137,6 +138,7 @@
 .rankListCon .captionCon .list-group-style{
 	background: #fff;
 	padding:6px 8px;
+	height: 72px;
 }
 .rankListCon .captionCon .list-group-style a{
 	font-size: 13px;

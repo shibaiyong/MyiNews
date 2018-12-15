@@ -12,7 +12,7 @@ $(function(){
 			});
 		}
 	})
-	
+	$('.table-operation').hide();
 	/*鼠标划入悬停提示*/
 	$('[data-toggle="popover"]').popover();
 	

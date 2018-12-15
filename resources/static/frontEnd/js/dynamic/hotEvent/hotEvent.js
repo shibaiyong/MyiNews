@@ -1,7 +1,7 @@
 var table1;
 var table2;
-var table3;
-var table4;
+// var table3;
+// var table4;
 EnterPress();
 $(function(){
 
@@ -21,7 +21,7 @@ $(function(){
 		scrollCon = true;
 		pagingTypeCon = "simple";
 	}
-	   /*事件查询-日期点击*/
+	   /*事件查询-日期点击 这段代码被隐藏了*/
     table1 = $('.searchesTable').DataTable({
     	scrollX: scrollCon,
     	serverSide: true,//标示从服务器获取数据
@@ -125,15 +125,30 @@ $(function(){
       		iDisplayLength : iDisplayLengthCon,
       		fnServerParams : function ( aoData ) {},
               "rowCallback" : function(row, data, index) {
-            	var content = '<div class="hotEventConListBox"><h6 class="hotEventConListTit">'
+
+    		    var btnCon ='马上跟踪';
+    		    var status = getFlag( data.eventCode );
+    		    if( status == 1 ){
+                    btnCon = '已跟踪';
+                }else{
+                    btnCon ='马上跟踪';
+                }
+
+    			var content = '<div class="hotEventConListBox">'
+                    	+'<h6 class="hotEventConListTit">'
             		     + '<a href="javascript:loadEventDetail(\''+data.eventCode+'\');" class="beyondEllipsis">'+data.eventName+'</a>'
-						 + '</h6><div  class="thumbnail"><a href="javascript:loadEventDetail(\''+data.eventCode+'\');"><img data-eventCode="'+data.eventCode+'" class="defaultImg"  alt="" src="'+context+'/frontEnd/image/home/default-gray.png"  /></a>'
-						 + '</div><p class="hotEventConListTime">'+new Date(data.occurDatetime).formatDate('yyyy-MM-dd hh:mm')+'</p>'
-						 + '<p class="sudokuSummary clearfix"><a href="javascript:loadEventDetail(\''+data.eventCode+'\');"><span>[摘要]&nbsp;</span>'+data.description+'</a></p></div>'
+						 + '</h6>'
+                    	+'<p class="hotEventConListTime">'+new Date(data.occurDatetime).formatDate('yyyy-MM-dd hh:mm')+'</p>'
+						+'<div  class="thumbnail">'
+						+'<a href="javascript:loadEventDetail(\''+data.eventCode+'\');"><img data-eventCode="'+data.eventCode+'" class="defaultImg imgSize"  alt="" src="'+data.picPath+'"  /></a>'
+						 + '</div>'
+						 + '<p class="sudokuSummary clearfix"><a href="javascript:loadEventDetail(\''+data.eventCode+'\');"><span>[摘要]&nbsp;</span>'+data.description+'</a></p>'
+						+ '<button class="btn eventTrack" data-eventcode="'+data.eventCode+'"><img src="'+context+'/frontEnd/image/hotEventDetail/follow.png"><span>'+btnCon+'</span></button>'
+						+'</div>'
               	$('td:eq(0)', row).html(content);
             	$(row).addClass('col-md-3 col-sm-6');
-            	
-            	getImgUrl(data.picPath,data.eventCode);
+
+            	// getImgUrl(data.picPath,data.eventCode);
             	
               },
               columns: [//显示的列
@@ -167,15 +182,29 @@ $(function(){
   		iDisplayLength : iDisplayLengthCon,
   		fnServerParams : function ( aoData ) {},
           "rowCallback" : function(row, data, index) {
-        	var content = '<div class="hotEventConListBox"><h6 class="hotEventConListTit">'
+
+              var btnCon ='马上跟踪';
+              var status = getFlag( data.eventCode );
+              if( status == 1 ){
+                  btnCon = '已跟踪';
+              }else{
+                  btnCon ='马上跟踪';
+              }
+        	var content = '<div class="hotEventConListBox">'
+                	+'<h6 class="hotEventConListTit">'
         		     + '<a href="javascript:loadEventDetail(\''+data.eventCode+'\')" class="beyondEllipsis">'+data.eventName+'</a>'
-					 + '</h6><div  class="thumbnail"><a href="javascript:loadEventDetail(\''+data.eventCode+'\')"><img data-eventCode="'+data.eventCode+'" class="defaultImg"  alt="" src="'+context+'/frontEnd/image/home/default-gray.png"   /></a>'
-					 + '</div><p class="hotEventConListTime">'+new Date(data.occurDatetime).formatDate('yyyy-MM-dd hh:mm')+'</p>'
-					 + '<p class="sudokuSummary clearfix"><a href="javascript:loadEventDetail(\''+data.eventCode+'\')"><span>[摘要]&nbsp;</span>'+data.description+'</a></p></div>'
+					 + '</h6>'
+					+ '<p class="hotEventConListTime">'+new Date(data.occurDatetime).formatDate('yyyy-MM-dd hh:mm')+'</p>'
+                	+'<div  class="thumbnail">'
+                	+'<a href="javascript:loadEventDetail(\''+data.eventCode+'\')"><img data-eventCode="'+data.eventCode+'" class="defaultImg imgSize"  alt="" src="'+data.picPath+'"   /></a>'
+					 + '</div>'
+					 + '<p class="sudokuSummary clearfix"><a href="javascript:loadEventDetail(\''+data.eventCode+'\')"><span>[摘要]&nbsp;</span>'+data.description+'</a></p>'
+                	+ '<button class="btn eventTrack" data-eventcode="'+data.eventCode+'"><img src="'+context+'/frontEnd/image/hotEventDetail/follow.png"><span>'+btnCon+'</span></button>'
+					+'</div>'
           	$('td:eq(0)', row).html(content);
         	$(row).addClass('col-md-3 col-sm-6');
         	
-        	getImgUrl(data.picPath,data.eventCode);
+        	// getImgUrl(data.picPath,data.eventCode);
           },
           columns: [//显示的列
                     { data: 'innerid', "bSortable": false},
@@ -187,43 +216,7 @@ $(function(){
               "defaultContent": "-"
           } ]
    });
-    
 
-    /*历史同期事件*/
-    table4 = $('.historyPeriodTable').DataTable({
-    	"dom":  "<'row'<'col-sm-12'tr>><'row hotEventTablePagination'p>",
-    	oLanguage:{
-    		"oPaginate" : {
-    			"sPrevious" : "<i class='fa fa-fw fa-angle-left fa-5x'></i>",
-        		"sNext" : "<i class='fa fa-fw fa-angle-right fa-5x'></i>",
-        	}
-    	},
-        sPaginationType:sPaginationTypeCon,
-        serverSide: true,//标示从服务器获取数据
-      	sAjaxSource : ctx+'/event/front/pageHistoryEvent',//服务器请求
-      	fnServerData : retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
-  		iDisplayLength : iDisplayLengthCon,
-  		fnServerParams : function ( aoData ) {},
-          "rowCallback" : function(row, data, index) {
-        	var content = '<div class="hotEventConListBox"><h6 class="hotEventConListTit">'
-        		     + '<a href="javascript:loadEventDetail(\''+data.eventCode+'\')" class="beyondEllipsis">'+data.eventName+'</a>'
-					 + '</h6><div  class="thumbnail"><a href="javascript:loadEventDetail(\''+data.eventCode+'\')"><img data-eventCode="'+data.eventCode+'" class="defaultImg"  alt="" src="'+context+'/frontEnd/image/home/default-gray.png"   /></a>'
-					 + '</div><p class="hotEventConListTime">'+new Date(data.occurDatetime).formatDate('yyyy-MM-dd hh:mm')+'</p>'
-					 + '<p class="sudokuSummary clearfix"><a href="javascript:loadEventDetail(\''+data.eventCode+'\')"><span>[摘要]&nbsp;</span>'+data.description+'</a></p></div>'
-          	$('td:eq(0)', row).html(content);
-        	$(row).addClass('col-md-3 col-sm-6');
-        	getImgUrl(data.picPath,data.eventCode);
-          },
-          columns: [//显示的列
-                    { data: 'innerid', "bSortable": false},
-                ],
-        	"aaSorting": [[0, ""]],
-        	"columnDefs": [ {
-              "targets": [ '_all' ],
-              "data": null,
-              "defaultContent": "-"
-          } ]
-   });
     $('.searchesTable').on('draw.dt',function() {
     	$('.paginate_button').click(function(){
     		scrollOffset($(".searchesTable").offset());
@@ -231,10 +224,12 @@ $(function(){
       footerPutBottom();
     });
    $('.hotEventTable').on('draw.dt',function() {
-	   $(this).find($('.sudokuSummary')).each(function(){
-       	if($(this).height()>155){
+
+   		//最新专题生成省略号
+       $(this).find($('.sudokuSummary')).each(function(){
+       	if($(this).height()>66){
    			$(this).css({
-   				'height':'155px'
+   				'height':'66px'
    			});
    			$(this).each(function(){
    				$(this).dotdotdot({
@@ -243,42 +238,48 @@ $(function(){
    			});
    		}else{
    			$(this).css({
-   				'height':'155px'
+   				'height':'66px'
    			});
    		}
        });
 	   $('.hotEventCon').mouseenter(function(){
-			  $(this).find('.pagination').fadeIn();
-			  return false;
-		  });
-		  $('.hotEventCon').mouseleave(function(){
-			  $(this).find('.pagination').fadeOut();
-			  return false;
-		  });
-	   $('.hotEventTable').judgeImgLoadError(context+'/frontEnd/image/home/defaultImg.png');
+		  $(this).find('.pagination').fadeIn();
+		  return false;
+	   });
+	   $('.hotEventCon').mouseleave(function(){
+		  $(this).find('.pagination').fadeOut();
+		  return false;
+	   });
+		//将显示错误或者其他什么图片替换成默认图片
+	   $('.hotEventTable .thumbnail').judgeImgLoadError(context+'/frontEnd/image/home/defaultImg.png');
+
 	   $('.hotEventTable tbody').find('tr').each(function(){
 		   
 		   if($(this).attr('role')==undefined){
 			   $('.hotEventCon').find('.pagination').remove();
 		   }
 	   });
+
    });
+
    $('.historyFollowTable').on('draw.dt',function() {
-	   $(this).find($('.sudokuSummary')).each(function(){
-       	if($(this).height()>155){
-   			$(this).css({
-   				'height':'155px'
-   			});
-   			$(this).each(function(){
-   				$(this).dotdotdot({
-   					wrap: 'letter'
-   				});
-   			});
-   		}else{
-   			$(this).css({
-   				'height':'155px'
-   			});
-   		}
+
+   	   //历史追踪省略号
+       $(this).find($('.sudokuSummary')).each(function(){
+           if($(this).height()>66){
+               $(this).css({
+                   'height':'66px'
+               });
+               $(this).each(function(){
+                   $(this).dotdotdot({
+                       wrap: 'letter'
+                   });
+               });
+           }else{
+               $(this).css({
+                   'height':'66px'
+               });
+           }
        });
 	   $('.historyFollowCon').mouseenter(function(){
 			  $(this).find('.pagination').fadeIn();
@@ -288,47 +289,114 @@ $(function(){
 			  $(this).find('.pagination').fadeOut();
 			  return false;
 		  });
-	   $('.historyFollowTable').judgeImgLoadError(context+'/frontEnd/image/home/defaultImg.png');
+	   $('.historyFollowTable .thumbnail').judgeImgLoadError(context+'/frontEnd/image/home/defaultImg.png');
 	   $('.historyFollowTable tbody').find('tr').each(function(){
 		   
 		   if($(this).attr('role')==undefined){
 			   $('.historyFollowCon').find('.pagination').remove();
 		   }
 	   });
+
+
    });
-   $('.historyPeriodTable').on('draw.dt',function() {
-	   $(this).find($('.sudokuSummary')).each(function(){
-       	if($(this).height()>155){
-   			$(this).css({
-   				'height':'155px'
-   			});
-   			$(this).each(function(){
-   				$(this).dotdotdot({
-   					wrap: 'letter'
-   				});
-   			});
-   		}else{
-   			$(this).css({
-   				'height':'155px'
-   			});
-   		}
-       });
-	   $('.historyPeriodCon').mouseenter(function(){
-			  $(this).find('.pagination').fadeIn();
-			  return false;
-		  });
-		  $('.historyPeriodCon').mouseleave(function(){
-			  $(this).find('.pagination').fadeOut();
-			  return false;
-		  });
-	   $('.historyPeriodTable').judgeImgLoadError(context+'/frontEnd/image/home/defaultImg.png');
-	   $('.historyPeriodTable tbody').find('tr').each(function(){
-		   
-		   if($(this).attr('role')==undefined){
-			   $('.historyPeriodCon').find('.pagination').remove();
-		   }
-	   });
-   });
+
+   //获取判断是否跟踪的标识
+    function getFlag( eventCode ){
+        var status = 0;
+        $.ajax({
+            url: ctx + "/hotEvent/track",
+            data: {eventCode: eventCode},
+            type: 'get',
+            dataType: 'json',
+            async:false,
+            success: function (res) {
+                if( res.result ){
+                    status = res.resultObj.status
+                }
+            }
+        })
+        return status;
+    }
+
+    //历史跟踪添加追踪逻辑和最新专题添加追踪逻辑
+
+    $(document).on('click','.eventTrack',function(){
+        $('.loading-zhe').show();
+    	var $this = $(this);
+    	var text = $this.find('span').text();
+        var eventCode = $(this).attr('data-eventcode');
+        if(text == '马上跟踪'){
+            $.ajax({
+                url : ctx +"/hotEvent/clickTrack",
+                data: {eventCode:eventCode},
+                type : 'get',
+                dataType : 'json',
+                success : function(res) {
+                    console.log(res);
+                    if(res.resultObj.code == '200'){
+                        $('.loading-zhe').hide();
+                        $this.find('span').text('已追踪');
+                    }else if(res.resultObj.code == 501){
+                        $('.loading-zhe').hide();
+                        $().toastmessage('showToast', {
+                            text: '最多跟踪9 个热⻔事件',
+                            sticky: false,
+                            position : 'top-center',
+                            type: 'error'
+                        });
+                    }else{
+                        $('.loading-zhe').hide();
+                        $().toastmessage('showToast', {
+                            text: '跟踪失败，请稍后再试',
+                            sticky: false,
+                            position : 'top-center',
+                            type: 'error'
+                        });
+                    }
+                },
+                error:function(){
+                    $('.loading-zhe').hide();
+                    $().toastmessage('showToast', {
+                        text: '跟踪失败，请稍后再试',
+                        sticky: false,
+                        position : 'top-center',
+                        type: 'error'
+                    });
+                }
+            })
+        }else{
+            $.ajax({
+                url : ctx +"/hotEvent/cancelTrack",
+                data: {eventCode:eventCode},
+                type : 'get',
+                dataType : 'json',
+                success : function(res) {
+                    if(res.result){
+                        $('.loading-zhe').hide();
+                        $this.find('span').text('马上跟踪');
+                    }else{
+                        $('.loading-zhe').hide();
+                        $().toastmessage('showToast', {
+                            text: '取消跟踪失败，请稍后再试',
+                            sticky: false,
+                            position : 'top-center',
+                            type: 'error'
+                        });
+                    }
+                },
+                error:function(){
+                    $('.loading-zhe').hide();
+                    $().toastmessage('showToast', {
+                        text: '取消跟踪失败，请稍后再试',
+                        sticky: false,
+                        position : 'top-center',
+                        type: 'error'
+                    });
+                }
+            })
+        }
+
+    })
    
    $('.customAddInput').limit_input_length();
    
@@ -412,7 +480,9 @@ function getImgUrl(imageUrl,code){
 	
 	$.ajax({
         url : inewsImageManager+imageUrl+'&width=320&height=180',//这个就是请求地址对应sAjaxSource
-        data:{'code':code},
+        data:{
+        	'code':code
+		},
         type : 'get',
         dataType : 'json',
         async : true,

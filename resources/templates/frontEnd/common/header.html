@@ -11,7 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="../../../static/common/plugins/smarticker/css/jquery.smarticker.css" th:href="@{/common/plugins/smarticker/css/jquery.smarticker.css}" />
 	<!-- Header Css -->
 	<link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/common/header.css" th:href="@{/frontEnd/css/common/header.css}" />
-	
+	<!-- 全局ajax请求拦截器-->
+	<script type="text/javascript" src="../../../static/frontEnd/js/dynamic/common/interceptAjax.js" th:src="@{/frontEnd/js/dynamic/common/interceptAjax.js}"></script>
+
 	<!-- smarticker Js -->
 	<script type="text/javascript" src="../../../static/common/plugins/smarticker/js/smarticker.js" th:src="@{/common/plugins/smarticker/js/smarticker.js}"></script>
 	<!-- Self Js -->
@@ -34,6 +36,61 @@
 		.rotateLong{
 			animation:mymove 3s linear infinite;
 		}
+		.redirect{
+			float: right;
+			position: relative;
+            height: 50px;
+		}
+        .redirect:hover .imgcontainer{
+            display: block;
+        }
+        .redirect:hover .rowJ{
+            display: block;
+        }
+		.redirect a{
+			display: block;
+			margin-top:19px;
+            font-size: 14px;
+			line-height: normal;
+			font-weight:bold;
+			color:#333;
+		}
+		.imgcontainer{
+			width: 150px;
+			height: 38px;
+			position: absolute;
+			left:50%;
+			top:50px;
+			margin-left: -90px;
+			background: white;
+			text-align: center;
+			padding:10px 15px;
+			border-radius: 5px;
+			box-shadow: 2px 2px 4px 2px #E2E3E4;
+			z-index: 9999;
+			box-sizing: content-box;
+            display: none;
+		}
+		.redirect .imgcontainer img{
+			display: block;
+			height:38px;
+			cursor: pointer;
+		}
+
+		.rowJ{
+			position: absolute;
+			left:50%;
+			top:44px;
+			margin-left: -12px;
+			width: 0px;
+			height: 0px;
+            transform: rotateZ(-45deg);
+			border:12px solid white;
+            /*border-color: transparent transparent white;*/
+            box-shadow: 2px 2px 4px 2px #E2E3E4;
+            border-radius: 3px;
+            display: none;
+		}
 	</style>
 </head>
 
@@ -42,6 +99,14 @@
 	<!--<input type="hidden" id="isNew" th:value="${isNew}"/>-->
 	<!--<input type="hidden" id="isNew" th:value="${session.isNew}"/>-->
 	<!--<input type="hidden" id="isNew" value="hshshshhs"/>-->
+
+	<form name='paySubmit' id="sub" method='post'  action='http://mon.inewsengine.com/imonitor/v1/api/inews/token/check'>
+		<input type='hidden' name='token' value=''/>
+		<input type='hidden' name='signature' value=''/>
+		<input type='hidden' name='account' value=''/>
+	</form>
+
+
 	<header> 
 		<div class="header-top-box ">
 			<div class="header-top container">
@@ -123,7 +188,15 @@
 					</div>
 					<div class="more">更多>></div>
 				</div>
-				
+
+				<div class="redirect">
+					<a href="javascript:;" id="redirectContent" data-toggle="popover" data-placement="bottom">更多产品</a>
+					<div class="rowJ"></div>
+					<div class="imgcontainer">
+						<img src="../../../static/frontEnd/image/logo/redirectLogo.png" th:src="@{/frontEnd/image/logo/redirectLogo.png}" />
+					</div>
+				</div>
+
 	   	    </div>
 	   	</div>
     	<nav id="inews_nav"  class="navbar navbar-default" role="navigation">
@@ -197,7 +270,7 @@
 				<img src="../../../static/frontEnd/image/backTop/weixin.jpg" th:src="@{/frontEnd/image/backTop/weixin.jpg}"  width="344" height="344" />
 			</div>
 		</div>
-	    <a href="javascript:void(0)" target="_blank" class="feedback"></a>
+	    <!--<a href="javascript:void(0)" target="_blank" class="feedback"></a>-->
 	    <a href="javascript:void(0)" class="go"></a>
 	</div>
 </body>

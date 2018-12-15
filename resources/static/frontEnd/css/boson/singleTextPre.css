@@ -469,6 +469,11 @@ ul.horizontal-nav li .icon {
 	background-color: #50c6fb
 }
 
+#demo-page .col-xs-9 .chunk .word-mean .ni, #demo-page .col-xs-9 .chunk .words .ni
+	{
+	background-color: #40c689
+}
+
 #demo-page .col-xs-9 .chunk .word-mean .ns, #demo-page .col-xs-9 .chunk .words .ns
 	{
 	background-color: #d07f7f

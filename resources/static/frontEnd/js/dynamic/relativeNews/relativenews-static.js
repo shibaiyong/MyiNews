@@ -9,7 +9,7 @@ $(function(){
 	var relativeTableAjaxUrl;
 //	根据跳转的类型，进入不同的查询路径：1 相关   2 相似
 	if(type == 1){
-		relativeTableAjaxUrl = ctx+'/latest/front/page/revelant/news';
+		relativeTableAjaxUrl = ctx+'/latest/front/page/relation/news';
 		$('.header-vimeo h2').html('相关新闻列表');
 		$(document).attr("title",'iNews-相关新闻列表');
 	}else{
@@ -17,7 +17,7 @@ $(function(){
 		$('.header-vimeo h2').html('相似新闻列表');
 		$(document).attr("title",'iNews-相似新闻列表');
 	}
-	
+
 //	全选功能
 	$('.table-operation-status').find('a').eq(0).allCheck({
 		'allFun':function(status){
@@ -114,9 +114,12 @@ $(function(){
        fnServerParams : function ( aoData ) {
     	   
     	   var webpageCode = $('.webpageCode').val();
-    	   
+           var releaseDateTime = $('.releaseDateTime').val();
+           var type = $('.type').val();
     	   aoData.push(
-        		{"name":"webpageCode","value":webpageCode}
+        		{"name":"webpageCode","value":webpageCode},
+               {"name":"releaseDateTime","value":releaseDateTime},
+			   {"name":"type","value":type}
         	);
        },
        
@@ -128,35 +131,35 @@ $(function(){
     	   
     	   //摘要,长度超过150截取
     	   var summary = '';
-	       if(null != data.cusSummary){
-	    	   if(data.cusSummary.length>150){
-	    		   summary = data.cusSummary.substr(0,150)+'...';
+	       if(null != data.summary){
+	    	   if(data.summary.length>150){
+	    		   summary = data.summary.substr(0,150)+'...';
 		       }else{
-		           summary = data.cusSummary;
+		           summary = data.summary;
 		       }
 	       	}else{
 	       		summary = '暂无摘要';
 	       	}
     	   
     	   //title
-    	   var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="right" data-content="'+summary+'">'+data.title+'</a>'
+    	   var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="right" data-content="'+summary+'">'+data.title+'</a>'
     	   $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
     	   
 //    	   相似相关、浏览量
-    	   var sameNum = '(<span class="sameNum'+index+'"></span>)';
-    	   var relevantNum = '(<span class="relevantNum'+index+'"></span>)';
-    	   var browseNum = '<span class="browseNum'+index+'"></span>';
-    	   $('td:eq(5)', row).html(sameNum);
-    	   $('td:eq(6)', row).html(relevantNum);
-    	   $('td:eq(8)', row).html(browseNum);
+//     	   var sameNum = '(<span class="sameNum'+index+'"></span>)';
+//     	   var relevantNum = '(<span class="relevantNum'+index+'"></span>)';
+//     	   var browseNum = '<span class="browseNum'+index+'"></span>';
+//     	   $('td:eq(5)', row).html(sameNum);
+//     	   $('td:eq(6)', row).html(relevantNum);
+//     	   $('td:eq(8)', row).html(browseNum);
     	   
-    	   var negativeCon = '<span class="negativeNum'+index+'"></span>';
-    	   $('td:eq(7)', row).addClass(negativeCon);
+    	   // var negativeCon = '<span class="negativeNum'+index+'"></span>';
+    	   // $('td:eq(7)', row).addClass(negativeCon);
     	   
     	   //操作
     	   var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span> <span><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></span>';
  //   	   var operationCon = '<span><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span> ';
-    	   $('td:eq(9)', row).html(operationCon).addClass('inewsOperation').attr('data-id',data.webpageCode);
+    	   $('td:eq(7)', row).html(operationCon).addClass('inewsOperation').attr('data-id',data.webpageCode);
     	   
        },
        
@@ -186,18 +189,18 @@ $(function(){
                }
            },
            { data: 'title', "bSortable": false},
-           { data: 'newsType', "bSortable": false,
-        	   render:function(data,type,row){
-        		   if(data[0] != null && data[0] != ''){
-        			   if(data[0].label != null && data[0].label != ''){
-        				   return data[0].label.name;
-        			   }
-        		   }else{
-        			   return '新闻'
-        		   }
-        	   }
-           },
-           { data: 'sourceReport', "bSortable": false,
+           // { data: 'newsType', "bSortable": false,
+        	//    render:function(data,type,row){
+        	// 	   if(data[0] != null && data[0] != ''){
+        	// 		   if(data[0].label != null && data[0].label != ''){
+        	// 			   return data[0].label.name;
+        	// 		   }
+        	// 	   }else{
+        	// 		   return '新闻'
+        	// 	   }
+        	//    }
+           // },
+           { data: 'sourceCrawl', "bSortable": false,
         	   render:function(data,type,row){
         		   if(data != null && data != ''){
         			   return data;
@@ -206,53 +209,47 @@ $(function(){
         		   }
         	   }
            },
-           { data: 'statEntity', "bSortable": false ,
+           { data: 'sameNewsNum', "bSortable": false ,
         	   render:function(data,type,row){
-        		   if(data != null && data != ''){
-        			   if(data.sameNum != null && data.sameNum != ''){
-        				   return data.sameNum
-        			   }
-        			   return '-'
+        		   if(data != null && data != '' && data != '0'){
+        		   		return data
         		   }else{
-        			   return '-'
+        			   return '0'
         		   }
         	   }
            },
-           { data: 'statEntity', "bSortable": false ,
+           { data: 'releventNewsNum', "bSortable": false ,
         	   render:function(data,type,row){
-        		   if(data != null && data != ''){
-        			   if(data.relevantNum != null && data.relevantNum != ''){
-        				   return data.relevantNum
-        			   }
-        			   return '-'
+        		   if(data != null && data != '' && data != '0'){
+        		   		return data
         		   }else{
-        			   return '-'
+        			   return '0'
         		   }
         	   }
            },
            { data: 'sentiment', "bSortable": false,
         	   render:function(data,type,row){
         		   if(data != null && data != ''){
-        			   var negative = data.negative * 100 + '&';
-        			   return negative;
+        			   var sentiment = parseInt(data * 10000)/100;
+        			   return sentiment;
         		   }else{
         			   return '-';
         		   }
         	   }
            },
-           { data: 'statEntity',"bSortable": false,
-        	   render:function(data,type,row){
-        		   if(data != null && data != ''){
-        			   if(data.browseNum != null && data.browseNum != ''){
-        				   return data.browseNum
-        			   }
-        			   return '-'
-        		   }else{
-        			   return '-'
-        		   }
-        	   }
-           },
-           { data: 'webpageCode',"bSortable": false}
+           // { data: 'statEntity',"bSortable": false,
+        	//    render:function(data,type,row){
+        	// 	   if(data != null && data != ''){
+        	// 		   if(data.browseNum != null && data.browseNum != ''){
+        	// 			   return data.browseNum
+        	// 		   }
+        	// 		   return '-'
+        	// 	   }else{
+        	// 		   return '-'
+        	// 	   }
+        	//    }
+           // },
+           { data: null,"bSortable": false}
        ],
        
        "aaSorting": [[0, ""]],
@@ -293,69 +290,71 @@ $(function(){
 		
 		var textArr = relativeTable.column(3).nodes().data();
 		tableItemWebPageCodeArr =[];
+		var releaseDateTimeArr = [];
 		if(textArr.length > 0){
 			var textArrCon =[];
 			for(var count = 0;textArr.length>count;count++){
 				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+				releaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
 			
 			//相似
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getSameNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.searchesTable tbody').find('[class*="sameNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getSameNewsNum',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		$('.searchesTable tbody').find('[class*="sameNum"]').each(function(index){
+			// 			$(this).text(data[index]);
+			// 		})
+			// 	}
+			// });
 			
 //			相关
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.searchesTable tbody').find('[class*="relevantNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.searchesTable tbody').find('[class*="relevantNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
 //			负面指数
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getsentimentindex',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					console.log(data);
-					$('.searchesTable tbody').find('[class*="negativeNum"]').each(function(index){
-						if(data[index].negative != null && data[index].negative != ''){
-							var colorStyle = ''
-							if(data[index].negative > 60){
-								colorStyle = 'red'
-							}else if(data[index].negative > 40){
-								colorStyle = 'gray'
-							}else{
-								colorStyle = 'green'
-							}
-							
-							$(this).text(data[index].negative+'%');
-							$(this).addClass(colorStyle);
-						}else{
-							$(this).text('-');
-						}
-						
-					})
-				}
-			});
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getsentimentindex',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					console.log(data);
+// 					$('.searchesTable tbody').find('[class*="negativeNum"]').each(function(index){
+// 						if(data[index].negative != null && data[index].negative != ''){
+// 							var colorStyle = ''
+// 							if(data[index].negative > 60){
+// 								colorStyle = 'red'
+// 							}else if(data[index].negative > 40){
+// 								colorStyle = 'gray'
+// 							}else{
+// 								colorStyle = 'green'
+// 							}
+//
+// 							$(this).text(data[index].negative+'%');
+// 							$(this).addClass(colorStyle);
+// 						}else{
+// 							$(this).text('-');
+// 						}
+//
+// 					})
+// 				}
+// 			});
 //		浏览量
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getBrowseNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.searchesTable tbody').find('[class*="browseNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getBrowseNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.searchesTable tbody').find('[class*="browseNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
 			
 //			操作-收藏
 			$().adraticAjaxData({
@@ -376,6 +375,7 @@ $(function(){
 			$('.inewsOperation').each(function(index){
 				$(this).find('span').eq(1).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.find('i').addClass('hide');
         				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
@@ -451,22 +451,22 @@ $(function(){
 	
 	var webpageCode = $('.webpageCode').val();
 //	相关关键词的获取
-	$.ajax({
-        url : ctx+'/latest/front/getrelevantkeywords',//这个就是请求地址对应sAjaxSource
-        data:{'webpageCode':webpageCode},
-        type : 'get',
-        dataType : 'json',
-        async : true,
-        success : function(data) {
-        	console.log(data);
-        	if(data.result == true){
-        		var obj = data.resultObj;
-        		var content = '';
-        		for(var i = 0;obj.length>i;i++){
-        			content +='<span>'+obj[i]+'</span> ';
-        		}
-        		$('.guanjianci').append(content);
-        	}
-        }
-	})
+// 	$.ajax({
+//         url : ctx+'/latest/front/getrelevantkeywords',//这个就是请求地址对应sAjaxSource
+//         data:{'webpageCode':webpageCode},
+//         type : 'get',
+//         dataType : 'json',
+//         async : true,
+//         success : function(data) {
+//         	console.log(data);
+//         	if(data.result == true){
+//         		var obj = data.resultObj;
+//         		var content = '';
+//         		for(var i = 0;obj.length>i;i++){
+//         			content +='<span>'+obj[i]+'</span> ';
+//         		}
+//         		$('.guanjianci').append(content);
+//         	}
+//         }
+// 	})
 })

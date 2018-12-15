@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.UserContactMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.UserContact">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uec.web.model.UserContact">
+    <result column="question" jdbcType="LONGVARCHAR" property="question" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, user_name, company, cellphone, email, create_datetime, comment
+  </sql>
+  <sql id="Blob_Column_List">
+    question
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_contact
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_contact
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.model.UserContact">
+    insert into user_contact (innerid, user_name, company, 
+      cellphone, email, create_datetime, 
+      comment, question)
+    values (#{innerid,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{cellphone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{comment,jdbcType=VARCHAR}, #{question,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.UserContact">
+    insert into user_contact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="cellphone != null">
+        cellphone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="question != null">
+        question,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null">
+        #{question,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.UserContact">
+    update user_contact
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null">
+        question = #{question,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uec.web.model.UserContact">
+    update user_contact
+    set user_name = #{userName,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR},
+      question = #{question,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.UserContact">
+    update user_contact
+    set user_name = #{userName,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

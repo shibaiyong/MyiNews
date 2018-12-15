@@ -86,6 +86,13 @@ function fnReviewAnalysisTable() {
         sAjaxSource: ajaxSource,//服务器请求
         fnServerData: retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
         iDisplayLength: 10,//每页显示条数
+
+        oLanguage: {
+            "sZeroRecords" : "没有可以显示的数据",
+            "sProcessing" : "正在获取数据，请稍后..."
+        },
+
+
         fnServerParams: function (aoData) {
         },
 //	       服务器传过来的值

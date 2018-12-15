@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.lemma.dao.BaikeLammaUrlEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.lemma.bean.BaikeLammaUrlEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="lemma_id" jdbcType="INTEGER" property="lemmaId" />
+    <result column="lemma_title" jdbcType="VARCHAR" property="lemmaTitle" />
+    <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="is_redirect" jdbcType="INTEGER" property="isRedirect" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_exist" jdbcType="INTEGER" property="isExist" />
+    <result column="lemma_desc" jdbcType="LONGVARCHAR" property="lemmaDesc" />
+    <result column="url" jdbcType="LONGVARCHAR" property="url" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    innerid, lemma_id, lemma_title, is_default, rank, is_redirect, create_time, update_time, 
+    is_exist, lemma_desc, url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from baike_lamma_url
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from baike_lamma_url
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.lemma.bean.BaikeLammaUrlEntity">
+    insert into baike_lamma_url (innerid, lemma_id, lemma_title, 
+      is_default, rank, is_redirect, 
+      create_time, update_time, is_exist, 
+      lemma_desc, url)
+    values (#{innerid,jdbcType=INTEGER}, #{lemmaId,jdbcType=INTEGER}, #{lemmaTitle,jdbcType=VARCHAR}, 
+      #{isDefault,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{isRedirect,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isExist,jdbcType=INTEGER}, 
+      #{lemmaDesc,jdbcType=LONGVARCHAR}, #{url,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.lemma.bean.BaikeLammaUrlEntity">
+    insert into baike_lamma_url
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="lemmaId != null">
+        lemma_id,
+      </if>
+      <if test="lemmaTitle != null">
+        lemma_title,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="isRedirect != null">
+        is_redirect,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isExist != null">
+        is_exist,
+      </if>
+      <if test="lemmaDesc != null">
+        lemma_desc,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="lemmaId != null">
+        #{lemmaId,jdbcType=INTEGER},
+      </if>
+      <if test="lemmaTitle != null">
+        #{lemmaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="isRedirect != null">
+        #{isRedirect,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isExist != null">
+        #{isExist,jdbcType=INTEGER},
+      </if>
+      <if test="lemmaDesc != null">
+        #{lemmaDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.lemma.bean.BaikeLammaUrlEntity">
+    update baike_lamma_url
+    <set>
+      <if test="lemmaId != null">
+        lemma_id = #{lemmaId,jdbcType=INTEGER},
+      </if>
+      <if test="lemmaTitle != null">
+        lemma_title = #{lemmaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="isRedirect != null">
+        is_redirect = #{isRedirect,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isExist != null">
+        is_exist = #{isExist,jdbcType=INTEGER},
+      </if>
+      <if test="lemmaDesc != null">
+        lemma_desc = #{lemmaDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.lemma.bean.BaikeLammaUrlEntity">
+    update baike_lamma_url
+    set lemma_id = #{lemmaId,jdbcType=INTEGER},
+      lemma_title = #{lemmaTitle,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      is_redirect = #{isRedirect,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_exist = #{isExist,jdbcType=INTEGER},
+      lemma_desc = #{lemmaDesc,jdbcType=LONGVARCHAR},
+      url = #{url,jdbcType=LONGVARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey1" parameterType="com.uec.web.lemma.bean.BaikeLammaUrlEntity">
+    update baike_lamma_url
+    set lemma_id = #{lemmaId,jdbcType=INTEGER},
+      lemma_title = #{lemmaTitle,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      is_redirect = #{isRedirect,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_exist = #{isExist,jdbcType=INTEGER}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+
+
+  <!-- 批量插入 -->
+  <insert id ="insertLemmaBatch" parameterType="java.util.List" >
+    <selectKey resultType ="java.lang.Integer" keyProperty= "id"
+               order= "AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey >
+    insert into baike_lamma_url
+    (
+    lemma_id, lemma_title, is_default, rank, is_redirect, create_time, update_time,
+    is_exist, lemma_desc, url
+    )
+    values
+    <foreach collection ="list" item="reddemCode" index= "index" separator =",">
+      (
+      #{reddemCode.lemmaId}, #{reddemCode.lemmaTitle},
+      #{reddemCode.isDefault},#{reddemCode.rank},
+      #{reddemCode.isRedirect},#{reddemCode.updateTime},
+      #{reddemCode.createTime},#{reddemCode.isExist},
+      #{reddemCode.lemmaDesc},#{reddemCode.url}
+      )
+    </foreach >
+  </insert >
+
+</mapper>

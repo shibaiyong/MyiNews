@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的定制 热门事件</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/hotEvent/hotEvent.css" th:href="@{/frontEnd/css/myCustom/myCustomHotEvent.css}" />
+    <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/hotEvent/hotEvent.css"
+          th:href="@{/common/plugins/jedate/skin/jedate.6.0.css}"/>
+
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/customEvent.js" th:src="@{/common/plugins/jedate/jedate_6.0.js}"></script>
+    <!--<script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/customEvent.js" th:src="@{/common/plugins/ajaxfileupload.js}"></script>-->
+    <!--<script type="text/javascript" src="../../../static/frontEnd/js/static/hotEvent/hotEvent.js" th:src="@{/frontEnd/js/dynamic/myCustom/myCustomHotEvent.js}"  ></script>-->
+
+    <script type="text/javascript" src="../../../static/frontEnd/js/static/myCustom/customEvent.js" th:src="@{/common/plugins/jquery.form.js}"></script>
+</head>
+<body>
+<div class="hoteventscontainer">
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改事件</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="eventitle" class="col-sm-2 control-label"><span class="red">*</span>事件标题:</label>
+                        <div class="col-sm-10">
+                            <input type="eventTitle" class="form-control" id="eventitle" placeholder="事件标题最长50个字符"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group keywordlabel">
+                        <label class="col-sm-2 control-label"><span class="red">*</span>事件关键词:</label>
+                        <div class="col-sm-10" style="padding-top:7px;">包含以下全部的关键词，多个关键词请用空格隔开</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventkeyword1" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="eventkeyword1"
+                                   readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group keywordlabel">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">包含以下任意关键词，多个关键词请用空格隔开</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventkeyword2" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="eventkeyword2"
+                                   readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group keywordlabel">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">排除以下关键词，多个关键词请用空格隔开</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventkeyword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="eventkeyword3"
+                                   readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">事件时间:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control jeTime" id="eventtimeStart" placeholder="开始时间" readonly="readonly"/>
+                        </div>
+                        <span class="jian hide"></span>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control jeTime hide" id="eventtimeEnd" placeholder="结束时间" readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <form method="post" enctype="multipart/form-data" id="uploadimg">
+                        <label for="chooseimg" class="col-sm-2 control-label">图片选择:</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="image" class="form-control" id="chooseimg" placeholder="图片选择"/>
+                        </div>
+                        </form>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventdes" class="col-sm-2 control-label"><span class="red">*</span>事件描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" id="eventdes" placeholder="输入字数最多不超过100"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">取消</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End-->
+
+<div class="modal " id="confirmDialog">
+    <div class="confirm-dialog">
+        <div class="hint">
+            提示信息
+        </div>
+        <div class="content">
+            <span class="title">确定要移除该定制事件吗?</span>
+            <sapn class="confirm" id="confirmDelete">确定</sapn>
+            <sapn class="cancel">取消</sapn>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript" src="../../../static/frontEnd/js/static/hotEvent/hotEvent.js" th:src="@{/frontEnd/js/dynamic/myCustom/myCustomHotEvent.js}"  ></script>

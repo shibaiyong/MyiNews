@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.nlp.dao.NlpApiOptEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.nlp.bean.NlpApiOptEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+    <result column="used_num" jdbcType="INTEGER" property="usedNum" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="count_type" jdbcType="VARCHAR" property="countType" />
+    <result column="analysis_type" jdbcType="VARCHAR" property="analysisType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, user_id, token, total_num, used_num, create_datetime, update_datetime, count_type, 
+    analysis_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nlp_api_opt
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nlp_api_opt
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="innerid" useGeneratedKeys="true" parameterType="com.uec.web.nlp.bean.NlpApiOptEntity">
+    insert into nlp_api_opt (innerid, user_id, token, 
+      total_num, used_num, create_datetime, 
+      update_datetime, count_type, analysis_type
+      )
+    values (#{innerid,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, 
+      #{totalNum,jdbcType=INTEGER}, #{usedNum,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{countType,jdbcType=VARCHAR}, #{analysisType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.nlp.bean.NlpApiOptEntity">
+    insert into nlp_api_opt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="totalNum != null">
+        total_num,
+      </if>
+      <if test="usedNum != null">
+        used_num,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="countType != null">
+        count_type,
+      </if>
+      <if test="analysisType != null">
+        analysis_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="usedNum != null">
+        #{usedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countType != null">
+        #{countType,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisType != null">
+        #{analysisType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.nlp.bean.NlpApiOptEntity">
+    update nlp_api_opt
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="usedNum != null">
+        used_num = #{usedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countType != null">
+        count_type = #{countType,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisType != null">
+        analysis_type = #{analysisType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.nlp.bean.NlpApiOptEntity">
+    update nlp_api_opt
+    set user_id = #{userId,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      used_num = #{usedNum,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      count_type = #{countType,jdbcType=VARCHAR},
+      analysis_type = #{analysisType,jdbcType=VARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

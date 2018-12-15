@@ -53,6 +53,9 @@
 			padding-left:0px;
 			padding-right:0px;
 		}
+		.table-operation .table-operation-status a:nth-child(1),.table-operation .table-operation-status a:nth-child(3){
+			display: none;
+		}
 	</style>
 </head>
 <body>
@@ -173,7 +176,10 @@
 								</table>
 							</div>
 							<div class="linkLastNewsDataTable" >
-								<div id="operateGroup"  th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+								<div class="operateGroupWrapper">
+									<div id="operateGroup" class="operateGroup" th:include="frontEnd/common/operateGroup :: operateGroup"></div>
+									<div class="showMore hide">更多</div>
+								</div>
 								
 								<div id="threadContent" th:include="frontEnd/common/threadContent :: threadContent"></div>
 								

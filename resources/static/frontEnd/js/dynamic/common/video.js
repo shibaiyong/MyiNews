@@ -45,42 +45,52 @@ $(function(){
 		    	   
 //		    	   第一张图片展示
 		    	   var picPath;
-		    	   if(data.videoPicPath != '' && data.videoPicPath != null){
+		    	   if(data.picPath != '' && data.picPath != null){
 		    		   $('.videoConBoxTable').getImgUrl({
-		    			   'imageUrl':data.videoPicPath,
+		    			   'imageUrl':data.picPath,
 		    			   'code':data.webpageCode
 		    		   });
 		    	   }
 		    	   
 		    	   var linkUrl;
-		    	   if(data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != ''){
-					   var mediaSta = data.statEntity.mediaStatus;
-					   var releaseDatetime = '';
-		    		   for(var i = 0;mediaSta.length>i;i++){
-							if (data.releaseDatetime != null && data.releaseDatetime != 'null' && data.releaseDatetime != '') {
-								releaseDatetime = '/' + data.releaseDatetime;
-							}
-		    			   if(mediaSta[i] == 6){
-		    				   if(data.webpageUrl != null && data.webpageUrl != ''){
-		    		    		   linkUrl = data.webpageUrl
-		    		    	   }else{
-		    		    		   
-		    		    	   }
-		    			   }else if(mediaSta[i] == 5){
-		    				   if(isearchVal != '' && isearchVal != undefined){
-		    					   linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + releaseDatetime + '?queryStr=' + isearchVal;
-		    				   }else{
-		    					   linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + releaseDatetime;
-		    				   }
-//		    				   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
-		    			   }
-		    		   }
-		    	   }
-		    	   if(data.videoPicPath != '' && data.videoPicPath != null){
-		    		   var picBox = '<div class="site-piclist_pic"><div class="site-piclist_pic_zhezhao"><a href="'+linkUrl+'" target="_blank"><img src="'+context+'/frontEnd/image/picGroupDetail/video.png"/></a></div><a href="'+linkUrl+'" target="_blank"><img data-webpagecode="'+data.webpageCode+'" class="defaultImg" src="'+context+'/frontEnd/image/home/default-white.png"/></a></div>';
-		    	   }else{
-		    		   var picBox = '<div class="site-piclist_pic"><div class="site-piclist_pic_zhezhao"><a href="'+linkUrl+'" target="_blank"><img src="'+context+'/frontEnd/image/picGroupDetail/video.png"/></a></div><a href="'+linkUrl+'" target="_blank"><img data-webpagecode="'+data.webpageCode+'" class="defaultImgOrange" src="'+context+'/frontEnd/image/home/defaultImg.png"/></a></div>';
-		    	   }
+// 		    	   if(data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != ''){
+// 					   var mediaSta = data.statEntity.mediaStatus;
+// 					   var releaseDatetime = '';
+// 		    		   for(var i = 0;mediaSta.length>i;i++){
+// 							if (data.releaseDatetime != null && data.releaseDatetime != 'null' && data.releaseDatetime != '') {
+// 								releaseDatetime = '/' + data.releaseDatetime;
+// 							}
+// 		    			   if(mediaSta[i] == 6){
+// 		    				   if(data.webpageUrl != null && data.webpageUrl != ''){
+// 		    		    		   linkUrl = data.webpageUrl
+// 		    		    	   }else{
+//
+// 		    		    	   }
+// 		    			   }else if(mediaSta[i] == 5){
+// 		    				   if(isearchVal != '' && isearchVal != undefined){
+// 		    					   linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + releaseDatetime + '?queryStr=' + isearchVal;
+// 		    				   }else{
+// 		    					   linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + releaseDatetime;
+// 		    				   }
+// //		    				   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
+// 		    			   }
+// 		    		   }
+// 		    	   }
+                   var releaseDatetime = '';
+                   if (data.releaseDatetime != null && data.releaseDatetime != 'null' && data.releaseDatetime != '') {
+                       releaseDatetime = '/' + data.releaseDatetime;
+                   }
+                   if(isearchVal != '' && isearchVal != undefined){
+                       linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + releaseDatetime + '?queryStr=' + isearchVal;
+                   }else{
+                       linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + releaseDatetime;
+                   }
+
+                   if(data.picPath != '' && data.picPath != null){
+                       var picBox = '<div class="site-piclist_pic"><div class="site-piclist_pic_zhezhao"><a href="'+linkUrl+'" target="_blank"><img src="'+context+'/frontEnd/image/picGroupDetail/video.png"/></a></div><a href="'+linkUrl+'" target="_blank"><img data-webpagecode="'+data.webpageCode+'" class="defaultImg" src="'+context+'/frontEnd/image/home/default-white.png"/></a></div>';
+                   }else{
+                       var picBox = '<div class="site-piclist_pic"><div class="site-piclist_pic_zhezhao"><a href="'+linkUrl+'" target="_blank"><img src="'+context+'/frontEnd/image/picGroupDetail/video.png"/></a></div><a href="'+linkUrl+'" target="_blank"><img data-webpagecode="'+data.webpageCode+'" class="defaultImgOrange" src="'+context+'/frontEnd/image/home/defaultImg.png"/></a></div>';
+                   }
 		    	   
 		    	   
 //		    	   标题、来源

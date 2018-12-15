@@ -130,68 +130,68 @@ $(function(){
 			}
 			
 			//相似
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getSameNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getSameNewsNum',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		$('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function(index){
+			// 			$(this).text(data[index]);
+			// 		})
+			// 	}
+			// });
 			
 //			相关
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		$('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function(index){
+			// 			$(this).text(data[index]);
+			// 		})
+			// 	}
+			// });
 //			负面指数
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getsentimentindex',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					console.log(data);
-					$('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function(index){
-						if(data[index].negative != null && data[index].negative != ''){
-							var colorStyle = ''
-							// if(data[index].negative > 60){
-							// 	colorStyle = 'red'
-							// }else
-							if(data[index].negative > 40){
-								colorStyle = 'gray'
-							}else{
-								colorStyle = 'green'
-							}
-                            var negative=data[index].negative;
-                            if(negative>40){
-                                $(this).text('-'+negative.toFixed(2));
-                            }else{
-                                $(this).text((100-negative).toFixed(2));
-                            }
-							//$(this).text(data[index].negative);
-							$(this).addClass(colorStyle);
-						}else{
-							$(this).text('-');
-						}
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getsentimentindex',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		console.log(data);
+			// 		$('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function(index){
+			// 			if(data[index].negative != null && data[index].negative != ''){
+			// 				var colorStyle = ''
+			// 				// if(data[index].negative > 60){
+			// 				// 	colorStyle = 'red'
+			// 				// }else
+			// 				if(data[index].negative > 40){
+			// 					colorStyle = 'gray'
+			// 				}else{
+			// 					colorStyle = 'green'
+			// 				}
+      //                       var negative=data[index].negative;
+      //                       if(negative>40){
+      //                           $(this).text('-'+negative.toFixed(2));
+      //                       }else{
+      //                           $(this).text((100-negative).toFixed(2));
+      //                       }
+			// 				//$(this).text(data[index].negative);
+			// 				$(this).addClass(colorStyle);
+			// 			}else{
+			// 				$(this).text('-');
+			// 			}
 						
-					})
-				}
-			});
+			// 		})
+			// 	}
+			// });
 //			浏览量
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getBrowseNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getBrowseNum',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		$('.dataConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
+			// 			$(this).text(data[index]);
+			// 		})
+			// 	}
+			// });
 			
 //			操作-收藏
 			$().adraticAjaxData({
@@ -303,13 +303,14 @@ $(function(){
  */
 function getParamsTable(aoData){
 	//labels给后台传一个标签，告诉后台进入的置顶新闻列表，labels的值还没有确定
-   var labels = [];
-   var labelsVal='90';
-   labels.push(labelsVal);
+   // var labels = [];
+   // var labelsVal='90';
+   // labels.push(labelsVal);
    
    aoData.push(
- 		{"name":"labels","value":labels},
- 		{"name":"showSimilar","value":false}
+ 		// {"name":"labels","value":labels},
+ 		// {"name":"showSimilar","value":false}
+       {"name":"top","value":true}
  	);
 	return aoData;
 }

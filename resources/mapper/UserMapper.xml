@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.oauth.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.oauth.model.User">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="tele_phone" jdbcType="VARCHAR" property="telePhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="enabled" jdbcType="INTEGER" property="enabled" />
+    <result column="online_num" jdbcType="INTEGER" property="onlineNum" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="is_new" jdbcType="INTEGER" property="isNew" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, user_name, password, name, email, mobile_phone, tele_phone, create_time, 
+    enabled, online_num, salt, end_time, is_new, company, position, wechat
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{username}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uec.web.oauth.model.User">
+    insert into user (innerid, user_name, password, 
+      name, email, mobile_phone, 
+      tele_phone, create_time, enabled, 
+      online_num, salt, end_time, 
+      is_new, company, position, 
+      wechat)
+    values (#{innerid,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
+      #{telePhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=INTEGER}, 
+      #{onlineNum,jdbcType=INTEGER}, #{salt,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{isNew,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{wechat,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.oauth.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone,
+      </if>
+      <if test="telePhone != null">
+        tele_phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="onlineNum != null">
+        online_num,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="isNew != null">
+        is_new,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="telePhone != null">
+        #{telePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="onlineNum != null">
+        #{onlineNum,jdbcType=INTEGER},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isNew != null">
+        #{isNew,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.oauth.model.User">
+    update user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="telePhone != null">
+        tele_phone = #{telePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="onlineNum != null">
+        online_num = #{onlineNum,jdbcType=INTEGER},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isNew != null">
+        is_new = #{isNew,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.oauth.model.User">
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      tele_phone = #{telePhone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enabled = #{enabled,jdbcType=INTEGER},
+      online_num = #{onlineNum,jdbcType=INTEGER},
+      salt = #{salt,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      is_new = #{isNew,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+</mapper>

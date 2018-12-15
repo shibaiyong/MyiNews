@@ -170,9 +170,13 @@ $(function() {
             if(null != data.sourceReport){
             	sourceReport = data.sourceReport;
         	}
-            
-            var imgSource = ctx+'/frontEnd/image/home/defaultImg.png';
-            if(null != data.imgSource){
+            // 页面中存在多个ctx值 ，此处获取的不应该添加uec
+            var newCtx = ctx;
+            if (ctx.indexOf('uec') != -1) {
+                newCtx = ctx.substr(0, ctx.lastIndexOf('/'));
+            }
+            var imgSource = newCtx + '/frontEnd/image/home/defaultImg.png';
+            if(null != data.imgSource){               
             	imgSource = data.imgSource;
 	        }
             
@@ -280,7 +284,7 @@ function getQueryParam(arrayObj){
 function titlehighlight(title) {
 	var queryStr =  $(".searchWord").val();
 	if(null != queryStr && '' != queryStr && null != title && '' != title){
-		var queryList = queryStr.split(/,|，/);
+		var queryList = queryStr.split(/,|，|\|/);
 		if(queryList !=null && queryList.length >0){
 			console.info(queryList.length);
 			for (var i = 0; i < queryList.length; i++) {

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uec.web.dao.AccessLogEntityMapper">
+  <resultMap id="BaseResultMap" type="com.uec.web.model.AccessLogEntity">
+    <id column="innerid" jdbcType="INTEGER" property="innerid" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+    <result column="op_datetime" jdbcType="TIMESTAMP" property="opDatetime" />
+    <result column="op_type" jdbcType="VARCHAR" property="opType" />
+    <result column="op_type_id" jdbcType="INTEGER" property="opTypeId" />
+    <result column="op_uri" jdbcType="VARCHAR" property="opUri" />
+    <result column="op_content" jdbcType="VARCHAR" property="opContent" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    innerid, ip, user_id, tenant_id, op_datetime, op_type, op_type_id, op_uri, op_content, 
+    module, level, code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_sys_access
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from log_sys_access
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </delete>
+  
+  <!--  生成 -->
+  <insert id="insert" parameterType="com.uec.web.model.AccessLogEntity"
+  useGeneratedKeys="true" keyProperty="innerid"
+  >
+    insert into log_sys_access (innerid, ip, user_id, 
+      tenant_id, op_datetime, op_type, 
+      op_type_id, op_uri, op_content, 
+      module, level, code
+      )
+    values (#{innerid,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{tenantId,jdbcType=INTEGER}, #{opDatetime,jdbcType=TIMESTAMP}, #{opType,jdbcType=VARCHAR}, 
+      #{opTypeId,jdbcType=INTEGER}, #{opUri,jdbcType=VARCHAR}, #{opContent,jdbcType=VARCHAR}, 
+      #{module,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uec.web.model.AccessLogEntity">
+    insert into log_sys_access
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        innerid,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="opDatetime != null">
+        op_datetime,
+      </if>
+      <if test="opType != null">
+        op_type,
+      </if>
+      <if test="opTypeId != null">
+        op_type_id,
+      </if>
+      <if test="opUri != null">
+        op_uri,
+      </if>
+      <if test="opContent != null">
+        op_content,
+      </if>
+      <if test="module != null">
+        module,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="innerid != null">
+        #{innerid,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="opDatetime != null">
+        #{opDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opType != null">
+        #{opType,jdbcType=VARCHAR},
+      </if>
+      <if test="opTypeId != null">
+        #{opTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="opUri != null">
+        #{opUri,jdbcType=VARCHAR},
+      </if>
+      <if test="opContent != null">
+        #{opContent,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uec.web.model.AccessLogEntity">
+    update log_sys_access
+    <set>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=INTEGER},
+      </if>
+      <if test="opDatetime != null">
+        op_datetime = #{opDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opType != null">
+        op_type = #{opType,jdbcType=VARCHAR},
+      </if>
+      <if test="opTypeId != null">
+        op_type_id = #{opTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="opUri != null">
+        op_uri = #{opUri,jdbcType=VARCHAR},
+      </if>
+      <if test="opContent != null">
+        op_content = #{opContent,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uec.web.model.AccessLogEntity">
+    update log_sys_access
+    set ip = #{ip,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      tenant_id = #{tenantId,jdbcType=INTEGER},
+      op_datetime = #{opDatetime,jdbcType=TIMESTAMP},
+      op_type = #{opType,jdbcType=VARCHAR},
+      op_type_id = #{opTypeId,jdbcType=INTEGER},
+      op_uri = #{opUri,jdbcType=VARCHAR},
+      op_content = #{opContent,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR}
+    where innerid = #{innerid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 后台日志 展示 查询接口  -->
+  
+  
+  <sql id="Back_Log_Column_List">
+    innerid, ip, user_id, tenant_id, op_datetime, op_type, op_type_id, op_uri, 
+    module, level, code
+  </sql>
+  
+   <select id="selectBackLogs" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Back_Log_Column_List"/>
+    from log_sys_access order by op_datetime desc
+  </select>
+  
+  <select id="selectBackLogsByUids" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Back_Log_Column_List"/>
+    from log_sys_access
+    WHERE user_id IN
+    <foreach collection="uids" item="id" index="index"
+             open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+    order by op_datetime desc
+  </select>
+  <!-- 后台日志 展示 查询接口 END  -->
+ 
+</mapper>

@@ -70,8 +70,9 @@
     				}
     			}
     		})
-    	}
-
+		}
+		
+		
     };
 //    获取来源、地区、分类、载体
     $.fn.getData = function(options){
@@ -439,11 +440,21 @@
     }
 //    我的定制-保存
     $.fn.conserve = function(options){
+			var name = $.trim($('#addCustomName').val()) || ''
+			if(name == '' || name.length == 0){
+				$().toastmessage('showToast', {
+					text: '定制名称不能为空！',
+					sticky: false,
+					position : 'top-center',
+					type: 'error',
+				});
+				return ;
+			}
     	var defaults = {
     		modalName:'.alreadyCon',
     		ajaxUrl:'',	
     		data:{
-    			'name': $.trim($('#addCustomName').val()),
+    		'name': name,
 				'keywords':'',
 				'source':'',
 				'carrier':'',
@@ -545,7 +556,7 @@
 			customParam.startDatetime = starttime;
 			customParam.endDatetime = endtime;
 		}
-        console.log(customParam)
+		console.log(customParam);
 		$.ajax({
             url : options.ajaxUrl,//这个就是请求地址对应sAjaxSource
             data:options.data,
@@ -564,8 +575,9 @@
             	        position : 'bottom-right',
             			//显示的状态。共notice, warning, error, success4种状态
             	        type: 'success',
-            		});
-            		
+					});	
+					// 更新线索列表
+					updateCustomList();           		
             		if(options.callback == undefined){
             			return
             		}else{
@@ -626,17 +638,34 @@
 //            		定制名称
             		$('#addCustomName').val(obj.name);
 //            		关键词
-            		var keyWords = obj.keywords;
-            		keyWords = keyWords.split('@');
+								var keyWords = obj.keywords;
+								if (keyWords.length > 0 && keyWords.lastIndexOf('@') != -1) {
+									keyWords = keyWords.substring(0, keyWords.lastIndexOf('@'));
+								}
+								keyWords = keyWords.split('@');
             		for(var i = 0;keyWords.length>i;i++){
-            			if(keyWords[i] != ''){
-            				if(i<1){
+            			if(keyWords[i] != ''){										
+            				if (i == 0) {
             					$('#addKeyWordInput').val(keyWords[i]);
             					$('#addKeyWordInput').change();
-            				}else{
-            					$('.keywordsBox').find('.has-feedback:last').find('input').val(keyWords[i]);
-            					$('.keywordsBox').find('.has-feedback:last').find('input').change();
-            				}
+										} else if (keyWords.length > 2){
+											// 先将默认的第二个输入框回显
+											if(i == 1){
+												$('.keywordsBox').find('.has-feedback').eq(i - 1).find('input').val(keyWords[i]);
+												$('.keywordsBox').find('.has-feedback').eq(i - 1).find('input').change();
+											}else if (i == keyWords.length - 1 ) {
+												$('.addKeyword').click();
+												$('.keywordsBox').find('.has-feedback:last').find('input').val(keyWords[i]);
+												$('.keywordsBox').find('.has-feedback:last').find('input').change();
+											} else {
+												$('.addKeyword').click();
+												$('.keywordsBox').find('.has-feedback').eq(i - 1).find('input').val(keyWords[i]);
+												$('.keywordsBox').find('.has-feedback').eq(i - 1).find('input').change();
+											}
+										}else{
+											$('.keywordsBox').find('.has-feedback:last').find('input').val(keyWords[i]);
+											$('.keywordsBox').find('.has-feedback:last').find('input').change();
+										}										
             			}
             		}
             		
@@ -910,11 +939,7 @@ $(function(){
 	})
 
 	//获取已添加的新闻线索名称和数量
-	//	var localstoredata=localStorage.newsdata;
-	var num = localStorage.len;
-	var customNews = JSON.parse(localStorage.customNewsArray);
-	var contentweb = getNewsHtml(customNews);
-	$('.hasAddWeb').append(contentweb);
+	hasAddWeb();
 
 
 	var timeCode;//全局共享的变量
@@ -940,7 +965,8 @@ $(function(){
                     ajaxUrl: ctx + '/custom/front/create',
                     callback: function (data) {
 					//点击保存以后，刷新整个页面
-                        window.location.reload();
+                        // window.location.reload();
+                        $('.conserve').attr('data-once','1');//在没有输入关键词的时候，防止点击保存按钮没放映
                     }
                 })
             }else{
@@ -948,11 +974,11 @@ $(function(){
                     ajaxUrl:ctx+'/custom/front/update?timeCode='+timeCode,
                     callback:function(data){
 					//点击保存以后，刷新整个页面
-                        window.location.reload();
+                        // window.location.reload();
                     }
                 })
             }
-            $('.conserve').attr('data-once','1');
+
         }else{
             return;
         }
@@ -984,11 +1010,15 @@ $(function(){
                     var arr = newsdataArray.filter(function(item){
                     	return item.customGroup != timeCode1;
                     });
-                    localStorage.customNewsArray = JSON.stringify(arr);
+					localStorage.customNewsArray = JSON.stringify(arr);
+					// 更新线索列表
+					updateCustomList();					
 				}
             }
         })
 	}
+
+
 
     $('.next-step').click(function(){
     	if($('#addKeyWordInput').val()){
@@ -1036,6 +1066,70 @@ $(function(){
             }
         })
     }
-
-
 });
+
+function hasAddWeb() {
+	var customNews = JSON.parse(localStorage.customNewsArray);
+	var contentweb = getNewsHtml(customNews);
+	$('.hasAddWeb').html(contentweb);
+}
+
+// 更新新闻线索列表
+function updateCustomList() {
+	$.ajax({
+		url: ctx + '/custom/front/getMyCustomGroup', //这个就是请求地址对应sAjaxSource
+		type: 'get',
+		dataType: 'json',
+		success: function (res) {
+			localStorage.customType = "";
+			localStorage.innerId = "";
+			var data = res.resultObj;
+			var len = data.length;
+			if (res.result) {
+				var str = '';
+				var contentweb = "";
+				if (data.length > 0) {
+					$('.submenu').html("");
+					for (var i = 0; i < data.length; i++) {
+						str = str + "<li class='mdynews' data-customGroup=" + data[i].customGroup + ">" + data[i].name + "</li>";
+						contentweb += '<a href="javascript:;" data-customGroup="' + data[i].customGroup + '" class="sourcesBox"><span class="contentWidth" data-customGroup="' + data[i].customGroup + '">' + data[i].name + '</span><span class="blodFont" data-customGroup="' + data[i].customGroup + '">&#10005;</span></a>';
+					}
+					$('.submenu').eq(0).append(str);
+
+					localStorage.newsdata = contentweb;
+					localStorage.customNewsArray = JSON.stringify(data);
+					localStorage.len = len;
+					// 更新已添加新闻线索
+					hasAddWeb();
+					$('.link').eq(0).find("i")[0].style.visibility = "visible"
+
+					setTimeout(function () {
+						// $('.submenu').eq(0)[0].innerHTML = str;
+						$('.submenu').eq(0).find('li').click(function () {
+							$('.mdynews').css('border', 'none');
+							this.style.borderLeft = '5px #f44336 solid'
+							var customType = "";
+							localStorage.customType = customType;
+                            var customgroup = $(this).attr('data-customGroup');
+                            localStorage.customgroup = customgroup;
+							var innerId = $(this).attr('data-innerid');
+							localStorage.innerId = innerId;
+							$('#myCustomContent').loadPage(ctx + '/custom/front/gotoMyCustomThread');
+						})
+					}, 100)
+				} else {
+					$('.link').eq(0).find("i")[0].style.visibility = "hidden";
+				}
+
+
+				$('.showAddModifyContainer').loadPage(ctx + '/custom/front/gotoAddMyCustom');
+
+				// $('#myaccordion>li:first>.link>i').click();
+				// $('.mdynews:first').css('borderLeft', '5px #f44336 solid');
+				// localStorage.customgroup = $('.submenu:first li:first').attr('data-customgroup');
+				// $('#myCustomContent').loadPage(ctx + '/custom/front/gotoMyCustomThread'); //默认加载。
+
+			}
+		}
+	})
+}

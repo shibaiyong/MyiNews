@@ -53,11 +53,15 @@ $(function(){
 		    			   'code':data.webpageCode
 		    		   });
 		    	   }
+                   var releaseDatetime = '';
+                   if (data.releaseDatetime != null && data.releaseDatetime != 'null' && data.releaseDatetime != '') {
+                       releaseDatetime = '/' + data.releaseDatetime;
+                   }
 		    	   
 		    	   if(data.picPath == null){
-		    		   var imgCon = '<div class="site-piclist_pic"><a href="'+ctx+'/latest/front/image/detail/'+data.webpageCode+'" data-webpageCode="'+data.webpageCode+'" target="_blank"><img class="defaultImgOrange"  src="'+context+'/frontEnd/image/home/defaultImg.png"/></a></div>';
+		    		   var imgCon = '<div class="site-piclist_pic"><a href="'+ctx+'/latest/front/image/detail/'+data.webpageCode+ releaseDatetime +'" data-webpageCode="'+data.webpageCode+'" target="_blank"><img class="defaultImgOrange"  src="'+context+'/frontEnd/image/home/defaultImg.png"/></a></div>';
 		    	   }else{
-		    		   var imgCon = '<div class="site-piclist_pic"><a href="'+ctx+'/latest/front/image/detail/'+data.webpageCode+'" data-webpageCode="'+data.webpageCode+'" target="_blank"><img class="defaultImg"  src="'+context+'/frontEnd/image/home/default-white.png"/></a></div>';
+		    		   var imgCon = '<div class="site-piclist_pic"><a href="'+ctx+'/latest/front/image/detail/'+data.webpageCode+ releaseDatetime +'" data-webpageCode="'+data.webpageCode+'" target="_blank"><img class="defaultImg"  src="'+context+'/frontEnd/image/home/default-white.png"/></a></div>';
 		    	   }
 		    	   
 //		    	   标题、来源
@@ -68,20 +72,20 @@ $(function(){
 		    		   browseCount = '-';
 		    	   }
 		    	   
-		    	   if(data.sourceCrawlDetail != '' && data.sourceCrawlDetail != null){
-		    		   sourceCrawl = data.sourceCrawlDetail.website.displayName;
+		    	   if(data.sourceCrawl != '' && data.sourceCrawl != null){
+		    		   sourceCrawl = data.sourceCrawl;
 		    	   }else{
 		    		   sourceCrawl = '-';
 		    	   }
 		    	   
 		    	   if(isearchVal != '' && isearchVal != undefined){
-					   var linkUrl = ctx+'/latest/front/image/detail/'+data.webpageCode+'?queryStr='+isearchVal;
+					   var linkUrl = ctx+'/latest/front/image/detail/'+data.webpageCode+ releaseDatetime +'?queryStr='+isearchVal;
 				   }else{
-					   var linkUrl = ctx+'/latest/front/image/detail/'+data.webpageCode;
+					   var linkUrl = ctx+'/latest/front/image/detail/'+data.webpageCode+ releaseDatetime ;
 				   }
 		    	   
 		    	   /*var title = '<div class="site-piclist_info"><p class="titleRightClick"><a href="'+linkUrl+'" target="_blank" data-id="'+data.webpageCode+'">'+data.title+'</a></p><p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i><span class="browseNum'+index+'">'+browseCount+'</span> | <span >'+sourceCrawl+'</span><span class="jiangao pull-right" data-id="'+data.webpageCode+'"><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="建稿"></i></span><span class="collect" data-id="'+data.webpageCode+'"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span></p></div>';*/
-		    	   var title = '<div class="site-piclist_info"><p class="titleRightClick"><a href="'+linkUrl+'" target="_blank" data-id="'+data.webpageCode+'">'+data.title+'</a></p><p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i><span class="browseNum'+index+'">'+browseCount+'</span> | <span >'+sourceCrawl+'</span><span class="collect" data-id="'+data.webpageCode+'"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span></p></div>';
+		    	   var title = '<div class="site-piclist_info"><p class="titleRightClick"><a href="'+linkUrl+'" target="_blank" data-id="'+data.webpageCode+'">'+data.title+'</a></p><p class="site-piclist-sources"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="浏览量"></i><span class="browseNum'+index+'">'+browseCount+'</span> | <span class="sourceCrawl">'+sourceCrawl+'</span><span class="collect" data-id="'+data.webpageCode+'"><i class="fa fa-heart-o" data-toggle="tooltip" data-placement="top" title="收藏"></i></span></p></div>';
 //		    	时间
 		    	   if(data.releaseDatetime != '' && data.releaseDatetime != null){
 		    		   var releaseDatetime = new Date(data.releaseDatetime);

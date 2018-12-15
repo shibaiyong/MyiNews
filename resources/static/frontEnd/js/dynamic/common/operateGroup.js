@@ -157,12 +157,13 @@
 	$.fn.tenantConfigArea = function (options) {
 		var defaults = {
 			getAjaxUrl: '', //请求路径
+			getSignleAjaxUrl: '',
 			dataParam: {}, //传递参数
 			isShow: false, //是否显示本地区，本省及全国按钮
 			callback: ''
 		};
 		var options = $.extend(defaults, options);
-		var $this = $(this);
+		var items = '';
 
 		$.ajax({
 			url: options.getAjaxUrl, //这个就是请求地址对应sAjaxSource
@@ -172,30 +173,23 @@
 			async: true,
 			success: function (data) {
 				if (data.result) {
-					var obj = data.resultObj || [];
-					if( obj.length == 0){
-						$('.country').text('全国');
-						$('.country').attr('data-innerid', '');
-						$('.country').addClass('areaActive');
-					} else if (obj.length > 0) {
-						for(var k=0; k<obj.length; k++){
-							if (obj[k].parentId == 0) {
-								$('.provinceArea').text(obj[k].name);
-								$('.provinceArea').attr('data-innerid', obj[k].innerid);
-								$('.provinceArea').addClass('areaActive');
+					var obj = data.resultObj || [];						
+					if (obj.length > 0) {
+						for (var k = 0; k < obj.length; k++) {
+							if (obj[k].innerid == 0) {
+								obj[k].innerid = '';
+							}
+							if( k == 0){
+								items += '<div class="tenantArea areaActive areaSelected" data-innerid="' + obj[k].innerid + '">' + obj[k].name + '</div>';
 							}else{
-								$('.cityArea').text(obj[k].name);
-								$('.cityArea').attr('data-innerid', obj[k].innerid);
-								$('.cityArea').addClass('areaActive');
+								items += '<div class="tenantArea areaActive" data-innerid="' + obj[k].innerid + '">' + obj[k].name + '</div>';
 							}
 						}
-						$('.country').text('全国');
-						$('.country').attr('data-innerid', '');
-						$('.country').addClass('areaActive');
-					}					
-					if (typeof (options.callback) == 'function') {
-						options.callback(data);
-					}
+						$('.table-operation-status').append(items);
+						if (typeof (options.callback) == 'function') {
+							options.callback(data);
+						}
+					}										
 				}
 			}
 		});

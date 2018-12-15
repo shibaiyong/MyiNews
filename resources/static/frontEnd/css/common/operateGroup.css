@@ -39,9 +39,11 @@
 }
 .table-operation .table-operation-status .citySelected, 
 .table-operation .table-operation-status .provinceSelected,
-.table-operation .table-operation-status .countrySelected
+.table-operation .table-operation-status .countrySelected,
+.table-operation .table-operation-status .areaSelected
 {
-	color:#F44336;
+	color:#fff;
+	background-color: #F44336;
 }
 .unareausable{
 	background-color: rgb(153, 153, 153);

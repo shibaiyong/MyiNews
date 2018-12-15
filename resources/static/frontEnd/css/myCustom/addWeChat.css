@@ -26,6 +26,7 @@
 	height:30px;
 	line-height:30px;
 	color:#F44336;
+	margin-left: -10px;
 }
 
 
@@ -124,20 +125,4 @@
 	top:40%;
 	margin-top:-50px;
 }
-/*loading模体框*/
-.loading {
-	width: 150px;
-	height:150px;
-	position: absolute;
-	top: 40%;
-	left:45%;
-	color: #fff;
-	padding-left: 60px;
-	background: #000 url(../../image/loader.gif) no-repeat 50%;
-	opacity: 0.7;
-	z-index: 9999;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	border-radius: 20px;
-	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
-}
+/*!*loading模体框*!*/

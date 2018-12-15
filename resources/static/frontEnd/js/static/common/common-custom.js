@@ -520,6 +520,7 @@
 				webpageCode:'', //新闻的webpageCode
 				buildingCon:'',//点击建稿时样式的改变
 				buildedCon:'',//建稿结束之后执行的内容
+				releaseDatetime: '',
 		};
 		
 		var options = $.extend(defaults,options);
@@ -528,16 +529,16 @@
         $this.click(function () {
             $.ajax({
                 url: ctx + "/latest/front/releaseBuildCheck", //处理页面的路径
-                type: "GET", //提交方式
+                type: "GET", //提交方式           
                 dataType: "JSON", //返回数据的类型
                 success: function (data) { //回调函数 ,成功时返回的数据存在形参data里
                     data = typeof data == "string" ? JSON.parse(data) : data;
                     if (data.result && data.resultObj) {
-                        window.open(ctx + '/api/draft/release/view?webpageCode=' + options.webpageCode);
+                        window.open(ctx + '/api/draft/release/view?webpageCode=' + options.webpageCode +'&releaseDatetime='+options.releaseDatetime);
                     } else {
 						// $this[0].firstChild.className = "fa fa-file-text-o";
                         $('#cannotSkipDialog').modal('show');
-                        $('#cannotSkipDialog .modal-body p').text('目标地址不存在，无法创建稿件');
+                        $('#cannotSkipDialog .modal-body p').text('您尚未开通一键建稿对接系统');
                         $('#cannotSkipDialog .modal-body .btn-red').text('确定');
                         $('#cannotSkipDialog .modal-body .btn-default').text('取消');
                         $(".confirm-myCustom").unbind();
@@ -727,7 +728,11 @@
 	        		var obj = data.resultObj;
 	        		var content = '';
 	        		// 此处再取一次，由于是ajax请求，ctx是个全局变量，易被覆盖导致路径发生变化 
-	        		ctx = $('#ctx').val();
+					ctx = $('#ctx').val();
+					// 进行数据过滤，将热点排行过滤掉(暂无移除此频道)
+					obj = obj.filter(function(item, index) {
+						return item.paramName != 'nav.hot';
+					});
 	        		for(var i = 0;i<obj.length;i++){
 	        			if(obj[i].status == '0'){//0:选中状态
 	        				content += '<li class="top" data-mark="'+obj[i].paramName+'"><a href="'+ctx+obj[i].value+'">'+obj[i].displayName+'</a></li>';
@@ -822,6 +827,14 @@ Accordion.prototype.dropdown = function(e) {
 //为你推荐-左侧导航  end
 
 function retrieveData(sSource, aoData, fnCallback) {
+	// var iDisplayStart = aoData.iDisplayStart || 0;
+	// var iDisplayLength = aoData.iDisplayLength
+	// test(取1800条数据，暂时保留)
+	// aoData[3].value = 0;
+	// aoData[4].value = 1800;
+	// var temp = {},
+	// 	tempList = [],
+	// 	listObj = {};
     $.ajax({
         url : sSource,//这个就是请求地址对应sAjaxSource
         data : aoData,//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
@@ -829,8 +842,27 @@ function retrieveData(sSource, aoData, fnCallback) {
         dataType : 'json',
         async : true,
         success : function(data) {
-        	// console.log(data);
+        	console.log(data);
         	if(data.result){
+				// 数组去重处理(暂时保留，以待后用)
+				// var key = '';
+				// console.log(new Date().getTime());
+				// for (var k = 0; k < data.resultObj.aaData.length; k++) {
+				// 	key = data.resultObj.aaData[k].title.hashCode();
+				// 	if (!temp[key]) {
+				// 		temp[key] = data.resultObj.aaData[k];
+				// 		tempList.push(data.resultObj.aaData[k]);
+				// 	}														
+				// }
+				// data.resultObj.aaData = tempList;
+				$('#DataTables_Table_0_processing').css('display','none');
+				// test无数据情形
+				// fnCallback({
+				// 	aaData: [],
+				// 	iTotalDisplayRecords: 0,
+				// 	iTotalRecords: 0,
+				// 	sEcho: 1
+				// });
         		fnCallback(data.resultObj);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
         	}else{
         		if(data.errorCode==401){
@@ -839,13 +871,44 @@ function retrieveData(sSource, aoData, fnCallback) {
         			var ip = param.ip;
         			var time = param.time;
         			location.href=ctx+"/kickout?ip="+ip+"&time="+time;
-        		}
+        		}else{
+					$('#DataTables_Table_0_processing').css('display', 'none');
+					fnCallback({
+						aaData: [],
+						iTotalDisplayRecords: 0,
+						iTotalRecords: 0,
+						sEcho: 1
+					});
+				}
         	}
 	       
         },
         error : function(msg) {
+        	console.log(msg);
+			// alert('数据加载失败，请重新尝试');
+            // alert(msg.errorMsg);
+			$('.dataTables_processing').css('display','none');
+            $('#DataTables_Table_0_processing').css('display','none');
         }
     });
+}
+
+// 生成hash码
+String.prototype.hashCode = function () {
+	if (Array.prototype.reduce) {
+		return this.split("").reduce(function (a, b) {
+			a = ((a << 5) - a) + b.charCodeAt(0);
+			return a & a
+		}, 0);
+	}
+	var hash = 0;
+	if (this.length === 0) return hash;
+	for (var i = 0; i < this.length; i++) {
+		var character = this.charCodeAt(i);
+		hash = ((hash << 5) - hash) + character;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+	return hash;
 }
 
 var ctx = '';

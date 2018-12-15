@@ -47,10 +47,10 @@ function historyTableCon(){
 			           summary = data.cusSummary;
 			       }
 		    		   
-		    	   var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="'+summary+'">'+data.title+'</a>'
+		    	   var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="'+summary+'">'+data.title+'</a>'
 	    	   }else{
 		       		summary = '暂无摘要';
-		       		var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'" target="_blank" class="beyondEllipsis"  data-id="'+data.webpageCode+'">'+data.title+'</a>'
+		       		var titleCon = '<a href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'" target="_blank" class="beyondEllipsis"  data-id="'+data.webpageCode+'">'+data.title+'</a>'
 		       	}
 				$('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
 
@@ -76,7 +76,8 @@ function historyTableCon(){
 				var operationCon = '<span><i class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top" title="收藏"></i></span>'
 							+'<span><i class="fa fa-file-text-o fa-lg" data-toggle="tooltip" data-placement="top" title="建稿"></i></span>';
 				$('td:eq(5)', row).html(operationCon).addClass('inewsOperation').attr('data-id', data.webpageCode);
-	       },
+				$('td:eq(5)', row).attr('data-time', data.releaseDatetime)
+			},
 	       
 //	       服务器传过来的值
 		   columns: [//显示的列
@@ -128,7 +129,7 @@ function historyTableCon(){
 				// 标题    
 	           { data: 'title', "bSortable": false},
 	        	// 采集来源    
-	           { data: 'sourceReport', "bSortable": false,
+	           { data: 'sourceCrawl', "bSortable": false,
 	        	   render:function(data,type,row){
 	        		   if(data != null && data != ''){
 						   if (data.length > 6) {
@@ -143,11 +144,11 @@ function historyTableCon(){
 	        	   }
 			   },
 			   { // 发稿来源
-			   	data: 'sourceCrawlDetail',
+			   	data: 'sourceReport',
 			   	"bSortable": false,
 			   	render: function (data, type, row) {
 			   		if (data != null && data != '') {
-			   			return data.website.displayName
+			   			return data
 			   		} else {
 			   			return '-'
 			   		}
@@ -184,6 +185,7 @@ function historyTableCon(){
 		// 收藏和建稿
 		$('.inewsOperation').each(function (index) {
 			var webpageCode = $(this).attr("data-id");
+			var releaseDatetime = $(this).attr('data-time');
 
 			$(this).find('span').eq(0).click(function (){
 				// 如果已收藏则再次点击时取消收藏
@@ -236,6 +238,7 @@ function historyTableCon(){
 			// 建稿
 			$(this).find('span').eq(1).releaseBuild({
 				'webpageCode': webpageCode,
+				'releaseDatetime': releaseDatetime,
 				'buildingCon': function (_$this) {
 					_$this.find('i').addClass('releaseBuild');
 				},

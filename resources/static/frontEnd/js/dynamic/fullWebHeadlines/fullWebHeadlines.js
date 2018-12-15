@@ -39,9 +39,14 @@ $(function () {
 //	iSearch搜索
     $('.customAddBtn').customInputClickBtn({
         'refreshTable': function () {
-            table.ajax.reload();
-            $('.searchesCon').slideDown();
-            $('.hotRankList').hide();
+            var queryStr = $("#queryStr").val();
+            if( queryStr != '' && !(/\s+/g.test(queryStr)) ) {
+                table.ajax.reload();
+                $('.searchesCon').slideDown();
+                $('.hotRankList').hide();
+            }else{
+                setModalContent('输入内容不能为空、空格','确定');
+            }
         }
     })
 
@@ -69,9 +74,15 @@ $(function () {
     $(".customAddInput").parseLocalArrayData({
         'dataSources': customAddVal,
         'afterSelect': function () {
-            table.ajax.reload();
-            $('.searchesCon').slideDown();
-            $('.hotRankList').hide();
+            var queryStr = $("#queryStr").val();
+            if( queryStr != '' && !(/\s+/g.test(queryStr))) {
+                table.ajax.reload();
+                $('.searchesCon').slideDown();
+                $('.hotRankList').hide();
+            }else{
+                setModalContent('输入内容不能为空、空格','确定');
+            }
+
         }
     });
 });
@@ -100,7 +111,6 @@ function tableAjaxData() {
                 startTime = new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 30)).toUTCString();
                 endTime = new Date().toUTCString();
             }
-
             var queryStr = $("#queryStr").val();
 
             if (time == '') {
@@ -120,7 +130,6 @@ function tableAjaxData() {
                     {"name": "queryStr", "value": queryStr}
                 );
             }
-
         },
 
 //	       服务器传过来的值
@@ -128,26 +137,34 @@ function tableAjaxData() {
             //checkbox选择
             var summary = '';
             var isearchVal = $('.customAddInput').val();
+
+            var dateTime = data.releaseDatetime;
+            var hrefUrl = data.webpageCode;
+            if(dateTime != '' && dateTime != null){
+                hrefUrl = data.webpageCode + '/' + dateTime;
+            }
+
             if (null != data.cusSummary) {
                 if (data.cusSummary.length > 150) {
                     summary = data.cusSummary.substr(0, 150) + '...';
                 } else {
                     summary = data.cusSummary;
                 }
+
                 //title
                 if (isearchVal != '') {
-                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + data.webpageCode + '?queryStr=' + isearchVal + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
+                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + hrefUrl + '?queryStr=' + isearchVal + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
                 } else {
-                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + data.webpageCode + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
+                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + hrefUrl + '" target="_blank" class="beyondEllipsis" tabindex="0" data-id="' + data.webpageCode + '"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + summary + '">' + data.title + '</a>'
                 }
 
             } else {
                 summary = '暂无摘要';
                 //title
                 if (isearchVal != '') {
-                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + data.webpageCode + '?queryStr=' + isearchVal + '" target="_blank" class="beyondEllipsis"  data-id="' + data.webpageCode + '">' + data.title + '</a>'
+                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + hrefUrl + '?queryStr=' + isearchVal + '" target="_blank" class="beyondEllipsis"  data-id="' + data.webpageCode + '">' + data.title + '</a>'
                 } else {
-                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + data.webpageCode + '" target="_blank" class="beyondEllipsis"  data-id="' + data.webpageCode + '">' + data.title + '</a>'
+                    var titleCon = '<a href="' + ctx + '/latest/front/news/detail/' + hrefUrl + '" target="_blank" class="beyondEllipsis"  data-id="' + data.webpageCode + '">' + data.title + '</a>'
                 }
 
             }
@@ -447,3 +464,19 @@ function getHeadLinesDataItem(regions, start, size) {
 //         }
 //     })
 // }
+
+function setModalContent( content,confirm,cancel ,callback1,callback2){
+    $('#deleteDialog').modal('show');
+    $('#deleteDialog .modal-body p').text(content);
+    $('#deleteDialog .modal-body .btn-red').text(confirm);
+    $('#deleteDialog .modal-body .btn-default').text(cancel);
+    $('.maxNum').click(function(){
+        $(this).unbind();
+        $('#deleteDialog').modal('hide');
+        if(callback1){
+            callback1();
+        }else{
+            return false;
+        }
+    })
+}

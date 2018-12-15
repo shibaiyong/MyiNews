@@ -72,7 +72,7 @@ $(function(){
         			content += '<li class=""><a class="ti" href="javascript:void(0)" data-innerid="'+obj[i].labelId+'">'+obj[i].name+'</a></li>';
         		}
         		$('#clusterSourcesPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterSources',
     				idName:'#clusterSourcesPro',
     			});
@@ -257,7 +257,7 @@ $(function(){
             		var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 +4;
             	}
         		
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterMap',
     				idName:'#clusterMapPro',
     			});
@@ -332,7 +332,7 @@ $(function(){
         		}
         		
 //        		$('#clusterFenleiPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterFenlei',
     				idName:'#clusterFenleiPro',
     			});

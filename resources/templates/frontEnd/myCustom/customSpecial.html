@@ -33,7 +33,15 @@
     <!--Self CSS-->
     <link rel="stylesheet" type="text/css" href="../../../static/frontEnd/css/myCustom/customSpecial.css"
           th:href="@{/frontEnd/css/myCustom/customSpecial.css}"/>
-
+    <style>
+        .dropdown-menu {
+            margin: -1px 0px 0px;
+            border-radius: 0px;
+            /* box-shadow:0 6px 12px #ededed; */
+            width: auto;
+            z-index: 2000;
+        }
+    </style>
 </head>
 <body>
 <div class="custom-special">
@@ -134,7 +142,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="save()" class="btn btn-primary" id="submit" style="background: #F44336;border-color:#F44336 ;">保存</button>
+                        <button type="button" onclick="save()" class="btn btn-primary" id="submit"
+                                style="background: #F44336;border-color:#F44336 ;">保存
+                        </button>
                         <button type="button" class="btn btn-default" onclick="modalClose()" data-dismiss="modal">取消
                         </button>
                     </div>

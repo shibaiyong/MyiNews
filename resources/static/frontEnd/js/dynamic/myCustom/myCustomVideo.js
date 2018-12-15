@@ -71,7 +71,7 @@ $(function(){
         			content += '<li class=""><a class="ti" href="javascript:void(0)" data-innerid="'+obj[i].labelId+'">'+obj[i].name+'</a></li>';
         		}
         		$('#clusterSourcesPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterSources',
     				idName:'#clusterSourcesPro',
     			});
@@ -256,7 +256,7 @@ $(function(){
             		var prosmoreHeight = $('#clusterMapPro').find('li').length * 30 +4;
             	}
         		
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterMap',
     				idName:'#clusterMapPro',
     			});
@@ -331,7 +331,7 @@ $(function(){
         		}
         		
 //        		$('#clusterFenleiPro').append(content);
-        		$().screenConditionFun({
+        		screenConditionHandler({
     				className:'.clusterFenlei',
     				idName:'#clusterFenleiPro',
     			});
@@ -475,10 +475,11 @@ $(function(){
 //		浏览量获取
 		var textArr = getVideoAjaxData1.column(0).nodes().data();
 		tableItemWebPageCodeArr = [];
+		var releaseDateTimeArr = [];
 		if(textArr.length > 0){
 			for(var count = 0;textArr.length>count;count++){
 				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
-				
+				releaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
 			console.log(tableItemWebPageCodeArr);
 //			浏览量
@@ -513,6 +514,7 @@ $(function(){
 			$('.jiangao').each(function(index){
 				$(this).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.find('i').addClass('hide');
         				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');

@@ -125,65 +125,67 @@ $(function(){
 		
 //		相似相关获取
 		var textArr = threadAjaxData1.column(5).nodes().data();
-	    tableItemWebPageCodeArr =[];
+			tableItemWebPageCodeArr =[];
+		var releaseDateTimeArr = [];	
 		if(textArr.length > 0){
 			for(var count = 0;textArr.length>count;count++){
 				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+				releaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
 			//相似
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getSameNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getSameNewsNum',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		$('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function(index){
+			// 			$(this).text(data[index]);
+			// 		})
+			// 	}
+			// });
 			
 //			相关
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
 			
 //			负面指数
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getsentimentindex',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					console.log(data);
-					$('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function(index){
-						if(data[index].negative != null && data[index].negative != ''){
-							var colorStyle = ''
-							// if(data[index].negative > 60){
-							// 	colorStyle = 'red'
-							// }else
-							if(data[index].negative > 40){
-								colorStyle = 'gray'
-							}else{
-								colorStyle = 'green'
-							}
-                            var negative=data[index].negative;
-                            if(negative>40){
-                                $(this).text('-'+negative.toFixed(2));
-                            }else{
-                                $(this).text((100-negative).toFixed(2));
-                            }
-							//$(this).text(data[index].negative+'%');
-							$(this).addClass(colorStyle);
-						}else{
-							$(this).text('-');
-						}
-						
-					})
-				}
-			});
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getsentimentindex',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					console.log(data);
+// 					$('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function(index){
+// 						if(data[index].negative != null && data[index].negative != ''){
+// 							var colorStyle = ''
+// 							// if(data[index].negative > 60){
+// 							// 	colorStyle = 'red'
+// 							// }else
+// 							if(data[index].negative > 40){
+// 								colorStyle = 'gray'
+// 							}else{
+// 								colorStyle = 'green'
+// 							}
+//                             var negative=data[index].negative;
+//                             if(negative>40){
+//                                 $(this).text('-'+negative.toFixed(2));
+//                             }else{
+//                                 $(this).text((100-negative).toFixed(2));
+//                             }
+// 							//$(this).text(data[index].negative+'%');
+// 							$(this).addClass(colorStyle);
+// 						}else{
+// 							$(this).text('-');
+// 						}
+//
+// 					})
+// 				}
+// 			});
 //		浏览量
 			$().adraticAjaxData({
 				'dataUrl':ctx+'/latest/front/getBrowseNum',
@@ -211,8 +213,10 @@ $(function(){
 			});
 //			操作-建稿
 			$('.inewsOperation').each(function(index){
+				console.log('ahahahahh');
 				$(this).find('span').eq(1).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.find('i').addClass('hide');
         				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
@@ -220,7 +224,7 @@ $(function(){
         			'buildedCon':function(_$this){
 //        				_$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
 //        				$("[data-toggle='tooltip']").tooltip();
-        				hotNewsList.ajax.reload();
+                        threadAjaxData1.ajax.reload();
         			}
 				})
 			})
@@ -229,7 +233,6 @@ $(function(){
 				'dataUrl':ctx+'/latest/front/getDraftType',
 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
 				'callback':function(data,con){
-					console.log(data);
 					$('.dataConBoxTable tbody').find('.titleRightClick').each(function(index){
 						if(data[index][0] == 1){
 							$(this).find('a').css({

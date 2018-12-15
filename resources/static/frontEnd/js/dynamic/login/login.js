@@ -19,14 +19,24 @@ $(function(){
 //点击登陆按钮
 	$('#submit').click(function(){
 		var _$this = $(this);
-		if(_$this.attr('data-once') == 'true'){
-			
-			_$this.attr('data-once','false');
-			
-			var userName = u.val().trim();
-			var password = p.val().trim();
-			var debug = d.val().trim();
-			var code = c.val().trim();
+		var userName = u.val().trim();
+		var password = p.val().trim();
+		var debug = d.val().trim();
+		var code = c.val().trim();
+        $.cookie(userName, userName, {path:"/",expires: 7});
+        if($('input.rememberpwd').attr('checked')==undefined){			
+			$.cookie(userName+'pwdFlag', '0', {path: "/", expires: 7});
+        	$.cookie('checkBox', '', { expires: -1, path: '/' });
+        	$.cookie(userName+'password', '', { expires: -1, path: '/' });
+        }else{
+        	var pwd = sha256_digest($(".password").val());
+			$.cookie(userName+'pwdFlag', '1', {path: "/", expires: 7});
+        	$.cookie(userName+'password', pwd, {path: "/",expires: 7});
+        	$.cookie("checkBox", $("input.rememberpwd").attr('checked'), {path:"/",expires: 7});
+		}
+		
+		if(_$this.attr('data-once') == 'true'){			
+			_$this.attr('data-once','false');				
 			if(userName == ''){
 				$('.err-tip').removeClass('hide').find('.err-title').html('用户名不能为空');
 				_$this.attr('data-once','true');
@@ -34,7 +44,6 @@ $(function(){
 				$('.err-tip').removeClass('hide').find('.err-title').html('密码不能为空');
 				_$this.attr('data-once','true');
 			}else {
-				console.log(retryCount);
                 if (retryCount>1){
                     if (code == ''){
                         $('.err-tip').removeClass('hide').find('.err-title').html('验证码不能为空');
@@ -50,9 +59,19 @@ $(function(){
                                 if (data.result == true){
                                     var data = {
                                         "userName": userName,
-                                        "password": sha256_digest(password),
+                                        // "password": sha256_digest(password),
                                         "debug": debug
-                                    };
+									};
+									if ($.cookie(userName+"pwdFlag") == 0) {
+										data.password = sha256_digest(password);
+									} else if ($.cookie(userName+"pwdFlag") == 1) {
+										password = $.cookie(userName+'password');
+										if(sha256_digest(p.val().trim()) != password && password){
+											data.password = sha256_digest(password);
+										}else{
+											data.password = password;
+										}	
+									}
                                     $.ajax({
                                         url: ctx + "/login",
                                         type: 'post',
@@ -64,7 +83,7 @@ $(function(){
                                                 retryCount = data.resultObj.retryCount;
                                                 $('.err-tip').removeClass('hide').find('.err-title').html(data.errorMsg);
                                                 _$this.attr('data-once', 'true');
-                                            } else {
+                                            } else {											
                                                 location.href = data.resultObj;
 
                                             }
@@ -82,7 +101,17 @@ $(function(){
                         });
                     }
                 } else {
-                    var data = {"userName": userName, "password": sha256_digest(password), "debug": debug};
+					var data = {"userName": userName, "password": sha256_digest(password), "debug": debug};
+					if ($.cookie(userName+"pwdFlag") == 0) {
+						data.password = sha256_digest(password);
+					} else if ($.cookie(userName+"pwdFlag") == 1) {
+						password = $.cookie(userName+'password');
+						if(sha256_digest(p.val().trim()) != password && password){
+							data.password = sha256_digest(password);
+						}else{
+							data.password = password;
+						}											
+					}
                     $.ajax({
                         url: ctx + "/login",
                         type: 'post',
@@ -182,27 +211,35 @@ function registerCookie(){
 			$(this).removeAttr('checked');
 		}
 	});
-	
-	if($.cookie("username")){
+
+	var user =  $.cookie("username");
+	if(user){	
         $(".username").val($.cookie("username"));
 	}
-	if($.cookie("password")){
-		$(".password").val($.cookie("password"));
+	if($.cookie(user+"password")){
+		var cookiePass = $.cookie(user+"password");
+		// var len = cookiePass.length - 64;
+		// var realPass = cookiePass.substr( 32,len );
+		$(".password").val(cookiePass);
 	}
 	if($.cookie("checkBox")){
 		$('input.rememberpwd').attr('checked','checked');
 	}
   
-    $("#submit").click(function () {
-        $.cookie("username", $(".username").val(), {path:"/",expires: 7});
-        if($('input.rememberpwd').attr('checked')==undefined){
-        	$.cookie('checkBox', '', { expires: -1, path: '/' });
-        	$.cookie('password', '', { expires: -1, path: '/' });
-        }else{
-        	$.cookie("password", $(".password").val(), {path:"/",expires: 7});
-        	$.cookie("checkBox", $("input.rememberpwd").attr('checked'), {path:"/",expires: 7});
-        }
-    })
+    // $("#submit").click(function () {
+	// 	var username = $.trim($(".username").val());
+    //     $.cookie(username, username, {path:"/",expires: 7});
+    //     if($('input.rememberpwd').attr('checked')==undefined){
+	// 		$.cookie('pwdFlag', '0', {path: "/", expires: 7});
+    //     	$.cookie('checkBox', '', { expires: -1, path: '/' });
+    //     	$.cookie(username+'password', '', { expires: -1, path: '/' });
+    //     }else{
+    //     	var password = sha256_digest($(".password").val());
+	// 		$.cookie('pwdFlag', '1', {path: "/", expires: 7});
+    //     	$.cookie(username+'password', password, {path: "/",expires: 7});
+    //     	$.cookie("checkBox", $("input.rememberpwd").attr('checked'), {path:"/",expires: 7});
+    //     }
+    // })
 }
 
 

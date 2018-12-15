@@ -6,10 +6,10 @@ var threadAjaxData1,
     customAddVal = [],
     batchCheckWebPageCode = [], //被选择的新闻的webpageCode
     tableItemWebPageCodeArr = []; //当前页面中显示的列表的webpageCode
-
+	realpage = 0;
+	totalpage = 0;
 $(function(){
 	/*头部导航高亮*/
-	
 	
 	$().showHeader({
 		callback:function(){
@@ -21,7 +21,6 @@ $(function(){
 		}
 	})
 	
-
 	footerPutBottom();
 //	点击刷新，每60秒刷新
 	refreshButton();
@@ -166,31 +165,35 @@ $(function(){
 		}
 	})
 
-
 	//	地区
-	var isUserable = sessionStorage.getItem('srceenMapUserable');
-	if (isUserable == 'usable') {
-		getArea();
-	}else{
-		$('.srceenMap').attr('disabled', true);
-		$('.srceenMap').addClass('unclick').addClass('unareausable');
-	}	
+	$().getData({
+		getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
+		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+		boxClassName: '.srceenMap',
+		ulClassName: '#srceenMapPro',
+		level: 3,
+		multiSelect: true,
+		conditionValue: 'map',
+		callback: areaEventHandler,
+	});
 	
 	//	分类
 	$().getData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+		getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
 		boxClassName: '.srceenClassification',
 		ulClassName: '#srceenClassificationPro',
 		level: 2,
 		multiSelect: true,
+		conditionValue: 'classification',
 	})
-	//	本地，本省，全国
+	//	本地，本省，全国及用户配置的地区
 	$().tenantConfigArea({
-		getAjaxUrl: ctx + '/tenant/back/listTenantRegion', //请求路径
+		getAjaxUrl: ctx + '/config/front/listUserRegionNew', //用户配置的地区(含租户的地区)
+		// getSignleAjaxUrl: ctx + '/config/front/listUserRegionNew', 
 		isShow: true,
-		callback: areaStatus,
-	})
+		callback: areaEventHandler,
+	});
 	
 	//	时间段
 	$().getData({
@@ -200,138 +203,52 @@ $(function(){
 	
 	//	时间段
 	selectTime();
+	// 注册地区事件管理
+	function areaEventHandler() {
+		// 处理选中问题
+		var $areaSelected = $('.areaSelected');
+		var regionId = '', reginonText = '';
+		if ($areaSelected != '' && $areaSelected.length > 0) {
+			regionId = $areaSelected.attr('data-innerid');
+			reginonText = $areaSelected.text() || '';
+			if (reginonText != '') {
+				$('.srceenMap').find('h2').attr('data-innerid', regionId);
+				$('.srceenMap').find('h2').attr('data-selectvalue', reginonText);
+				$('.srceenMap').find('h2').attr('data-content', reginonText);
+				$('.srceenMap').find('h2').html(reginonText + '<i class="fa fa-caret-down"></i>');
+			}
+		}
 
-	// 本地区
-	$('.cityArea').click(function () {		
-		if ($(this).hasClass('citySelected')) {
-			$(this).removeClass('citySelected');
-			sessionStorage.setItem('areaSelected', '');
-			// 地区选项可用标识
-			sessionStorage.setItem('srceenMapUserable', 'usable');	
-			$('.srceenMap').removeAttr('disabled');
-			$('.srceenMap').removeClass('unclick').removeClass('unareausable');
-			$('.srceenMap').find('ul').empty();
-			getArea();
-		}else{
-			$('.tenantArea').removeClass('citySelected').removeClass('provinceSelected').removeClass('countrySelected');
-			$(this).addClass('citySelected');
-			sessionStorage.setItem('areaSelected', 'citySelected');
-			// 地区选项不可用标识
-			sessionStorage.setItem('srceenMapUserable', 'unusable');
-			$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
-			$('.srceenMap').find('h2').find('i').addClass('hide');
-			$('.srceenMap').find('h2').text('地区');
-			$('.srceenMap').attr('disabled', true);
-			$('.srceenMap').addClass('unclick').addClass('unareausable');
-		}
-		if ($('.tableListCon').val() == '0') {
-			threadAjaxData1.ajax.reload();
-		} else if ($('.tableListCon').val() == '1') {
-			thumbnailTable.ajax.reload();
-		} else if ($('.tableListCon').val() == '2') {
-			sudokuTable.ajax.reload();
-		}
-		return false;
-	});
-	// 本省
-	$('.provinceArea').click(function () {
-		if ($(this).hasClass('provinceSelected')) {
-			$(this).removeClass('provinceSelected');
-			sessionStorage.setItem('areaSelected', '');
-			// 地区选项可用标识
-			sessionStorage.setItem('srceenMapUserable', 'usable');
-			$('.srceenMap').removeAttr('disabled');
-			$('.srceenMap').removeClass('unclick').removeClass('unareausable');
-			$('.srceenMap').find('ul').empty();
-			getArea();
-		} else {
-			$('.tenantArea').removeClass('citySelected').removeClass('provinceSelected').removeClass('countrySelected');
-			$(this).addClass('provinceSelected');
-			sessionStorage.setItem('areaSelected', 'provinceSelected');
-			// 地区选项不可用标识
-			sessionStorage.setItem('srceenMapUserable', 'unusable');
-			$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
-			$('.srceenMap').find('h2').find('i').addClass('hide');
-			$('.srceenMap').find('h2').text('地区');
-			$('.srceenMap').attr('disabled', true);
-			$('.srceenMap').addClass('unclick').addClass('unareausable');
-		}
-		if ($('.tableListCon').val() == '0') {
-			threadAjaxData1.ajax.reload();
-		} else if ($('.tableListCon').val() == '1') {
-			thumbnailTable.ajax.reload();
-		} else if ($('.tableListCon').val() == '2') {
-			sudokuTable.ajax.reload();
-		}
-		return false;
-	});
-	// 全国
-	$('.country').click(function () {
-		if ($(this).hasClass('countrySelected')) {
-			$(this).removeClass('countrySelected');
-			sessionStorage.setItem('areaSelected', '');
-			// 地区选项可用标识
-			sessionStorage.setItem('srceenMapUserable', 'usable');
-			$('.srceenMap').removeAttr('disabled');
-			$('.srceenMap').removeClass('unclick').removeClass('unareausable');
-			$('.srceenMap').find('ul').empty();
-			getArea();
-		} else {
-			$('.tenantArea').removeClass('citySelected').removeClass('provinceSelected').removeClass('countrySelected');
-			$(this).addClass('countrySelected');
-			sessionStorage.setItem('areaSelected', 'countrySelected');
-			// 地区选项不可用标识
-			sessionStorage.setItem('srceenMapUserable', 'unusable');
-			$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
-			$('.srceenMap').find('h2').find('i').addClass('hide');
-			$('.srceenMap').find('h2').text('地区');
-			$('.srceenMap').attr('disabled', true);
-			$('.srceenMap').addClass('unclick').addClass('unareausable');
-		}
-		if ($('.tableListCon').val() == '0') {
-			threadAjaxData1.ajax.reload();
-		} else if ($('.tableListCon').val() == '1') {
-			thumbnailTable.ajax.reload();
-		} else if ($('.tableListCon').val() == '2') {
-			sudokuTable.ajax.reload();
-		}
-		return false;
-	});
-
-	// 处理本市，全省，全国的选中状态
-	function areaStatus() {
-		// 处理本地，本省和全国
-		var areaSelected = sessionStorage.getItem('areaSelected');
-		if ($('.cityArea').hasClass('areaActive')) {
-			$('.cityArea').removeClass('hide');
-			if (areaSelected != '' && areaSelected != 'undefined' && areaSelected == 'citySelected') {
-				$('.cityArea').addClass('citySelected');
+		// 统一处理地区选中
+		$('.tenantArea').off('click').click(function () {
+			if ($(this).hasClass('areaSelected')) {
+				$(this).removeClass('areaSelected');
+				$('.srceenMap').find('h2').attr('data-innerid', '');
+				$('.srceenMap').find('h2').attr('data-selectvalue', '');
+				$('.srceenMap').find('h2').attr('data-content', '全部地区');
+				$('.srceenMap').find('h2').html('全部地区<i class="fa fa-caret-down"></i>');
+			} else {
+				$('.table-operation-status .tenantArea').removeClass('areaSelected');
+				$(this).addClass('areaSelected');				
+				$('.srceenMap').find('h2').attr('data-innerid', $(this).attr('data-innerid'));
+				$('.srceenMap').find('h2').attr('data-selectvalue', $(this).text());
+				$('.srceenMap').find('h2').attr('data-content', $(this).text());
+				$('.srceenMap').find('h2').html($(this).text() + '<i class="fa fa-caret-down"></i>');				
 			}
-		}
-		if ($('.provinceArea').hasClass('areaActive')) {
-			$('.provinceArea').removeClass('hide');
-			if (areaSelected != '' && areaSelected != 'undefined' && areaSelected == 'provinceSelected') {
-				$('.cityArea').addClass('areaSelected');
+			// 操作此按钮时刷新缓存
+			sessionStorage.setItem('cache', '1');
+			if ($('.tableListCon').val() == '0') {
+				threadAjaxData1.ajax.reload();
+			} else if ($('.tableListCon').val() == '1') {
+				thumbnailTable.ajax.reload();
+			} else if ($('.tableListCon').val() == '2') {
+				sudokuTable.ajax.reload();
 			}
-		}
-		if ($('.country').hasClass('areaActive')) {
-			$('.country').removeClass('hide');
-			if (areaSelected != '' && areaSelected != 'undefined' && areaSelected == 'countrySelected') {
-				$('.cityArea').addClass('areaSelected');
-			}
-		}
+			return false;
+		});
 	}
-	// 获取地区
-	function getArea() {
-		$().getData({
-			getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigRegion', //请求路径(用户配置的数据)
-			getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
-			boxClassName: '.srceenMap',
-			ulClassName: '#srceenMapPro',
-			level: 2,
-			multiSelect: true,
-		})
-	}
+	
+	
 //	 相似合并、展示条数的样式
 	$('.changeState').click(function(){
 		$('.dataShowTable').attr('data-once','true');
@@ -340,7 +257,8 @@ $(function(){
 		}else{
 			$(this).addClass('activeBg');
 		}
-		
+		// 每次刷新完保存为已缓存状态
+		sessionStorage.setItem('cache', '1');
 		if($('.tableListCon').val() == 0){
 			threadAjaxData1.ajax.reload();
 		}else if($('.tableListCon').val() == 1){
@@ -355,7 +273,7 @@ $(function(){
 			var displayLength = $(this).find('a').text();
 			$('.tableListLength').val(displayLength);
 			if($('.tableListCon').val() == 0){
-				threadAjaxData1.ajax.reload();
+				// threadAjaxData1.ajax.reload();
 				threadAjaxData1.page.len( displayLength ).draw();
 			}
 		})
@@ -475,7 +393,7 @@ $(function(){
 							if(tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]){
 								++jishustatus;
 							}
-                    	}
+						}
 						
 						if(jishustatus == 0){
 							batchCheckWebPageCode.push(tableItemWebPageCodeArr[i])
@@ -498,17 +416,110 @@ $(function(){
 		}
 	});
 	
-
-	
 	// 延时1000执行，待用户定制的参数渲染之后再执行此方法
 	setTimeout(function () {
+		// 只要刷新页面就刷新缓存
+		sessionStorage.setItem('cache', '1');
 		//表格进行数据传值
 		threadAjaxData1 = $().threadAjaxData({
 			'requestUrl': ctx + '/latest/front/pageLatestNewsCache',
 			'getPassValue': getParamsTable
 		});
 	}, 2000);
-	
+
+
+    // 传播力分析
+	$('.dataConBoxTable tbody').on('click','tr td span .fa-rss',function(){
+        var recive = threadAjaxData1.row( this.parentNode.parentNode.parentNode ).data();
+        var detalObj={};
+        $.ajax({
+            url : ctx+'/latest/front/getNewsDetail',//这个就是请求地址对应sAjaxSource
+            data:{
+                webpageCode:recive.webpageCode,
+                releaseDateTime:recive.releaseDatetime
+            },
+            type : 'get',
+            dataType : 'json',
+            async : true,
+            success : function(data) {
+                if (data.result == true) {
+                    var obj = data.resultObj;
+                    detalObj.articleId = obj.newsId;
+                    detalObj.url = obj.webpageUrl;
+                    detalObj.title = obj.title;
+                    detalObj.content = obj.content;
+                    detalObj.repoter = obj.author || '';
+                    detalObj.source = obj.sourceReport || ''; //来源
+                    detalObj.publishTime = new Date(obj.releaseDatetime).formatDate('yyyy-MM-dd hh:mm:ss'); //发布时间
+                    detalObj.column = ''; //所属栏目
+                    // detalObj.platformName = sourceCrawl; //平台名称
+                    // detalObj.platformTypeName = platformTypeName; //平台类型名称
+                    detalObj.platformName = 'inews'; //平台名称
+                    detalObj.platformTypeName = '其它'; //平台类型名称
+
+                    detalObj.commentNum = 0; //评论数
+                    detalObj.clickNum = 0; //点击数
+                    detalObj.thumbsNum = 0; //点赞数
+                    detalObj.awardNum = 0; //打赏次数
+                    detalObj.shareNum = 0; //转发数
+                    detalObj.transNum = 0; //转载数
+                    detalObj.subscribeNum = 0; //收藏数
+                    detalObj.isOrigin = 0; //是否是原创，0：非原创，1：原创
+                    detalObj.subscribeNum =0; //收藏数
+
+                    $.ajax({
+                        // test
+                        url: ctx+'/api/imonitor/token', //这个就是请求地址对应sAjaxSource
+                        // url: ctx + '/api/imonitor/token', //这个就是请求地址对应sAjaxSource
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data && data.userId) {
+                                detalObj.userId = data.userId; //用户id
+                            }
+                            if (data && data.client_id) {
+                                detalObj.tenantId = data.client_id; //租户id
+                            }
+
+                            $.ajax({
+                                // test
+                                url: 'http://mon.inewsengine.com/imonitor/v1/api/originArticlesInews', //这个就是请求地址对应sAjaxSource
+                                type: 'post',
+                                dataType: 'json',
+                                data: detalObj,
+                                crossDomain: true,
+                                success: function (data) {
+                                    if(data.code == 200){
+                                        $().toastmessage('showToast', {
+                                            text: '传播力分析添加成功！',
+                                            sticky: false,
+                                            position: 'middle-center',
+                                            type: 'success'
+                                        });
+                                    }else{
+                                        $().toastmessage('showToast', {
+                                            text: '传播力添加失败，请重新偿试！',
+                                            sticky: false,
+                                            position: 'middle-center',
+                                            type: 'error'
+                                        });
+                                    }
+                                }
+                            });
+                        },
+                        fail: function (err) {
+                            $().toastmessage('showToast', {
+                                text: '传播力添加失败，请重新偿试！',
+                                sticky: false,
+                                position: 'middle-center',
+                                type: 'error'
+                            });
+                        }
+                    });
+                }
+            }
+        })
+	})
 //	批量收藏
 	$('.table-operation-status a').eq(2).click(function(){
 		$(this).batchCollect({
@@ -564,10 +575,28 @@ $(function(){
 //	获得ajax返回的获取
 	$('.dataConBoxTable').on('xhr.dt', function ( e, settings, json, xhr ) {
 		console.log(json);
+		//$('.sortCountButton a').find('span').text(json.iTotalRecords);
+		highlightList = json.highlightList;
+		totalpage = json.iTotalRecords;
+		realpage = json.iTotalDisplayRecords;
+	});
+	$('.dataConThumbnailTable').on('xhr.dt', function ( e, settings, json, xhr ) {
+		console.log(json);
 		$('.sortCountButton a').find('span').text(json.iTotalRecords);
 		highlightList = json.highlightList
-		
-    });
+        totalpage = json.iTotalRecords;
+        realpage = json.iTotalDisplayRecords;
+	});
+	$('.dataConSudokuTable').on('xhr.dt', function ( e, settings, json, xhr ) {
+		console.log(json);
+		$('.sortCountButton a').find('span').text(json.iTotalRecords);
+		highlightList = json.highlightList
+        totalpage = json.iTotalRecords;
+        realpage = json.iTotalDisplayRecords;
+	});
+
+
+
 	$('.dataConBoxTable').on('draw.dt',function() {
 		
 		$('.dataConBoxTable').itemCheck({   //给每一条新闻增加单击的事件
@@ -583,150 +612,155 @@ $(function(){
 						}
 					}
 				}
-				
-				console.log(batchCheckWebPageCode);
 			}
 		});
-		
-		
+        //替换总页数
+		var pagination = $('#DataTables_Table_0_info').text();
+		if( totalpage > 10000){
+            pagination = pagination.replace('10,000',totalpage)
+            $('#DataTables_Table_0_info').text(pagination);
+		}
+
 //		相似相关获取
 		var textArr = threadAjaxData1.column(5).nodes().data();
-		console.log(textArr);
 		tableItemWebPageCodeArr = [];
+		let otherReleaseDateTimeArr = [];
 		if(textArr.length > 0){
 			var textArrCon =[];
 			for(var count = 0;textArr.length>count;count++){
 				tableItemWebPageCodeArr.push(textArr[count].webpageCode);
+				otherReleaseDateTimeArr.push(textArr[count].releaseDatetime);
 			}
-			//相似
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getSameNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
-			
-//			相关
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
-			
-//			负面指数
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getsentimentindex',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function(index){
-						if(data[index].negative != null && data[index].negative != ''){
-							var colorStyle = ''
-							// if(data[index].negative > 60){
-							// 	colorStyle = 'red'
-							// }else
-							if(data[index].negative > 40){
-								colorStyle = 'gray'
-							}else{
-								colorStyle = 'green'
-							}
-                            var negative=data[index].negative;
-                            if(negative>40){
-                                $(this).text('-'+negative.toFixed(2));
-                            }else{
-                                $(this).text((100-negative).toFixed(2));
-                            }
-							//$(this).text(data[index].negative);
-							$(this).addClass(colorStyle);
-						}else{
-							$(this).text('-');
-						}
-					})
-				}
-			});
-//		浏览量
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getBrowseNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
-			
-//			操作-收藏
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getUserFavorites',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConBoxTable tbody').find('.inewsOperation').each(function(index){
-						if(data[index] == true){
-							$(this).find('i').eq(0).attr('class','fa fa-heart active');
-						}else{
-							
-						}
-					})
-				}
-			});
-//			操作-建稿
-			
-			$('.inewsOperation').each(function(index){
-				$(this).find('span').eq(1).releaseBuild({
-					'webpageCode':tableItemWebPageCodeArr[index],
-					'buildingCon':function(_$this){
-						_$this.find('i').addClass('hide');
-        				_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
-        			},
-        			'buildedCon':function(_$this){
-        				_$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
-        				$("[data-toggle='tooltip']").tooltip();
-        				threadAjaxData1.ajax.reload();
-        			}
-				})
-			})
-//			建、采
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getDraftType',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data,con){
-					console.log(data);
-					$('.dataConBoxTable tbody').find('.titleRightClick').each(function(index){
-						if(data[index].length > 0){
-							if(data[index][0] == 1){
-								$(this).find('a').css({
-									'width':'90%'
-								})
-								$(this).append('<span class="label-status label-jian">【建】</span>');
-							}else if(data[index][0] == 2){
-								$(this).find('a').css({
-									'width':'90%'
-								})
-								$(this).append('<span class="label-status label-cai">【采】</span>');
-							}else{}
-						}
-						
-					})
-				}
-			});
-			
-			
-//			datatables翻页时查询页面中是否有选中的新闻
-			for(var i = 0;tableItemWebPageCodeArr.length>i;i++){
-				for(var j = 0;batchCheckWebPageCode.length>j;j++){
-					if(tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]){
-						$('.dataConBoxTable').find('.check-child').eq(i).addClass('checked');
-					}
-				}
-			}
-			
-			
+// 			//相似
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getSameNewsNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConBoxTable tbody').find('[class*="sameNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
+//
+// //			相关
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConBoxTable tbody').find('[class*="relevantNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
+//
+// //			负面指数
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getsentimentindex',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConBoxTable tbody').find('[class*="negativeNum"]').each(function(index){
+// 						if(data[index].negative != null && data[index].negative != ''){
+// 							var colorStyle = ''
+// 							// if(data[index].negative > 60){
+// 							// 	colorStyle = 'red'
+// 							// }else
+// 							if(data[index].negative > 40){
+// 								colorStyle = 'gray'
+// 							}else{
+// 								colorStyle = 'green'
+// 							}
+//                             var negative=data[index].negative;
+//                             if(negative>40){
+//                                 $(this).text('-'+negative.toFixed(2));
+//                             }else{
+//                                 $(this).text((100-negative).toFixed(2));
+//                             }
+// 							//$(this).text(data[index].negative);
+// 							$(this).addClass(colorStyle);
+// 						}else{
+// 							$(this).text('-');
+// 						}
+// 					})
+// 				}
+// 			});
+// //		浏览量
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getBrowseNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConBoxTable tbody').find('[class*="browseNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
+//
+// //			操作-收藏
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getUserFavorites',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConBoxTable tbody').find('.inewsOperation').each(function(index){
+// 						if(data[index] == true){
+// 							$(this).find('i').eq(0).attr('class','fa fa-heart active');
+// 						}else{
+//
+// 						}
+// 					})
+// 				}
+// 			});
+// //			操作-建稿
+//
+				$('.inewsOperation').each(function(index){
+					$(this).find('span').eq(1).releaseBuild({
+						'webpageCode':tableItemWebPageCodeArr[index],
+						'releaseDatetime': otherReleaseDateTimeArr[index],
+						'buildingCon':function(_$this){
+							_$this.find('i').addClass('hide');
+									_$this.append('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>');
+								},
+								'buildedCon':function(_$this){
+									_$this.html('<i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="建稿"></i>').removeAttr("disabled");
+									$("[data-toggle='tooltip']").tooltip();
+									threadAjaxData1.ajax.reload();
+								}
+					});
+				});
+// //			建、采
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getDraftType',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data,con){
+// 					console.log(data);
+// 					$('.dataConBoxTable tbody').find('.titleRightClick').each(function(index){
+// 						if(data[index].length > 0){
+// 							if(data[index][0] == 1){
+// 								$(this).find('a').css({
+// 									'width':'90%'
+// 								})
+// 								$(this).append('<span class="label-status label-jian">【建】</span>');
+// 							}else if(data[index][0] == 2){
+// 								$(this).find('a').css({
+// 									'width':'90%'
+// 								})
+// 								$(this).append('<span class="label-status label-cai">【采】</span>');
+// 							}else{}
+// 						}
+//
+// 					})
+// 				}
+// 			});
+//
+//
+// //			datatables翻页时查询页面中是否有选中的新闻
+// 			for(var i = 0;tableItemWebPageCodeArr.length>i;i++){
+// 				for(var j = 0;batchCheckWebPageCode.length>j;j++){
+// 					if(tableItemWebPageCodeArr[i] == batchCheckWebPageCode[j]){
+// 						$('.dataConBoxTable').find('.check-child').eq(i).addClass('checked');
+// 					}
+// 				}
+// 			}
+//
+//
 		}
 		
 //		搜索词高亮显示
@@ -812,8 +846,13 @@ $(function(){
     		     });
     		 }
     	});
-    	
-    	
+    	//替换总页数
+        var pagination = $('#DataTables_Table_1_info').text();
+        if( totalpage > 10000){
+            pagination = pagination.replace('10,000',totalpage)
+            $('#DataTables_Table_1_info').text(pagination);
+        }
+
     	$('.dataConThumbnailTable').itemCheck({   //给每一条新闻增加单击的事件
 			'itemFun':function($this,statusItem){
 				if(statusItem){
@@ -832,33 +871,35 @@ $(function(){
     	
 		var thumbnailArr = thumbnailTable.column(1).nodes().data();
 		tableItemWebPageCodeArr =[];
+		var releaseDateTimeArr = [];	
 		if(thumbnailArr.length > 0){
 			for(var count = 0;thumbnailArr.length>count;count++){
 				tableItemWebPageCodeArr.push(thumbnailArr[count].webpageCode);
+				releaseDateTimeArr.push(thumbnailArr[count].releaseDatetime);
 			}
 			
 			//相似
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getSameNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConThumbnailTable tbody').find('[class*="sameNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getSameNewsNum',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		$('.dataConThumbnailTable tbody').find('[class*="sameNum"]').each(function(index){
+			// 			$(this).text(data[index]);
+			// 		})
+			// 	}
+			// });
 			
 //			相关
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					$('.dataConThumbnailTable tbody').find('[class*="relevantNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
-//		浏览量
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getRelevantNewsNum',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data){
+// 					$('.dataConThumbnailTable tbody').find('[class*="relevantNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
+			// 浏览量
 			$().adraticAjaxData({
 				'dataUrl':ctx+'/latest/front/getBrowseNum',
 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
@@ -868,8 +909,20 @@ $(function(){
 					})
 				}
 			});
-			
-//			操作-收藏
+            //建稿量
+            $().adraticAjaxData({
+                'dataUrl':ctx+'/latest/front/getDraftType',
+                'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+                'callback':function(data){
+                    if(!data && data == 'null'){
+                        return false;
+                    }
+                    $('.dataConThumbnailTable tbody').find('[class*="draftNum"]').each(function(index){
+                        $(this).text(data[index])
+                    })
+                }
+            });
+			//	操作-收藏
 			$().adraticAjaxData({
 				'dataUrl':ctx+'/latest/front/getUserFavorites',
 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
@@ -889,6 +942,7 @@ $(function(){
 			$('.mediaOperation').each(function(index){
 				$(this).find('a').eq(2).releaseBuild({
 					'webpageCode':tableItemWebPageCodeArr[index],
+					'releaseDatetime': releaseDateTimeArr[index],
 					'buildingCon':function(_$this){
 						_$this.html('<div style="color:#F44336"  class="la-timer la-sm"><div></div></div>&nbsp;建稿中...');
         			},
@@ -900,29 +954,29 @@ $(function(){
 			});
 			
 //			建、采
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getDraftType',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data,con){
-					console.log(data);
-					$('.dataConThumbnailTable tbody').find('.titleRightClick').each(function(index){
-						if(data[index].length > 0){
-							if(data[index][0] == 1){
-								$(this).find('a').css({
-									'width':'90%'
-								});
-								$(this).append('<span class="label-status label-jian">【建】</span>');
-							}else if(data[index][0] == 2){
-								$(this).find('a').css({
-									'width':'90%'
-								});
-								$(this).append('<span class="label-status label-cai">【采】</span>');
-							}else{}
-						}
-						
-					})
-				}
-			});
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getDraftType',
+// 				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+// 				'callback':function(data,con){
+// 					console.log(data);
+// 					$('.dataConThumbnailTable tbody').find('.titleRightClick').each(function(index){
+// 						if(data[index].length > 0){
+// 							if(data[index][0] == 1){
+// 								$(this).find('a').css({
+// 									'width':'90%'
+// 								});
+// 								$(this).append('<span class="label-status label-jian">【建】</span>');
+// 							}else if(data[index][0] == 2){
+// 								$(this).find('a').css({
+// 									'width':'90%'
+// 								});
+// 								$(this).append('<span class="label-status label-cai">【采】</span>');
+// 							}else{}
+// 						}
+//
+// 					})
+// 				}
+// 			});
 			
 			
 //			datatables翻页时查询页面中是否有选中的新闻
@@ -998,9 +1052,14 @@ $(function(){
     		     });
     		 }
     	});
-    	
+
+
+        var pagination = $('#DataTables_Table_2_info').text();
+        if( totalpage > 10000){
+            pagination = pagination.replace('10,000',totalpage)
+            $('#DataTables_Table_2_info').text(pagination);
+        }
 	})
-	
 	
 //	含图片与含视频切换
 	$('.changeStateBtn').click(function(){
@@ -1014,6 +1073,8 @@ $(function(){
 			$('.changeStateBtn').removeClass('active');
 			$(this).addClass('active');
 		}
+		// 每次刷新完保存为已缓存状态
+		sessionStorage.setItem('cache', '1');
 		if($('.tableListCon').val() == 0){
 			threadAjaxData1.ajax.reload();
 		}else if($('.tableListCon').val() == 1){
@@ -1022,42 +1083,8 @@ $(function(){
 			sudokuTable.ajax.reload();
 		}
 	})
-	
-// //	点击地区(多选)
-// 	$('#srceenMapPro').click(function(event){		
-// 		var event = event || window.event;
-// 		var className = event.target.className;
-// 		if (className == 'multiSure') {
-// 			// 操作此按钮时刷新缓存
-// 			sessionStorage.setItem('cache', '1');
-// 			if ($('.tableListCon').val() == '0') {
-// 				threadAjaxData1.ajax.reload();
-// 			} else if ($('.tableListCon').val() == '1') {
-// 				thumbnailTable.ajax.reload();
-// 			} else if ($('.tableListCon').val() == '2') {
-// 				sudokuTable.ajax.reload();
-// 			}
-// 			return false;
-// 		}		
-// 	})
-// //	点击分类(多选)
-// 	$('#srceenClassificationPro').click(function (event) {
-// 		var event = event || window.event;
-// 		var className = event.target.className;
-// 		if (className == 'multiSure') {
-// 			// 操作此按钮时刷新缓存
-// 			sessionStorage.setItem('cache', '1');
-// 			if ($('.tableListCon').val() == 0) {
-// 				threadAjaxData1.ajax.reload();
-// 			} else if ($('.tableListCon').val() == 1) {
-// 				thumbnailTable.ajax.reload();
-// 			} else if ($('.tableListCon').val() == 2) {
-// 				sudokuTable.ajax.reload();
-// 			}
-// 			return false;
-// 		}		
-// 	})
-	//	地区(多选)、分类(多选)
+
+	//	地区、分类
 	window.reloadData = function () {
 		// 操作此按钮时刷新缓存
 		sessionStorage.setItem('cache', '1');
@@ -1071,20 +1098,21 @@ $(function(){
 		return false;
 	};
 //	点击时间段刷新列表
-	$('#srceenTimeQuantumPro').click(function(){
+	$('#srceenTimeQuantumPro').click(function(e){
+        e.stopPropagation();
 		var ds = $(this).prev('h2').text();
 		if(ds == '自定义'){
 			return;
 		}else{
 			// 操作此按钮时刷新缓存
-			sessionStorage.setItem('cache', '1');
-			if($('.tableListCon').val() == 0){
-				threadAjaxData1.ajax.reload();
-			}else if($('.tableListCon').val() == 1){
-				thumbnailTable.ajax.reload();
-			}else if($('.tableListCon').val() == 2){
-				sudokuTable.ajax.reload();
-			}
+			// sessionStorage.setItem('cache', '1');
+			// if($('.tableListCon').val() == 0){
+			// 	threadAjaxData1.ajax.reload();
+			// }else if($('.tableListCon').val() == 1){
+			// 	thumbnailTable.ajax.reload();
+			// }else if($('.tableListCon').val() == 2){
+			// 	sudokuTable.ajax.reload();
+			// }
 		}
 		
 		return false;
@@ -1137,6 +1165,10 @@ function getParamsTable(aoData){
 //	地区
 	var regions = [];
 	var regionsId = $('.srceenMap h2').attr('data-innerid');
+	var $areaSelected = $('.areaSelected');
+	if ($areaSelected != '' && $areaSelected.length > 0) {
+		regionsId = $areaSelected.attr('data-innerid');
+	}
 	regions.push(regionsId);
 //	分类
 	var classifications = [];

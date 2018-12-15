@@ -10,6 +10,8 @@ $(function(){
 	if($('body').width()<768){
 		scrollCon = true;
 	}
+	$('.table-operation-status').find('a').eq(0).removeClass('hide');
+	$('.table-operation-status').find('a').eq(2).removeClass('hide');
 	
 	var heatTable = $('.heatTable').DataTable({
 		   scrollX: scrollCon,
@@ -33,67 +35,88 @@ $(function(){
 			       }else{
 			           summary = data.cusSummary;
 			       }
-//		    	   标题跳转详情，如果是视频跳转原文
+//		    	 标题跳转详情，如果是视频跳转原文
 		    	   var linkUrl;
-		    	   if(data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != ''){
-		    		   var mediaSta = data.statEntity.mediaStatus;
-		    		   mediaSta = mediaSta.substring(1,mediaSta.length-1).split(',');
-		    		   for(var i = 0;mediaSta.length>i;i++){
-		    			   if(mediaSta[i] == 6){
-		    				   if(data.webpageUrl != null && data.webpageUrl != ''){
-		    		    		   linkUrl = data.webpageUrl
-		    		    	   }else{
+		    	  //  if(data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != ''){
+		    		//    var mediaSta = data.statEntity.mediaStatus;
+		    		//    mediaSta = mediaSta.substring(1,mediaSta.length-1).split(',');
+		    		//    for(var i = 0;mediaSta.length>i;i++){
+		    		// 	   if(mediaSta[i] == 6){
+		    		// 		   if(data.webpageUrl != null && data.webpageUrl != ''){
+		    		//     		   linkUrl = data.webpageUrl
+		    		//     	   }else{
 		    		    		   
-		    		    	   }
+		    		//     	   }
 		    				   
-		    				   break;
-		    			   }else if(mediaSta[i] == 5){
-		    				   if(isearchVal != '' && isearchVal != undefined){
-		    					   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode+'?queryStr='+isearchVal;
-		    				   }else{
-		    					   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
-		    				   }
+		    		// 		   break;
+		    		// 	   }else if(mediaSta[i] == 5){
+		    		// 		   if(isearchVal != '' && isearchVal != undefined){
+		    		// 			   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode+'?queryStr='+isearchVal;
+		    		// 		   }else{
+		    		// 			   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
+		    		// 		   }
 		    				   
-		    				   break;
-		    			   }else if(mediaSta[i] == 0){
-		    				   if(isearchVal != '' && isearchVal != undefined){
-		    					   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode+'?queryStr='+isearchVal;
-		    				   }else{
-		    					   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
-		    				   }
-		    			   }
-		    		   }
-		    	   }
+		    		// 		   break;
+		    		// 	   }else if(mediaSta[i] == 0){
+		    		// 		   if(isearchVal != '' && isearchVal != undefined){
+		    		// 			   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode+'?queryStr='+isearchVal;
+		    		// 		   }else{
+		    		// 			   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
+		    		// 		   }
+		    		// 	   }
+		    		//    }
+						//  }
+
+						var dateTime = data.releaseDatetime;
+						if(dateTime != '' && dateTime != null){
+							dateTime = '/' + data.releaseDatetime;
+						}
+
+						 if (isearchVal != '' && isearchVal != undefined) {
+						 	linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + dateTime + '?queryStr=' + isearchVal;
+						 } else {
+						 	linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + dateTime;
+						 }
 		    	 //title
 		    	   var titleCon = '<a href="'+linkUrl+'" target="_blank" class="beyondEllipsis" tabindex="0" data-id="'+data.webpageCode+'"  data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="'+summary+'">'+data.title+'</a>'
 	    	   }else{
 		       		summary = '暂无摘要';
 //			    	   标题跳转详情，如果是视频跳转原文
 			    	   var linkUrl;
-			    	   if(data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != ''){
-			    		   var mediaSta = data.statEntity.mediaStatus;
-			    		   mediaSta = mediaSta.substring(1,mediaSta.length-1).split(',');
-			    		   for(var i = 0;mediaSta.length>i;i++){
-			    			   if(mediaSta[i] == 6){
-			    				   if(data.webpageUrl != null && data.webpageUrl != ''){
-			    		    		   linkUrl = data.webpageUrl
-			    		    	   }else{
+			    	  //  if(data.statEntity.mediaStatus != null && data.statEntity.mediaStatus != ''){
+			    		//    var mediaSta = data.statEntity.mediaStatus;
+			    		//    mediaSta = mediaSta.substring(1,mediaSta.length-1).split(',');
+			    		//    for(var i = 0;mediaSta.length>i;i++){
+			    		// 	   if(mediaSta[i] == 6){
+			    		// 		   if(data.webpageUrl != null && data.webpageUrl != ''){
+			    		//     		   linkUrl = data.webpageUrl
+			    		//     	   }else{
 			    		    		   
-			    		    	   }
-			    				   break;
-			    			   }else if(mediaSta[i] == 5){
-			    				   linkUrl = ''
-			    			   }else if(mediaSta[i] == 0){
-			    				   if(isearchVal != '' && isearchVal != undefined){
-			    					   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode+'?queryStr='+isearchVal;
-			    				   }else{
-			    					   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
-			    				   }
-			    			   }
-			    		   }
-			    	   }
+			    		//     	   }
+			    		// 		   break;
+			    		// 	   }else if(mediaSta[i] == 5){
+			    		// 		   linkUrl = ''
+			    		// 	   }else if(mediaSta[i] == 0){
+			    		// 		   if(isearchVal != '' && isearchVal != undefined){
+			    		// 			   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode+'?queryStr='+isearchVal;
+			    		// 		   }else{
+			    		// 			   linkUrl = ctx+'/latest/front/news/detail/'+data.webpageCode;
+			    		// 		   }
+			    		// 	   }
+			    		//    }
+							//  }
+							var dateTime = data.releaseDatetime;
+							if (dateTime != '' && dateTime != null) {
+								dateTime = '/' + data.releaseDatetime;
+							}
+
+							if (isearchVal != '' && isearchVal != undefined) {
+								linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + dateTime + '?queryStr=' + isearchVal;
+							} else {
+								linkUrl = ctx + '/latest/front/news/detail/' + data.webpageCode + dateTime;
+							}
 		       		//title
-		       			var titleCon = '<a href="'+linkUrl+'" target="_blank" class="beyondEllipsis"  data-id="'+data.webpageCode+'">'+data.title+'</a>'
+		       		var titleCon = '<a href="'+linkUrl+'" target="_blank" class="beyondEllipsis"  data-id="'+data.webpageCode+'">'+data.title+'</a>'
 			    	
 		       	}
 	    	   if(null != data.isSticked && 1==data.isSticked){
@@ -102,14 +125,23 @@ $(function(){
 	    	   $('td:eq(2)', row).html(titleCon).addClass('titleRightClick');
 	    	   
 //	    	   热度值
-	    	   $('td:eq(5)', row).html('('+data.rankWeight+')');
-//	    	   浏览量
+					 $('td:eq(5)', row).html(data.rankWeight.toFixed(1));
+					 
+//	    	 浏览量
 	    	   var browseNum = '<span class="browseNum'+index+'"></span>';
 	    	   $('td:eq(7)', row).html(browseNum);
 	    	   
 	    	   //负面指数样式：0-40% 绿色  41%-60% 灰色  61%-100% 红色
-	    	   var negative = '';
-	    	   var negativeCon = '<span class="negativeNum'+index+'"></span>'
+	    	   var negative = (data.sentiment != null && data.sentiment != '') ? data.sentiment : 0;
+	    	   //截取到小数点后两位
+	    	   negative = (negative * 100).toFixed(2);
+	    	   var colorStyle = "";
+	    	   if (negative > 50) {
+	    	   	colorStyle = 'red';
+	    	   } else {
+	    	   	colorStyle = 'green';
+	    	   }
+	    	   var negativeCon = '<span class="negativeNum ' + colorStyle + '">' + negative + '</span>';
 	    	   $('td:eq(6)', row).html(negativeCon);
 	    	   
 	    	   //操作
@@ -237,9 +269,21 @@ $(function(){
 	
 //	批量收藏
 	$('.table-operation-status a').eq(2).click(function(){
+		if(batchCheckWebPageCode && batchCheckWebPageCode.length == 0){
+			$().toastmessage('showToast', {
+				text: '请选择想要收藏的新闻',
+				sticky: false,
+				position : 'top-center',
+				type: 'error',
+			});
+			return false;
+		}
 		$(this).batchCollect({
 			dataUrl:ctx+'/latest/front/collectingAllNews', //请求路径
-			dataParam:{'webpageCodeList':batchCheckWebPageCode,'type':1},  //传递参数
+			dataParam:{
+				'webpageCodeList':batchCheckWebPageCode.join(), //数组转字符串
+				'type':1
+			},
 			callback:function(data){
 	    		if(data.result){
 	    			var obj = data.resultObj;
@@ -298,31 +342,31 @@ $(function(){
 			}
 			
 //			负面指数
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getsentimentindex',
-				'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
-				'callback':function(data){
-					console.log(data);
-					$('.heatTable tbody').find('[class*="negativeNum"]').each(function(index){
-						if(data[index].negative != null && data[index].negative != ''){
-                            var colorStyle = ''
-                            var negative=data[index].negative;
-                            if(negative>40){
-                                colorStyle = 'green'
-                                $(this).text('-'+negative.toFixed(2));
-                            }else{
-                                colorStyle = 'red'
-                                $(this).text((100-negative).toFixed(2));
-                            }
-							// $(this).text(data[index].negative+'%');
-							$(this).addClass(colorStyle);
-						}else{
-							$(this).text('-');
-						}
+			// $().adraticAjaxData({
+			// 	'dataUrl':ctx+'/latest/front/getsentimentindex',
+			// 	'dataParam':{'webpageCode':tableItemWebPageCodeArr.join(',')},
+			// 	'callback':function(data){
+			// 		console.log(data);
+			// 		$('.heatTable tbody').find('[class*="negativeNum"]').each(function(index){
+			// 			if(data[index].negative != null && data[index].negative != ''){
+      //                       var colorStyle = ''
+      //                       var negative=data[index].negative;
+      //                       if(negative>40){
+      //                           colorStyle = 'green'
+      //                           $(this).text('-'+negative.toFixed(2));
+      //                       }else{
+      //                           colorStyle = 'red'
+      //                           $(this).text((100-negative).toFixed(2));
+      //                       }
+			// 				// $(this).text(data[index].negative+'%');
+			// 				$(this).addClass(colorStyle);
+			// 			}else{
+			// 				$(this).text('-');
+			// 			}
 						
-					})
-				}
-			});
+			// 		})
+			// 	}
+			// });
 //			浏览量
 			$().adraticAjaxData({
 				'dataUrl':ctx+'/latest/front/getBrowseNum',

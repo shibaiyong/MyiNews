@@ -128,3 +128,14 @@ p.site-piclist-sources i{
 .jiangao{
 	margin-right:2px;
 }
+
+/*图片库 文章来源显示省略号*/
+.site-piclist_info .sourceCrawl{
+	display: inline-block;
+	width:74%;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: middle;
+}

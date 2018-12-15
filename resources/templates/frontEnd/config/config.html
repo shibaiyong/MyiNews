@@ -29,7 +29,22 @@
 <script type="text/javascript"	src="../../../static/frontEnd/js/static/more/more.js"	th:src="@{/frontEnd/js/dynamic/config/dad.js}"></script>
 <!-- Self JS -->
 <script type="text/javascript"	src="../../../static/frontEnd/js/static/more/more.js"	th:src="@{/frontEnd/js/dynamic/config/config.js}"></script>
+<style>
+	.threeSortDownContent a {
+		padding: 6px 8px;
+		display: inline-block;
+		width: 85px;
+	}
+	.threeSortDownContent a.active {
+		color: #F44336;
+	}
+	.threeSortDownContent{
+		padding:5px 10px;
+		box-shadow:0px 0px 4px #666;
+		margin-top:15px;
+	}
 
+</style>
 </head>
 <body>
 	<!-- 头部内容 -->
@@ -75,7 +90,7 @@
 												</div>
 									    	</div>
 									  	</div>
-									  	<div class="form-group">
+									  	<div class="form-group region">
 									    	<label for="inputEmail3" class="col-sm-2 control-label">地区</label>
 									    	<div class="col-sm-10">
 									      		<div class="listLabel" id="map" data-position='8'>
@@ -91,6 +106,10 @@
 										<h4>已定制条件</h4>
 									</div>
 									<div class="alreadyCon" >
+
+									</div>
+									<div style="color:#F44336;margin-top:15px;letter-spacing: 1px;line-height: 20px;padding-left:15px;">
+										温馨提示：已定制条件中的选中地区，为用户配置的默认地区，系统将默认展示与默认地区相关的内容。
 									</div>
 								</div>
 								<div class="col-sm-offset-4 col-sm-8">

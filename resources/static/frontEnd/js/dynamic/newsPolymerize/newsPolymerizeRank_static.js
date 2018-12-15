@@ -33,25 +33,25 @@ $(function(){
 			++screenIndex;
 		}
 	})
-	
-//	地区
+	//	地区
 	$().getSignleData({
-		getAjaxUserConfigUrl: ctx+'/config/front/listUserConfigRegion',  //请求路径(用户配置的数据)
-		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径(查全部省级数据)
-		boxClassName:'.srceenMap',
-		ulClassName:'#srceenMapPro',
+		getAjaxUserConfigUrl: ctx + '/tenant/back/listTenantRegion', //请求路径(用户配置的数据)
+		getAjaxUrl: ctx + '/common/dic/front/listRegion', //请求路径
+		boxClassName: '.srceenMap',
+		ulClassName: '#srceenMapPro',
 		level: 1,
 		multiSelect: true,
-	})
-	
+		conditionValue: 'map',
+	});
 //	分类
 	$().getSignleData({
-		getAjaxUserConfigUrl: ctx + '/config/front/listUserConfigClassification', //请求路径(用户配置的数据)
+		getAjaxUserConfigUrl: '', //请求路径(用户配置的数据)
 		getAjaxUrl: ctx + '/common/dic/front/listNewsClassification', //请求路径
 		boxClassName:'.srceenClassification',
 		ulClassName:'#srceenClassificationPro',
 		level:1,
 		multiSelect: true,
+		conditionValue: 'classification',
 	})
 //	热点发现中-微博微信
 	$().getSignleData({
@@ -59,9 +59,14 @@ $(function(){
 		boxClassName:'.srceenMediaAlone',
 		ulClassName:'#srceenMediaAlonePro',
 		level:1,
-		inter:true
+		inter:true,
+		conditionValue: 'mediaAlone',
 	})
-	
+	// 将样式调整放在回调函数中，防止用户在组件渲染未完成时进行操作
+	function showScreenMap() {
+		$('.srceenMap').find('h2').attr('data-innerid', '');
+		$('.srceenMap').find('h2').html('全部地区<i class="fa fa-caret-down"></i>');
+	}
 	
 	$("#screen_begin_time").jeDate({
 		skinCell:"jedatered",
@@ -73,8 +78,6 @@ $(function(){
 		}
 	});
 	
-
-	
 //	获得ajax返回的获取
 	$('.searchesTable').on('xhr.dt', function ( e, settings, json, xhr ) {
 		highlightList = json.highlightList
@@ -83,38 +86,38 @@ $(function(){
 	$('.searchesTable').on('draw.dt',function() {
 //		加载24小时趋势图
 		var textArr = tableCluster.column(2).nodes().data();
-		
-		var time = new Date(new Date($('#screen_begin_time').val().replace(/-/g,'/')).getTime()+(1000 * 60 * 60 * 24));
-		
-		for(var count = 0;textArr.length > count;count++){
-			$().getTendencyData({
-				'count':count,
-				'modalName':'trend-polyline-charts'+count,
-				'dataUrl':ctx+'/cluster/front/loadTrendMap',
-				'dataParam':{
-					'clusterCode':textArr[count].clusterCode,
-					'time':time,
-				}
-			})
-		}
+//
+// 		var time = new Date(new Date($('#screen_begin_time').val().replace(/-/g,'/')).getTime()+(1000 * 60 * 60 * 24));
+//
+// 		for(var count = 0;textArr.length > count;count++){
+// 			$().getTendencyData({
+// 				'count':count,
+// 				'modalName':'trend-polyline-charts'+count,
+// 				'dataUrl':ctx+'/cluster/front/loadTrendMap',
+// 				'dataParam':{
+// 					'clusterCode':textArr[count].clusterCode,
+// 					'time':time,
+// 				}
+// 			})
+// 		}
 		
 //		浏览量
 		var textArrCon =[];
-		if(textArr.length > 0){
-			var textArrCon =[];
-			for(var count = 0;textArr.length>count;count++){
-				textArrCon.push(textArr[count].clusterCode);
-			}
-			$().adraticAjaxData({
-				'dataUrl':ctx+'/latest/front/getBrowseNum',
-				'dataParam':{'webpageCode':textArrCon.join(',')},
-				'callback':function(data){
-					$('.searchesTable tbody').find('[class*="browseNum"]').each(function(index){
-						$(this).text(data[index]);
-					})
-				}
-			});
-		}
+// 		if(textArr.length > 0){
+// 			var textArrCon =[];
+// 			for(var count = 0;textArr.length>count;count++){
+// 				textArrCon.push(textArr[count].clusterCode);
+// 			}
+// 			$().adraticAjaxData({
+// 				'dataUrl':ctx+'/latest/front/getBrowseNum',
+// 				'dataParam':{'webpageCode':textArrCon.join(',')},
+// 				'callback':function(data){
+// 					$('.searchesTable tbody').find('[class*="browseNum"]').each(function(index){
+// 						$(this).text(data[index]);
+// 					})
+// 				}
+// 			});
+// 		}
 		
 //		表格中的排序的前三个样式
 //		$('.searchesTable tbody').find('tr').each(function(index){
@@ -154,25 +157,6 @@ $(function(){
 		}
 	})
 	
-// //	点击地区刷新列表（多选）
-// 	$('#srceenMapPro').click(function (event) {
-// 		var event = event || window.event;
-// 		var className = event.target.className;
-// 		if (className == 'multiSure') {
-// 			tableCluster.ajax.reload();
-// 			return false;
-// 		}		
-// 	})
-
-// //	点击分类刷新列表
-// 	$('#srceenClassificationPro').click(function (event) {
-// 		var event = event || window.event;
-// 		var className = event.target.className;
-// 		if (className == 'multiSure') {
-// 			tableCluster.ajax.reload();
-// 			return false;
-// 		}
-// 	})
 	//	地区(多选)、分类(多选)
 	window.signleReloadData = function () {
 		tableCluster.ajax.reload();
@@ -181,51 +165,6 @@ $(function(){
 
 //	点击标签刷新列表
 	$('#srceenTagPro').click(function(){
-		tableCluster.ajax.reload();
-		return false;
-	})
-//	点击微信刷新列表
-	$('#srceenMediaAlonePro').click(function(){
-		
-		if($('.srceenMediaAlone').find('h2').attr('data-innerid') != ''){
-			
-			$('.srceenMap').css({   
-	            'background':'#eee'
-	        });
-			$('.srceenMap').find('h2').css({
-	            'color':'#fff',
-	            'cursor':'not-allowed',
-	        });
-			$('#srceenMapPro').addClass('hide');
-			
-			
-			$('.srceenClassification').css({   
-	            'background':'#eee'
-	        });
-			$('.srceenClassification').find('h2').css({
-	            'color':'#fff',
-	            'cursor':'not-allowed',
-	        });
-			$('#srceenClassificationPro').addClass('hide');
-		}else{
-			$('#srceenMapPro').removeClass('hide');
-			$('.srceenMap').css({
-	            'background':'#F44336'
-	        });
-			$('.srceenMap').find('h2').css({
-	            'color':'#fff',
-	            'cursor':'default',
-	        });
-			
-			$('#srceenClassificationPro').removeClass('hide');
-			$('.srceenClassification').css({
-	            'background':'#F44336'
-	        });
-			$('.srceenClassification').find('h2').css({
-	            'color':'#fff',
-	            'cursor':'default',
-	        });
-		}
 		tableCluster.ajax.reload();
 		return false;
 	})
@@ -265,6 +204,10 @@ function getParamsTable(aoData){
 	}else{
 		var regionsId = $('.srceenMap h2').attr('data-innerId');
 	}
+	// var $areaSelected = $('.areaSelected');
+	// if ($areaSelected != '' && $areaSelected.length > 0) {
+	// 	regionsId = $areaSelected.attr('data-innerid');
+	// }
 	regions.push(regionsId);
 //	分类
 	var classifications = [];
@@ -293,17 +236,20 @@ function getParamsTable(aoData){
 	queryStr.push(queryStrVal);
 	
 //	时间
-	var startTime;
-	var endTime;
+	var startTime = '';
+	var endTime = '';
 	var todayTime = new Date();
-	var inputTime = new Date($('#screen_begin_time').val().replace(/-/g,'/'));
-	if(todayTime.formatDate('yyyy/MM/dd') == inputTime.formatDate('yyyy/MM/dd')){
-		startTime = new Date(new Date().getTime() - (1000 * 60 * 60 * 24));
-		endTime = new Date();
-	}else{
-		startTime = inputTime;
-		endTime = new Date(inputTime.getTime() + (1000 * 60 * 60 * 24));
-	}
+	var inputTime = '';
+	if (($('#screen_begin_time').val()||'') != '') {
+		inputTime = new Date($('#screen_begin_time').val().replace(/-/g, '/'));
+		if (todayTime.formatDate('yyyy/MM/dd') == inputTime.formatDate('yyyy/MM/dd')) {
+			startTime = new Date(new Date().getTime() - (1000 * 60 * 60 * 24));
+			endTime = new Date();
+		} else {
+			startTime = inputTime;
+			endTime = new Date(inputTime.getTime() + (1000 * 60 * 60 * 24));
+		}
+	}		
 	
 	//console.log(startTime);
 	//console.log(endTime);

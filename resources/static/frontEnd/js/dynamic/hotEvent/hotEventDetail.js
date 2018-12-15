@@ -91,6 +91,7 @@ $(function(){
 		scrollCon = true;
 		pagingTypeCon = "simple";
 	}
+
 	table = $('.hotEventPredictConTable').DataTable({
 		dom:domString,
 		oLanguage: { 
@@ -102,7 +103,9 @@ $(function(){
     	sAjaxSource : ctx+'/event/front/pageEventNews',//服务器请求
     	fnServerData : retrieveData,//用于替换默认发到服务端的请求操作,默认方法为：$.getJSON
 		'iDisplayLength' : 10,
+
 		fnServerParams : function ( aoData ) {
+
 			var eventCode = $('#eventId').val().trim();
 			var sourcesLevelOne = [];
 			var source = $('.hotEventPredictConBtn').find('dd').find('.btn-group').find('.dropdown-toggle').find('a').find('span:first').attr('value');
@@ -140,24 +143,31 @@ $(function(){
 				);
         },
         "rowCallback" : function(row, data, index) {
-        	var title = '<a href="javascript:loadNewsDetail(\''+data.webpageCode+'\')"  class="beyondEllipsis" >'+data.title+' </a>';
-        	$('td:eq(2)', row).html(title);
-        	if($('body').width()<992){
-        		$('.hotEventPredictConTable').css({
-            		'width':'500px',
-            	});
-            	$('.hotEventPredictConTable').find('th').css({
-            		'width':'200px',
-            	});
-        	}
-        	
-        	if(null != data.similarNum && ""!=data.similarNum){
-        		var similarNews = '(<a href="'+ctx+'/latest/front/similarNewsList/'+data.webpageCode+'" style="display:inline" target="_blank" class="relativeNews" >'+data.statEntity.sameNum+'</a>)';
-      		$('td:eq(3)', row).html(similarNews);
-        	}else{
-        		$('td:eq(3)', row).html('(<a class="relativeNews" style="display:inline">0</a>)');
-        	}
-        	
+                $('td:eq(1)', row).html(data.sourceCrawl);
+		        var code = data.webpageCode;
+				var releaseDatetime = data.releaseDatetime;
+				if(releaseDatetime != null && releaseDatetime != ''){
+                    code = code + '/' + releaseDatetime;
+				}
+                var title = '<a href="javascript:loadNewsDetail(\''+code+'\')"  class="beyondEllipsis" >'+data.title+' </a>';
+                $('td:eq(2)', row).html(title);
+                if($('body').width()<992){
+                    $('.hotEventPredictConTable').css({
+                        'width':'500px',
+                    });
+                    $('.hotEventPredictConTable').find('th').css({
+                        'width':'200px',
+                    });
+                }
+
+                if(null != data.similarNum && ""!=data.similarNum){
+                    var similarNews = '(<a href="'+ctx+'/latest/front/similarNewsList/'+data.webpageCode+'" style="display:inline" target="_blank" class="relativeNews" >'+data.statEntity.sameNum+'</a>)';
+                    $('td:eq(3)', row).html(similarNews);
+                }else{
+                    $('td:eq(3)', row).html('(<a class="relativeNews" style="display:inline">0</a>)');
+                }
+
+
         },
         columns: [//显示的列
                   { data: 'releaseDatetime', "bSortable": false,
@@ -168,7 +178,7 @@ $(function(){
 	            		}
                 	  }    
                   },
-                  { data: 'sourceCrawlDetail.website.displayName', "bSortable": false},
+                  { data: 'sourceCrawl', "bSortable": false},
                   { data: 'title', "bSortable": false},
                   { data: 'statEntity.sameNum', "bSortable": false,
                 	  render:function(data, type, row){
@@ -183,7 +193,7 @@ $(function(){
             "targets": [ '_all' ],
             "data": null,
             "defaultContent": "-"
-        } ]
+        } ],
 	});
 	$('.hotEventPredictConTable').on('draw.dt',function() {
 	//相似获取
@@ -204,8 +214,19 @@ $(function(){
 					$('.hotEventPredictConTable tbody').find('[class="relativeNews"]').each(function(index){
 						$(this).text(data[index]);
 					})
+                    var scrolltop = localStorage.getItem('scrolltop');
+                    if (scrolltop){
+                        $(window).scrollTop(scrolltop);
+                        localStorage.removeItem('scrolltop');
+                    }
 				}
 			});
+		}else {
+            var scrolltop = localStorage.getItem('scrolltop');
+            if (scrolltop){
+                $(window).scrollTop(scrolltop);
+                localStorage.removeItem('scrolltop');
+            }
 		}
 	});
 	
@@ -340,11 +361,11 @@ function latestnewsProcess(res,ele){
         return false;
     }
     var data = res.resultObj;
-    var summary=data.cusSummary;
+    var summary= data.summary;
     var time = data.releaseDatetime;
-    var keywords = data.cusKeyWords;
+    var keywords = data.keyExpression;
     var keywordsDom='';
-    var source = data.sourceCrawlDetail;
+    var source = data.sourceCrawl;
     if(!summary||summary=='null'){
         summary='暂无摘要';
     }
@@ -357,16 +378,18 @@ function latestnewsProcess(res,ele){
         keywordsDom='<span>无</span>';
     }else{
         for(var i = 0; i < keywords.length; i++){
-            keywordsDom+= '<span>'+keywords[i].keyword+'</span>'
+            if( i<5){
+                keywordsDom+= '<span>'+keywords[i].expression+'</span>'
+            }
         }
     }
     if(!source||source=='null'){
         source = '无'
     }else{
-        source = data.sourceCrawlDetail.currentWebsite.displayName;
+        source = data.sourceCrawl;
     }
     var str='<div class="reportBox">'+
-        '<div class="newstitle"><h4>'+data.title+'</h4></div>'+
+        '<div class="newstitle"><h4><a target="_blank" href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'">'+data.title+'</a></h4></div>'+
         '<div class="relativeReportCon">'+
         '<p class="latestReport" id="overflowLatest">'+summary+'</p>'+
         '<div class="keyInfo">'+
@@ -391,11 +414,11 @@ function firstnewsProcess(res,ele){
         return false;
     }
     var data = res.resultObj;
-    var summary=data.cusSummary;
+    var summary=data.summary;
     var time = data.releaseDatetime;
-    var keywords = data.cusKeyWords;
+    var keywords = data.keyExpression;
     var keywordsDom='';
-    var source = data.sourceCrawlDetail;
+    var source = data.sourceCrawl;
     if(!summary||summary=='null'){
         summary='暂无摘要';
     }
@@ -408,17 +431,19 @@ function firstnewsProcess(res,ele){
         keywordsDom='<span>无</span>';
     }else{
         for(var i = 0; i < keywords.length; i++){
-            console.log(keywords[i])
-            keywordsDom+= '<span>'+keywords[i].keyword+'</span>'
+            if(i<5){
+                keywordsDom+= '<span>'+keywords[i].expression+'</span>'
+            }
+
         }
     }
     if(!source||source=='null'){
         source = '无'
     }else{
-        source = data.sourceCrawlDetail.currentWebsite.displayName;
+        source = data.sourceCrawl;
     }
     var str='<div class="reportBox">'+
-        '<div class="newstitle"><h4>'+data.title+'</h4></div>'+
+        '<div class="newstitle"><h4><a target="_blank" href="'+ctx+'/latest/front/news/detail/'+data.webpageCode+'/'+data.releaseDatetime+'">'+data.title+'</a></h4></div>'+
         '<div class="relativeReportCon">'+
         '<p class="latestReport" id="overflowFirst">'+summary+'</p>'+
         '<div class="keyInfo">'+
@@ -893,7 +918,6 @@ function reportCountDateData(eventCode){
 				//隐藏图表
 				/*$(".reportCountBox").find(".reportCountDate").remove();
 				hideEmptyArea();*/
-				
 				$('#list_mark').find('b.reportCountDate').remove();
 				$('#list_mark').find('b:eq(0)').addClass('active');
 				$(".reportCountBox").find(".reportCountDate").remove();
@@ -954,7 +978,13 @@ function reportCountDate(data){
 				            }]
 				        });
 	                    dateChart.on('click',function(params){
-	                    	reportCountDetailedDate(params);
+
+                            if (params.componentType === 'markPoint') {
+                                return;
+                            }
+                            else if (params.componentType === 'series') {
+                                reportCountDetailedDate(params);
+                            }
 	                    });
 	                }
 	            },
@@ -999,22 +1029,49 @@ function reportCountDate(data){
 	};
 	dateChart.setOption(dateOption);
 	dateChart.on('click', function (params) {
-		reportCountDetailedDate(params);
+        if (params.componentType === 'markPoint') {
+            return;
+        }
+        else if (params.componentType === 'series') {
+            reportCountDetailedDate(params);
+        }
 	});
+
 	
 	function reportCountDetailedDate(params){
 		var name = JSON.stringify(params.name);
 		name = name.replace(/"/g,'');
 		if(name != '今日'){
 			dateChart.setOption({
+                tooltip : {
+                    trigger : 'axis',
+                    axisPointer : { // 坐标轴指示器，坐标轴触发有效
+                        type : 'none'
+                    },
+                    formatter : '{a}<br/>{b} : {c}',
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
 		    	xAxis: {
+                    type : 'category',
 			        data: ["1时","2时","3时",'4时','5时','6时','7时','8时','9时','10时','11时','12时','13时','14时','15时','16时','17时','18时','19时','20时','21时','22时','23时','24时'],
 			        axisLabel: {
 			            interval: 'auto',
 			            margin:10
 			        },
 			    },
+                yAxis : [ {
+                    type : 'value',
+                    axisLabel : {
+                        formatter : '{value}'
+                    },
+                } ],
 	            series: [{
+                    name:'报道量(个)',
 	            	type : 'bar',
 	            	barWidth:'80%',
 	                // 通过饼图表现单个柱子中的数据分布
@@ -1024,14 +1081,35 @@ function reportCountDate(data){
 	        dateChart.off('click');
 		}else{
 			dateChart.setOption({
+                tooltip : {
+                    trigger : 'axis',
+                    axisPointer : { // 坐标轴指示器，坐标轴触发有效
+                        type : 'none'
+                    },
+                    formatter : '{a}<br/>{b} : {c}',
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
 		    	xAxis: {
+                    type : 'category',
 			        data: data.todayHours,
 			        axisLabel: {
 			            interval: 'auto',
 			            margin:10
 			        },
 			    },
+                yAxis : [ {
+                    type : 'value',
+                    axisLabel : {
+                        formatter : '{value}'
+                    },
+                } ],
 	            series: [{
+                    name:'报道量(个)',
 	            	type : 'bar',
 	            	barWidth:'80%',
 	                // 通过饼图表现单个柱子中的数据分布
@@ -1044,6 +1122,7 @@ function reportCountDate(data){
 
 }
 /*事件报道统计——媒体数据*/
+var mediaList = [];
 function reportCountMediaData(eventCode){
 	$.ajax({
 		type : "get",
@@ -1054,7 +1133,7 @@ function reportCountMediaData(eventCode){
 		},
 		dataType : "json", //返回数据形式为json
 		success : function(data) {
-			if(null == data.mediaList || data.mediaList.length == 0){
+			if(null == data.mediaReport || data.mediaReport.length == 0){
 				//隐藏图表
 				/*$(".reportCountBox").find(".reportCountMedia").remove();
 				hideEmptyArea();*/
@@ -1065,6 +1144,9 @@ function reportCountMediaData(eventCode){
 				$('.reportCountBox').find('.list1:eq(0)').css('display','block');
 				
 			}else{
+                if( data.idList && data.idList.length ){
+                    mediaList = data.idList;
+                }
 				reportCountMedia(data);
 			}
 		},
@@ -1134,12 +1216,12 @@ function reportCountMedia(data){
 	            	fontFamily:'Microsoft Yahei'
 	            }
 	        },
-			data : data.mediaList
+			data : data.mediaReport
 		},
 		series : [ {
 			name : '媒体提及率',
 			type : 'bar',
-			data : data.reportCountList,
+			data : data.count,
 			/*barWidth : '10px',*/
 			barMaxWidth:'20px',
 			barGap : '10px',
@@ -1154,8 +1236,9 @@ function reportCountMedia(data){
 	mediaChart.setOption(mediaOption);
 	mediaChart.on('click',function(params){
 		var eventId = $('#eventId').val();//clusterid
-		window.open(ctx+'/latest/front/eventMediaList/'+params.name+'/'+eventId);
-		
+        var dataIndex = params.dataIndex;
+        var id = mediaList[dataIndex];
+		window.open(ctx+'/latest/front/eventMediaList/'+id+'/'+eventId);
 	});
 }
 
@@ -1448,6 +1531,8 @@ function reportCountEmotion(data){
 function changeBtnCon(){
 	$('.btn-group').each(function(index, el) {
 		$(this).find('ul.dropdown-menu>li').click(function(event) {
+			var scrollTop = $(window).scrollTop();
+			localStorage.setItem('scrolltop',scrollTop);
 			$(this).parents('ul.dropdown-menu').siblings('button').html($(this).html()+' <span class="caret"></span>');
 			table.ajax.reload();
 		});
@@ -1641,15 +1726,20 @@ function wiki(){
 		$.ajax({
 			type : "get",
 			async : true, //同步执行 
-				url : ctx+"/dictionary/front/getDictionary?names="+words,
+				url : ctx+"/lemma/checkDictionary?names="+words,
 			dataType : "json", //返回数据形式为json
 			success : function(data) {
+
 				if(null != data){
 					var entityWords = $("#entityWordsDiv").html();
-					for (var i = 0; i < data.length; i++) {
-						var name = data[i].name;
-						var pageId = data[i].id;
-						var newWord = '<span class="modal_incident" onclick="dictionaryOpen('+pageId+',\''+data[i].type+'\')" >'+name+'</span>';
+					var dataobj = data.resultObj;
+
+                    for (var i = 0; i < dataobj.length; i++) {
+						var name = dataobj[i].lemmaTitle;
+						var url = dataobj[i].url;
+
+						var newWord = '<span class="modal_incident" onclick="dictionaryOpen(\''+url+'\')" >'+name+'</span>';
+
 						entityWords = entityWords.replace(new RegExp("<span>"+name+"</span>", 'g'),newWord);
 					}
 					$("#entityWordsDiv").html(entityWords);
@@ -1667,39 +1757,8 @@ function wiki(){
 /*
  * 查询词条
  */
-function dictionaryOpen(id,type){
-	$.ajax({
-		type : "get",
-		async : true, //同步执行 
-		url : ctx+"/dictionary/front/getDictionaryById?pageId="+id+"&type="+type,
-		dataType : "json", //返回数据形式为json
-		success : function(data) {
-			if(null != data){
-				var title = data.name;
-				var content = "";
-				var dic = data.detail;
-				if("zgzy"==data.type){
-					content = '<B>人物详情</B><div style="margin-top:10px;martin-bottom:10px"><div class="col-sm-3" style="height:190px;"><img src="'+dic.picPath+'"  style="width:150px;height:190px" /></div><div class="col-sm-9" style="height:190px;">'
-							+'<p>'+dic.position+'</p>'
-							+'<div class="col-sm-3">出生年月：</div><div class="col-sm-3">'+dic.birthday+'</div>'
-			      			+'<div class="col-sm-3">性别：</div><div class="col-sm-3">'+dic.sex+'</div>'
-			      			+'<div class="col-sm-3">籍贯：</div><div class="col-sm-3">'+dic.hometown+'</div>'
-			      			+'<div class="col-sm-3">民族：</div><div class="col-sm-3">'+dic.nation+'</div>'
-			      			+'<div class="col-sm-3">毕业院校：</div><div class="col-sm-3">'+dic.school+'</div>'
-			      			+'<div class="col-sm-3">学位/学历：</div><div class="col-sm-3">'+dic.degree+'</div>'
-							+'</div></div><B>主要经历</B><div style="clear:both;margin-top:10px">'+dic.resume+'</div>';
-				}else if("wiki"==data.type){
-					content = dic.dictionary.cleanText;
-				}
-				$("#dictionary_title").html(title);
-				$("#dictionary_content").html(content);
-				$("#dictionaryModal").modal('show');
-			}
-		},
-		error : function(errorMsg) {
-			
-		}
-	});
+function dictionaryOpen(id){
+    window.open(id);
 }	
 	function getHotEventTopic(eventCode){
 		
@@ -1730,7 +1789,9 @@ function dictionaryOpen(id,type){
 	                	var cluster = clusterList[i];
 	                	var title = cluster.title;
 	                	var clusterCode = cluster.clusterCode;
-	                	clusterRankingList = clusterRankingList + '<li ><dl class="dl-horizontal"><dt><img src="'+context+'/frontEnd/image/eventDetail/hot1.png'+'"></dt><dd><a href="'+ctx+'/cluster/front/detail/'+clusterCode+'" target="_blank" tabindex="0" data-toggle="popover" data-original-title="" title="">'+title+'</a></dd></dl></li>';
+                        var time = cluster.createDatetime;
+                        var startTime = new Date(time).getTime();
+	                	clusterRankingList = clusterRankingList + '<li ><dl class="dl-horizontal"><dt><img src="'+context+'/frontEnd/image/eventDetail/hot1.png'+'"></dt><dd><a href="'+ctx+'/cluster/front/detail/'+clusterCode+'?startTime='+startTime+'" target="_blank" tabindex="0" data-toggle="popover" data-original-title="" title="">'+title+'</a></dd></dl></li>';
 	                }
 	        	}
 	            if(clusterRankingList == ""){

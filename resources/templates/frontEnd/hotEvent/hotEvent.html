@@ -8,7 +8,7 @@
 	<meta name="keywords" content="iNews,智慧新闻,聚合平台,内容聚合,自然语言处理,新闻舆情,采编助手,新闻分析 ,News,intelligent news" />
 	<meta name="description" content="iNews智慧新闻软件是北京荣之联科技股份有限公司自主研发产品，是面向政府、媒体行业推出的智慧化新闻生产服务工具。iNews采用领先的大数据和自然语言处理技术，帮助用户打造优质内容聚合平台，提高内容加工效率和内容质量，促进媒体融合。" />
 	<link rel="shortcut  icon" type="image/x-icon" href="../../../static/frontEnd/image/logo/favicon.ico" media="screen" th:href="@{/frontEnd/image/logo/favicon.ico}" /> 
-	<title>iNews-热点专题</title>
+	<title>iNews-热门专题</title>
 	<!-- 热点专题 -->
 	<!-- 引用公共css -->
 	<object style="display:none;" th:include="frontEnd/common/common_css :: common_css"></object>
@@ -38,6 +38,46 @@
 	<script type="text/javascript" src="../../../static/common/plugins/daterangepicker/js/daterangepicker.min.js" th:src="@{/common/plugins/daterangepicker/js/daterangepicker.min.js}" ></script>
 	<!-- Self JS -->
 	<script type="text/javascript" src="../../../static/frontEnd/js/static/hotEvent/hotEvent.js" th:src="@{/frontEnd/js/dynamic/hotEvent/hotEvent.js}"  ></script>
+	<style>
+		.hotEventConListBox .eventTrack{
+			background:white;
+			width:100%;
+			margin:10px 0px 15px;
+			color:#666666;
+			border: 1px solid #666666;
+			border-radius: 4px;
+		}
+		.hotEventConListBox .eventTrack img{
+			margin-right:6px;
+		}
+		@-webkit-keyframes mymove {
+			from {
+				transform: rotate(0deg)
+			}
+			to {
+				transform: rotate(360deg)
+			}
+		}
+
+		.ico_loading {
+			animation: mymove 3s linear infinite;
+			margin-top: 20%;
+		}
+
+		.loading-zhe {
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			position: fixed;
+			left: 0;
+			right: 0;
+			z-index: 9999;
+			top: 0;
+			display: none;
+			text-align: center;
+
+		}
+	</style>
 </head>
 <body>
 	<!-- 头部内容 -->
@@ -507,40 +547,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- 历史同期专题 -->
-							<div class="historyPeriod box p-right p-left">
-								<div class="box-header header-vimeo">
-									<h2>历史同期专题</h2>
-								</div>
-								<div class="historyPeriodCon">
-									<div class='box p-left p-right'>
-										<table class='table no-border historyPeriodTable'>
-											<thead></thead>
-											<tbody class="row" th:remove="body">
-												<tr class="col-md-3 col-ms-12 ">
-													<td>
-														<div class="hotEventConListBox">
-															<h6 class="hotEventConListTit">
-																<a href="javascript:void" class="beyondEllipsis">
-																	支付宝密码验证漏洞
-																</a>
-															</h6>
-															<div  class="thumbnail">
-														      	<img  alt="..." src="../../../static/frontEnd/image/hotEvent/6.jpg" />
-														    </div>
-														    <p class="hotEventConListTime">2017-01-10 10:45</p>
-														    <p class="sudokuSummary clearfix">
-																<span>[摘要]</span>
-																近日，有网友曝出支付宝存在新漏洞——陌生人有五分之一的机会登录你的支付宝，而熟人则有百分之百的机会登录你的支付宝。2017年1月10日，针对网友曝出的修改密码漏洞，支付宝方面回应称这一方式仅在特定情况下才会实现。且一旦用户支付宝在其他设备被登录，本人设备会收到通知提醒。 　　
-															</p>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
+
 						</div>
 					</div>
 				</div>
@@ -549,5 +556,6 @@
 	</div>
 	<!-- 尾部内容 -->
 	<footer id="footer" th:include="frontEnd/common/footer :: footer"></footer>
+	<div class="loading-zhe"><i class="fa fa-spinner ico_loading" aria-hidden="true" style="color:white;font-size: 50px;"></i></div>
 </body>
 </html>
